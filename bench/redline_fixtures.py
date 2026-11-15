@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v44', 'version': 44}
+SUITE = {'id': 'redline-v50', 'version': 50}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -355,6 +355,7 @@ def generate():
     strict_chart_parts(corpus)
     deleted_textbox_text(corpus)
     picture_bullet_lists(corpus)
+    tab_break_edits(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2778,3 +2779,95 @@ def picture_bullet_lists(corpus):
                    document(items(former, 1, rev.dele, lambda: rev.mark('del')) + items(added, 2, rev.ins, lambda: rev.mark('ins')),
                             **lists([rust, teal], [(720, 0), (900, 1)])),
                    [untracked(lead, CLOSING), drawn('accepted', added, teal), drawn('rejected', former, rust)], assets)
+
+
+def tab_break_edits(corpus):
+    """A tab or line break in a paragraph changes nothing about how the text around it is compared.
+
+    A comparison that groups tabs and breaks with note references and images falls back, for any paragraph that
+    holds one, to a diff anchored on every token, spaces included. A replaced phrase then comes out as one-word
+    deletions and insertions around kept spaces, or around a kept tab between its words; a lone shared comma
+    stays unmarked between one-word spans; and a clause laid out as tab, label, tab, text stays one edited
+    paragraph when it is rewritten. Each reproducer has a control without the tab or break, and two more controls
+    keep a tab that is itself the edit, and an edited tabbed clause, as edits."""
+    tab, line_break = '<w:r><w:tab/></w:r>', '<w:r><w:br/></w:r>'
+    issue = 'JSv4/Docxodus#1759'
+    blocks = {'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}
+
+    def kind(name):
+        return 'control' if name.endswith('control') else 'reproducer'
+
+    # The sentence is one run, or, with a joiner between the phrase's words, three runs and no punctuation, so
+    # that no lone-punctuation rule decides whether a tab between the replaced words may anchor the diff.
+    head, tail = 'Every harbor pilot ', ' before noon'
+    for name, lead, join, where in (('phrase-control', '', None, 'a sentence'),
+                                    ('phrase-lead-tab', tab, None, 'a paragraph that starts with a tab'),
+                                    ('phrase-lead-break', line_break, None, 'a paragraph that starts with a line break'),
+                                    ('phrase-inner-space-control', '', t(' '), 'a sentence of three runs'),
+                                    ('phrase-inner-tab', '', tab, 'a sentence with a tab between its words')):
+        def phrase(first, second, wrap=lambda content: content, join=join):
+            return wrap(t(first + ' ' + second) if join is None else t(first) + join + t(second))
+        def sentence(first, second, lead=lead, join=join):
+            text = (t(head + first + ' ' + second + tail + '.') if join is None
+                    else t(head + first) + join + t(second + tail))
+            return p(lead + text) + p(t(CLOSING))
+        rev = Revisions()
+        corpus.compare('redline-tab-' + name, 'revisions', kind(name), issue,
+                       f'A phrase replaced in {where} is one deletion and one insertion',
+                       dict(body=sentence('logs tide', 'charts')), dict(body=sentence('checks wind gauges', 'and buoy lamps')),
+                       dict(body=p(lead + t(head) + phrase('logs tide', 'charts', rev.dele)
+                                   + phrase('checks wind gauges', 'and buoy lamps', rev.ins)
+                                   + t(tail + ('.' if join is None else ''))) + p(t(CLOSING))),
+                       [blocks, untracked(head, tail, CLOSING)])
+
+    for name, lead in (('comma-control', ''), ('comma-lead-tab', tab)):
+        rev = Revisions()
+        corpus.compare('redline-tab-' + name, 'revisions', kind(name), issue,
+                       'A lone shared comma between replaced words is replaced with them'
+                       + (' in a paragraph that starts with a tab' if lead else ''),
+                       dict(body=p(lead + t('Ropes, nets and hooks are stowed.')) + p(t(CLOSING))),
+                       dict(body=p(lead + t('Sails, oars and cleats are stowed.')) + p(t(CLOSING))),
+                       dict(body=p(lead + rev.dele(t('Ropes, nets')) + rev.ins(t('Sails, oars')) + t(' and ')
+                                   + rev.dele(t('hooks')) + rev.ins(t('cleats')) + t(' are stowed.')) + p(t(CLOSING))),
+                       [{'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'del', 'text': 'Ropes, nets'},
+                        untracked(' and ', ' are stowed.', CLOSING)])
+
+    def frame(middle):
+        return p(t('Schedule of works')) + middle + p(t('Signed and dated below.'))
+    old = 'For courier by with for warehouse on supplier voucher for by ledger supplier manifest courier with.'
+    new = 'Lease garden tenant of for utilities and utilities on fixtures notice repair fixtures by notice tenant.'
+    for name, label in (('clause-control', lambda text: t('(3) ' + text)),
+                        ('clause-tabbed', lambda text: tab + t('(3)') + tab + t(text))):
+        rev = Revisions()
+        corpus.compare('redline-tab-' + name, 'revisions', kind(name), issue,
+                       'A clause rewritten in other words, sharing only its label and a few short words, is replaced whole'
+                       + ('' if name.endswith('control') else '; it is laid out as tab, label, tab, text'),
+                       dict(body=frame(p(label(old)))), dict(body=frame(p(label(new)))),
+                       dict(body=frame(p(rev.ins(label(new)), mark=rev.mark('ins')) + p(rev.dele(label(old)), mark=rev.mark('del')))),
+                       [blocks, untracked('Schedule of works', 'Signed and dated below.')])
+
+    edited = ('The supplier ', ('shall', 'must'), ' deliver the goods to the warehouse before the end of each ',
+              ('month', 'quarter'), '.')
+    def clause(side, rev=None):
+        content = tab + t('(4)') + tab
+        for piece in edited:
+            if isinstance(piece, str):
+                content += t(piece)
+            elif rev is None:
+                content += t(piece[side])
+            else:
+                content += rev.dele(t(piece[0])) + rev.ins(t(piece[1]))
+        return p(content)
+    rev = Revisions()
+    corpus.compare('redline-tab-clause-edited-control', 'revisions', 'control', issue,
+                   'A clause laid out as tab, label, tab, text with two words changed stays one edited paragraph',
+                   dict(body=frame(clause(0))), dict(body=frame(clause(1))), dict(body=frame(clause(None, rev))),
+                   [untracked(edited[0], edited[2])])
+
+    rev = Revisions()
+    corpus.compare('redline-tab-for-space-control', 'revisions', 'control', issue,
+                   'A space replaced by a tab is the edit itself: the space is deleted and the tab inserted',
+                   dict(body=p(t(head + 'logs tide') + t(' ') + t('charts' + tail)) + p(t(CLOSING))),
+                   dict(body=p(t(head + 'logs tide') + tab + t('charts' + tail)) + p(t(CLOSING))),
+                   dict(body=p(t(head + 'logs tide') + rev.dele(t(' ')) + rev.ins(tab) + t('charts' + tail)) + p(t(CLOSING))),
+                   [untracked(head + 'logs tide', 'charts' + tail, CLOSING)])

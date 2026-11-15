@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v44`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v50`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -753,3 +753,36 @@ cannot see a list drawn with the wrong picture or naming a bullet that is not th
 redline carries every bullet it needs under distinct ids. Word 2024 results and renders are in
 [`docs/results/picture-bullets/`](results/picture-bullets/). The authored redlines were not run
 through LibreOffice or the SDK validator on the capture machine; CI runs both.
+
+## Tabs and line breaks (Docxodus #1759)
+
+`redline-v50` adds five original reproducers and six controls. The reference compare treats a tab or a break
+in a paragraph as it treats a space: it never keeps one unmarked on its own between changed words, and it keeps
+one both versions share at the edge of a changed span. A comparison that instead treats tabs and breaks like
+note references or images diffs every paragraph that holds one by all of its tokens, spaces included, and
+threads short insertions and deletions around the kept spaces.
+
+- `redline-tab-phrase-lead-tab` and `redline-tab-phrase-lead-break` (reproducers): one sentence in one run,
+  after a tab or a line break, in which `logs tide charts` becomes `checks wind gauges and buoy lamps`. Control:
+  `redline-tab-phrase-control`, the same sentence alone.
+- `redline-tab-phrase-inner-tab` (reproducer): the same phrases with a tab between their second and third words,
+  in a sentence of three runs and no punctuation, so no rule about lone punctuation decides whether the tab may
+  stand on its own. Control: `redline-tab-phrase-inner-space-control`, a space in place of the tab.
+- `redline-tab-comma-lead-tab` (reproducer): after a tab, `Ropes, nets and hooks are stowed.` becomes
+  `Sails, oars and cleats are stowed.`; the shared comma goes with the replaced words. Control:
+  `redline-tab-comma-control`, without the tab.
+- `redline-tab-clause-tabbed` (reproducer): a clause laid out as tab, `(3)`, tab, text, rewritten in other
+  words between unchanged paragraphs, is replaced whole. Control: `redline-tab-clause-control`, the clause as
+  `(3) ` and its text in one run.
+- `redline-tab-clause-edited-control`: a tabbed clause with two words changed stays one edited paragraph.
+- `redline-tab-for-space-control`: a space replaced by a tab is itself the edit; the words around it stay
+  unmarked.
+
+The reproducers use the existing `revision-blocks` (each side's text one run in body order), `revision-text`
+(`Ropes, nets` in adjacent deletions) and `untracked-text` assertions, so a redline that keeps a space, a tab or
+the comma unmarked between one-word revisions fails while both round trips pass. The controls guard the
+opposite mistakes: replacing an edited tabbed clause whole, or losing a tab that is the edit. Every LibreOffice
+comparison is declared eligible; the authored redlines hold plain runs, tabs and line breaks inside ordinary
+insertions and deletions, and whole-paragraph insertions and deletions. No earlier DOCX bytes change. Docxodus
+`1d45d551` fails the five reproducers on their assertions alone and passes the controls; the fix passes all
+eleven. See [the evidence and labelled review sheets](results/tab-break-edits/README.md).

@@ -1,3 +1,12 @@
+`redline-v50` adds eleven comparison cases for [Docxodus #1759](https://github.com/JSv4/Docxodus/issues/1759):
+a tab or line break in a paragraph must not change how the text around it is compared. Five reproducers (a
+phrase replaced in a paragraph that starts with a tab or a line break, or with a tab between the replaced words;
+a lone shared comma between replaced words after a leading tab; and a clause laid out as tab, label, tab, text
+rewritten in other words) each have a control without the tab or break, and two more controls keep a space
+replaced by a tab, and an edited tabbed clause, as edits. The existing `revision-blocks`, `revision-text` and
+`untracked-text` assertions decide them, so a redline that keeps spaces, a tab or a lone comma unmarked between
+one-word revisions fails while both round trips pass. See [the redline notes](docs/REDLINE.md#tabs-and-line-breaks-docxodus-1759).
+
 `core-v173` adds an original reproducer and control for [Docxodus #1750](https://github.com/JSv4/Docxodus/issues/1750): a fixed 450pt Quince table whose rows all leave its last two grid columns unused (`w:gridAfter`). Word 2024 drops those columns and widens the other three in proportion to the table's preferred width, so `QuinceSum1` starts at 387pt; Docxodus 0af51ef5 keeps the grid's widths and starts it at 247pt. In `table-grid-unused-columns-filled-control` the last row fills the grid and nothing widens. Two version 2 `marker-region` checks per case pin the second and third cells' first words. `core-v169` and `core-v170` are claimed by open PRs. All earlier DOCX files remain byte-identical. The redline suite is unchanged. New reference registration and full-suite scoring remain pending. See [the evidence](docs/results/unused-grid-columns/README.md).
 
 `core-v172` adds two inputs and a control for Docxodus #1751, on the #1738 page-foot paragraphs: in
