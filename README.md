@@ -1,3 +1,17 @@
+`redline-v52` adds three reproducers and two controls for [Docxodus #1771](https://github.com/JSv4/Docxodus/issues/1771),
+two lock-note sections whose revision names its header parts by relationship ids of its own, or turns off a
+section's title page. In `redline-revision-part-two-stories` the revision keeps the first section's header under
+a new id and lets the second section inherit it; in `redline-header-ids-swapped` the two unchanged headers swap
+ids; `redline-header-ids-renamed-control` keeps both under new ids. Docxodus 54eb5836 wrote a section break both
+documents share with the revision's references and resolved them in the original's package, so rejecting the first
+reproducer put the second section's header in the first section, and both endpoints of the second showed the
+second header twice. In `redline-inline-title-page-off` only the first section's `w:titlePg` changes, so the
+paragraph ending that section is otherwise unchanged and Docxodus 54eb5836 copied the revision's section
+properties without a `w:sectPrChange`; `redline-inline-title-page-off-margin-control` also changes the margin.
+The markup view holds no section properties, so a `section-flags` assertion on the rejected document catches the
+lost title page. All earlier DOCX files remain byte-identical, and the PDF suite stays `core-v174`. See
+[the redline notes](docs/REDLINE.md#revision-relationship-ids-and-an-inline-title-page-docxodus-1771).
+
 `core-v174` adds two original pairs for [Docxodus #1764](https://github.com/JSv4/Docxodus/issues/1764).
 `section-page-universal-measures` writes an A4 page with 2 cm margins as a Strict save writes twips measures,
 `w:pgSz w:w="595.30pt"` and `w:pgMar w:top="56.70pt"`, in a Transitional package; Docxodus 644bbc9a printed it

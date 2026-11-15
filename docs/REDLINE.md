@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v51`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v52`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -853,3 +853,47 @@ break with the revision's section properties and bound the shared part only wher
 redline's first section has no header: it fails both round trips and `section-stories` (observed `''`,
 `Stair ledger`, `Tower ledger`) and passes the control. The fix passes both. See
 [the evidence and labelled review sheets](results/shared-header-removal/README.md).
+
+## Revision relationship ids and an inline title page (Docxodus #1771)
+
+`redline-v52` adds five original cases. Each document has two sections of canal-lock notes; the first
+section ends inside the body, at a paragraph that carries its section properties.
+
+The first three give the original's sections the headers `Upper basin` (relationship id `rHeader1`) and
+`Lower basin` (`rHeader2`), and change only how the revision names its header parts:
+
+- `redline-revision-part-two-stories` (reproducer): the revision keeps `Upper basin` in the first section
+  under a new id, `rHeader3`, and lets the second section inherit it. That one revision part pairs with two
+  original stories: unchanged against the first section's, changed against the second's.
+- `redline-header-ids-swapped` (reproducer): nothing changes but the ids; the revision gives `Upper basin`
+  the id `rHeader2` and `Lower basin` the id `rHeader1`.
+- `redline-header-ids-renamed-control` (control): both headers are unchanged under ids the original does not
+  use.
+
+Header references cannot be tracked, so a correct redline keeps a reference in every section, and in the
+first reproducer the second section's story reads `Upper basin` once accepted: its accepted expectation is the
+revision with `Upper basin` referenced from both sections. The other two accept to the revision itself. Both
+round trips are mandatory, with `untracked-text` keeping the body unmarked. Docxodus `54eb5836` writes a section
+break both documents share with the revision's references and resolves their ids in the original's package, or
+through the output of whichever pair last used the revision part. Rejecting its first reproducer shows `Lower
+basin` in both sections (`markup-rejected`); in the swapped case both sections show `Lower basin` on accept and
+reject alike. It passes the control, where no revision id exists in the original. The fix keeps the original's
+references on a section break both documents share and passes all three.
+
+The other two give the first section a first-page header, `Gate register`, and a running header,
+`Lock register`, which the second section inherits:
+
+- `redline-inline-title-page-off` (reproducer): the original's first section has a title page (`w:titlePg`)
+  and the revision's does not; nothing else changes.
+- `redline-inline-title-page-off-margin-control` (control): the revision also raises that section's top
+  margin from 1440 to 1800 twips.
+
+The final section has no title page in either document, so neither case relies on the final section's
+`w:sectPrChange`. A correct redline gives the first section the revision's properties and records the
+original's in its `w:sectPrChange`. The markup view holds no section properties, so `section-flags` carries
+the check: no title page in the review or the accepted document, and the first section's title page back in
+the rejected one. Docxodus `54eb5836` compares an inline section break only on page size, margins, orientation
+and section type under its default policy, so in the reproducer the paragraph is unchanged and its section
+properties are copied without a record: the rejected flags are `false, false` instead of `true, false`. The
+margin change in the control makes it record every property, and it passes. The fix records any differing
+section property and passes both. See [the evidence and labelled review sheets](results/revision-part-two-stories/README.md).
