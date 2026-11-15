@@ -1,3 +1,13 @@
+`core-v174` adds two original pairs for [Docxodus #1764](https://github.com/JSv4/Docxodus/issues/1764).
+`section-page-universal-measures` writes an A4 page with 2 cm margins as a Strict save writes twips measures,
+`w:pgSz w:w="595.30pt"` and `w:pgMar w:top="56.70pt"`, in a Transitional package; Docxodus 644bbc9a printed it
+on Letter paper. `chart-strict-part` holds a bar chart whose part alone is written in the Strict namespaces;
+Docxodus 644bbc9a drew it empty. Each has a control (the page in twips; the chart part in the Transitional
+namespaces). The physical page geometry, two `marker-region` checks and the chart's token inventory decide
+them. `core-v169` and `core-v170` are claimed by open PRs. All earlier DOCX files remain byte-identical. The
+redline suite is unchanged. New reference registration and full-suite scoring remain pending. See
+[the evidence](docs/results/universal-measures-strict-parts/README.md).
+
 `redline-v51` adds a reproducer and control for [Docxodus #1763](https://github.com/JSv4/Docxodus/issues/1763):
 a revision that removes every header from a three-section body. In `redline-shared-header-removed` the original's
 first and third sections share one header part; Docxodus 644bbc9a bound that part only where it reappeared, so
