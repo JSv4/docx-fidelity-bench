@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v44`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v48`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -753,3 +753,26 @@ cannot see a list drawn with the wrong picture or naming a bullet that is not th
 redline carries every bullet it needs under distinct ids. Word 2024 results and renders are in
 [`docs/results/picture-bullets/`](results/picture-bullets/). The authored redlines were not run
 through LibreOffice or the SDK validator on the capture machine; CI runs both.
+
+## Section breaks both deleted and inserted (Docxodus #1757)
+
+`redline-v48` adds two original cases. The original has three sections of quarry notes, each under
+its own default header (`Quarry ledger 1` to `3`), and both revisions replace the whole body with
+unrelated kiln notes.
+
+- `redline-mixed-section-stories` (reproducer): the revision has two sections, each under its own
+  header (`Kiln register 1`, `2`), so the comparison deletes two section breaks and inserts one.
+  The review document holds four sections: the first kiln section, then the second kiln section's
+  text with the first quarry section, then the second and third quarry sections.
+- `redline-mixed-section-stories-deleted-control` (control): the revision has one section, so
+  section breaks are only deleted.
+
+Each review section's header pairs the headers of the sections whose text it holds. A section that
+holds only quarry text disappears on accept, so its authored header is the quarry one, unchanged,
+as Word 2024's own compare leaves it. Accept/reject round trips (whose semantic view lists each
+section's header), `section-boundaries` on both endpoints and an exact `section-stories` list of the
+review headers' text are mandatory. Docxodus 1d45d551 paired headers by section number once breaks
+were both deleted and inserted, so its rejected reproducer has `Quarry ledger 2`, `3`, `3`. Word
+2024 results and renders are in
+[`docs/results/mixed-section-stories/`](results/mixed-section-stories/). LibreOffice was not
+available on the capture machine; CI runs it.
