@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v50`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v51`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -831,3 +831,25 @@ comparison is declared eligible; the authored redlines hold plain runs, tabs and
 insertions and deletions, and whole-paragraph insertions and deletions. No earlier DOCX bytes change. Docxodus
 `1d45d551` fails the five reproducers on their assertions alone and passes the controls; the fix passes all
 eleven. See [the evidence and labelled review sheets](results/tab-break-edits/README.md).
+
+## A removed header two sections share (Docxodus #1763)
+
+`redline-v51` adds two original cases. The original has three sections of signal-tower notes and both
+revisions keep the body and section breaks but reference no header at all.
+
+- `redline-shared-header-removed` (reproducer): the original's first and third sections reference one header
+  part (`Tower ledger`) and the second has its own (`Stair ledger`).
+- `redline-shared-header-removed-own-control` (control): each section has its own part (`Tower ledger`,
+  `Stair ledger`, `Chest ledger`).
+
+Header references cannot be tracked, so a correct redline keeps a reference in every section and marks each
+header's text deleted. The authored redlines give every section a part of its own, as the reference compare
+does; a redline that keeps the shared part in both sections is equally correct. Reject must restore each
+original header in place. Accept leaves each section's header story empty, so the accepted expectation is the
+revision with those empty stories rather than the revision itself. Both round trips and an exact
+`section-stories` list of the review headers' text (`Tower ledger`, `Stair ledger`, `Tower ledger`) are
+mandatory, with `untracked-text` keeping the body unmarked. Docxodus `644bbc9a` writes an unchanged section
+break with the revision's section properties and bound the shared part only where it reappeared, so its
+redline's first section has no header: it fails both round trips and `section-stories` (observed `''`,
+`Stair ledger`, `Tower ledger`) and passes the control. The fix passes both. See
+[the evidence and labelled review sheets](results/shared-header-removal/README.md).

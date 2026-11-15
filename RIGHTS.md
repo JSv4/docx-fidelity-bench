@@ -3,6 +3,12 @@ labels and literal OOXML authored in `bench/fixtures.py`. No product fixture, he
 font program is imported, and no reporter attachment was opened or used. Their review sheet shows Word
 2024 PDFs of these inputs and Docxodus HTML renders of them.
 
+The two shared-header-removal redline cases for Docxodus #1763 contain original signal-tower text
+and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported, and the issue's reproduction scripts were not used. Their review
+sheets show a desktop word processor's PDFs of the authored redline and of Docxodus's redlines,
+drawn with PyMuPDF.
+
 The two mixed-section-story redline cases for Docxodus #1757 contain original quarry and kiln text
 and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
 image or font program is imported, and the issue's reproduction scripts were not used. Their review

@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v50', 'version': 50}
+SUITE = {'id': 'redline-v51', 'version': 51}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -358,6 +358,7 @@ def generate():
     mixed_section_stories(corpus)
     strict_values(corpus)
     tab_break_edits(corpus)
+    shared_header_removal(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3011,3 +3012,50 @@ def tab_break_edits(corpus):
                    dict(body=p(t(head + 'logs tide') + tab + t('charts' + tail)) + p(t(CLOSING))),
                    dict(body=p(t(head + 'logs tide') + rev.dele(t(' ')) + rev.ins(tab) + t('charts' + tail)) + p(t(CLOSING))),
                    [untracked(head + 'logs tide', 'charts' + tail, CLOSING)])
+
+
+def shared_header_removal(corpus):
+    """The revision removes every header while two original sections share one header part.
+
+    The original has three sections of signal-tower notes. In the reproducer its first and third
+    sections reference the same header part and the second has its own; in the control each section
+    has its own part. Both revisions keep the body and section breaks and reference no header at all.
+    Header references cannot be tracked, so the redline keeps one reference per section and marks each
+    header's text deleted; like the reference compare, the authored redline gives every section a part
+    of its own. Reject restores each original header in place. Accept leaves every section's header
+    story empty, so the accepted expectation is the revision with those empty stories."""
+    notes = ['Keepers raise the storm cone above the signal tower when the glass falls.',
+             'The night watch logs every passing lantern in the tower book.',
+             'Spare flags are folded into the cedar chest beneath the stair.']
+
+    def document(stories, refs):
+        """`stories` maps a header relationship id to its paragraphs; `refs` gives each section's id."""
+        def sect(rid):
+            return SECTION.format(refs=f'<w:headerReference w:type="default" r:id="{rid}"/>' if rid else '')
+        body = ''.join(p(t(text), props=sect(rid) if i < len(notes) - 1 else '')
+                       for i, (text, rid) in enumerate(zip(notes, refs)))
+        names = {rid: f'header{n}.xml' for n, rid in enumerate(stories, 1)}
+        return dict(body=body, section=sect(refs[-1]),
+                    relations_extra=[(rid, 'header', name) for rid, name in names.items()],
+                    content_types_extra=''.join(f'<Override PartName="/word/{name}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>' for name in names.values()),
+                    extra_parts={f'word/{name}': f'<w:hdr {NAMESPACES}>{stories[rid]}</w:hdr>' for rid, name in names.items()})
+
+    review = ['rReview1', 'rReview2', 'rReview3']
+    for control in (False, True):
+        labels = ['Tower ledger', 'Stair ledger', 'Chest ledger' if control else 'Tower ledger']
+        parts = {'rTower': 'Tower ledger', 'rStair': 'Stair ledger'} | ({'rChest': 'Chest ledger'} if control else {})
+        refs = ['rTower', 'rStair', 'rChest' if control else 'rTower']
+        case_id = 'redline-shared-header-removed' + ('-own-control' if control else '')
+        rev = Revisions()
+        left = corpus.file(case_id, 'left', **document({rid: p(t(text)) for rid, text in parts.items()}, refs))
+        right = corpus.file(case_id, 'right', **document({}, [None, None, None]))
+        accepted = corpus.file(case_id, 'accepted', **document({rid: p() for rid in review}, review))
+        authored = corpus.file(case_id, 'authored-redline', **document(
+            {rid: p(rev.dele(t(text))) for rid, text in zip(review, labels)}, review))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1763',
+                   'The revision removes every header from a three-section body whose ' +
+                   ('sections each have their own header part' if control else 'first and third sections share one header part')
+                   + '; reject restores each original header in place and accept leaves every header story empty',
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': accepted, 'rejected': left},
+                   authored, [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': 'header',
+                               'kind': 'default', 'values': labels}, untracked(*notes)])

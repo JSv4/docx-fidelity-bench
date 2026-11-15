@@ -8,6 +8,15 @@ them. `core-v169` and `core-v170` are claimed by open PRs. All earlier DOCX file
 redline suite is unchanged. New reference registration and full-suite scoring remain pending. See
 [the evidence](docs/results/universal-measures-strict-parts/README.md).
 
+`redline-v51` adds a reproducer and control for [Docxodus #1763](https://github.com/JSv4/Docxodus/issues/1763):
+a revision that removes every header from a three-section body. In `redline-shared-header-removed` the original's
+first and third sections share one header part; Docxodus 644bbc9a bound that part only where it reappeared, so
+its redline's first section had no header and rejecting it lost that header. In
+`redline-shared-header-removed-own-control` each section has its own part. The reject round trip and a
+`section-stories` check catch the defect. References cannot be tracked, so the accepted expectation is the
+revision with every section's header story left empty. All earlier DOCX files remain byte-identical. See
+[the redline notes](docs/REDLINE.md#a-removed-header-two-sections-share-docxodus-1763).
+
 `redline-v50` adds eleven comparison cases for [Docxodus #1759](https://github.com/JSv4/Docxodus/issues/1759):
 a tab or line break in a paragraph must not change how the text around it is compared. Five reproducers (a
 phrase replaced in a paragraph that starts with a tab or a line break, or with a tab between the replaced words;
