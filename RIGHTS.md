@@ -1,3 +1,7 @@
+The seven section-change-value redline cases for Docxodus #1775 contain original harbour-ferry text and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document, image or font
+program is imported, and neither the issue's text nor its reproduction was used as a fixture.
+
 The five revision-part and inline-title-page redline cases for Docxodus #1771 contain original
 canal-lock text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper,
 document, image or font program is imported, and the issue's reproduction tests were not used. Their review

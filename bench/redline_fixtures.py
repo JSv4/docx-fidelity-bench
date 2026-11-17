@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v52', 'version': 52}
+SUITE = {'id': 'redline-v53', 'version': 53}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -205,6 +205,11 @@ LIBREOFFICE_INELIGIBLE = {
     **{'redline-reviewer-bookmark-' + kind: (('accepted', 'rejected'),
        'LibreOffice exposes zero revisions for the authored bookmark-only removal/movement; semantic, reviewer and schema checks remain mandatory')
        for kind in ('move-and-remove', 'single-remove-control')},
+    **{case: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 exposes zero revisions for the authored section-property-only change; independent markup endpoints, declared section values and flags, revision count and SDK checks remain mandatory')
+       for case in ('redline-section-orientation-default', 'redline-section-orientation-stated-control',
+                    'redline-inline-section-orientation-default', 'redline-section-title-page-off',
+                    'redline-section-title-page-off-stated-control', 'redline-section-page-width-runs')},
     'redline-consolidated-note-prefix': (('rejected',),
         'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
@@ -361,6 +366,7 @@ def generate():
     shared_header_removal(corpus)
     revision_part_two_stories(corpus)
     inline_title_page(corpus)
+    section_change_values(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3167,3 +3173,108 @@ def inline_title_page(corpus):
                    [{'type': 'section-flags', 'version': 1, 'scope': scope, 'titlePg': flags}
                     for scope, flags in [('redline', [False, False]), ('accepted', [False, False]), ('rejected', [True, False])]]
                    + [untracked(*LOCK_NOTES)])
+
+
+FERRY_NOTES = ['The harbour ferry leaves the north slip on the half hour.',
+               'Foot passengers board first; cyclists wait by the ramp.']
+MARGINS = '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>'
+PORTRAIT = '<w:pgSz w:w="12240" w:h="15840"/>'
+LANDSCAPE = '<w:pgSz w:w="15840" w:h="12240" w:orient="landscape"/>'
+
+
+def section_values(*sections, scope='redline'):
+    return {'type': 'section-change-values', 'version': 1, 'scope': scope, 'sections': list(sections)}
+
+
+def endpoint_widths(accepted, rejected, sections=1):
+    """The changed section's page width in each resolved endpoint, which the markup view does not hold."""
+    rest = [{}] * (sections - 1)
+    return [section_values({'pgSz@w': [width, None]}, *rest, scope=scope)
+            for scope, width in (('accepted', accepted), ('rejected', rejected))]
+
+
+def section_change_values(corpus):
+    """Each side of a section property change states the values the other side states.
+
+    A desktop word processor reads a value that one side of a `w:sectPrChange` leaves out as unchanged,
+    not as its default. In `redline-section-orientation-default` the original's one section is portrait
+    Letter and leaves `w:orient` at its default; the revision's is landscape. A redline whose archived
+    `w:pgSz` copies the original's, with no `w:orient`, rejects to landscape there.
+    `redline-inline-section-orientation-default` turns the first of two sections landscape, at the
+    paragraph that ends it. In the control, `redline-section-orientation-stated-control`, the original
+    writes `w:orient="portrait"` itself. In `redline-section-title-page-off` the original's section has a
+    title page and the revision's has none: a redline whose section simply has no `w:titlePg`, beside an
+    archive holding one, is not seen as a change there. In its control the revision writes
+    `<w:titlePg w:val="0"/>` itself. `section-change-values` reads the literal values on both sides of
+    each section's change.
+
+    `redline-section-page-width-runs` changes only the page width of a section that ends inside the
+    body; no run's formatting changes, so the only revision is the section's. In its control the same
+    paragraph's run also turns bold, which is a second revision. `revision-count` bounds both."""
+    def document(first, final, runs=(t(FERRY_NOTES[0]),), split=False):
+        if not split:
+            return dict(body=p(''.join(runs)) + p(t(FERRY_NOTES[1])), section=f'<w:sectPr>{final}</w:sectPr>')
+        return dict(body=p(''.join(runs), props=f'<w:sectPr>{first}</w:sectPr>') + p(t(FERRY_NOTES[1])),
+                    section=f'<w:sectPr>{final}</w:sectPr>')
+    def archived(rev, props):
+        return f'<w:sectPrChange {rev.attrs(AUTHOR)}><w:sectPr>{props}</w:sectPr></w:sectPrChange>'
+    stated_portrait = '<w:pgSz w:w="12240" w:h="15840" w:orient="portrait"/>'
+    cases = [
+        ('redline-section-orientation-default', 'reproducer', False, PORTRAIT, LANDSCAPE, stated_portrait,
+         "The revision turns the document's one section from portrait, which the original leaves to the default, to "
+         "landscape; the archived properties state the portrait orientation reject restores",
+         [section_values({'pgSz@orient': ['landscape', 'portrait']})] + endpoint_widths('15840', '12240')),
+        ('redline-section-orientation-stated-control', 'control', False, stated_portrait, LANDSCAPE, stated_portrait,
+         "The revision turns the document's one section from portrait, which the original states, to landscape",
+         [section_values({'pgSz@orient': ['landscape', 'portrait']})] + endpoint_widths('15840', '12240')),
+        ('redline-inline-section-orientation-default', 'reproducer', True, PORTRAIT, LANDSCAPE, stated_portrait,
+         "The revision turns the first of two sections, which ends inside the body, from portrait left to the default "
+         "to landscape; the archived properties state the portrait orientation reject restores",
+         [section_values({'pgSz@orient': ['landscape', 'portrait']}, {})] + endpoint_widths('15840', '12240', 2)),
+    ]
+    for case_id, kind, split, original, revised, archive, description, assertions in cases:
+        rev = Revisions()
+        def changed(props):
+            # The section that changes is the first of two in a split document, else the only one.
+            return document(props, PORTRAIT + MARGINS, split=True) if split else document('', props)
+        left = corpus.file(case_id, 'left', **changed(original + MARGINS))
+        right = corpus.file(case_id, 'right', **changed(revised + MARGINS))
+        authored = corpus.file(case_id, 'authored-redline', **changed(revised + MARGINS + archived(rev, archive + MARGINS)))
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1775', description, 'compare',
+                   [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left},
+                   authored, assertions + [untracked(*FERRY_NOTES)])
+    for control in (False, True):
+        case_id = 'redline-section-title-page-off' + ('-stated-control' if control else '')
+        rev = Revisions()
+        off = '<w:titlePg w:val="0"/>'
+        left = corpus.file(case_id, 'left', **document('', PORTRAIT + MARGINS + '<w:titlePg/>'))
+        right = corpus.file(case_id, 'right', **document('', PORTRAIT + MARGINS + (off if control else '')))
+        authored = corpus.file(case_id, 'authored-redline', **document(
+            '', PORTRAIT + MARGINS + off + archived(rev, PORTRAIT + MARGINS + '<w:titlePg/>')))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1775',
+                   'The revision turns off the title page of the final section'
+                   + (', writing it off itself' if control else ' by leaving it out')
+                   + '; the section states the title page off beside the archive that has it on', 'compare',
+                   [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   [section_values({'titlePg': ['off', 'on']})]
+                   + [{'type': 'section-flags', 'version': 1, 'scope': scope, 'titlePg': flags}
+                      for scope, flags in [('redline', [False]), ('accepted', [False]), ('rejected', [True])]]
+                   + [untracked(*FERRY_NOTES)])
+    narrow = '<w:pgSz w:w="12000" w:h="15840"/>'
+    for control in (False, True):
+        case_id = 'redline-section-page-width-runs' + ('-bold-control' if control else '')
+        rev = Revisions()
+        bold = t(FERRY_NOTES[0], '<w:b/>') if control else t(FERRY_NOTES[0])
+        left = corpus.file(case_id, 'left', **document(PORTRAIT + MARGINS, PORTRAIT + MARGINS, split=True))
+        right = corpus.file(case_id, 'right', **document(narrow + MARGINS, PORTRAIT + MARGINS, (bold,), split=True))
+        run = (t(FERRY_NOTES[0], f'<w:b/><w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>') if control
+               else t(FERRY_NOTES[0]))
+        authored = corpus.file(case_id, 'authored-redline', **document(
+            narrow + MARGINS + archived(rev, PORTRAIT + MARGINS), PORTRAIT + MARGINS, (run,), split=True))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1775',
+                   'The revision narrows the page of a section that ends inside the body'
+                   + (' and bolds the run of the paragraph that ends it; the redline records both' if control
+                      else ', its only change; the redline records the section change alone'), 'compare',
+                   [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 2 if control else 1},
+                    untracked(*FERRY_NOTES)] + endpoint_widths('12000', '12240', 2))

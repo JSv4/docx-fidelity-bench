@@ -1,3 +1,15 @@
+`redline-v53` adds four reproducers and three controls for [Docxodus #1775](https://github.com/JSv4/Docxodus/issues/1775),
+section property changes that leave a value out of one side of their `w:sectPrChange`. In
+`redline-section-orientation-default` and `redline-inline-section-orientation-default` a portrait section, whose
+original leaves `w:orient` at its default, turns landscape; `redline-section-orientation-stated-control` states the
+original's orientation. In `redline-section-title-page-off` the final section loses its title page; its control
+states `<w:titlePg w:val="0"/>` itself. Docxodus d99765d7 copied each side's properties as written, so the archive
+held no orientation and the section held no title page beside an archive that had one; a new `section-change-values`
+assertion reads the literal values on both sides. In `redline-section-page-width-runs` only a section's page width
+changes, and Docxodus d99765d7 also gave the paragraph's run an empty `w:rPrChange`, which `revision-count` catches;
+its control also bolds the run. All earlier DOCX files remain byte-identical, and the PDF suite stays `core-v174`. See
+[the redline notes](docs/REDLINE.md#values-a-section-change-leaves-out-docxodus-1775).
+
 `redline-v52` adds three reproducers and two controls for [Docxodus #1771](https://github.com/JSv4/Docxodus/issues/1771),
 two lock-note sections whose revision names its header parts by relationship ids of its own, or turns off a
 section's title page. In `redline-revision-part-two-stories` the revision keeps the first section's header under
