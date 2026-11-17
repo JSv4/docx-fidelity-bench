@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v52')
-        self.assertEqual(len(registry['cases']), 336)
+        self.assertEqual(registry['suite']['id'], 'redline-v53')
+        self.assertEqual(len(registry['cases']), 343)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -302,6 +302,42 @@ class AuthoredCalibration(unittest.TestCase):
         # The markup view holds no section properties, so only the flag assertion sees the lost title page.
         self.assertEqual(views(mutant)[1], rejected)
         self.assertFalse(redline._assertion(assertion, mutant, resolved(mutant))['passed'])
+
+    def test_section_change_values_catch_a_value_one_side_leaves_out(self):
+        for case_id, mutate in (
+                # The archive copies the original's page size as written, leaving its orientation out.
+                ('redline-section-orientation-default',
+                 lambda root: next(root.iter(W + 'sectPrChange')).find(W + 'sectPr/' + W + 'pgSz').attrib.pop(W + 'orient')),
+                # The section leaves its title page out instead of stating it off.
+                ('redline-section-title-page-off',
+                 lambda root: next(root.iter(W + 'sectPr')).remove(next(root.iter(W + 'sectPr')).find(W + 'titlePg')))):
+            record = case(case_id)
+            assertion = next(a for a in record['assertions'] if a['type'] == 'section-change-values')
+            accepted, rejected = (revisions.view(load(record['expected'][key])) for key in ('accepted', 'rejected'))
+            authored = load(record['authored'])
+            self.assertEqual(views(authored), (accepted, rejected))
+            self.assertTrue(redline._assertion(assertion, authored, {})['passed'])
+            def change(root, mutate=mutate):
+                root.set('xmlns:w14', revisions.W14)
+                mutate(root)
+            mutant = rewrite(record['authored'], change)
+            # Both round trips still hold: only the declared values see the omission.
+            self.assertEqual(views(mutant), (accepted, rejected))
+            self.assertFalse(redline._assertion(assertion, mutant, {})['passed'])
+
+    def test_section_page_width_runs_count_an_empty_run_format_change(self):
+        record = case('redline-section-page-width-runs')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'revision-count')
+        def empty_run_change(root):
+            root.set('xmlns:w14', revisions.W14)
+            run = next(root.iter(W + 'r'))
+            properties = ET.Element(W + 'rPr')
+            ET.SubElement(ET.SubElement(properties, W + 'rPrChange', {W + 'id': '900', W + 'author': 'Bench'}), W + 'rPr')
+            run.insert(0, properties)
+        mutant = rewrite(record['authored'], empty_run_change)
+        self.assertTrue(redline._assertion(assertion, load(record['authored']), {})['passed'])
+        self.assertEqual(views(mutant), views(load(record['authored'])))
+        self.assertFalse(redline._assertion(assertion, mutant, {})['passed'])
 
     def test_section_stories_follow_inheritance_and_ignore_property_history(self):
         record = case('redline-inserted-section-footer')
