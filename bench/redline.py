@@ -303,6 +303,7 @@ def validate_registry(registry=None):
                              isinstance(key, str) and re.fullmatch('[A-Za-z]+(@[A-Za-z]+)?', key)
                              and isinstance(values, list) and len(values) == 2
                              and all(v is None or isinstance(v, str) and v for v in values)
+                             and ('@' in key or all(v in {None, 'on', 'off'} for v in values))
                              for key, values in section.items()) for section in a['sections']),
                      'section-stories': lambda a: a['scope'] == 'redline' and a.get('story') in {'header', 'footer'}
                          and a.get('kind') in {'default', 'first', 'even'} and isinstance(a.get('values'), list)

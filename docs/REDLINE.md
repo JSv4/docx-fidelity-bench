@@ -48,7 +48,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `deleted-text-owned` v1 (scope `redline`): every `w:delText` and `w:delInstrText` in the raw redline lies in a `w:del` or `w:moveFrom` of its own story. A text box (`w:txbxContent`) is a story of its own, so a deletion around the run that anchors the box does not count for the text inside it. Word 2024 reports a package that breaks this as corrupt, while both round trips and the schema pass it. Metric contract 30 records this check.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
-   - `section-change-values` v1 (scope `redline`, `accepted` or `rejected`): one entry per physical section of the raw redline or of the independently resolved endpoint, in body order (the property history in `w:sectPrChange` and text boxes excluded), maps each declared property to its literal value in the section and in the `w:sectPr` its `w:sectPrChange` archives: `name@attribute` reads the attribute as written, `name` reads a toggle as `on` or `off` (a missing `w:val` is on), and a value either side leaves out, or an archive the section lacks, is null. The number of sections must match. A desktop word processor reads a value left out of one side of a section change as unchanged, not as its default, so it rejects a portrait-to-landscape change whose archive leaves `w:orient` out to landscape, and does not see a title page turned off by leaving `w:titlePg` out (Docxodus #1775); neither round trip reads section properties. Metric contract 32 records this check.
+   - `section-change-values` v1 (scope `redline`, `accepted` or `rejected`): one entry per physical section of the raw redline or of the independently resolved endpoint, in body order (the property history in `w:sectPrChange` and text boxes excluded), maps each declared property to its literal value in the section and in the `w:sectPr` its `w:sectPrChange` archives: `name@attribute` reads the attribute as written, `name` reads a toggle as `on` or `off` (a missing `w:val` is on), and a value either side leaves out, or an archive the section lacks, is null. The number of sections must match. Docxodus #1775 reports, from a desktop word processor this bench has not captured, that it reads a value left out of one side of a section change as unchanged, not as its default: it rejects a portrait-to-landscape change whose archive leaves `w:orient` out to landscape, and does not see a final section's title page turned off by leaving `w:titlePg` out (an inline section break is read correctly). Neither round trip reads section properties. Metric contract 32 records this check.
    - `section-boundaries` v1 (scope `accepted` or `rejected`): inline section breaks must occur after exactly the declared zero-based body paragraph indices in `afterParagraphs`. Paragraphs are enumerated in XML document order beneath the body, including nested containers; the trailing body section properties are excluded. This binds section and running-story changes to their carrier paragraphs even when the semantic view and section-story order match. Metric contract version 18 records this check.
    - `inline-trees` v1 (scope `accepted` or `rejected`): the complete ordered `m:oMath`, `w:drawing`, or `w:pict` subtrees in the resolved body match declared XML. It retains operators, properties, geometry and textbox content; image references resolve to the SHA-256 of their actual package bytes. Only engine addressing attributes and remappable `wp:docPr/@id` values are ignored. Surviving deleted text carriers normalize to ordinary text, empty run properties are discarded, and adjacent plain text runs with identical attributes and properties coalesce. Metric contract version 14 additionally includes VML pict carriers.
 
@@ -922,18 +922,21 @@ section property and passes both. See [the evidence and labelled review sheets](
 
 The issue reports that a desktop word processor reads a value one side of a `w:sectPrChange` leaves out as
 unchanged, not as its default: it rejects an archive without `w:orient` to landscape, and lists no revision,
-and keeps the title page, for a section without `w:titlePg` beside an archive that has it. Both round trips
+and keeps the title page, for a final section without `w:titlePg` beside an archive that has it. This bench has no
+capture of that application for these cases; the reproducers rest on the issue's report. Both round trips
 pass such a redline, since the markup view holds no section properties and the benchmark's engine restores the
 archive as written, so `section-change-values` reads the literal values: `landscape` in the section and
 `portrait` in its archive, or a title page `off` in the section and `on` in the archive. The title-page cases
-also declare `section-flags` on the review and both endpoints; the others declare the changed section's page width
-in each resolved endpoint with `section-change-values`. The page-width cases bound `revision-count`:
-one record (the section's) for the reproducer, two for the control. LibreOffice 25.8.7.3 exposes no revision
+also declare `section-flags` on the review and both endpoints; the others declare the changed section's page size
+in each resolved endpoint with `section-change-values`. Every case bounds `revision-count`: one record (the
+section's), or two for the bold control. LibreOffice 25.8.7.3 exposes no revision
 for a change to section properties alone, so its comparisons are declared ineligible for every case but the
-bold control.
+bold control. The same holds for the two #1771 inline title-page cases, whose LibreOffice comparisons were declared
+eligible and left them unmeasured; they are now declared ineligible too, with no change to their documents.
 
 Docxodus `d99765d7` archives each side's properties as written: the orientation reproducers read `landscape`
-and null, the title-page reproducer null and `on`, and the page-width reproducer counts two records, because
+and null, the title-page reproducer null and `on`, and the page-width reproducer (and the inline orientation
+reproducer) counts two records, because
 every run of a paragraph classed as changed only in its formatting received an empty `w:rPrChange`. It passes
 the three controls. The fix states, on each side, every value the other side states where leaving it out
 means a value the specification defines, and marks only a run whose formatting changed; it passes all seven.

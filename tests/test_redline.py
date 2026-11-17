@@ -771,7 +771,7 @@ class AuthoredCalibration(unittest.TestCase):
     def test_move_from_text_rejects_deletion_carriers_and_missing_moves(self):
         record = case('redline-moved-from-text')
         assertion = next(a for a in record['assertions'] if a['type'] == 'revision-text')
-        self.assertTrue(redline._assertion(assertion, load(record['authored']), {})['passed'])
+        self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'])
         for mutation in ('deleted-text', 'deleted-instruction', 'missing-move'):
             def change(root):
                 move = next(e for e in root.iter(W + 'moveFrom') if list(e.iter(W + 't')))
@@ -787,7 +787,7 @@ class AuthoredCalibration(unittest.TestCase):
     def test_revision_text_rejects_wrong_deletion_carrier(self):
         record = case('redline-moved-from-text-control')
         assertion = next(a for a in record['assertions'] if a['type'] == 'revision-text')
-        self.assertTrue(redline._assertion(assertion, load(record['authored']), {})['passed'])
+        self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'])
         def change(root):
             next(root.iter(W + 'delText')).tag = W + 't'
         self.assertFalse(redline._assertion(assertion, rewrite(record['authored'], change), {'redline': None})['passed'])
@@ -855,7 +855,7 @@ class AuthoredCalibration(unittest.TestCase):
         for name in ('redline-deleted-textbox-text', 'redline-deleted-textbox-text-control'):
             record = case(name)
             self.assertIn(assertion, record['assertions'])
-            self.assertTrue(redline._assertion(assertion, load(record['authored']), {})['passed'], name)
+            self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'], name)
         authored = case('redline-deleted-textbox-text')['authored']
         def renamed(root):
             for box in root.iter(W + 'txbxContent'):
@@ -1118,7 +1118,7 @@ class GamingIsRejected(unittest.TestCase):
         record = case('redline-header-bookmark-only')
         assertion = record['assertions'][0]
         self.assertEqual(assertion['story'], 'headers')
-        self.assertTrue(redline._assertion(assertion, load(record['authored']), {})['passed'])
+        self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'])
         self.assertFalse(redline._assertion(dict(assertion, story='body'), load(record['authored']), {'redline': None})['passed'])
 
     def test_consolidation_credits_each_reviewer(self):

@@ -206,10 +206,13 @@ LIBREOFFICE_INELIGIBLE = {
        'LibreOffice exposes zero revisions for the authored bookmark-only removal/movement; semantic, reviewer and schema checks remain mandatory')
        for kind in ('move-and-remove', 'single-remove-control')},
     **{case: (('accepted', 'rejected'),
-       'LibreOffice 25.8.7.3 exposes zero revisions for the authored section-property-only change; independent markup endpoints, declared section values and flags, revision count and SDK checks remain mandatory')
+       'LibreOffice 25.8.7.3 exposes zero revisions for the authored section-property-only change; independent markup endpoints, the declared section assertions, revision count and SDK checks remain mandatory')
        for case in ('redline-section-orientation-default', 'redline-section-orientation-stated-control',
                     'redline-inline-section-orientation-default', 'redline-section-title-page-off',
                     'redline-section-title-page-off-stated-control', 'redline-section-page-width-runs')},
+    **{case: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 exposes zero revisions for the authored section-property-only change; independent markup endpoints, section flags and SDK checks remain mandatory')
+       for case in ('redline-inline-title-page-off', 'redline-inline-title-page-off-margin-control')},
     'redline-consolidated-note-prefix': (('rejected',),
         'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
@@ -3187,26 +3190,31 @@ def section_values(*sections, scope='redline'):
 
 
 def endpoint_widths(accepted, rejected, sections=1):
-    """The changed section's page width in each resolved endpoint, which the markup view does not hold."""
+    """The changed section's page size in each resolved endpoint, which the markup view does not hold. Each
+    size is (width, height) in twips."""
     rest = [{}] * (sections - 1)
-    return [section_values({'pgSz@w': [width, None]}, *rest, scope=scope)
-            for scope, width in (('accepted', accepted), ('rejected', rejected))]
+    return [section_values({'pgSz@w': [size[0], None], 'pgSz@h': [size[1], None]}, *rest, scope=scope)
+            for scope, size in (('accepted', accepted), ('rejected', rejected))]
+
+
+def revision_bound(count):
+    return {'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': count}
 
 
 def section_change_values(corpus):
     """Each side of a section property change states the values the other side states.
 
-    A desktop word processor reads a value that one side of a `w:sectPrChange` leaves out as unchanged,
-    not as its default. In `redline-section-orientation-default` the original's one section is portrait
+    Docxodus #1775 reports, from a desktop word processor this bench did not capture, that the application
+    reads a value one side of a `w:sectPrChange` leaves out as unchanged, not as its default. In `redline-section-orientation-default` the original's one section is portrait
     Letter and leaves `w:orient` at its default; the revision's is landscape. A redline whose archived
     `w:pgSz` copies the original's, with no `w:orient`, rejects to landscape there.
     `redline-inline-section-orientation-default` turns the first of two sections landscape, at the
     paragraph that ends it. In the control, `redline-section-orientation-stated-control`, the original
-    writes `w:orient="portrait"` itself. In `redline-section-title-page-off` the original's section has a
-    title page and the revision's has none: a redline whose section simply has no `w:titlePg`, beside an
-    archive holding one, is not seen as a change there. In its control the revision writes
+    writes `w:orient="portrait"` itself. In `redline-section-title-page-off` the original's final section has
+    a title page and the revision's has none: the issue reports that a final section with no `w:titlePg`,
+    beside an archive holding one, is not seen as a change there (an inline section break is read correctly). In its control the revision writes
     `<w:titlePg w:val="0"/>` itself. `section-change-values` reads the literal values on both sides of
-    each section's change.
+    each section's change, and `revision-count` holds each redline to its one section revision.
 
     `redline-section-page-width-runs` changes only the page width of a section that ends inside the
     body; no run's formatting changes, so the only revision is the section's. In its control the same
@@ -3223,14 +3231,14 @@ def section_change_values(corpus):
         ('redline-section-orientation-default', 'reproducer', False, PORTRAIT, LANDSCAPE, stated_portrait,
          "The revision turns the document's one section from portrait, which the original leaves to the default, to "
          "landscape; the archived properties state the portrait orientation reject restores",
-         [section_values({'pgSz@orient': ['landscape', 'portrait']})] + endpoint_widths('15840', '12240')),
+         [section_values({'pgSz@orient': ['landscape', 'portrait']})] + endpoint_widths(('15840', '12240'), ('12240', '15840'))),
         ('redline-section-orientation-stated-control', 'control', False, stated_portrait, LANDSCAPE, stated_portrait,
          "The revision turns the document's one section from portrait, which the original states, to landscape",
-         [section_values({'pgSz@orient': ['landscape', 'portrait']})] + endpoint_widths('15840', '12240')),
+         [section_values({'pgSz@orient': ['landscape', 'portrait']})] + endpoint_widths(('15840', '12240'), ('12240', '15840'))),
         ('redline-inline-section-orientation-default', 'reproducer', True, PORTRAIT, LANDSCAPE, stated_portrait,
          "The revision turns the first of two sections, which ends inside the body, from portrait left to the default "
          "to landscape; the archived properties state the portrait orientation reject restores",
-         [section_values({'pgSz@orient': ['landscape', 'portrait']}, {})] + endpoint_widths('15840', '12240', 2)),
+         [section_values({'pgSz@orient': ['landscape', 'portrait']}, {})] + endpoint_widths(('15840', '12240'), ('12240', '15840'), 2)),
     ]
     for case_id, kind, split, original, revised, archive, description, assertions in cases:
         rev = Revisions()
@@ -3242,7 +3250,7 @@ def section_change_values(corpus):
         authored = corpus.file(case_id, 'authored-redline', **changed(revised + MARGINS + archived(rev, archive + MARGINS)))
         corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1775', description, 'compare',
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left},
-                   authored, assertions + [untracked(*FERRY_NOTES)])
+                   authored, assertions + [revision_bound(1), untracked(*FERRY_NOTES)])
     for control in (False, True):
         case_id = 'redline-section-title-page-off' + ('-stated-control' if control else '')
         rev = Revisions()
@@ -3259,7 +3267,7 @@ def section_change_values(corpus):
                    [section_values({'titlePg': ['off', 'on']})]
                    + [{'type': 'section-flags', 'version': 1, 'scope': scope, 'titlePg': flags}
                       for scope, flags in [('redline', [False]), ('accepted', [False]), ('rejected', [True])]]
-                   + [untracked(*FERRY_NOTES)])
+                   + [revision_bound(1), untracked(*FERRY_NOTES)])
     narrow = '<w:pgSz w:w="12000" w:h="15840"/>'
     for control in (False, True):
         case_id = 'redline-section-page-width-runs' + ('-bold-control' if control else '')
@@ -3276,5 +3284,5 @@ def section_change_values(corpus):
                    + (' and bolds the run of the paragraph that ends it; the redline records both' if control
                       else ', its only change; the redline records the section change alone'), 'compare',
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
-                   [{'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 2 if control else 1},
-                    untracked(*FERRY_NOTES)] + endpoint_widths('12000', '12240', 2))
+                   [revision_bound(2 if control else 1), untracked(*FERRY_NOTES)]
+                   + endpoint_widths(('12000', '15840'), ('12240', '15840'), 2))
