@@ -301,12 +301,12 @@ def validate_registry(registry=None):
                          and all(type(v) is bool for v in a['titlePg']),
                      'run-formatting': lambda a: a['scope'] in {'accepted', 'rejected'}
                          and isinstance(a.get('properties'), list) and bool(a['properties'])
-                         and all(isinstance(name, str) and re.fullmatch('[A-Za-z]+', name) for name in a['properties'])
+                         and all(name in RUN_TOGGLES or name in RUN_VALUED for name in a['properties'])
                          and a['properties'] == sorted(set(a['properties']))
                          and isinstance(a.get('spans'), list) and bool(a['spans']) and all(isinstance(span, list) and len(span) == 2
                              and isinstance(span[0], str) and span[0] and isinstance(span[1], list)
                              and all(isinstance(entry, str) and entry.split('=', 1)[0] in a['properties']
-                                     and (entry in RUN_TOGGLES) == ('=' not in entry) for entry in span[1])
+                                     and (entry.split('=', 1)[0] in RUN_TOGGLES) == ('=' not in entry) for entry in span[1])
                              and span[1] == sorted(set(span[1])) for span in a['spans'])
                          and all(first[1] != second[1] for first, second in zip(a['spans'], a['spans'][1:])),
                      'section-change-values': lambda a: a['scope'] in {'redline', 'accepted', 'rejected'} and isinstance(a.get('sections'), list)
@@ -631,9 +631,11 @@ def body_sections(element):
 RUN_CHARACTERS = {'tab': '\t', 'ptab': '\t', 'br': '\n', 'cr': '\n', 'noBreakHyphen': '\u2011', 'softHyphen': '\u00ad'}
 # Run properties read as on or off; any other run property is read as its w:val.
 RUN_TOGGLES = {'b', 'bCs', 'i', 'iCs', 'caps', 'smallCaps', 'strike', 'dstrike', 'vanish', 'specVanish',
-               'emboss', 'imprint', 'outline', 'shadow', 'noProof', 'webHidden', 'snapToGrid'}
+               'emboss', 'imprint', 'outline', 'shadow', 'noProof', 'webHidden', 'snapToGrid', 'rtl', 'cs', 'oMath'}
+# Run properties read by their w:val alone.
+RUN_VALUED = {'u', 'color', 'sz', 'szCs', 'highlight', 'vertAlign', 'rStyle', 'effect', 'em', 'spacing', 'position', 'kern', 'w'}
 # A w:val that means the property is not applied.
-RUN_NEUTRAL = {'u': {'none'}, 'highlight': {'none'}, 'vertAlign': {'baseline'}, 'effect': {'none'}, 'em': {'none'}}
+RUN_NEUTRAL = {'u': {'none'}, 'highlight': {'none'}, 'vertAlign': {'baseline'}, 'effect': {'none'}, 'em': {'none'}, 'color': {'auto'}}
 
 
 def run_formatting(body, properties):
@@ -645,7 +647,7 @@ def run_formatting(body, properties):
     off = {'0', 'false', 'off'}
     def runs(element):
         for child in element:
-            if child.tag == revisions.w('txbxContent'):
+            if child.tag == revisions.w('txbxContent') or child.tag.endswith('}Fallback'):
                 continue
             if child.tag == revisions.w('r'):
                 yield child
