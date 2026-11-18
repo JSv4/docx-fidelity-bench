@@ -1,8 +1,8 @@
 `redline-v54` adds three reproducers and a control for [Docxodus #1784](https://github.com/JSv4/Docxodus/issues/1784):
 a centred paragraph whose revision removes the formatting of some runs, beside a symbol, an underlined tab, or inside
 a hyperlink. Docxodus 6c98b822 archived each run's original formatting on the wrong run, so reject formatted the wrong
-words; neither round trip reads character formatting, so a new `run-formatting` assertion declares the formatted
-spans of both endpoints. `core-v175` adds a pair for [Docxodus #1786](https://github.com/JSv4/Docxodus/issues/1786):
+words; neither round trip reads character formatting, so a new `run-formatting` assertion declares the bold and
+underline of the text spans of both endpoints. `core-v175` adds a pair for [Docxodus #1786](https://github.com/JSv4/Docxodus/issues/1786):
 a paragraph mark hidden with `<w:vanish w:val="on"/>` (`hidden-mark-on-spelling`) and with `w:val="1"` (control),
 which join their paragraph to the next; Docxodus 6c98b822 read the `on` spelling as off and kept the paragraphs apart.
 All earlier DOCX files remain byte-identical. New reference registration and full-suite scoring for `core-v175`

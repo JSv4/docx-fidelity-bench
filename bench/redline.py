@@ -57,7 +57,7 @@ CONTRACT = {'version': 33, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All',
             'strictPackages': 'a package in the ISO/IEC 29500 Strict conformance class is read under the Transitional WordprocessingML, math and relationship names, so an input or an output of either class is resolved and viewed alike',
             'relationshipIds': 'declared relationship-ids assertions require every relationship-namespace attribute in every XML part of the redline to name a relationship of that part that is external or whose target is in the package',
-            'runFormatting': 'declared run-formatting assertions require the body of an independently resolved endpoint to hold the declared text spans, each with the run-property names its characters carry (a property turned off is not listed), whatever the run boundaries',
+            'runFormatting': 'declared run-formatting assertions require the body of an independently resolved endpoint to hold the declared text spans, each with the declared run properties its characters carry (a toggle when on, any other property as its value unless neutral; undeclared properties ignored), whatever the run boundaries',
             'sectionChangeValues': 'declared section-change-values assertions require each physical section of the raw redline or an independently resolved endpoint, and the w:sectPr archived in its w:sectPrChange, to state the declared literal values: an attribute as written, a toggle as on or off, absent as null',
             'pictureBullets': 'declared picture-bullets assertions require every body list paragraph of an independently resolved endpoint to draw the declared bullet: the bytes of the image its level names through a picture bullet of the numbering part, or none'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
@@ -299,11 +299,16 @@ def validate_registry(registry=None):
                      'section-flags': lambda a: a['scope'] in {'redline', 'accepted', 'rejected'}
                          and isinstance(a.get('titlePg'), list) and bool(a['titlePg'])
                          and all(type(v) is bool for v in a['titlePg']),
-                     'run-formatting': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('spans'), list)
-                         and bool(a['spans']) and all(isinstance(span, list) and len(span) == 2
+                     'run-formatting': lambda a: a['scope'] in {'accepted', 'rejected'}
+                         and isinstance(a.get('properties'), list) and bool(a['properties'])
+                         and all(isinstance(name, str) and re.fullmatch('[A-Za-z]+', name) for name in a['properties'])
+                         and a['properties'] == sorted(set(a['properties']))
+                         and isinstance(a.get('spans'), list) and bool(a['spans']) and all(isinstance(span, list) and len(span) == 2
                              and isinstance(span[0], str) and span[0] and isinstance(span[1], list)
-                             and all(isinstance(name, str) and name for name in span[1]) and span[1] == sorted(set(span[1]))
-                             for span in a['spans']),
+                             and all(isinstance(entry, str) and entry.split('=', 1)[0] in a['properties']
+                                     and (entry in RUN_TOGGLES) == ('=' not in entry) for entry in span[1])
+                             and span[1] == sorted(set(span[1])) for span in a['spans'])
+                         and all(first[1] != second[1] for first, second in zip(a['spans'], a['spans'][1:])),
                      'section-change-values': lambda a: a['scope'] in {'redline', 'accepted', 'rejected'} and isinstance(a.get('sections'), list)
                          and bool(a['sections']) and all(isinstance(section, dict) and all(
                              isinstance(key, str) and re.fullmatch('[A-Za-z]+(@[A-Za-z]+)?', key)
@@ -623,14 +628,20 @@ def body_sections(element):
         else:
             yield from body_sections(child)
 
-RUN_CHARACTERS = {'tab': '\t', 'br': '\n', 'cr': '\n', 'noBreakHyphen': '\u2011', 'softHyphen': '\u00ad'}
+RUN_CHARACTERS = {'tab': '\t', 'ptab': '\t', 'br': '\n', 'cr': '\n', 'noBreakHyphen': '\u2011', 'softHyphen': '\u00ad'}
+# Run properties read as on or off; any other run property is read as its w:val.
+RUN_TOGGLES = {'b', 'bCs', 'i', 'iCs', 'caps', 'smallCaps', 'strike', 'dstrike', 'vanish', 'specVanish',
+               'emboss', 'imprint', 'outline', 'shadow', 'noProof', 'webHidden', 'snapToGrid'}
+# A w:val that means the property is not applied.
+RUN_NEUTRAL = {'u': {'none'}, 'highlight': {'none'}, 'vertAlign': {'baseline'}, 'effect': {'none'}, 'em': {'none'}}
 
 
-def run_formatting(body):
-    """The body's text as spans of consecutive characters carrying the same run properties, whatever the run
-    boundaries: each span is [text, sorted local names of its run's w:rPr children]. A toggle turned off
-    (w:val 0, false or off) or an underline of none is not listed, nor is w:rPrChange. Text is w:t, a symbol's
-    character, and a tab, break or special hyphen as its character; text boxes are their own stories."""
+def run_formatting(body, properties):
+    """The body's text as spans of consecutive characters with the same values of the declared run `properties`,
+    whatever the run boundaries: each span is [text, sorted entries], an entry being a toggle's name when it is
+    on or `name=value` for any other property applied (a neutral value such as an underline of none is not
+    applied). Run properties not declared are ignored. Text is w:t and restored w:delText, a symbol's character,
+    and a tab, break or special hyphen as its character; text boxes are their own stories."""
     off = {'0', 'false', 'off'}
     def runs(element):
         for child in element:
@@ -641,19 +652,29 @@ def run_formatting(body):
             else:
                 yield from runs(child)
     def character(child):
-        name = child.tag.rsplit('}', 1)[-1]
-        if child.tag == revisions.w('t'):
+        if child.tag in (revisions.w('t'), revisions.w('delText')):
             return child.text or ''
         if child.tag == revisions.w('sym'):
             code = child.get(revisions.w('char'), '')
             return chr(int(code, 16)) if re.fullmatch('[0-9A-Fa-f]{1,4}', code) else ''
+        name = child.tag.rsplit('}', 1)[-1]
         return RUN_CHARACTERS.get(name, '') if child.tag.startswith('{' + revisions.W + '}') else ''
+    def entries(rpr):
+        found = set()
+        for child in (rpr if rpr is not None else []):
+            name = child.tag.rsplit('}', 1)[-1]
+            if name not in properties or not child.tag.startswith('{' + revisions.W + '}'):
+                continue
+            value = child.get(revisions.w('val'))
+            if name in RUN_TOGGLES:
+                if (value or 'true').lower() not in off:
+                    found.add(name)
+            elif value is not None and value.lower() not in RUN_NEUTRAL.get(name, set()):
+                found.add(f'{name}={value}')
+        return sorted(found)
     spans = []
     for run in runs(body):
-        properties = run.find(revisions.w('rPr'))
-        names = sorted({child.tag.rsplit('}', 1)[-1] for child in (properties if properties is not None else [])
-                        if child.tag != revisions.w('rPrChange') and child.get(revisions.w('val'), 'true').lower() not in off
-                        and not (child.tag == revisions.w('u') and child.get(revisions.w('val')) == 'none')})
+        names = entries(run.find(revisions.w('rPr')))
         text = ''.join(character(child) for child in run)
         if not text:
             continue
@@ -753,7 +774,7 @@ def _assertion(assertion, package, resolved):
         check.update(passed=observed == assertion['titlePg'], observed=observed)
     elif kind == 'run-formatting':
         body = (parts[package.main] if parts is not None else package.xml(package.main)).find(revisions.w('body'))
-        observed = run_formatting(body)
+        observed = run_formatting(body, set(assertion['properties']))
         check.update(passed=observed == assertion['spans'], observed=observed)
     elif kind == 'section-change-values':
         # Literal values on both sides of each section's property change: an attribute as written, a toggle

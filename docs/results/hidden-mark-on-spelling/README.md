@@ -5,7 +5,9 @@
 with `w:val="1"`. A hidden paragraph mark joins its paragraph to the next, so `RowanTail` follows `RowanLead` on
 one line in both. A `marker-reference-position` check pins `RowanTail` to the reference's position.
 
-Docxodus main `6c98b822` read `on` as off in its HTML converter, so its render kept `RowanLead` and `RowanTail` in two
-paragraphs, while the control joined them; with the fix ([JSv4/Docxodus#1792](https://github.com/JSv4/Docxodus/pull/1792))
-both join. These are Docxodus observations, not registered references: new reference registration and full-suite
+This is a code-level finding, not a measured render: Docxodus main `6c98b822` read `on` as off in its HTML
+converter (`GetBoolProp`), so its HTML kept the two paragraphs apart while the control joined them, as Docxodus's
+own test of the converter shows; the fix is [JSv4/Docxodus#1792](https://github.com/JSv4/Docxodus/pull/1792) (head
+`c1754108` at review). LibreOffice 25.8.7.3 joins both variants, with `RowanTail` at the same position, so the
+1.5pt reference-position check tells a joined line from a separate one. New reference registration and full-suite
 scoring for `core-v175` remain pending, and no reference application capture was made for this pair.

@@ -315,17 +315,27 @@ class AuthoredCalibration(unittest.TestCase):
             root.set('xmlns:w14', revisions.W14)
             runs = [r for r in root.iter(W + 'r') if r.find(W + 't') is not None]
             bold, tail = runs[1], runs[2]
-            tail.insert(0, bold.find(W + 'rPr'))
+            properties = bold.find(W + 'rPr')
+            bold.remove(properties)
+            tail.insert(0, properties)
         mutant = rewrite(record['authored'], misplaced)
         # Neither round trip reads character formatting; only the declared spans see the misplaced bold.
         self.assertEqual(views(mutant), views(authored))
         self.assertFalse(redline._assertion(assertion, mutant, resolved(mutant))['passed'])
 
-    def test_run_formatting_ignores_run_boundaries_and_off_toggles(self):
-        body = ET.fromstring(f'<w:body xmlns:w="{revisions.W}"><w:p><w:r><w:t>Le</w:t></w:r><w:r><w:rPr><w:b w:val="0"/>'
-                             '</w:rPr><w:t>ad </w:t></w:r><w:r><w:rPr><w:u w:val="none"/></w:rPr><w:tab/></w:r>'
-                             '<w:r><w:rPr><w:b/></w:rPr><w:t>bold</w:t></w:r></w:p></w:body>')
-        self.assertEqual(redline.run_formatting(body), [['Lead \t', []], ['bold', ['b']]])
+    def test_run_formatting_reads_declared_values_and_restored_text(self):
+        def body(runs):
+            return ET.fromstring(f'<w:body xmlns:w="{revisions.W}"><w:p>{runs}</w:p></w:body>')
+        properties = {'b', 'u'}
+        # Run boundaries, an off toggle, a neutral underline and an undeclared property make no span.
+        self.assertEqual(redline.run_formatting(body(
+            '<w:r><w:t>Le</w:t></w:r><w:r><w:rPr><w:b w:val="0"/><w:lang w:val="fr-FR"/></w:rPr><w:t>ad </w:t></w:r>'
+            '<w:r><w:rPr><w:u w:val="None"/></w:rPr><w:tab/></w:r><w:r><w:rPr><w:b w:val="1"/></w:rPr><w:t>bold</w:t></w:r>'), properties),
+            [['Lead \t', []], ['bold', ['b']]])
+        # An underline's style is part of its value, and text restored as w:delText is text.
+        self.assertEqual(redline.run_formatting(body(
+            '<w:r><w:rPr><w:u w:val="double"/></w:rPr><w:tab/></w:r><w:r><w:delText>gone</w:delText></w:r>'), properties),
+            [['\t', ['u=double']], ['gone', []]])
 
     def test_section_change_values_catch_a_value_one_side_leaves_out(self):
         for case_id, mutate in (

@@ -3297,25 +3297,33 @@ def format_only_run_formatting(corpus):
     run's original formatting by counting only `w:t` text: after a symbol (`w:sym`, one character) every later
     run read the run before it, a tab took the next text run's formatting, and a run inside a hyperlink was
     never marked. `redline-format-only-symbol`, `-tab` and `-hyperlink` are those three shapes;
-    `redline-format-only-plain-control` has none of them. Neither round trip reads character formatting, so
-    `run-formatting` declares the formatted text spans of both endpoints."""
+    `redline-format-only-plain-control` has none of them. Every case opens with the same bookmark, and the tab
+    case's tab is also underlined, a second reformatted run. Neither round trip reads character formatting, so
+    `run-formatting` declares the bold and underline of the text spans of both endpoints."""
     sym = '<w:r><w:sym w:font="Symbol" w:char="F0B7"/></w:r>'
-    tab = lambda props='': f'<w:r>{"<w:rPr>" + props + "</w:rPr>" if props else ""}<w:tab/></w:r>'
+    bullet = '\uf0b7'
+    def tab(props=''):
+        return f'<w:r>{"<w:rPr>" + props + "</w:rPr>" if props else ""}<w:tab/></w:r>'
     def link(content):
         return f'<w:hyperlink w:anchor="Ferry">{content}</w:hyperlink>'
     mark = '<w:bookmarkStart w:id="7" w:name="Ferry"/><w:bookmarkEnd w:id="7"/>'
-    # Each shape: (runs, given the formatting each run has and a Revisions for its change markers).
+    # Each shape: the paragraph's runs given each formatting, the original's formatted spans, the plain text, the
+    # number of reformatted runs, and the words that stay untracked.
     shapes = {
-        'symbol': (lambda bold, under: t('Lead ') + sym + t('bold', bold) + t(' plain tail'),
-                   [['Lead ', []], ['bold', ['b']], [' plain tail', []]], 'Lead bold plain tail', 1),
-        'tab': (lambda bold, under: t('Lead') + tab(under) + t('bold', bold) + t(' plain tail'),
-                [['Lead', []], ['\t', ['u']], ['bold', ['b']], [' plain tail', []]], 'Lead\tbold plain tail', 2),
+        'symbol': (lambda bold, under: mark + t('Lead ') + sym + t('bold', bold) + t(' plain tail'),
+                   [['Lead ' + bullet, []], ['bold', ['b']], [' plain tail', []]], 'Lead ' + bullet + 'bold plain tail', 1,
+                   ['Lead', 'bold', 'plain tail']),
+        'tab': (lambda bold, under: mark + t('Lead') + tab(under) + t('bold', bold) + t(' plain tail'),
+                [['Lead', []], ['\t', ['u=single']], ['bold', ['b']], [' plain tail', []]], 'Lead\tbold plain tail', 2,
+                ['Lead', 'bold', 'plain tail']),
         'hyperlink': (lambda bold, under: mark + t('Lead ') + link(t('linked', bold)) + t(' plain tail'),
-                      [['Lead ', []], ['linked', ['b']], [' plain tail', []]], 'Lead linked plain tail', 1),
-        'plain-control': (lambda bold, under: t('Lead ') + t('bold', bold) + t(' plain tail'),
-                          [['Lead ', []], ['bold', ['b']], [' plain tail', []]], 'Lead bold plain tail', 1),
+                      [['Lead ', []], ['linked', ['b']], [' plain tail', []]], 'Lead linked plain tail', 1,
+                      ['Lead', 'linked', 'plain tail']),
+        'plain-control': (lambda bold, under: mark + t('Lead ') + t('bold', bold) + t(' plain tail'),
+                          [['Lead ', []], ['bold', ['b']], [' plain tail', []]], 'Lead bold plain tail', 1,
+                          ['Lead', 'bold', 'plain tail']),
     }
-    for shape, (runs, original_spans, text, changed) in shapes.items():
+    for shape, (runs, original_spans, text, changed, words) in shapes.items():
         case_id = 'redline-format-only-' + shape
         rev = Revisions()
         def archived(props):
@@ -3326,13 +3334,13 @@ def format_only_run_formatting(corpus):
         authored = corpus.file(case_id, 'authored-redline', body=p(
             runs(archived('<w:b/>'), archived('<w:u w:val="single"/>')), props=centred))
         control = shape == 'plain-control'
+        formatting = lambda scope, spans: {'type': 'run-formatting', 'version': 1, 'scope': scope,
+                                           'properties': ['b', 'u'], 'spans': spans}
         corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1784',
                    'The revision centres a paragraph and removes the formatting of some of its runs'
                    + ('' if control else ', beside ' + {'symbol': 'a symbol before the bold run', 'tab': 'an underlined tab run',
                                                          'hyperlink': 'a bold run inside a hyperlink'}[shape])
-                   + '; reject restores each run\'s own formatting', 'compare',
+                   + "; reject restores each run's own formatting", 'compare',
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
-                   [{'type': 'run-formatting', 'version': 1, 'scope': 'rejected', 'spans': original_spans},
-                    {'type': 'run-formatting', 'version': 1, 'scope': 'accepted', 'spans': [[text, []]]},
-                    {'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 1 + changed},
-                    untracked('plain tail')])
+                   [formatting('rejected', original_spans), formatting('accepted', [[text, []]]),
+                    revision_bound(1 + changed), untracked(*words)])
