@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v53')
-        self.assertEqual(len(registry['cases']), 343)
+        self.assertEqual(registry['suite']['id'], 'redline-v54')
+        self.assertEqual(len(registry['cases']), 347)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -302,6 +302,40 @@ class AuthoredCalibration(unittest.TestCase):
         # The markup view holds no section properties, so only the flag assertion sees the lost title page.
         self.assertEqual(views(mutant)[1], rejected)
         self.assertFalse(redline._assertion(assertion, mutant, resolved(mutant))['passed'])
+
+    def test_run_formatting_catches_formatting_restored_to_the_wrong_run(self):
+        record = case('redline-format-only-symbol')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'run-formatting' and a['scope'] == 'rejected')
+        def resolved(package):
+            return {'rejected': revisions.resolve(package.story_parts(), 'reject')}
+        authored = load(record['authored'])
+        self.assertTrue(redline._assertion(assertion, authored, resolved(authored))['passed'])
+        def misplaced(root):
+            # The bold run's archived properties move to the run after it, as a cursor that skips the symbol does.
+            root.set('xmlns:w14', revisions.W14)
+            runs = [r for r in root.iter(W + 'r') if r.find(W + 't') is not None]
+            bold, tail = runs[1], runs[2]
+            properties = bold.find(W + 'rPr')
+            bold.remove(properties)
+            tail.insert(0, properties)
+        mutant = rewrite(record['authored'], misplaced)
+        # Neither round trip reads character formatting; only the declared spans see the misplaced bold.
+        self.assertEqual(views(mutant), views(authored))
+        self.assertFalse(redline._assertion(assertion, mutant, resolved(mutant))['passed'])
+
+    def test_run_formatting_reads_declared_values_and_restored_text(self):
+        def body(runs):
+            return ET.fromstring(f'<w:body xmlns:w="{revisions.W}"><w:p>{runs}</w:p></w:body>')
+        properties = {'b', 'u'}
+        # Run boundaries, an off toggle, a neutral underline and an undeclared property make no span.
+        self.assertEqual(redline.run_formatting(body(
+            '<w:r><w:t>Le</w:t></w:r><w:r><w:rPr><w:b w:val="0"/><w:lang w:val="fr-FR"/></w:rPr><w:t>ad </w:t></w:r>'
+            '<w:r><w:rPr><w:u w:val="None"/></w:rPr><w:tab/></w:r><w:r><w:rPr><w:b w:val="1"/></w:rPr><w:t>bold</w:t></w:r>'), properties),
+            [['Lead \t', []], ['bold', ['b']]])
+        # An underline's style is part of its value, and text restored as w:delText is text.
+        self.assertEqual(redline.run_formatting(body(
+            '<w:r><w:rPr><w:u w:val="double"/></w:rPr><w:tab/></w:r><w:r><w:delText>gone</w:delText></w:r>'), properties),
+            [['\t', ['u=double']], ['gone', []]])
 
     def test_section_change_values_catch_a_value_one_side_leaves_out(self):
         for case_id, mutate in (

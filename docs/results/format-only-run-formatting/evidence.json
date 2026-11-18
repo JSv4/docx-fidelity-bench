@@ -1,0 +1,253 @@
+{
+ "baseline": "6c98b8223e8bc7acbd0d4f9e22bc51261c527293",
+ "candidate": "c3df47296d506b28388b4fab6b6a0fca8059385c",
+ "cases": {
+  "redline-format-only-symbol": {
+   "authored": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead ",
+      []
+     ],
+     [
+      "bold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-revision-count",
+     "assertion-run-formatting"
+    ],
+    "rejectedSpans": [
+     [
+      "Lead bold",
+      []
+     ],
+     [
+      " plain tail",
+      [
+       "b"
+      ]
+     ]
+    ]
+   },
+   "candidate": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead ",
+      []
+     ],
+     [
+      "bold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   }
+  },
+  "redline-format-only-tab": {
+   "authored": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead",
+      []
+     ],
+     [
+      "\t",
+      [
+       "u=single"
+      ]
+     ],
+     [
+      "bold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-run-formatting"
+    ],
+    "rejectedSpans": [
+     [
+      "Lead",
+      []
+     ],
+     [
+      "\tbold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   },
+   "candidate": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead",
+      []
+     ],
+     [
+      "\t",
+      [
+       "u=single"
+      ]
+     ],
+     [
+      "bold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   }
+  },
+  "redline-format-only-hyperlink": {
+   "authored": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead ",
+      []
+     ],
+     [
+      "linked",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-run-formatting"
+    ],
+    "rejectedSpans": [
+     [
+      "Lead linked",
+      []
+     ],
+     [
+      " plain tail",
+      [
+       "b"
+      ]
+     ]
+    ]
+   },
+   "candidate": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead ",
+      []
+     ],
+     [
+      "linked",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   }
+  },
+  "redline-format-only-plain-control": {
+   "authored": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead ",
+      []
+     ],
+     [
+      "bold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   },
+   "baseline": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead ",
+      []
+     ],
+     [
+      "bold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   },
+   "candidate": {
+    "failedChecks": [],
+    "rejectedSpans": [
+     [
+      "Lead ",
+      []
+     ],
+     [
+      "bold",
+      [
+       "b"
+      ]
+     ],
+     [
+      " plain tail",
+      []
+     ]
+    ]
+   }
+  }
+ }
+}
