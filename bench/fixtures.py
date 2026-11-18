@@ -4357,6 +4357,19 @@ def strict_chart_part_cases(add):
             assertions=[dict(type='same-page', version=1, markers=['KilnFirings'] + labels + ['KilnClosing'])])
 
 
+def on_spelled_hidden_mark_cases(add):
+    """Original Rowan labels: a paragraph mark hidden with `<w:vanish w:val="on"/>`, an ST_OnOff spelling of
+    on, against the same mark hidden with `w:val="1"` (Docxodus #1786). A hidden paragraph mark joins its
+    paragraph to the next, so `RowanTail` follows `RowanLead` on one line in both."""
+    for kind, value in (('on', 'on'), ('one-control', '1')):
+        body = (para(props=f'<w:rPr><w:vanish w:val="{value}"/></w:rPr>', runs=run('RowanLead')) + para(' RowanTail'))
+        add('hidden-mark-on-spelling' + ('' if kind == 'on' else '-one-control'), 'paragraphs',
+            'Rowan paragraph whose mark is hidden with w:vanish w:val="' + value + '"'
+            + ('' if kind == 'on' else ' (control)') + '; it joins the next paragraph (Docxodus #1786)',
+            ['RowanLead', 'RowanTail'], body,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': 'RowanTail', 'tolerancePt': 1.5}])
+
+
 def unused_grid_column_cases(add):
     """Original Quince labels: grid columns no row reaches leave the table (Docxodus #1750)."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -7511,7 +7524,8 @@ def generate():
     unused_grid_column_cases(add)
     universal_measure_page_cases(add)
     strict_chart_part_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v174', 'version': 174, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    on_spelled_hidden_mark_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v175', 'version': 175, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

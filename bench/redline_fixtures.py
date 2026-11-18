@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v53', 'version': 53}
+SUITE = {'id': 'redline-v54', 'version': 54}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -370,6 +370,7 @@ def generate():
     revision_part_two_stories(corpus)
     inline_title_page(corpus)
     section_change_values(corpus)
+    format_only_run_formatting(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3286,3 +3287,52 @@ def section_change_values(corpus):
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
                    [revision_bound(2 if control else 1), untracked(*FERRY_NOTES)]
                    + endpoint_widths(('12000', '15840'), ('12240', '15840'), 2))
+
+
+def format_only_run_formatting(corpus):
+    """The revision centres a paragraph and removes formatting from some of its runs; its text is unchanged.
+
+    A correct redline gives each run that lost its formatting a `w:rPrChange` holding that run's own original
+    properties, so reject restores them where they were. Docxodus #1784 found a comparison that located each
+    run's original formatting by counting only `w:t` text: after a symbol (`w:sym`, one character) every later
+    run read the run before it, a tab took the next text run's formatting, and a run inside a hyperlink was
+    never marked. `redline-format-only-symbol`, `-tab` and `-hyperlink` are those three shapes;
+    `redline-format-only-plain-control` has none of them. Neither round trip reads character formatting, so
+    `run-formatting` declares the formatted text spans of both endpoints."""
+    sym = '<w:r><w:sym w:font="Symbol" w:char="F0B7"/></w:r>'
+    tab = lambda props='': f'<w:r>{"<w:rPr>" + props + "</w:rPr>" if props else ""}<w:tab/></w:r>'
+    def link(content):
+        return f'<w:hyperlink w:anchor="Ferry">{content}</w:hyperlink>'
+    mark = '<w:bookmarkStart w:id="7" w:name="Ferry"/><w:bookmarkEnd w:id="7"/>'
+    # Each shape: (runs, given the formatting each run has and a Revisions for its change markers).
+    shapes = {
+        'symbol': (lambda bold, under: t('Lead ') + sym + t('bold', bold) + t(' plain tail'),
+                   [['Lead ', []], ['bold', ['b']], [' plain tail', []]], 'Lead bold plain tail', 1),
+        'tab': (lambda bold, under: t('Lead') + tab(under) + t('bold', bold) + t(' plain tail'),
+                [['Lead', []], ['\t', ['u']], ['bold', ['b']], [' plain tail', []]], 'Lead\tbold plain tail', 2),
+        'hyperlink': (lambda bold, under: mark + t('Lead ') + link(t('linked', bold)) + t(' plain tail'),
+                      [['Lead ', []], ['linked', ['b']], [' plain tail', []]], 'Lead linked plain tail', 1),
+        'plain-control': (lambda bold, under: t('Lead ') + t('bold', bold) + t(' plain tail'),
+                          [['Lead ', []], ['bold', ['b']], [' plain tail', []]], 'Lead bold plain tail', 1),
+    }
+    for shape, (runs, original_spans, text, changed) in shapes.items():
+        case_id = 'redline-format-only-' + shape
+        rev = Revisions()
+        def archived(props):
+            return f'<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr>{props}</w:rPr></w:rPrChange>'
+        left = corpus.file(case_id, 'left', body=p(runs('<w:b/>', '<w:u w:val="single"/>')))
+        right = corpus.file(case_id, 'right', body=p(runs('', ''), props='<w:jc w:val="center"/>'))
+        centred = f'<w:jc w:val="center"/><w:pPrChange {rev.attrs(AUTHOR)}><w:pPr/></w:pPrChange>'
+        authored = corpus.file(case_id, 'authored-redline', body=p(
+            runs(archived('<w:b/>'), archived('<w:u w:val="single"/>')), props=centred))
+        control = shape == 'plain-control'
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1784',
+                   'The revision centres a paragraph and removes the formatting of some of its runs'
+                   + ('' if control else ', beside ' + {'symbol': 'a symbol before the bold run', 'tab': 'an underlined tab run',
+                                                         'hyperlink': 'a bold run inside a hyperlink'}[shape])
+                   + '; reject restores each run\'s own formatting', 'compare',
+                   [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   [{'type': 'run-formatting', 'version': 1, 'scope': 'rejected', 'spans': original_spans},
+                    {'type': 'run-formatting', 'version': 1, 'scope': 'accepted', 'spans': [[text, []]]},
+                    {'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 1 + changed},
+                    untracked('plain tail')])

@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v53`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v54`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -48,6 +48,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `deleted-text-owned` v1 (scope `redline`): every `w:delText` and `w:delInstrText` in the raw redline lies in a `w:del` or `w:moveFrom` of its own story. A text box (`w:txbxContent`) is a story of its own, so a deletion around the run that anchors the box does not count for the text inside it. Word 2024 reports a package that breaks this as corrupt, while both round trips and the schema pass it. Metric contract 30 records this check.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
+   - `run-formatting` v1 (scope `accepted` or `rejected`): the resolved body's text as spans of consecutive characters with the same run properties, whatever the run boundaries; each span is the text and the sorted local names of its run's `w:rPr` children. A toggle turned off (`w:val` `0`, `false` or `off`) or an underline of `none` is not listed, nor is `w:rPrChange`. Text is `w:t`, a symbol's character, and a tab, break or special hyphen as its character; text boxes are their own stories. Neither round trip reads character formatting, so a redline that archives a run's original formatting on the wrong run rejects to the right text with the wrong words formatted (Docxodus #1784). Metric contract 33 records this check.
    - `section-change-values` v1 (scope `redline`, `accepted` or `rejected`): one entry per physical section of the raw redline or of the independently resolved endpoint, in body order (the property history in `w:sectPrChange` and text boxes excluded), maps each declared property to its literal value in the section and in the `w:sectPr` its `w:sectPrChange` archives: `name@attribute` reads the attribute as written, `name` reads a toggle as `on` or `off` (a missing `w:val` is on), and a value either side leaves out, or an archive the section lacks, is null. The number of sections must match. Docxodus #1775 reports, from a desktop word processor this bench has not captured, that it reads a value left out of one side of a section change as unchanged, not as its default: it rejects a portrait-to-landscape change whose archive leaves `w:orient` out to landscape, and does not see a final section's title page turned off by leaving `w:titlePg` out (an inline section break is read correctly). Neither round trip reads section properties. Metric contract 32 records this check.
    - `section-boundaries` v1 (scope `accepted` or `rejected`): inline section breaks must occur after exactly the declared zero-based body paragraph indices in `afterParagraphs`. Paragraphs are enumerated in XML document order beneath the body, including nested containers; the trailing body section properties are excluded. This binds section and running-story changes to their carrier paragraphs even when the semantic view and section-story order match. Metric contract version 18 records this check.
    - `inline-trees` v1 (scope `accepted` or `rejected`): the complete ordered `m:oMath`, `w:drawing`, or `w:pict` subtrees in the resolved body match declared XML. It retains operators, properties, geometry and textbox content; image references resolve to the SHA-256 of their actual package bytes. Only engine addressing attributes and remappable `wp:docPr/@id` values are ignored. Surviving deleted text carriers normalize to ordinary text, empty run properties are discarded, and adjacent plain text runs with identical attributes and properties coalesce. Metric contract version 14 additionally includes VML pict carriers.
@@ -941,3 +942,22 @@ every run of a paragraph classed as changed only in its formatting received an e
 the three controls. The fix states, on each side, every value the other side states where leaving it out
 means a value the specification defines, and marks only a run whose formatting changed; it passes all seven.
 See [the evidence](results/section-change-values/README.md).
+
+## Formatting restored to its own run (Docxodus #1784)
+
+`redline-v54` adds four original cases. In each, the revision centres a one-paragraph document and removes the
+formatting of some of its runs; the text is unchanged, so a correct redline records a `w:pPrChange` and, on each
+run that lost its formatting, a `w:rPrChange` holding that run's own original properties.
+
+- `redline-format-only-symbol` (reproducer): a symbol (`w:sym`) run comes before the bold run.
+- `redline-format-only-tab` (reproducer): an underlined tab run comes before the bold run.
+- `redline-format-only-hyperlink` (reproducer): the bold run is inside a hyperlink.
+- `redline-format-only-plain-control` (control): plain text runs only.
+
+`run-formatting` declares the formatted spans of both endpoints, and `revision-count` bounds the redline to the
+paragraph change and one record per reformatted run. Docxodus `6c98b822` located each run's original formatting with a
+cursor that counted only `w:t` text, while a symbol counts as one character: rejecting the symbol case left `bold`
+plain and made ` plain tail` bold. The tab case gave the tab the bold run's properties instead of its underline, and
+the hyperlink case never marked the linked run, so its bold moved to the run after it. It passes the control. The
+fix (`4acba339`) finds each run's formatting at the same place in the original's run model and passes all four. See
+[the evidence](results/format-only-run-formatting/README.md).

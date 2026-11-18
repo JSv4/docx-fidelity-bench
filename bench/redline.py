@@ -26,13 +26,13 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'relationship-ids': {1}, 'deleted-text-owned': {1}, 'picture-bullets': {1}, 'section-change-values': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'relationship-ids': {1}, 'deleted-text-owned': {1}, 'picture-bullets': {1}, 'section-change-values': {1}, 'run-formatting': {1}}
 # Operations whose candidate returns the resolved document itself, not a redline.
 OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 32, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 33, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -57,6 +57,7 @@ CONTRACT = {'version': 32, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All',
             'strictPackages': 'a package in the ISO/IEC 29500 Strict conformance class is read under the Transitional WordprocessingML, math and relationship names, so an input or an output of either class is resolved and viewed alike',
             'relationshipIds': 'declared relationship-ids assertions require every relationship-namespace attribute in every XML part of the redline to name a relationship of that part that is external or whose target is in the package',
+            'runFormatting': 'declared run-formatting assertions require the body of an independently resolved endpoint to hold the declared text spans, each with the run-property names its characters carry (a property turned off is not listed), whatever the run boundaries',
             'sectionChangeValues': 'declared section-change-values assertions require each physical section of the raw redline or an independently resolved endpoint, and the w:sectPr archived in its w:sectPrChange, to state the declared literal values: an attribute as written, a toggle as on or off, absent as null',
             'pictureBullets': 'declared picture-bullets assertions require every body list paragraph of an independently resolved endpoint to draw the declared bullet: the bytes of the image its level names through a picture bullet of the numbering part, or none'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
@@ -298,6 +299,11 @@ def validate_registry(registry=None):
                      'section-flags': lambda a: a['scope'] in {'redline', 'accepted', 'rejected'}
                          and isinstance(a.get('titlePg'), list) and bool(a['titlePg'])
                          and all(type(v) is bool for v in a['titlePg']),
+                     'run-formatting': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('spans'), list)
+                         and bool(a['spans']) and all(isinstance(span, list) and len(span) == 2
+                             and isinstance(span[0], str) and span[0] and isinstance(span[1], list)
+                             and all(isinstance(name, str) and name for name in span[1]) and span[1] == sorted(set(span[1]))
+                             for span in a['spans']),
                      'section-change-values': lambda a: a['scope'] in {'redline', 'accepted', 'rejected'} and isinstance(a.get('sections'), list)
                          and bool(a['sections']) and all(isinstance(section, dict) and all(
                              isinstance(key, str) and re.fullmatch('[A-Za-z]+(@[A-Za-z]+)?', key)
@@ -617,6 +623,47 @@ def body_sections(element):
         else:
             yield from body_sections(child)
 
+RUN_CHARACTERS = {'tab': '\t', 'br': '\n', 'cr': '\n', 'noBreakHyphen': '\u2011', 'softHyphen': '\u00ad'}
+
+
+def run_formatting(body):
+    """The body's text as spans of consecutive characters carrying the same run properties, whatever the run
+    boundaries: each span is [text, sorted local names of its run's w:rPr children]. A toggle turned off
+    (w:val 0, false or off) or an underline of none is not listed, nor is w:rPrChange. Text is w:t, a symbol's
+    character, and a tab, break or special hyphen as its character; text boxes are their own stories."""
+    off = {'0', 'false', 'off'}
+    def runs(element):
+        for child in element:
+            if child.tag == revisions.w('txbxContent'):
+                continue
+            if child.tag == revisions.w('r'):
+                yield child
+            else:
+                yield from runs(child)
+    def character(child):
+        name = child.tag.rsplit('}', 1)[-1]
+        if child.tag == revisions.w('t'):
+            return child.text or ''
+        if child.tag == revisions.w('sym'):
+            code = child.get(revisions.w('char'), '')
+            return chr(int(code, 16)) if re.fullmatch('[0-9A-Fa-f]{1,4}', code) else ''
+        return RUN_CHARACTERS.get(name, '') if child.tag.startswith('{' + revisions.W + '}') else ''
+    spans = []
+    for run in runs(body):
+        properties = run.find(revisions.w('rPr'))
+        names = sorted({child.tag.rsplit('}', 1)[-1] for child in (properties if properties is not None else [])
+                        if child.tag != revisions.w('rPrChange') and child.get(revisions.w('val'), 'true').lower() not in off
+                        and not (child.tag == revisions.w('u') and child.get(revisions.w('val')) == 'none')})
+        text = ''.join(character(child) for child in run)
+        if not text:
+            continue
+        if spans and spans[-1][1] == names:
+            spans[-1][0] += text
+        else:
+            spans.append([text, names])
+    return spans
+
+
 def _assertion(assertion, package, resolved):
     kind, scope = assertion['type'], assertion['scope']
     parts = resolved.get(scope)
@@ -704,6 +751,10 @@ def _assertion(assertion, package, resolved):
         flags = [section.find(revisions.w('titlePg')) for section in body_sections(body)]
         observed = [flag is not None and flag.get(revisions.w('val'), 'true') not in {'0', 'false', 'off'} for flag in flags]
         check.update(passed=observed == assertion['titlePg'], observed=observed)
+    elif kind == 'run-formatting':
+        body = (parts[package.main] if parts is not None else package.xml(package.main)).find(revisions.w('body'))
+        observed = run_formatting(body)
+        check.update(passed=observed == assertion['spans'], observed=observed)
     elif kind == 'section-change-values':
         # Literal values on both sides of each section's property change: an attribute as written, a toggle
         # (an element named without an attribute) as on or off, a value left out as null.
