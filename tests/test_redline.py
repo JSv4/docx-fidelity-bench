@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v54')
-        self.assertEqual(len(registry['cases']), 347)
+        self.assertEqual(registry['suite']['id'], 'redline-v55')
+        self.assertEqual(len(registry['cases']), 353)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -302,6 +302,50 @@ class AuthoredCalibration(unittest.TestCase):
         # The markup view holds no section properties, so only the flag assertion sees the lost title page.
         self.assertEqual(views(mutant)[1], rejected)
         self.assertFalse(redline._assertion(assertion, mutant, resolved(mutant))['passed'])
+
+    def test_mark_formatting_catches_an_untracked_mark_change(self):
+        record = case('redline-mark-size-blank')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'mark-formatting' and a['scope'] == 'rejected')
+        def resolved(package):
+            return {'rejected': revisions.resolve(package.story_parts(), 'reject')}
+        authored = load(record['authored'])
+        self.assertTrue(redline._assertion(assertion, authored, resolved(authored))['passed'])
+        def untracked_mark(root):
+            # The revised mark with no record of the original's, as a comparison that leaves the mark out writes it.
+            root.set('xmlns:w14', revisions.W14)
+            for change in list(root.iter(W + 'rPrChange')):
+                for parent in root.iter():
+                    if change in list(parent):
+                        parent.remove(change)
+        mutant = rewrite(record['authored'], untracked_mark)
+        # Neither round trip reads paragraph marks; only the declared marks see the lost size.
+        self.assertEqual(views(mutant), views(authored))
+        self.assertFalse(redline._assertion(assertion, mutant, resolved(mutant))['passed'])
+
+    def test_mark_formatting_reads_table_paragraphs_and_skips_text_boxes(self):
+        body = ET.fromstring(
+            f'<w:body xmlns:w="{revisions.W}"><w:p><w:pPr><w:rPr><w:del w:id="1" w:author="a"/><w:sz w:val="72"/></w:rPr></w:pPr>'
+            '<w:r><w:pict><w:txbxContent><w:p><w:pPr><w:rPr><w:sz w:val="10"/></w:rPr></w:pPr></w:p></w:txbxContent></w:pict></w:r></w:p>'
+            '<w:tbl><w:tr><w:tc><w:p><w:pPr><w:rPr><w:sz w:val="30"/></w:rPr></w:pPr></w:p></w:tc></w:tr></w:tbl><w:p/></w:body>')
+        # A table cell's paragraph counts; the text box's is its own story; the mark's deletion marker is no property.
+        self.assertEqual(redline.mark_formatting(body, {'sz'}), [['sz=72'], ['sz=30'], []])
+
+    def test_indented_copy_counts_a_spurious_property_change(self):
+        record = case('redline-indented-copy')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'revision-count')
+        authored = load(record['authored'])
+        self.assertTrue(redline._assertion(assertion, authored, {})['passed'])
+        def spurious(root):
+            # A table property change archiving the same properties, as a comparison that reads indentation as an edit records.
+            root.set('xmlns:w14', revisions.W14)
+            properties = next(root.iter(W + 'tblPr'))
+            archived = ET.Element(W + 'tblPr')
+            archived.extend(copy.deepcopy(child) for child in properties)
+            change = ET.SubElement(properties, W + 'tblPrChange', {W + 'id': '900', W + 'author': 'Bench'})
+            change.append(archived)
+        mutant = rewrite(record['authored'], spurious)
+        self.assertEqual(views(mutant), views(authored))
+        self.assertFalse(redline._assertion(assertion, mutant, {})['passed'])
 
     def test_run_formatting_catches_formatting_restored_to_the_wrong_run(self):
         record = case('redline-format-only-symbol')

@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v54`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v55`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -48,6 +48,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `deleted-text-owned` v1 (scope `redline`): every `w:delText` and `w:delInstrText` in the raw redline lies in a `w:del` or `w:moveFrom` of its own story. A text box (`w:txbxContent`) is a story of its own, so a deletion around the run that anchors the box does not count for the text inside it. Word 2024 reports a package that breaks this as corrupt, while both round trips and the schema pass it. Metric contract 30 records this check.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
+   - `mark-formatting` v1 (scope `accepted` or `rejected`): every body paragraph's mark (`w:pPr/w:rPr`), in document order, as the declared run `properties` it applies, read as `run-formatting` reads a run; the mark's revision markers are not properties, the number of paragraphs must match (an extra empty paragraph fails), text boxes are their own stories, and `mc:Fallback` is skipped. Neither round trip reads paragraph marks, so a redline that leaves a mark change untracked rejects to the revised mark unnoticed (Docxodus #1794). Metric contract 34 records this check.
    - `run-formatting` v1 (scope `accepted` or `rejected`): the resolved body's text as spans of consecutive characters carrying the same values of the declared run `properties`, whatever the run boundaries. Each span is the text and its sorted entries: a toggle's name when it is on, or `name=value` for any other property applied (a neutral value such as an underline of `none` is not applied); undeclared run properties are ignored. Text is `w:t` and restored `w:delText`, a symbol's character, and a tab, break or special hyphen as its character; text boxes are their own stories and an `mc:Fallback` is not read. Only supported properties may be declared: toggles, read as on or off, and properties read by their `w:val`. Neither round trip reads character formatting, so a redline that archives a run's original formatting on the wrong run rejects to the right text with the wrong words formatted (Docxodus #1784). Metric contract 33 records this check.
    - `section-change-values` v1 (scope `redline`, `accepted` or `rejected`): one entry per physical section of the raw redline or of the independently resolved endpoint, in body order (the property history in `w:sectPrChange` and text boxes excluded), maps each declared property to its literal value in the section and in the `w:sectPr` its `w:sectPrChange` archives: `name@attribute` reads the attribute as written, `name` reads a toggle as `on` or `off` (a missing `w:val` is on), and a value either side leaves out, or an archive the section lacks, is null. The number of sections must match. Docxodus #1775 reports, from a desktop word processor this bench has not captured, that it reads a value left out of one side of a section change as unchanged, not as its default: it rejects a portrait-to-landscape change whose archive leaves `w:orient` out to landscape, and does not see a final section's title page turned off by leaving `w:titlePg` out (an inline section break is read correctly). Neither round trip reads section properties. Metric contract 32 records this check.
    - `section-boundaries` v1 (scope `accepted` or `rejected`): inline section breaks must occur after exactly the declared zero-based body paragraph indices in `afterParagraphs`. Paragraphs are enumerated in XML document order beneath the body, including nested containers; the trailing body section properties are excluded. This binds section and running-story changes to their carrier paragraphs even when the semantic view and section-story order match. Metric contract version 18 records this check.
@@ -964,3 +965,39 @@ plain and made ` plain tail` bold. The tab case gave the tab the bold run's prop
 the hyperlink case never marked the linked run, so its bold moved to the run after it. It passes the control. The
 fix (`c3df4729`) finds each run's formatting at the same place in the original's run model, and splits a run Word re-split, and passes all four. See
 [the evidence](results/format-only-run-formatting/README.md).
+
+## Paragraph marks and indented copies (Docxodus #1794, #1793)
+
+`redline-v55` adds six original cases.
+
+- `redline-mark-size-blank` (reproducer): an empty paragraph between two lighthouse notes; the revision grows its
+  mark to 36pt (`w:sz w:val="72"`) and changes nothing else.
+- `redline-mark-size-leading-blanks` (reproducer): the same change on three empty paragraphs at the top of the
+  document.
+- `redline-mark-size-text` (reproducer): the same change on the mark of the second note, a paragraph with text.
+- `redline-mark-size-centred-control` (control): the same change on the same empty paragraph, which the revision
+  also centres, so the paragraph's own properties change too.
+- `redline-indented-copy` (reproducer): the revision changes "dusk" to "dawn" in a table cell and indents
+  property elements, putting a newline and two spaces before each of their children (nested children are not
+  indented deeper): the properties of a field-result run (`w:rPr` holding only
+  `w:noProof`), a paragraph mark, the table and cell properties and the section. Paragraph and run content stay
+  compact.
+- `redline-indented-copy-control` (control): the same one-word edit without indentation.
+
+The mark cases declare every paragraph mark's size in both endpoints with `mark-formatting`, and each case bounds
+`revision-count` to its own records: one per changed mark, plus the paragraph-property change in the control, and the
+edit's deletion and insertion in the indented pair.
+
+LibreOffice 25.8.7.3 shows the authored mark change on an empty paragraph as a revision, so those cases keep both
+LibreOffice comparisons, but its text view cannot see a mark, so those comparisons add nothing the text view can see. It shows
+no revision for the mark-only change on a text paragraph, so `redline-mark-size-text` declares both comparisons
+ineligible; markup endpoints, declared marks, revision count and SDK checks stay mandatory.
+
+Docxodus `9704704e` paired paragraphs without their marks, so it recorded no mark change and rejected to the 36pt
+marks. Its IR hash kept indentation between elements, so it read three of the indented elements as changed: the
+field-result run's properties (it deleted and reinserted the field's paragraph, rewritten as a complex field), the
+table properties and the section. The indented mark and cell properties changed nothing for it and are there for
+realism. It passes both controls. [JSv4/Docxodus#1798](https://github.com/JSv4/Docxodus/pull/1798) (#1794) passes the
+mark cases and [JSv4/Docxodus#1799](https://github.com/JSv4/Docxodus/pull/1799) (#1793) the indented pair; each
+passes both controls, and the head of #1799, which carries both, passes all six. See
+[the evidence](results/mark-formatting-and-indentation/README.md).

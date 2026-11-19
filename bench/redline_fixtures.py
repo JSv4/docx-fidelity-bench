@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v54', 'version': 54}
+SUITE = {'id': 'redline-v55', 'version': 55}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -213,6 +213,8 @@ LIBREOFFICE_INELIGIBLE = {
     **{case: (('accepted', 'rejected'),
        'LibreOffice 25.8.7.3 exposes zero revisions for the authored section-property-only change; independent markup endpoints, section flags and SDK checks remain mandatory')
        for case in ('redline-inline-title-page-off', 'redline-inline-title-page-off-margin-control')},
+    'redline-mark-size-text': (('accepted', 'rejected'),
+        'LibreOffice 25.8.7.3 exposes zero revisions for the authored mark-only change on a text paragraph; independent markup endpoints, declared marks, revision count and SDK checks remain mandatory'),
     'redline-consolidated-note-prefix': (('rejected',),
         'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
@@ -371,6 +373,8 @@ def generate():
     inline_title_page(corpus)
     section_change_values(corpus)
     format_only_run_formatting(corpus)
+    paragraph_mark_formatting(corpus)
+    indented_copies(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3344,3 +3348,106 @@ def format_only_run_formatting(corpus):
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
                    [formatting('rejected', original_spans), formatting('accepted', [[text, []]]),
                     revision_bound(1 + changed), untracked(*words)])
+
+
+MARK_NOTES = ['The lighthouse keeper logs each passing hull at dusk.', 'Fog signals sound every thirty seconds.']
+
+
+def paragraph_mark_formatting(corpus):
+    """The revision changes a paragraph mark's own run properties (w:pPr/w:rPr) and nothing else about the paragraph.
+
+    A paragraph mark's size sets an empty paragraph's height and the pilcrow's, so a correct redline records the
+    change as a paragraph-mark `w:rPrChange` and reject restores the original mark. Docxodus #1794 found a
+    comparison that paired paragraphs without their marks, so a mark-only change was left untracked. The
+    reproducers grow a mark to 36pt (`w:sz w:val="72"`): on an empty paragraph between two lighthouse notes
+    (`redline-mark-size-blank`), on three empty paragraphs at the top (`redline-mark-size-leading-blanks`) and on
+    the second note itself (`redline-mark-size-text`). The control, `redline-mark-size-centred-control`, makes the
+    same change on the empty paragraph and also centres it, so the paragraph's own properties change as well,
+    which the comparison already records. Neither round trip reads paragraph marks, so `mark-formatting` declares
+    every paragraph mark's size in both endpoints, and `revision-count` bounds each redline to its own records."""
+    big = '<w:sz w:val="72"/>'
+    def archived(rev):
+        return f'<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'
+    def paragraph(text, rpr='', ppr=''):
+        props = ppr + (f'<w:rPr>{rpr}</w:rPr>' if rpr else '')
+        return f'<w:p>{"<w:pPr>" + props + "</w:pPr>" if props else ""}{text}</w:p>'
+    note0, note1 = t(MARK_NOTES[0]), t(MARK_NOTES[1])
+    # Each case: the body for a given (blank-maker, text-maker), how many marks change, and their positions.
+    cases = [
+        ('redline-mark-size-blank', 'an empty paragraph between two notes',
+         lambda blank, text: paragraph(note0) + blank() + paragraph(note1), [1]),
+        ('redline-mark-size-leading-blanks', 'three empty paragraphs at the top of the document',
+         lambda blank, text: blank() + blank() + blank() + paragraph(note0) + paragraph(note1), [0, 1, 2]),
+        ('redline-mark-size-text', 'the second of two notes',
+         lambda blank, text: paragraph(note0) + text(note1), [1]),
+    ]
+    formatting = lambda scope, marks: {'type': 'mark-formatting', 'version': 1, 'scope': scope, 'properties': ['sz'], 'marks': marks}
+    for case_id, where, body, changed in cases:
+        rev = Revisions()
+        left = corpus.file(case_id, 'left', body=body(lambda: paragraph(''), lambda text: paragraph(text)))
+        right = corpus.file(case_id, 'right', body=body(lambda: paragraph('', big), lambda text: paragraph(text, big)))
+        # Each changed mark's record gets its own revision id.
+        authored = corpus.file(case_id, 'authored-redline', body=body(lambda: paragraph('', big + archived(rev)),
+                                                                      lambda text: paragraph(text, big + archived(rev))))
+        total = len(changed) + (2 if case_id != 'redline-mark-size-text' else 1)
+        corpus.add(case_id, 'revisions', 'reproducer', 'JSv4/Docxodus#1794',
+                   f'The revision changes only the paragraph mark size of {where}; reject restores the original marks',
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   [formatting('rejected', [[] for _ in range(total)]),
+                    formatting('accepted', [['sz=72'] if i in changed else [] for i in range(total)]),
+                    revision_bound(len(changed)), untracked(*MARK_NOTES)])
+    case_id = 'redline-mark-size-centred-control'
+    rev = Revisions()
+    centre = '<w:jc w:val="center"/>'
+    left = corpus.file(case_id, 'left', body=paragraph(note0) + paragraph('') + paragraph(note1))
+    right = corpus.file(case_id, 'right', body=paragraph(note0) + paragraph('', big, centre) + paragraph(note1))
+    authored = corpus.file(case_id, 'authored-redline', body=paragraph(note0) + paragraph(
+        '', big + archived(rev), centre) .replace('</w:pPr>', f'<w:pPrChange {rev.attrs(AUTHOR)}><w:pPr/></w:pPrChange></w:pPr>') + paragraph(note1))
+    corpus.add(case_id, 'revisions', 'control', 'JSv4/Docxodus#1794',
+               'The revision grows the mark of an empty paragraph between two notes to 36pt and also centres it; reject restores both',
+               'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+               [formatting('rejected', [[], [], []]), formatting('accepted', [[], ['sz=72'], []]),
+                revision_bound(2), untracked(*MARK_NOTES)])
+
+
+INDENT_NOTES = ['Tide tables are posted on the quay every Monday.', 'Pilot boats return to the inner mooring after dusk.']
+
+
+def indented_copies(corpus):
+    """The revision edits one word and is saved with indentation.
+
+    Pretty-printing writers (`XDocument.Save`, lxml `pretty_print`) indent element-only content, and that
+    whitespace has no meaning, so a correct redline records the one-word edit and nothing else. Docxodus #1793
+    found the IR's hash keeping it. Docxodus 9704704e read three of this case's indented elements as changed: a
+    field-result run whose properties hold only `w:noProof` (it deleted and reinserted the field's paragraph,
+    rewritten as a complex field), the table properties and the section (a `w:tblPrChange` and a `w:sectPrChange`);
+    an indented paragraph mark and cell properties are there for realism and changed nothing for it. In
+    `redline-indented-copy` the revision changes "dusk" to "dawn" in a table cell and indents those property
+    elements; the control,
+    `redline-indented-copy-control`, makes the same edit without indentation. Both bound `revision-count` to the
+    edit's deletion and insertion."""
+    def document(n, cell_text):
+        # n: the indentation between child elements ('' compact, '\n  ' indented)
+        mark = f'<w:pPr><w:rPr>{n}<w:b/>{n}<w:sz w:val="24"/>{n}</w:rPr></w:pPr>'
+        field = (f'<w:p><w:r><w:t xml:space="preserve">{INDENT_NOTES[0]} Page </w:t></w:r><w:fldSimple w:instr=" PAGE ">'
+                 f'<w:r><w:rPr>{n}<w:noProof/>{n}</w:rPr><w:t>1</w:t></w:r></w:fldSimple></w:p>')
+        cell = (f'<w:tbl><w:tblPr>{n}<w:tblW w:w="4680" w:type="dxa"/>{n}<w:tblBorders>{n}<w:top w:val="single" w:sz="4" w:space="0" w:color="444444"/>'
+                f'{n}<w:bottom w:val="single" w:sz="4" w:space="0" w:color="444444"/>{n}</w:tblBorders>{n}</w:tblPr>'
+                f'<w:tblGrid><w:gridCol w:w="4680"/></w:tblGrid><w:tr><w:tc><w:tcPr>{n}<w:tcW w:w="4680" w:type="dxa"/>{n}'
+                f'<w:shd w:val="clear" w:color="auto" w:fill="EEEEEE"/>{n}</w:tcPr>' + p(cell_text) + '</w:tc></w:tr></w:tbl>')
+        section = (f'<w:sectPr>{n}<w:pgSz w:w="12240" w:h="15840"/>{n}<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"'
+                   f' w:header="720" w:footer="720" w:gutter="0"/>{n}<w:cols w:num="2" w:equalWidth="0">{n}<w:col w:w="4000" w:space="720"/>'
+                   f'{n}<w:col w:w="4000"/>{n}</w:cols>{n}</w:sectPr>')
+        return dict(body=field + f'<w:p>{mark}' + t('Closing note.') + '</w:p>' + cell + p(), section=section)
+    lead = 'Pilot boats return to the inner mooring after '
+    for control in (False, True):
+        case_id = 'redline-indented-copy' + ('-control' if control else '')
+        rev = Revisions()
+        left = corpus.file(case_id, 'left', **document('', t(lead + 'dusk.')))
+        right = corpus.file(case_id, 'right', **document('' if control else '\n  ', t(lead + 'dawn.')))
+        authored = corpus.file(case_id, 'authored-redline', **document('', t(lead) + rev.dele(t('dusk')) + rev.ins(t('dawn')) + t('.')))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1793',
+                   'The revision changes one word in a table cell' + ('' if control else ' and indents its property elements')
+                   + '; a correct redline records the edit and nothing else', 'compare',
+                   [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 2}, untracked(INDENT_NOTES[0], 'Closing note.')])

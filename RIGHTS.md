@@ -1,3 +1,9 @@
+The six paragraph-mark and indented-copy redline cases for Docxodus #1794 and #1793 contain original lighthouse
+and harbour text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. Two shapes follow the issues' own descriptions, which the repository owner
+wrote: an empty paragraph's mark set to `w:sz w:val="72"` (#1794) and a two-column `w:cols` section (#1793). The
+XML was written afresh, not copied from the issues.
+
 The four format-only run cases for Docxodus #1784 and the two Rowan hidden-mark cases for Docxodus #1786
 contain original text and literal OOXML authored in `bench/redline_fixtures.py` and `bench/fixtures.py`. No
 product fixture, helper, document, image or font program is imported, and neither issue's text nor its

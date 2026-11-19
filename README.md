@@ -1,3 +1,13 @@
+`redline-v55` adds four reproducers and two controls for [Docxodus #1794](https://github.com/JSv4/Docxodus/issues/1794)
+and [#1793](https://github.com/JSv4/Docxodus/issues/1793). Three change only a paragraph mark's size: of an empty
+paragraph (`redline-mark-size-blank`), of three leading ones (`-leading-blanks`) and of a text paragraph (`-text`);
+`redline-mark-size-centred-control` also centres the empty paragraph. Neither round trip reads marks, so a new
+`mark-formatting` assertion declares each paragraph mark's size in both endpoints. `redline-indented-copy` edits one
+word and indents the revision's property elements, and bounds `revision-count` to that edit; its control makes the
+same edit unindented. Docxodus 9704704e left the mark changes untracked and emitted revisions for the indentation.
+All earlier DOCX files remain byte-identical, and the PDF suite stays `core-v175`. See
+[the redline notes](docs/REDLINE.md#paragraph-marks-and-indented-copies-docxodus-1794-1793).
+
 `redline-v54` adds three reproducers and a control for [Docxodus #1784](https://github.com/JSv4/Docxodus/issues/1784):
 a centred paragraph whose revision removes the formatting of some runs, beside a symbol, an underlined tab, or inside
 a hyperlink. Docxodus 6c98b822 archived each run's original formatting on the wrong run, so reject formatted the wrong
