@@ -1,8 +1,8 @@
-`redline-v57` adds six reproducers and six controls for [Docxodus #1804](https://github.com/JSv4/Docxodus/issues/1804)
-and [#1805](https://github.com/JSv4/Docxodus/issues/1805). Eight share a two-column table of depot notes: each
+`redline-v57` adds seven reproducers and six controls for [Docxodus #1804](https://github.com/JSv4/Docxodus/issues/1804)
+and [#1805](https://github.com/JSv4/Docxodus/issues/1805). Nine share a two-column table of depot notes: each
 reproducer puts a row in a table-level content control, as a repeating section does, or a cell in a row-level one, and
 adds a word beside it, removes the control with its rows, adds a word in the row of a controlled cell, or bolds a
-controlled row's text; each control is the same case with no content control. Four hold two paragraphs whose first
+controlled row's or cell's text; each control is the same case with no content control. Four hold two paragraphs whose first
 ends a section that names a header or footer the last section inherits; the revision removes that break. Docxodus
 f5cefdd1 wrote a controlled row twice, dropped a removed control on reject, redlined a whole table for one word,
 left the bold untracked, and lost the inherited story on accept. Metric contract 35 adds `table-state` v3, which reads

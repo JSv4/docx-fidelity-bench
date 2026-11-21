@@ -3614,7 +3614,9 @@ def untyped_story_references(corpus):
                      'values': [label + ' revised']}, revision_bound(1), untracked(*STORY_NOTES)])
 
 
-# Exact revision-record counts of the authored redlines, so a redline with any extra record fails.
+# The authored redlines' revision-record counts: a redline with more records fails. redline-control-removed's count
+# includes the four custom-XML range markers around the deleted control, which the bench's resolver does not need
+# (it drops an emptied control either way), so a redline without them has four records to spare.
 BOUNDS = {'redline-control-removed': 14, 'redline-plain-rows-removed-control': 10,
           'redline-removed-break-inherited-header': 5, 'redline-removed-break-inherited-footer': 4,
           'redline-removed-break-named-header-control': 5, 'redline-removed-break-deleted-paragraph-control': 3}
@@ -3656,9 +3658,10 @@ def content_control_rows(corpus):
     """A table row or cell that a content control delivers, as a repeating section writes it.
 
     A correct redline writes such a row (`w:tbl/w:sdt/w:tr`) or cell (`w:tr/w:sdt/w:tc`) once, inside its control,
-    with its edits tracked; a control only one document has is marked as inserted or deleted with the paired custom-XML
-    ranges Word writes around a whole control, so the view without it drops the control with its rows. Docxodus #1804
-    found a redline that copied the revision's table-level control, rows and all, ahead of the table's rows and then
+    with its edits tracked; a control only one document has is marked as inserted or deleted with paired custom-XML
+    ranges, as Docxodus marks a whole block-level control, so the view without it drops the control with its rows
+    (the bench's own resolver drops an emptied control either way, so it does not measure the markers). Docxodus
+    #1804 found a redline that copied the revision's table-level control, rows and all, ahead of the table's rows and then
     wrote those rows again without it; that dropped a removed control on reject; that redlined the whole table as a
     deletion and an insertion when a row held a cell in a control; and that left a formatting change in such a table
     untracked. The table holds depot notes: `Depot`/`Platform one`, then `Signal`/`Lamp two`, with `Siding`/`Buffer
@@ -3666,8 +3669,9 @@ def content_control_rows(corpus):
     `redline-control-row-beside-edit` adds a word to the first row while the second sits in a control;
     `redline-control-removed` removes a control holding the second and third rows; `redline-control-cell-same-row`
     adds a word to the second row's first cell while its second cell sits in a control; `redline-control-row-bold`
-    bolds the text of the second row's second cell, in a control, and changes nothing else. `table-state` v3 reads
-    rows through table-level controls and names each row's and cell's control, since the markup view looks through
+    bolds the text of the second row's second cell, in a control, and changes nothing else; `redline-control-cell-bold`
+    bolds the same text where only that cell sits in a row-level control, and shares the row-bold control.
+    `table-state` v3 reads rows through table-level controls and names each row's and cell's control, since the markup view looks through
     them; `revision-count` bounds each redline to its own records."""
     every = sorted(RUN_TOGGLES | RUN_VALUED)
     runs = lambda scope, spans: {'type': 'run-formatting', 'version': 1, 'scope': scope, 'properties': every, 'spans': spans}
@@ -3737,6 +3741,25 @@ def content_control_rows(corpus):
                    {'accepted': right, 'rejected': left}, authored,
                    states([(None, [None, None]), (None, [None, cc])], [(None, [None, None]), (None, [None, cc])])
                    + [revision_bound(1), untracked(label1, text1, label2, text2, CLOSING)])
+
+        if controlled:
+            # A cell held by a row-level control turns bold; its control is redline-plain-row-bold-control, the same
+            # table with no content control.
+            case_id = 'redline-control-cell-bold'
+            rev = Revisions()
+            first = depot_row([t(label1), t(text1)])
+            left = corpus.file(case_id, 'left', **depot_document([first, depot_row([t(label2), depot_cell_control(t(text2), cell_id)])]))
+            right = corpus.file(case_id, 'right', **depot_document([first, depot_row([t(label2), depot_cell_control(t(text2, '<w:b/>'), cell_id)])]))
+            authored = corpus.file(case_id, 'authored-redline', **depot_document([first, depot_row([t(label2), depot_cell_control(
+                t(text2, f'<w:b/><w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'), cell_id)])]))
+            corpus.add(case_id, 'revisions', 'reproducer', 'JSv4/Docxodus#1804',
+                       'The revision bolds the text of a table cell that sits in a row-level content control and changes nothing else; '
+                       'reject restores the plain text', 'compare', [dict(left, role='left'), dict(right, role='right')],
+                       {'accepted': right, 'rejected': left}, authored,
+                       states([(None, [None, None]), (None, [None, cc])], [(None, [None, None]), (None, [None, cc])])
+                       + [runs('rejected', [[label1 + text1 + label2 + text2 + CLOSING, []]]),
+                          runs('accepted', [[label1 + text1 + label2, []], [text2, ['b']], [CLOSING, []]]),
+                          revision_bound(1), untracked(label1, text1, label2, text2, CLOSING)])
 
         # The second row's second cell, in a control, turns bold; nothing else changes.
         case_id = 'redline-control-row-bold' if controlled else 'redline-plain-row-bold-control'

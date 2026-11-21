@@ -1,4 +1,4 @@
-The twelve content-control table and removed-section-break redline cases for Docxodus #1804 and #1805 contain
+The thirteen content-control table and removed-section-break redline cases for Docxodus #1804 and #1805 contain
 original depot text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper,
 document, image or font program is imported. The shapes follow the issues' descriptions, which the repository
 owner wrote: a table row or cell inside a content control (#1804) and a removed section break whose header the next

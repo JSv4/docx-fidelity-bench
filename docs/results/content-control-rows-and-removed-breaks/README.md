@@ -17,6 +17,7 @@ cases declare `run-formatting`; every case bounds `revision-count`.
 | `redline-control-cell-same-row` | reproducer | `assertion-revision-count`, `assertion-untracked-text` | `assertion-revision-count`, `assertion-untracked-text` | none | none |
 | `redline-plain-cell-same-row-control` | control | none | none | none | none |
 | `redline-control-row-bold` | reproducer | `assertion-run-formatting` | `assertion-run-formatting` | none | none |
+| `redline-control-cell-bold` | reproducer | `assertion-run-formatting` | `assertion-run-formatting` | none | none |
 | `redline-plain-row-bold-control` | control | none | none | none | none |
 | `redline-removed-break-inherited-header` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
 | `redline-removed-break-inherited-footer` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
@@ -26,7 +27,7 @@ cases declare `run-formatting`; every case bounds `revision-count`.
 Each cell lists the failed checks. The fix commits are the heads of
 [JSv4/Docxodus#1808](https://github.com/JSv4/Docxodus/pull/1808) (#1805) and [JSv4/Docxodus#1811](https://github.com/JSv4/Docxodus/pull/1811) (#1804). `77cfa753` is a merge of
 the two, made only for scoring (its tree, `58c9a883`, is what `git merge-tree` gives for the two heads):
-each fix passes its own reproducers and all six controls, and the merge passes all twelve. The authored redlines pass
+each fix passes its own reproducers and all six controls, and the merge passes all thirteen cases. The authored redlines pass
 every check. Checks are the bench's markup comparisons, SDK validation, assertions and the LibreOffice text round
 trips, run on Linux with LibreOffice 25.8.7.3. No reference application capture was made for these cases.
 `evidence.json` holds each run's failed checks, revision counts, rejected table states and section stories.
@@ -55,7 +56,7 @@ The same edit with no content control: every version tracks the one word.
 
 ![redline-control-removed](redline-control-removed.png)
 
-Main writes the two rows deleted but without their control, so Reject All restores them without it; with the fixes the control is marked deleted with custom-XML ranges and comes back around its rows. LibreOffice does not draw a control's boundary, so `table-state` carries the check.
+Main writes the two rows deleted but without their control, so Reject All restores them without it; with the fixes the control is marked deleted with custom-XML ranges and comes back around its rows. LibreOffice does not draw a control's boundary, so `table-state` carries the check. LibreOffice also lists a fifth revision for the authored redline and both fixes, a format change on the closing line, and marks that line in the sheet: it reads the custom-XML range after the table that way. The bench's own engine finds the closing line untracked in every row.
 
 ### `redline-plain-rows-removed-control`
 
@@ -81,6 +82,12 @@ The same edit with no content control: every version tracks the one word.
 
 Main copies the bold untracked, so Reject All keeps it; with the fixes it is a tracked format change and Reject All restores plain text.
 
+### `redline-control-cell-bold`
+
+![redline-control-cell-bold](redline-control-cell-bold.png)
+
+Main copies the bold in the controlled cell untracked, so Reject All keeps it; with the #1804 fix it is a tracked format change. Its control is `redline-plain-row-bold-control`.
+
 ### `redline-plain-row-bold-control`
 
 ![redline-plain-row-bold-control](redline-plain-row-bold-control.png)
@@ -91,7 +98,7 @@ The same bold with no content control: every version tracks it.
 
 ![redline-removed-break-inherited-header](redline-removed-break-inherited-header.png)
 
-Each tile is the top of pages 1 and 2. The redline keeps the original's break, so the deleted paragraph is a page of its own. On main the second page's header (the last section's) is untracked and Reject All leaves the revised `Depot timetable, winter` there; with the fixes it is the tracked story and rejects to `Depot timetable`. LibreOffice's Accept All keeps the deleted paragraph's break and an empty first page in every row, the authored one included, so its accepted comparison is declared ineligible; the bench's own engine shows main's accepted document without any header.
+Each tile is the top of pages 1 and 2. The redline keeps the original's break, so the deleted paragraph is a page of its own. Main tracks `, winter` in its one header part, but only the first section names that part; the last inherits it. The bench's engine therefore finds main's accepted document without any header (`markup-accepted`), and its rejected document showing the right header only by inheritance, where the expectation names it (`markup-rejected`). LibreOffice shows an inherited header's copy without its tracking, so on main its Reject All leaves the revised `Depot timetable, winter` on the second page (`libreoffice-rejected`); with the fixes the last section names the tracked story and both views are right. LibreOffice's Accept All keeps the deleted paragraph's break and an empty first page in every row, the authored one included, so its accepted comparison is declared ineligible.
 
 ### `redline-removed-break-inherited-footer`
 

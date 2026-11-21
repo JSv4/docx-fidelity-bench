@@ -48,7 +48,7 @@ class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
         self.assertEqual(registry['suite']['id'], 'redline-v57')
-        self.assertEqual(len(registry['cases']), 374)
+        self.assertEqual(len(registry['cases']), 375)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
         self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794, 1797, 1803, 1804, 1805)})
 
@@ -1994,19 +1994,27 @@ class ContentControlRowsAndRemovedBreaks(unittest.TestCase):
                 held.remove(child)
             held.append(row)
             table.append(copy_)
-        def empty_control(parts):
+        def rowless_control(parts):
+            # A control holding no row survives resolution when it holds anything (here a bookmark); an empty one is
+            # pruned before any endpoint is read.
             control = ET.SubElement(table_of(parts), revisions.w('sdt'))
-            ET.SubElement(control, revisions.w('sdtContent'))
-        for change in (unwrap, split, empty_control):
+            content = ET.SubElement(control, revisions.w('sdtContent'))
+            ET.SubElement(content, revisions.w('bookmarkStart'), {revisions.w('id'): '77', revisions.w('name'): 'Spare'})
+            ET.SubElement(content, revisions.w('bookmarkEnd'), {revisions.w('id'): '77'})
+        for change in (unwrap, split, rowless_control):
             parts = rejected()
             change(parts)
             # The markup view looks through a table's content controls, so only table-state sees the change.
-            self.assertEqual(revisions.view(package, parts), revisions.view(package, rejected()), change.__name__)
+            if change is not rowless_control:
+                self.assertEqual(revisions.view(package, parts), revisions.view(package, rejected()), change.__name__)
             self.assertFalse(redline._assertion(declaration, package, {'rejected': parts})['passed'], change.__name__)
         # Version 2 reads only a table's direct rows, so it cannot see the rows inside the control.
         self.assertFalse(redline._assertion(dict(declaration, version=2), package, {'rejected': rejected()})['passed'])
         self.assertFalse(redline.valid_table_state(declaration['state'], controls=True))
         self.assertTrue(redline.valid_table_state(declaration['state'], controls=True, rows=True))
+        wrong = copy.deepcopy(declaration['state'])
+        wrong['rows'][0]['control'] = 4201
+        self.assertFalse(redline.valid_table_state(wrong, controls=True, rows=True))
 
     def test_table_state_scopes_are_validated(self):
         for version, scope in [(3, 'redline'), (2, 'accepted'), (1, 'rejected')]:
@@ -2017,6 +2025,11 @@ class ContentControlRowsAndRemovedBreaks(unittest.TestCase):
             if version < 3:
                 for row in declaration['state']['rows']:
                     row.pop('control')
+                    if version < 2:
+                        for cell in row['cells']:
+                            cell.pop('control')
+            # Each declaration is valid for its own version, so only the scope can make it invalid.
+            self.assertTrue(redline.valid_table_state(declaration['state'], controls=version >= 2, rows=version == 3))
             with self.subTest(version=version, scope=scope), self.assertRaises(ValueError):
                 redline.validate_registry(registry)
 

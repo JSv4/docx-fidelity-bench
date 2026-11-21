@@ -1050,9 +1050,9 @@ the untyped one and the section held two; it passes both typed controls. The fix
 
 ## Content-control rows and a removed section break (Docxodus #1804, #1805)
 
-`redline-v57` adds six reproducers and six controls. Metric contract 35 adds `table-state` v3.
+`redline-v57` adds seven reproducers and six controls. Metric contract 35 adds `table-state` v3.
 
-**Rows and cells in content controls (#1804).** Eight cases share a two-column, fixed-width table of depot notes
+**Rows and cells in content controls (#1804).** Nine cases share a two-column, fixed-width table of depot notes
 (`Depot`/`Platform one`, `Signal`/`Lamp two`, and in two cases `Siding`/`Buffer three`) and a closing paragraph.
 Each reproducer puts a row in a table-level content control (`w:tbl/w:sdt/w:tr`, the shape a repeating section
 writes) or a cell in a row-level one (`w:tr/w:sdt/w:tc`); its control is the same case with no content control.
@@ -1063,17 +1063,23 @@ writes) or a cell in a row-level one (`w:tr/w:sdt/w:tc`); its control is the sam
 | `redline-control-removed` | removes a control holding the second and third rows | `redline-plain-rows-removed-control` |
 | `redline-control-cell-same-row` | adds a word to the first cell of a row whose second cell sits in a control | `redline-plain-cell-same-row-control` |
 | `redline-control-row-bold` | bolds the text of the second row's second cell, in a control, and changes nothing else | `redline-plain-row-bold-control` |
+| `redline-control-cell-bold` | bolds the same text where only that cell sits in a row-level control | `redline-plain-row-bold-control` |
 
 A correct redline writes each row or cell once, inside its control, with its edits tracked. A control only one
 document has is marked with the paired custom-XML ranges Word writes around a whole control, so the view without it
 drops the control with its rows (`redline-control-removed`'s authored redline crosses the control's opening and
-closing tags with `w:customXmlDelRangeStart`/`End`, as the block-level control cases do). The markup view looks
+closing tags with `w:customXmlDelRangeStart`/`End`, the shape Docxodus writes for a whole deleted block-level control;
+no reference capture was made). The bench's own resolver drops an emptied control either way, so it does not measure
+those markers, and the case's `revision-count` bound, which counts them, leaves a redline without them four records
+to spare. The markup view looks
 through a table's content controls, so it cannot see a lost or doubled control. `table-state` v3 can: it reads a
 table's rows through table-level controls and adds a `control` entry to every row, the `w:id` of each control
 around it, outermost first and joined by `/`, or null; a later control that reuses an id is named with `#2`, `#3`, …,
-so one control written twice does not read as one. Cells are read as in v2. Unlike v1 and v2 it may be declared on
-an accepted or rejected endpoint. A control left holding no row is a row with no cells, so it cannot match a
-declared state. Every case declares the state of both endpoints and bounds `revision-count`; the bold cases also
+so one control written twice does not read as one. Cells are read as in v2, except that a cell control reusing an id
+already seen in the table, at row or cell level, is named apart in the same way. Unlike v1 and v2 it may be declared
+on an accepted or rejected endpoint. A control holding no row but something else (a bookmark) is a row with no
+cells, so it cannot match a declared state; an empty control is pruned before either endpoint is read, so v3 does not
+see one. Every case declares the state of both endpoints and bounds `revision-count`; the bold cases also
 declare `run-formatting`.
 
 **A removed section break (#1805).** Four cases hold two paragraphs of depot notes and one header or footer part,
@@ -1104,6 +1110,7 @@ LibreOffice comparison ineligible and keep the rejected one.
 | `redline-control-cell-same-row` | reproducer | `assertion-revision-count`, `assertion-untracked-text` | `assertion-revision-count`, `assertion-untracked-text` | none | none |
 | `redline-plain-cell-same-row-control` | control | none | none | none | none |
 | `redline-control-row-bold` | reproducer | `assertion-run-formatting` | `assertion-run-formatting` | none | none |
+| `redline-control-cell-bold` | reproducer | `assertion-run-formatting` | `assertion-run-formatting` | none | none |
 | `redline-plain-row-bold-control` | control | none | none | none | none |
 | `redline-removed-break-inherited-header` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
 | `redline-removed-break-inherited-footer` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
