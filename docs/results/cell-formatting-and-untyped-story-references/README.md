@@ -26,3 +26,65 @@ the two heads); each fix passes its own reproducers and all four controls, and t
 redlines pass every check. Checks are the bench's markup comparisons, SDK validation, assertions and the LibreOffice
 text round trips, run on Linux with LibreOffice 25.8.7.3. No reference application capture was made for these
 cases. `evidence.json` holds each run's failed checks, revision counts, rejected spans or marks, and section stories.
+
+## Screenshots
+
+Each sheet shows the top of the first page as LibreOffice 25.8.7.3 exports it to PDF: the redline as opened, and after
+LibreOffice's own Reject All (`bench/lo_revisions.py`). Rows are the authored redline, the baseline `fbabfaf4` and both fixes
+`de4ab351`. In the cell sheets Docxodus's cell text sits closer to the cell border than the authored redline's: its
+comparison writes a hairline `w:tblInd` and `w:tblCellMar` on a fixed-width table without cell margins, as Word's
+compare output does, in every version shown. That is untracked table geometry, not a cell change.
+
+### `redline-cell-bold`
+
+![redline-cell-bold](redline-cell-bold.png)
+
+Main leaves the bold untracked, and Reject All keeps it; with the fixes it is a tracked attribute change, and Reject All restores plain text.
+
+### `redline-cell-mark-size`
+
+![redline-cell-mark-size](redline-cell-mark-size.png)
+
+LibreOffice shows no revision for a mark-only change, so its Reject All leaves the 36pt mark in every row, the authored one included; this case's LibreOffice comparisons are declared ineligible, and `mark-formatting` reads the marks.
+
+### `redline-cell-bold-beside-edit`
+
+![redline-cell-bold-beside-edit](redline-cell-bold-beside-edit.png)
+
+Main tracks the word change but not the two bold cells; with the fixes all three are tracked, and Reject All restores the word and the plain text.
+
+### `redline-cell-bold-edit-control`
+
+![redline-cell-bold-edit-control](redline-cell-bold-edit-control.png)
+
+The cell's text changes too, so main already tracks the bold and the word.
+
+### `redline-cell-mark-size-edit-control`
+
+![redline-cell-mark-size-edit-control](redline-cell-mark-size-edit-control.png)
+
+The cell's text changes too, so main already tracks the word and the mark.
+
+### `redline-untyped-header-changed`
+
+![redline-untyped-header-changed](redline-untyped-header-changed.png)
+
+LibreOffice does not show a header through a reference without `w:type`, so the authored redline shows none. Both Docxodus rows show it through a typed reference: on main a second one beside the untyped reference, with the fixes the bound reference itself. `section-stories` reads the references.
+
+### `redline-untyped-footer-changed`
+
+![redline-untyped-footer-changed](redline-untyped-footer-changed.png)
+
+As the header case, for a footer; each panel adds the bottom of the page below the gap line.
+
+### `redline-typed-header-changed-control`
+
+![redline-typed-header-changed-control](redline-typed-header-changed-control.png)
+
+A typed reference: every row shows the header, with " revised" tracked and then rejected.
+
+### `redline-typed-footer-changed-control`
+
+![redline-typed-footer-changed-control](redline-typed-footer-changed-control.png)
+
+As the header control, for a footer; each panel adds the bottom of the page below the gap line.
