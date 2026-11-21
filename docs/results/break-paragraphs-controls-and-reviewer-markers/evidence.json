@@ -1,0 +1,1999 @@
+{
+ "commits": {
+  "main": "c70ea5e99696d3fd424c8ed09e210612a4f7fcdb",
+  "merge": "66a20e2d3fc2bac00e79a3713148cdf470af4345",
+  "fix1809": "e0904977850ded03e98f64c1d84f0a146f1d849c",
+  "fix1810": "4752f093c8bb6c901c21aeb1a64be932e9626ed8",
+  "fix1812": "19782682ba5f62648d41b17134134b980b422269",
+  "mergeTree": "197c6715e83c8734e15feabc210fcedee8e2584c"
+ },
+ "mergeNote": "a merge of the #1809 head and the #1810 head (which contains the #1812 head) made only for scoring; its tree is the merge-tree of the two heads",
+ "libreoffice": "25.8.7.3",
+ "reference": "not captured: these cases are scored by the bench engine, the SDK validator and LibreOffice only",
+ "cases": {
+  "redline-break-paragraph-merged": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "libreoffice-rejected",
+     "markup-accepted",
+     "markup-rejected"
+    ],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   }
+  },
+  "redline-break-paragraph-kept-merge-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   }
+  },
+  "redline-break-paragraph-moved": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "libreoffice-rejected",
+     "markup-accepted",
+     "markup-rejected"
+    ],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   }
+  },
+  "redline-break-paragraph-kept-move-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   }
+  },
+  "redline-break-paragraph-split": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "assertion-section-boundaries",
+     "assertion-section-change-values",
+     "assertion-section-stories",
+     "libreoffice-rejected",
+     "markup-rejected"
+    ],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": []
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   }
+  },
+  "redline-break-paragraph-kept-split-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted"
+    ],
+    "observed": {
+     "section-stories": [
+      "Quarry register, north face",
+      "Quarry register, north face"
+     ],
+     "section-boundaries@accepted": [],
+     "section-boundaries@rejected": [
+      0
+     ]
+    }
+   }
+  },
+  "redline-control-wraps-row": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "assertion-table-state",
+     "libreoffice-rejected"
+    ],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4301",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 0
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 14
+    }
+   }
+  },
+  "redline-control-renamed-beside-edit": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "assertion-revision-count",
+     "assertion-untracked-text"
+    ],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4302",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 20
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4302",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 19
+    }
+   }
+  },
+  "redline-control-kept-beside-edit-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4302",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4302",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 1
+    }
+   }
+  },
+  "redline-control-row-moves-on": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "assertion-table-state"
+    ],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4303",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4304",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4304",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 0
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4303",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4303",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4304",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 10
+    }
+   }
+  },
+  "redline-control-rows-kept-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4303",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4303",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4304",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4303",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4303",
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4304",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 1
+    }
+   }
+  },
+  "redline-control-wraps-cell": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "assertion-table-state"
+    ],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": "4305",
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 0
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 10
+    }
+   }
+  },
+  "redline-control-cell-kept-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": "4305",
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": "4305",
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 1
+    }
+   }
+  },
+  "redline-consolidate-control-rows": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "libreoffice-accepted",
+     "markup-accepted",
+     "markup-reviewer-Reviewer A",
+     "markup-reviewer-Reviewer B"
+    ],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4401",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 0
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4401",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 2
+    }
+   }
+  },
+  "redline-consolidate-control-row-bookmark": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "markup-accepted",
+     "markup-reviewer-Reviewer B"
+    ],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4401",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": "4401",
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 3
+    }
+   }
+  },
+  "redline-consolidate-plain-rows-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 2
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 2
+    }
+   }
+  },
+  "redline-consolidate-plain-row-bookmark-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 3
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "table-state@rejected": {
+      "grid": [
+       4680,
+       4680
+      ],
+      "rows": [
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       },
+       {
+        "after": 0,
+        "before": 0,
+        "cells": [
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         },
+         {
+          "control": null,
+          "fill": null,
+          "span": 1,
+          "type": "dxa",
+          "width": 4680
+         }
+        ],
+        "control": null,
+        "height": null
+       }
+      ]
+     },
+     "revision-count": 3
+    }
+   }
+  },
+  "redline-consolidate-comment-beside-edit": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "libreoffice-accepted",
+     "markup-accepted",
+     "markup-reviewer-Reviewer B"
+    ],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 4
+    }
+   }
+  },
+  "redline-consolidate-comment-other-paragraph-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 4
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 4
+    }
+   }
+  },
+  "redline-consolidate-comment-in-table": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "libreoffice-accepted",
+     "markup-accepted",
+     "markup-reviewer-Reviewer B"
+    ],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 4
+    }
+   }
+  },
+  "redline-consolidate-comment-in-table-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 4
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 4
+    }
+   }
+  },
+  "redline-consolidate-table-format-bookmark": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "markup-accepted",
+     "markup-reviewer-Reviewer B"
+    ],
+    "notApplicable": [
+     "libreoffice-accepted",
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted",
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 3
+    }
+   }
+  },
+  "redline-consolidate-bookmark-table-format": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "markup-accepted",
+     "markup-reviewer-Reviewer B"
+    ],
+    "notApplicable": [
+     "libreoffice-accepted",
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 1
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted",
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 3
+    }
+   }
+  },
+  "redline-consolidate-table-format-outside-bookmark-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted",
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 3
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [
+     "libreoffice-accepted",
+     "libreoffice-rejected"
+    ],
+    "observed": {
+     "revision-count": 3
+    }
+   }
+  },
+  "redline-consolidate-bookmark-control-between-rows": {
+   "main": {
+    "score": 0.0,
+    "failedChecks": [
+     "libreoffice-accepted",
+     "libreoffice-rejected",
+     "markup-accepted",
+     "markup-rejected",
+     "markup-reviewer-Reviewer A",
+     "markup-reviewer-Reviewer B"
+    ],
+    "notApplicable": [],
+    "observed": {
+     "revision-count": 2
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "revision-count": 2
+    }
+   }
+  },
+  "redline-consolidate-bare-bookmark-between-rows-control": {
+   "main": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "revision-count": 2
+    }
+   },
+   "merge": {
+    "score": 100.0,
+    "failedChecks": [],
+    "notApplicable": [],
+    "observed": {
+     "revision-count": 2
+    }
+   }
+  }
+ }
+}

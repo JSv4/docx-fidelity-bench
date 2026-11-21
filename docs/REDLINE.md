@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v56`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v58`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -1122,3 +1122,137 @@ Each cell lists the failed checks. The fix commits are the heads of
 [JSv4/Docxodus#1811](https://github.com/JSv4/Docxodus/pull/1811) (#1804). `70ee2e03` is a merge of the two,
 made only for scoring. The authored redlines pass every check. See
 [the evidence and labelled review sheets](results/content-control-rows-and-removed-breaks/README.md).
+
+## Break paragraphs merged, moved or split; content-control changes; reviewers' markers (Docxodus #1809, #1810, #1812)
+
+`redline-v58` adds fourteen reproducers and twelve controls.
+
+**A paragraph that holds a section break (#1809).** Six cases hold four paragraphs of quarry notes and one header part,
+`Quarry register`. In the original the first section ends at an inline break that names the header and sets a
+1800-twip top margin, and the last section inherits the header. The revision has one section, whose break names the
+header, which gains `, north face`.
+
+| Case | Kind | The revision |
+| --- | --- | --- |
+| `redline-break-paragraph-merged` | reproducer | joins the paragraph that holds the break to the next one |
+| `redline-break-paragraph-kept-merge-control` | control | joins the second and third paragraphs; the first stays apart and loses its break |
+| `redline-break-paragraph-moved` | reproducer | moves the paragraph that holds the break to the end |
+| `redline-break-paragraph-kept-move-control` | control | moves the second paragraph to the end; the first stays and loses its break |
+| `redline-break-paragraph-split` | reproducer | splits the original's first paragraph, two sentences that hold the break, in two |
+| `redline-break-paragraph-kept-split-control` | control | the break ends a one-sentence first paragraph, and the revision splits the two-sentence paragraph after it |
+
+Each control makes the same merge, move or split, and the same change of sections, on a paragraph without the break;
+the two split cases' revisions are the same document. A correct redline keeps the break, with its margin, on a copy
+that accepting removes: the merged paragraph's own deleted mark, the moved paragraph's deleted source, or, for the
+split, the original paragraph deleted whole beside the revision's two inserted, since the paragraph mark both documents
+share cannot lose a break in place. Header references cannot be tracked, so the redline's last section names the
+header itself, and the rejected expectation is the original with that reference written out, as for #1805. Every case
+declares `section-stories` (both sections of the raw redline read `Quarry register, north face`), `section-boundaries`
+(no inline break once accepted, one after the first paragraph once rejected), `section-change-values` (the top
+margins: 1440 accepted, 1800 and 1440 rejected) and `untracked-text` for the paragraphs the change does not touch. The
+markup view holds a section's references but not its other properties, so only `section-change-values` sees a break
+restored without its margin. LibreOffice 25.8.7.3 keeps the section break on the authored deleted paragraph or mark
+when it accepts, with an empty paragraph left or the merged paragraphs left apart, so all six declare their accepted
+LibreOffice comparison ineligible. The issue's third shape, a changed paragraph holding a break whose revision holds
+tracked changes of its own, arises only when the comparison preserves the inputs' revisions; the bench's adapter
+never sets `PreserveInputRevisions`, so it is not benched.
+
+**A change to a table's content controls alone (#1810).** Seven cases share a two-column table of granary notes
+(`Granary`/`Bay one`, `Mill`/`Stone two`, `Kiln`/`Floor three`, `Barn`/`Loft four`), with a plain first row, since the
+bench's resolver prunes a table that holds no row directly, and a closing paragraph.
+
+| Case | Kind | The revision |
+| --- | --- | --- |
+| `redline-control-wraps-row` | reproducer | wraps the second row, unchanged, in a new table-level content control |
+| `redline-control-renamed-beside-edit` | reproducer | renames (`w:alias`) the control around the second row and adds a word to the first row |
+| `redline-control-kept-beside-edit-control` | control | adds the same word; the control is the same in both documents (the control for both reproducers above) |
+| `redline-control-row-moves-on` | reproducer | moves the third row from the first of two table-level controls into the second |
+| `redline-control-rows-kept-control` | control | adds a word to the third row, which stays in the first control |
+| `redline-control-wraps-cell` | reproducer | puts the second row's second cell, unchanged, in a new row-level control |
+| `redline-control-cell-kept-control` | control | adds a word to the first row; the cell's control is the same in both documents |
+
+A correct redline deletes the row in its original controls and inserts it in its revised ones, and marks a control
+only one document has with the paired custom-XML ranges, as for #1804; a cell's new control comes in with its row's
+inserted copy. Every case declares `table-state` v3 on both endpoints, bounds `revision-count` to the authored records
+(the range markers included) and keeps the rows the change does not touch untracked. The markup view looks through a
+table's controls, so a redline that copies the revised table untracked round-trips; `table-state` sees the rejected
+document keep the revised controls. It reads a control's `w:id`, not its alias, so the rename itself is not pinned:
+`redline-control-renamed-beside-edit` pins the row-precise redline beside it, which a table replaced whole breaks.
+LibreOffice 25.8.7.3 rewrites table-level controls on load and save: after rejecting the authored redline of
+`redline-control-row-moves-on` it writes the last row without the control its load of the original keeps, so that case
+declares its rejected LibreOffice comparison ineligible.
+
+**Two reviewers in a table with a controlled row (#1810).** In `redline-consolidate-control-rows` reviewer A adds a word
+to the first row and reviewer B to the second, which sits in a table-level control; in
+`redline-consolidate-control-row-bookmark` A adds a word to the controlled row and B only adds a bookmark around the
+first row's text. Accept has both changes, the row in its control once. Each control,
+`redline-consolidate-plain-rows-control` and `redline-consolidate-plain-row-bookmark-control`, is the same case in a
+plain table. Both declare `table-state` v3 on both endpoints, `revision-count` and `untracked-text`.
+
+**A reviewer's comment or bookmark beside another reviewer's change (#1812).** Every case consolidates a base with
+reviewer A, who edits, and reviewer B, who only adds a comment or a bookmark (reviewer S only centres a table).
+
+| Case | Kind | The reviewers |
+| --- | --- | --- |
+| `redline-consolidate-comment-beside-edit` | reproducer | B comments on words of an observatory note; A adds a word later in the same paragraph |
+| `redline-consolidate-comment-other-paragraph-control` | control | B's comment; A adds a word to the next paragraph |
+| `redline-consolidate-comment-in-table` | reproducer | B comments on a cell's text in a table's first row; A adds words to the second row |
+| `redline-consolidate-comment-in-table-control` | control | B's comment; A adds words to the paragraph before the table |
+| `redline-consolidate-table-format-bookmark` | reproducer | S only centres the table and B only adds a bookmark around a cell's text, S first |
+| `redline-consolidate-bookmark-table-format` | reproducer | the same, B first |
+| `redline-consolidate-table-format-outside-bookmark-control` | control | S only centres the table and B only adds a bookmark around the paragraph after it, S first |
+| `redline-consolidate-bookmark-control-between-rows` | reproducer | a table-level control holding only a bookmark sits between the two rows; A adds words to the first row and B to the second |
+| `redline-consolidate-bare-bookmark-between-rows-control` | control | the same with a bare bookmark between the rows |
+
+A correct redline marks B's comment markers or bookmark as B's insertions, so the per-reviewer projections hold, and
+keeps them where B put them. The markup view carries comment markers, each comment's text and author, and a table's
+bookmarks in order among its rows, so both round trips and the reviewer projections see a dropped or displaced
+marker; `comment-threads` reads only reply links, which these single comments have none of, so it is not declared.
+The centred table is 6000 twips wide, narrower than the text column, so the centring shows. The control between the rows reads as a row with no cells, which `table-state` cannot declare, so
+`redline-consolidate-bookmark-control-between-rows` declares its control subtree with `content-controls` on both
+endpoints; the markup view looks through it. No assertion reads a table's alignment, so the centring is not pinned.
+Every case bounds `revision-count` and keeps unchanged text untracked. LibreOffice keeps a comment whose markers are
+in rejected insertions, so the four comment cases declare their rejected LibreOffice comparison ineligible, and it
+shows no revision for a table-property change and a bookmark insertion, so the three centring cases declare both
+ineligible.
+
+| Case | Kind | Docxodus main `c70ea5e9` | Fixes merged `66a20e2d` |
+| --- | --- | --- | --- |
+| `redline-break-paragraph-merged` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
+| `redline-break-paragraph-kept-merge-control` | control | none | none |
+| `redline-break-paragraph-moved` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
+| `redline-break-paragraph-kept-move-control` | control | none | none |
+| `redline-break-paragraph-split` | reproducer | `assertion-section-boundaries`, `assertion-section-change-values`, `assertion-section-stories`, `libreoffice-rejected`, `markup-rejected` | none |
+| `redline-break-paragraph-kept-split-control` | control | none | none |
+| `redline-control-wraps-row` | reproducer | `assertion-table-state`, `libreoffice-rejected` | none |
+| `redline-control-renamed-beside-edit` | reproducer | `assertion-revision-count`, `assertion-untracked-text` | none |
+| `redline-control-kept-beside-edit-control` | control | none | none |
+| `redline-control-row-moves-on` | reproducer | `assertion-table-state` | none |
+| `redline-control-rows-kept-control` | control | none | none |
+| `redline-control-wraps-cell` | reproducer | `assertion-table-state` | none |
+| `redline-control-cell-kept-control` | control | none | none |
+| `redline-consolidate-control-rows` | reproducer | `libreoffice-accepted`, `markup-accepted`, `markup-reviewer-Reviewer A`, `markup-reviewer-Reviewer B` | none |
+| `redline-consolidate-plain-rows-control` | control | none | none |
+| `redline-consolidate-control-row-bookmark` | reproducer | `markup-accepted`, `markup-reviewer-Reviewer B` | none |
+| `redline-consolidate-plain-row-bookmark-control` | control | none | none |
+| `redline-consolidate-comment-beside-edit` | reproducer | `libreoffice-accepted`, `markup-accepted`, `markup-reviewer-Reviewer B` | none |
+| `redline-consolidate-comment-other-paragraph-control` | control | none | none |
+| `redline-consolidate-comment-in-table` | reproducer | `libreoffice-accepted`, `markup-accepted`, `markup-reviewer-Reviewer B` | none |
+| `redline-consolidate-comment-in-table-control` | control | none | none |
+| `redline-consolidate-table-format-bookmark` | reproducer | `markup-accepted`, `markup-reviewer-Reviewer B` | none |
+| `redline-consolidate-bookmark-table-format` | reproducer | `markup-accepted`, `markup-reviewer-Reviewer B` | none |
+| `redline-consolidate-table-format-outside-bookmark-control` | control | none | none |
+| `redline-consolidate-bookmark-control-between-rows` | reproducer | `libreoffice-accepted`, `libreoffice-rejected`, `markup-accepted`, `markup-rejected`, `markup-reviewer-Reviewer A`, `markup-reviewer-Reviewer B` | none |
+| `redline-consolidate-bare-bookmark-between-rows-control` | control | none | none |
+
+Each cell lists the failed checks. On main, accepting the merged and moved reproducers leaves the one section with no
+header, and rejecting the split one gives one section, without the first one's margin. The control-change reproducers
+keep the revised controls on reject, except the renamed one, whose table is deleted and inserted whole (20 records). The
+consolidations keep the base's table where two reviewers edit a controlled one, and drop B's comment or bookmark; in
+the last reproducer the control moves to the head of the table. The fixes are
+[JSv4/Docxodus#1820](https://github.com/JSv4/Docxodus/pull/1820) (#1809, head `e0904977`),
+[JSv4/Docxodus#1826](https://github.com/JSv4/Docxodus/pull/1826) (#1812, head `19782682`) and
+[JSv4/Docxodus#1827](https://github.com/JSv4/Docxodus/pull/1827) (#1810, head `4752f093`, stacked on #1826). `66a20e2d` is
+a merge of `e0904977` and `4752f093`, made only for scoring; its tree, `197c6715`, is what `git merge-tree` gives for
+the two heads. It passes all twenty-six cases and writes exactly the authored redlines' revision records in each. The
+authored redlines pass every check. See [the evidence and labelled review sheets](results/break-paragraphs-controls-and-reviewer-markers/README.md).

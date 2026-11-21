@@ -1,3 +1,12 @@
+The twenty-six section-break, content-control and reviewer-marker redline cases for Docxodus #1809, #1810 and #1812
+contain original quarry, granary and observatory text and literal OOXML authored in `bench/redline_fixtures.py`. No
+product fixture, helper, document, image or font program is imported. The shapes follow the issues' descriptions: a
+merged, moved or split paragraph that holds a section break (#1809), a change to a table's content controls alone and
+two reviewers in a table with a controlled row (#1810), and a reviewer's comment or bookmark beside another reviewer's
+change (#1812). The XML and text were written afresh; nothing was copied from any issue. The screenshot sheets in
+`docs/results/break-paragraphs-controls-and-reviewer-markers/` are LibreOffice 25.8.7.3 renders of those fixtures and of
+Docxodus output, not Word page renders.
+
 The thirteen content-control table and removed-section-break redline cases for Docxodus #1804 and #1805 contain
 original depot text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper,
 document, image or font program is imported. The shapes follow the issues' descriptions, which the repository

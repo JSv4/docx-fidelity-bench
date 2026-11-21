@@ -24,7 +24,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v57', 'version': 57}
+SUITE = {'id': 'redline-v58', 'version': 58}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -225,6 +225,17 @@ LIBREOFFICE_INELIGIBLE = {
        'LibreOffice 25.8.7.3 keeps an empty paragraph and its section break when accepting the authored deleted paragraph that holds the break, so its accepted document has two sections; independent markup endpoints, section stories, revision count and SDK checks remain mandatory')
        for case in ('redline-removed-break-inherited-header', 'redline-removed-break-inherited-footer',
                     'redline-removed-break-named-header-control', 'redline-removed-break-deleted-paragraph-control')},
+    **{'redline-break-paragraph-' + shape: (('accepted',),
+       'LibreOffice 25.8.7.3 keeps the section break on the authored deleted paragraph or paragraph mark when accepting, with an empty paragraph or the merged paragraphs apart, so its accepted document has two sections; independent markup endpoints, section stories, section boundaries and values, and SDK checks remain mandatory')
+       for shape in ('merged', 'kept-merge-control', 'moved', 'kept-move-control', 'split', 'kept-split-control')},
+    'redline-control-row-moves-on': (('rejected',),
+        'LibreOffice 25.8.7.3 rewrites table-level content controls on load and save: after rejecting the authored redline it writes the last row without the control its load of the original keeps, so the text views differ only in that path; independent markup endpoints, table state, revision count and SDK checks remain mandatory'),
+    **{case: (('rejected',), 'LibreOffice keeps the comment whose markers are in rejected insertion revisions; independent markup endpoints, reviewer projections, revision count and SDK checks remain mandatory')
+       for case in ('redline-consolidate-comment-beside-edit', 'redline-consolidate-comment-other-paragraph-control',
+                    'redline-consolidate-comment-in-table', 'redline-consolidate-comment-in-table-control')},
+    **{case: (('accepted', 'rejected'), 'LibreOffice 25.8.7.3 exposes zero revisions for the authored table-property change and bookmark insertion; independent markup endpoints, reviewer projections, revision count and SDK checks remain mandatory')
+       for case in ('redline-consolidate-table-format-bookmark', 'redline-consolidate-bookmark-table-format',
+                    'redline-consolidate-table-format-outside-bookmark-control')},
     'redline-consolidated-note-prefix': (('rejected',),
         'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
@@ -389,6 +400,10 @@ def generate():
     untyped_story_references(corpus)
     content_control_rows(corpus)
     removed_section_breaks(corpus)
+    section_break_paragraph_shapes(corpus)
+    content_control_changes(corpus)
+    content_control_consolidation(corpus)
+    reviewer_markers(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3839,3 +3854,409 @@ def removed_section_breaks(corpus):
                    [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story, 'kind': 'default',
                      'values': [label + (', winter' if changed else '')] * 2},
                     revision_bound(BOUNDS[case_id]), untracked(second)])
+
+
+QUARRY_NOTES = ['The quarry crew drills the upper face before the morning blast.',
+                'Wagons carry the cut blocks down to the canal wharf.',
+                'The foreman records each load in the weighbridge book.',
+                'Pumps keep the lower pit dry through the winter months.']
+
+
+def section_break_paragraph_shapes(corpus):
+    """The revision merges, moves or splits the paragraph that holds a section break, so the original's two sections
+    become one.
+
+    In the original the first section ends at an inline break that names the header `Quarry register` and sets a
+    1800-twip top margin; the last section inherits the header. The revision has one section, whose break names the
+    header, which gains `, north face`. A correct redline keeps the break, with its properties, on a copy of the
+    original's paragraph or mark that accepting removes, and keeps a header reference in every section, since
+    references cannot be tracked: the redline's last section names the header itself, so the rejected expectation is
+    the original with that reference written out. Docxodus #1809 found the comparison's section map walking the
+    alignment of the two documents' paragraphs, which shows a merge, a move or a split as one entry: it missed the
+    break on a merged paragraph's deleted mark and the break of a moved paragraph, so accepting left the one section
+    with no header, and a split dropped the original's break, so rejecting gave one section, without the first one's
+    margin. `redline-break-paragraph-merged` joins the break's paragraph to the next; `redline-break-paragraph-moved`
+    moves it to the end; `redline-break-paragraph-split` splits a two-sentence paragraph that holds the break. Each
+    control has the same section change and the same merge, move or split, of a paragraph without the break:
+    `redline-break-paragraph-kept-merge-control` joins the second and third paragraphs,
+    `redline-break-paragraph-kept-move-control` moves the second paragraph to the end and
+    `redline-break-paragraph-kept-split-control` splits the paragraph after the break. `section-boundaries` and
+    `section-change-values` read where each endpoint's breaks are and the sections' top margins."""
+    a, b, c, d = QUARRY_NOTES
+    label, added = 'Quarry register', ', north face'
+    ref = '<w:headerReference w:type="default" r:id="rStory"/>'
+    inline = SECTION.format(refs=ref).replace('w:top="1440"', 'w:top="1800"')
+    def para(text, section='', mark=''):
+        rpr = f'<w:rPr>{mark}</w:rPr>' if mark else ''
+        return f'<w:p>{"<w:pPr>" + rpr + section + "</w:pPr>" if rpr or section else ""}{text}</w:p>'
+    def document(story, final_named, paragraphs):
+        return depot_sections(story, [True, final_named], 'header', ''.join(paragraphs))
+    for case_id, kind, original, revised, redline, kept in (
+            ('redline-break-paragraph-merged', 'reproducer', [(a, True), b, c, d], [a + ' ' + b, c, d],
+             lambda rev: [para(t(a) + rev.ins(t(' ')), inline, rev.mark('del')), para(t(b)), para(t(c)), para(t(d))], (c, d)),
+            ('redline-break-paragraph-kept-merge-control', 'control', [(a, True), b, c, d], [a, b + ' ' + c, d],
+             lambda rev: [para(rev.dele(t(a)), inline, rev.mark('del')), para(rev.ins(t(a)), mark=rev.mark('ins')),
+                          para(t(b) + rev.ins(t(' ')), mark=rev.mark('del')), para(t(c)), para(t(d))], (d,)),
+            ('redline-break-paragraph-moved', 'reproducer', [(a, True), b, c, d], [b, c, d, a],
+             lambda rev: [para(rev.dele(t(a)), inline, rev.mark('del')), para(t(b)), para(t(c)), para(t(d)),
+                          para(rev.ins(t(a)), mark=rev.mark('ins'))], (b, c, d)),
+            ('redline-break-paragraph-kept-move-control', 'control', [(a, True), b, c, d], [a, c, d, b],
+             lambda rev: [para(rev.dele(t(a)), inline, rev.mark('del')), para(rev.ins(t(a)), mark=rev.mark('ins')),
+                          para(rev.dele(t(b)), mark=rev.mark('del')), para(t(c)), para(t(d)),
+                          para(rev.ins(t(b)), mark=rev.mark('ins'))], (c, d)),
+            ('redline-break-paragraph-split', 'reproducer', [(a + ' ' + b, True), c, d], [a, b, c, d],
+             lambda rev: [para(rev.dele(t(a + ' ' + b)), inline, rev.mark('del')), para(rev.ins(t(a)), mark=rev.mark('ins')),
+                          para(rev.ins(t(b)), mark=rev.mark('ins')), para(t(c)), para(t(d))], (c, d)),
+            ('redline-break-paragraph-kept-split-control', 'control', [(a, True), b + ' ' + c, d], [a, b, c, d],
+             lambda rev: [para(rev.dele(t(a)), inline, rev.mark('del')), para(rev.ins(t(a)), mark=rev.mark('ins')),
+                          para(t(b) + rev.dele(t(' ')), mark=rev.mark('ins')), para(t(c)), para(t(d))], (d,))):
+        rev = Revisions()
+        body = [para(t(x[0]), inline) if isinstance(x, tuple) else para(t(x)) for x in original]
+        left = corpus.file(case_id, 'left', **document(p(t(label)), False, body))
+        right = corpus.file(case_id, 'right', **document(p(t(label + added)), True, [para(t(x)) for x in revised]))
+        rejected = corpus.file(case_id, 'rejected', **document(p(t(label)), True, body))
+        authored = corpus.file(case_id, 'authored-redline', **document(p(t(label) + rev.ins(t(added))), True, redline(rev)))
+        shape = {'merged': 'joins the paragraph that holds the first section\'s break to the next',
+                 'moved': 'moves the paragraph that holds the first section\'s break to the end',
+                 'split': 'splits the paragraph that holds the first section\'s break in two',
+                 'kept-merge-control': 'joins the second and third paragraphs and removes the first paragraph\'s break',
+                 'kept-move-control': 'moves the second paragraph to the end and removes the first paragraph\'s break',
+                 'kept-split-control': 'splits the paragraph after the first section\'s break and removes the break'}
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1809',
+                   'Two sections become one: the revision ' + shape[case_id.split('redline-break-paragraph-', 1)[1]]
+                   + ', and adds words to the header the last section inherits; accept shows the one section with the revised '
+                   'header and reject restores both sections, their margins and the original header',
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': rejected},
+                   authored,
+                   [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': 'header', 'kind': 'default',
+                     'values': [label + added] * 2},
+                    {'type': 'section-boundaries', 'version': 1, 'scope': 'accepted', 'afterParagraphs': []},
+                    {'type': 'section-boundaries', 'version': 1, 'scope': 'rejected', 'afterParagraphs': [0]},
+                    section_values({'pgMar@top': ['1440', None]}, scope='accepted'),
+                    section_values({'pgMar@top': ['1800', None]}, {'pgMar@top': ['1440', None]}, scope='rejected'),
+                    untracked(*kept)])
+
+
+GRANARY_ROWS = [('Granary', 'Bay one'), ('Mill', 'Stone two'), ('Kiln', 'Floor three'), ('Barn', 'Loft four')]
+# The authored redlines' revision-record counts; a custom-XML range marker around a control only one document has
+# counts as a record, as in BOUNDS.
+CONTROL_BOUNDS = {'redline-control-wraps-row': 14, 'redline-control-renamed-beside-edit': 19,
+                  'redline-control-row-moves-on': 10, 'redline-control-wraps-cell': 10}
+
+
+def granary_control(content, alias, identifier, tag='GranaryRows'):
+    return (f'<w:sdt><w:sdtPr><w:alias w:val="{alias}"/><w:tag w:val="{tag}"/><w:id w:val="{identifier}"/></w:sdtPr>'
+            f'<w:sdtContent>{content}</w:sdtContent></w:sdt>')
+
+
+def granary_cell(content, width=DEPOT_WIDTHS[1]):
+    return f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>{content}</w:tc>'
+
+
+def granary_row(label, text, cell_control=None, mark='', rev=None, kind=None, author=AUTHOR):
+    """One two-cell row. With `kind` (`ins` or `del`) the row, its text and its paragraph marks are tracked; with
+    `cell_control` (alias, id) the second cell sits in a row-level content control."""
+    def content(value):
+        if kind is None:
+            return p(t(value))
+        marked = (rev.ins if kind == 'ins' else rev.dele)(t(value), author)
+        return p(marked, mark=rev.mark(kind, author))
+    second = granary_cell(content(text))
+    if cell_control:
+        second = granary_control(second, *cell_control, tag='GranaryCell')
+    row_mark = rev.mark(kind, author) if kind else ''
+    return ('<w:tr>' + (f'<w:trPr>{row_mark}</w:trPr>' if row_mark else '') + granary_cell(content(label)) + second + '</w:tr>')
+
+
+def control_envelope(inner, kind, rev, alias, identifier):
+    """A table-level control only one document has, with the paired custom-XML ranges Word writes across its tags."""
+    tag = 'Ins' if kind == 'ins' else 'Del'
+    start, end = rev.attrs(AUTHOR), rev.attrs(AUTHOR)
+    start_id, end_id = start.split('"')[1], end.split('"')[1]
+    return (f'<w:customXml{tag}RangeStart {start}/>'
+            + granary_control(f'<w:customXml{tag}RangeEnd w:id="{start_id}"/>' + inner + f'<w:customXml{tag}RangeStart {end}/>', alias, identifier)
+            + f'<w:customXml{tag}RangeEnd w:id="{end_id}"/>')
+
+
+def content_control_changes(corpus):
+    """A change to a table's content controls alone, around rows and cells both documents have.
+
+    Docxodus #1810 found that wrapping an unchanged row in a new table-level control, moving a row from one control
+    to the next and giving a cell a row-level control were neither reported nor tracked (the redline copied the
+    revised table untracked, so rejecting kept the revised controls), and that renaming a control beside an edit in
+    another row replaced the whole table. A correct redline deletes such a row in its original controls and inserts
+    it in its revised ones; a control only one document has is marked with the paired custom-XML ranges, as for
+    #1804. The table holds granary notes (`Granary`/`Bay one`, `Mill`/`Stone two`, `Kiln`/`Floor three`,
+    `Barn`/`Loft four`) and keeps a plain first row, since a table with no direct row is pruned by the bench's
+    resolver. Reproducers: `redline-control-wraps-row`, `redline-control-renamed-beside-edit`,
+    `redline-control-row-moves-on` and `redline-control-wraps-cell`. Each control keeps the same controls on both
+    sides and makes one edit: `redline-control-kept-beside-edit-control` (for the first two),
+    `redline-control-rows-kept-control` and `redline-control-cell-kept-control`. `table-state` v3 reads each row's
+    and cell's controls by id; it does not read an alias, so the rename is pinned by the row-precise redline
+    (`revision-count`, `untracked-text`)."""
+    (l1, x1), (l2, x2), (l3, x3), (l4, x4) = GRANARY_ROWS
+    def states(accepted, rejected):
+        return [{'type': 'table-state', 'version': 3, 'scope': 'accepted', 'state': depot_state(accepted)},
+                {'type': 'table-state', 'version': 3, 'scope': 'rejected', 'state': depot_state(rejected)}]
+    plain = [None, None]
+    def case(case_id, kind, description, left, right, redline, accepted, rejected, bound, kept):
+        rev = Revisions()
+        files = [corpus.file(case_id, name, **depot_document(rows)) for name, rows in (('left', left), ('right', right))]
+        authored = corpus.file(case_id, 'authored-redline', **depot_document(redline(rev)))
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1810', description, 'compare',
+                   [dict(files[0], role='left'), dict(files[1], role='right')], {'accepted': files[1], 'rejected': files[0]},
+                   authored, states(accepted, rejected) + [revision_bound(bound), untracked(*kept, CLOSING)])
+    first, edited = granary_row(l1, x1), granary_row(l1, x1 + ' east')
+
+    case('redline-control-wraps-row', 'reproducer',
+         'The revision wraps the second row, unchanged, in a new table-level content control and changes nothing else; '
+         'reject removes the control', [first, granary_row(l2, x2)], [first, granary_control(granary_row(l2, x2), 'Mill rows', 4301)],
+         lambda rev: [first, granary_row(l2, x2, rev=rev, kind='del'),
+                      control_envelope(granary_row(l2, x2, rev=rev, kind='ins'), 'ins', rev, 'Mill rows', 4301)],
+         [(None, plain), ('4301', plain)], [(None, plain), (None, plain)], CONTROL_BOUNDS['redline-control-wraps-row'], (l1, x1))
+    case('redline-control-renamed-beside-edit', 'reproducer',
+         'The revision renames the table-level content control around the second row and adds a word to the first row; '
+         'the edit is tracked in its row and the controlled row is deleted in the old control and inserted in the renamed one',
+         [first, granary_control(granary_row(l2, x2), 'Mill rows', 4302)],
+         [edited, granary_control(granary_row(l2, x2), 'Mill rows, spare', 4302)],
+         lambda rev: [granary_row(l1, x1).replace(t(x1), t(x1) + rev.ins(t(' east'))),
+                      control_envelope(granary_row(l2, x2, rev=rev, kind='del'), 'del', rev, 'Mill rows', 4302),
+                      control_envelope(granary_row(l2, x2, rev=rev, kind='ins'), 'ins', rev, 'Mill rows, spare', 4302)],
+         [(None, plain), ('4302', plain)], [(None, plain), ('4302', plain)], CONTROL_BOUNDS['redline-control-renamed-beside-edit'], (l1, x1))
+    case('redline-control-kept-beside-edit-control', 'control',
+         'The revision adds a word to the first row; the second row sits in a table-level content control both documents '
+         'have unchanged', [first, granary_control(granary_row(l2, x2), 'Mill rows', 4302)],
+         [edited, granary_control(granary_row(l2, x2), 'Mill rows', 4302)],
+         lambda rev: [granary_row(l1, x1).replace(t(x1), t(x1) + rev.ins(t(' east'))), granary_control(granary_row(l2, x2), 'Mill rows', 4302)],
+         [(None, plain), ('4302', plain)], [(None, plain), ('4302', plain)], 1, (l1, x1, l2, x2))
+    case('redline-control-row-moves-on', 'reproducer',
+         'The revision moves the third row from the first table-level content control into the next one and changes '
+         'nothing else; reject puts it back in the first control',
+         [first, granary_control(granary_row(l2, x2) + granary_row(l3, x3), 'Upper rows', 4303),
+          granary_control(granary_row(l4, x4), 'Lower rows', 4304)],
+         [first, granary_control(granary_row(l2, x2), 'Upper rows', 4303),
+          granary_control(granary_row(l3, x3) + granary_row(l4, x4), 'Lower rows', 4304)],
+         lambda rev: [first, granary_control(granary_row(l2, x2) + granary_row(l3, x3, rev=rev, kind='del'), 'Upper rows', 4303),
+                      granary_control(granary_row(l3, x3, rev=rev, kind='ins') + granary_row(l4, x4), 'Lower rows', 4304)],
+         [(None, plain), ('4303', plain), ('4304', plain), ('4304', plain)],
+         [(None, plain), ('4303', plain), ('4303', plain), ('4304', plain)], CONTROL_BOUNDS['redline-control-row-moves-on'],
+         (l1, x1, l2, x2, l4, x4))
+    case('redline-control-rows-kept-control', 'control',
+         'The revision adds a word to the third row, which stays in the first of two table-level content controls',
+         [first, granary_control(granary_row(l2, x2) + granary_row(l3, x3), 'Upper rows', 4303),
+          granary_control(granary_row(l4, x4), 'Lower rows', 4304)],
+         [first, granary_control(granary_row(l2, x2) + granary_row(l3, x3 + ' east'), 'Upper rows', 4303),
+          granary_control(granary_row(l4, x4), 'Lower rows', 4304)],
+         lambda rev: [first, granary_control(granary_row(l2, x2) + granary_row(l3, x3).replace(t(x3), t(x3) + rev.ins(t(' east'))), 'Upper rows', 4303),
+                      granary_control(granary_row(l4, x4), 'Lower rows', 4304)],
+         [(None, plain), ('4303', plain), ('4303', plain), ('4304', plain)],
+         [(None, plain), ('4303', plain), ('4303', plain), ('4304', plain)], 1, (l1, x1, l2, x2, l3, x3, l4, x4))
+    case('redline-control-wraps-cell', 'reproducer',
+         'The revision puts the second row\'s second cell, unchanged, in a new row-level content control and changes '
+         'nothing else; reject removes the control', [first, granary_row(l2, x2)],
+         [first, granary_row(l2, x2, cell_control=('Stone cell', 4305))],
+         lambda rev: [first, granary_row(l2, x2, rev=rev, kind='del'),
+                      granary_row(l2, x2, cell_control=('Stone cell', 4305), rev=rev, kind='ins')],
+         [(None, plain), (None, [None, '4305'])], [(None, plain), (None, plain)], CONTROL_BOUNDS['redline-control-wraps-cell'], (l1, x1))
+    case('redline-control-cell-kept-control', 'control',
+         'The revision adds a word to the first row; the second row\'s second cell sits in a row-level content control '
+         'both documents have unchanged', [first, granary_row(l2, x2, cell_control=('Stone cell', 4305))],
+         [edited, granary_row(l2, x2, cell_control=('Stone cell', 4305))],
+         lambda rev: [granary_row(l1, x1).replace(t(x1), t(x1) + rev.ins(t(' east'))), granary_row(l2, x2, cell_control=('Stone cell', 4305))],
+         [(None, plain), (None, [None, '4305'])], [(None, plain), (None, [None, '4305'])], 1, (l1, x1, l2, x2))
+
+
+def consolidate_case(corpus, case_id, category, kind, issue, description, base, reviewers, accepted, redline, assertions):
+    """A consolidation: `base` and each reviewer's (author, document) are package keyword dicts; `redline` builds the
+    authored redline from a Revisions."""
+    inputs = [dict(corpus.file(case_id, 'base', **base), role='base')]
+    for index, (author, document) in enumerate(reviewers, 1):
+        inputs.append(dict(corpus.file(case_id, f'reviewer{index}', **document), role='reviewer', author=author))
+    merged = corpus.file(case_id, 'accepted', **accepted)
+    authored = corpus.file(case_id, 'authored-redline', **redline(Revisions()))
+    corpus.add(case_id, category, kind, issue, description, 'consolidate', inputs,
+               {'accepted': merged, 'rejected': {k: inputs[0][k] for k in ('path', 'sha256')}}, authored, assertions)
+
+
+def content_control_consolidation(corpus):
+    """Two reviewers edit a table whose second row sits in a table-level content control (Docxodus #1810).
+
+    Docxodus #1804's fix recorded a conflict for any such table two reviewers changed and kept the base's, and dropped
+    a reviewer's bookmark there when another reviewer edited the table. `redline-consolidate-control-rows`: reviewer A
+    adds a word to the first row and reviewer B to the controlled row, so accept has both edits, the row in its control
+    once; `redline-consolidate-control-row-bookmark`: A edits the controlled row and B only adds a bookmark around the
+    first row's text, which accept keeps. Each control is the same case in a plain table."""
+    (l1, x1), (l2, x2) = GRANARY_ROWS[:2]
+    def states(rows):
+        return [{'type': 'table-state', 'version': 3, 'scope': scope, 'state': depot_state(rows)} for scope in ('accepted', 'rejected')]
+    for controlled in (True, False):
+        wrap = (lambda row: granary_control(row, 'Mill rows', 4401)) if controlled else (lambda row: row)
+        rows = [(None, [None, None]), ('4401' if controlled else None, [None, None])]
+        def table(first_row, second_row):
+            return depot_document([first_row, wrap(second_row)])
+        kind = 'reproducer' if controlled else 'control'
+        where = 'sits in a table-level content control' if controlled else 'is a plain row'
+        consolidate_case(
+            corpus, 'redline-consolidate-control-rows' if controlled else 'redline-consolidate-plain-rows-control', 'consolidate',
+            kind, 'JSv4/Docxodus#1810',
+            f'Reviewer A adds a word to a table\'s first row and reviewer B to its second, which {where}; accept has both edits',
+            table(granary_row(l1, x1), granary_row(l2, x2)),
+            [('Reviewer A', table(granary_row(l1, x1 + ' east'), granary_row(l2, x2))),
+             ('Reviewer B', table(granary_row(l1, x1), granary_row(l2, x2 + ' spare')))],
+            table(granary_row(l1, x1 + ' east'), granary_row(l2, x2 + ' spare')),
+            lambda rev: table(granary_row(l1, x1).replace(t(x1), t(x1) + rev.ins(t(' east'), 'Reviewer A')),
+                              granary_row(l2, x2).replace(t(x2), t(x2) + rev.ins(t(' spare'), 'Reviewer B'))),
+            states(rows) + [revision_bound(2), untracked(l1, x1, l2, x2, CLOSING)])
+        marked = lambda rev=None: granary_row(l1, x1).replace(
+            t(x1), ((lambda m: rev.ins(m, 'Reviewer B')) if rev else (lambda m: m))(bookmark(True, 31, 'GranaryBay'))
+            + t(x1) + ((lambda m: rev.ins(m, 'Reviewer B')) if rev else (lambda m: m))(bookmark(False, 31)))
+        consolidate_case(
+            corpus, 'redline-consolidate-control-row-bookmark' if controlled else 'redline-consolidate-plain-row-bookmark-control',
+            'consolidate', kind, 'JSv4/Docxodus#1810',
+            f'Reviewer A adds a word to a table\'s second row, which {where}; reviewer B only adds a bookmark around the '
+            'first row\'s text, which accept keeps',
+            table(granary_row(l1, x1), granary_row(l2, x2)),
+            [('Reviewer A', table(granary_row(l1, x1), granary_row(l2, x2 + ' spare'))),
+             ('Reviewer B', table(marked(), granary_row(l2, x2)))],
+            table(marked(), granary_row(l2, x2 + ' spare')),
+            lambda rev: table(marked(rev), granary_row(l2, x2).replace(t(x2), t(x2) + rev.ins(t(' spare'), 'Reviewer A'))),
+            states(rows) + [revision_bound(3), untracked(l1, x1, l2, x2, CLOSING)])
+
+
+OBSERVATORY_NOTES = ['The observatory logs each clear night in the bound ledger.',
+                     'Visitors sign the register at the north gate.']
+OBSERVATORY_ROWS = [('Telescope', 'Dome east'), ('Sextant', 'Case two')]
+OBSERVATORY_OPENING = 'Instrument list for the winter season.'
+NOTE_AUTHOR = 'Reviewer B'
+
+
+def reviewer_note(identifier, text):
+    return (f'<w:comment w:id="{identifier}" w:author="{NOTE_AUTHOR}" w:date="{DATE}" w:initials="RB">'
+            + p('<w:r><w:annotationRef/></w:r>' + t(text)) + '</w:comment>')
+
+
+def commented(text, rev=None, identifier=0):
+    """`text` inside a comment's range, with its reference after the range end; with `rev` the markers are reviewer
+    B's insertions."""
+    mark = (lambda m: rev.ins(m, NOTE_AUTHOR)) if rev else (lambda m: m)
+    return (mark(comment_marks('rangeStart', identifier)) + t(text) + mark(comment_marks('rangeEnd', identifier))
+            + mark(comment_marks('reference', identifier)))
+
+
+def observatory_table(cells, tblpr='', between='', widths=DEPOT_WIDTHS):
+    """The two-row instrument table: `cells` holds each cell's paragraph content; `between` is literal XML between the
+    rows and `tblpr` literal XML after the table width."""
+    rows = ['<w:tr>' + ''.join(granary_cell(p(c), width) for c, width in zip(row, widths)) + '</w:tr>' for row in cells]
+    borders = ''.join(f'<w:{s} w:val="single" w:sz="4" w:space="0" w:color="444444"/>' for s in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'))
+    grid = ''.join(f'<w:gridCol w:w="{x}"/>' for x in widths)
+    properties = f'<w:tblW w:w="{sum(widths)}" w:type="dxa"/>{{jc}}<w:tblBorders>{borders}</w:tblBorders><w:tblLayout w:type="fixed"/>'
+    jc, change = tblpr if isinstance(tblpr, tuple) else (tblpr, '')
+    return (f'<w:tbl><w:tblPr>{properties.format(jc=jc)}{change.format(old=properties.format(jc=""))}</w:tblPr>'
+            f'<w:tblGrid>{grid}</w:tblGrid>{rows[0]}{between}{rows[1]}</w:tbl>')
+
+
+def reviewer_markers(corpus):
+    """A reviewer's comment or bookmark beside another reviewer's change in the same paragraph or table
+    (Docxodus #1812).
+
+    Docxodus #1812 found that consolidation carried a reviewer's comment only into a paragraph copied from the
+    original, so a comment in a paragraph or table another reviewer edited was lost without a conflict; that a bookmark
+    in a table was dropped when the first reviewer to touch the table only reformatted it; and that a composed table
+    moved a content control holding no row to its head. Reproducers and controls:
+    `redline-consolidate-comment-beside-edit` (B comments on words of a paragraph A edits elsewhere) and
+    `redline-consolidate-comment-other-paragraph-control` (A edits the next paragraph);
+    `redline-consolidate-comment-in-table` (B comments in a cell of a table whose other row A edits) and
+    `redline-consolidate-comment-in-table-control` (A edits the paragraph before the table);
+    `redline-consolidate-table-format-bookmark` and `redline-consolidate-bookmark-table-format` (reviewer S only
+    centres the table and B only adds a bookmark in a cell, S first or B first; Docxodus main drops the bookmark in
+    either order) and `redline-consolidate-table-format-outside-bookmark-control` (B's bookmark is around the paragraph
+    after the table);
+    `redline-consolidate-bookmark-control-between-rows` (a table-level control holding only a bookmark between the
+    rows while A edits the first row and B the second) and `redline-consolidate-bare-bookmark-between-rows-control`
+    (a bare bookmark there). The markup view carries comment markers, comment text and authors and the order of a
+    table's bookmarks among its rows; no assertion reads a table's alignment, so the centring itself is not pinned."""
+    first, second = OBSERVATORY_NOTES
+    note = reviewer_note(0, 'Add the cloudy nights as well.')
+    words = 'each clear night'
+    before, after = first.split(words)
+    tail = after.replace('bound ledger.', '')
+    for edits_other in (False, True):
+        def body(comment_rev=None, commented_in=False, edited=False, rev=None):
+            lead = t(before) + (commented(words, comment_rev) if commented_in else t(words)) + t(tail)
+            ledger = (rev.ins(t('new '), 'Reviewer A') if rev else t('new ')) if edited and not edits_other else ''
+            gate = second.replace('north gate.', '')
+            gate_edit = (rev.ins(t('old '), 'Reviewer A') if rev else t('old ')) if edited and edits_other else ''
+            return p(lead + ledger + t('bound ledger.')) + p(t(gate) + gate_edit + t('north gate.')) + p(t(CLOSING))
+        def document(content, comments=False):
+            return dict(body=content, comments=note if comments else None)
+        consolidate_case(
+            corpus, 'redline-consolidate-comment-other-paragraph-control' if edits_other else 'redline-consolidate-comment-beside-edit',
+            'consolidate', 'control' if edits_other else 'reproducer', 'JSv4/Docxodus#1812',
+            'Reviewer B comments on words of a paragraph; reviewer A adds a word to '
+            + ('the next paragraph' if edits_other else 'the same paragraph after the comment') + '. Accept keeps the comment and the edit',
+            document(body()), [('Reviewer A', document(body(edited=True))), (NOTE_AUTHOR, document(body(commented_in=True), True))],
+            document(body(commented_in=True, edited=True), True),
+            lambda rev: document(body(rev, True, True, rev), True),
+            [revision_bound(4), untracked(before, words, 'bound ledger.', 'north gate.', CLOSING)])
+
+    (l1, x1), (l2, x2) = OBSERVATORY_ROWS
+    for edits_opening in (False, True):
+        def body(comment_rev=None, commented_in=False, edited=False, rev=None):
+            insertion = (lambda text: rev.ins(t(text), 'Reviewer A')) if rev else t
+            opening = t(OBSERVATORY_OPENING.replace('season.', '')) + (insertion('and spring ') if edited and edits_opening else '') + t('season.')
+            cell = commented(x1, comment_rev) if commented_in else t(x1)
+            case_cell = t(x2) + (insertion(', brass') if edited and not edits_opening else '')
+            return p(opening) + observatory_table([[t(l1), cell], [t(l2), case_cell]]) + p(t(CLOSING))
+        def document(content, comments=False):
+            return dict(body=content, comments=note if comments else None)
+        consolidate_case(
+            corpus, 'redline-consolidate-comment-in-table-control' if edits_opening else 'redline-consolidate-comment-in-table',
+            'consolidate', 'control' if edits_opening else 'reproducer', 'JSv4/Docxodus#1812',
+            'Reviewer B comments on a cell\'s text in the first row of a table; reviewer A adds words to '
+            + ('the paragraph before the table' if edits_opening else 'the table\'s second row') + '. Accept keeps the comment and the edit',
+            document(body()), [('Reviewer A', document(body(edited=True))), (NOTE_AUTHOR, document(body(commented_in=True), True))],
+            document(body(commented_in=True, edited=True), True),
+            lambda rev: document(body(rev, True, True, rev), True),
+            [revision_bound(4), untracked(l1, x1, l2, x2, 'season.', CLOSING)])
+
+    centred = '<w:jc w:val="center"/>'
+    for case_id, kind, b_first, outside in (('redline-consolidate-table-format-bookmark', 'reproducer', False, False),
+                                             ('redline-consolidate-bookmark-table-format', 'reproducer', True, False),
+                                             ('redline-consolidate-table-format-outside-bookmark-control', 'control', False, True)):
+        def body(centre=False, marked=False, rev=None):
+            mark = (lambda m: rev.ins(m, NOTE_AUTHOR)) if rev else (lambda m: m)
+            def around(text, name):
+                return mark(bookmark(True, 41, name)) + t(text) + mark(bookmark(False, 41)) if marked else t(text)
+            cell = t(x1) if outside else around(x1, 'DomeEast')
+            closing = around(CLOSING, 'ClosingLine') if outside else t(CLOSING)
+            tblpr = (centred, f'<w:tblPrChange {rev.attrs("Reviewer S")}><w:tblPr>{{old}}</w:tblPr></w:tblPrChange>') if rev else (centred if centre else '')
+            # Narrower than the text column, so the centring shows.
+            return dict(body=observatory_table([[t(l1), cell], [t(l2), t(x2)]], tblpr, widths=(3000, 3000)) + p(closing))
+        reviewers = [('Reviewer S', body(centre=True)), (NOTE_AUTHOR, body(marked=True))]
+        consolidate_case(
+            corpus, case_id, 'consolidate', kind, 'JSv4/Docxodus#1812',
+            'Reviewer S only centres a table and reviewer B only adds a bookmark around '
+            + ('the paragraph after the table' if outside else 'a cell\'s text') + '; '
+            + ('B is the first reviewer' if b_first else 'S is the first reviewer') + '. Accept keeps the bookmark',
+            body(), reviewers[::-1] if b_first else reviewers, body(centre=True, marked=True),
+            lambda rev: body(True, True, rev), [revision_bound(3), untracked(l1, x1, l2, x2, CLOSING)])
+
+    for bare in (False, True):
+        marker = bookmark(True, 43, 'ShelfMark') + bookmark(False, 43)
+        between = marker if bare else granary_control(marker, 'Shelf mark', 4501, tag='ShelfMark')
+        def body(first_edit=False, second_edit=False, rev=None):
+            insertion = (lambda text, author: rev.ins(t(text), author)) if rev else (lambda text, author: t(text))
+            first_cell = t(x1) + (insertion(', upper', 'Reviewer A') if first_edit else '')
+            second_cell = t(x2) + (insertion(', brass', 'Reviewer B') if second_edit else '')
+            return dict(body=observatory_table([[t(l1), first_cell], [t(l2), second_cell]], between=between) + p(t(CLOSING)))
+        assertions = [revision_bound(2), untracked(l1, x1, l2, x2, CLOSING)]
+        if not bare:
+            assertions += [{'type': 'content-controls', 'version': 1, 'scope': scope, 'controls': [between.replace('<w:sdt>', f'<w:sdt xmlns:w="{W}">', 1)]}
+                           for scope in ('accepted', 'rejected')]
+        consolidate_case(
+            corpus, 'redline-consolidate-bare-bookmark-between-rows-control' if bare else 'redline-consolidate-bookmark-control-between-rows',
+            'consolidate', 'control' if bare else 'reproducer', 'JSv4/Docxodus#1812',
+            'Reviewer A adds words to a table\'s first row and reviewer B to its second; between the rows sits '
+            + ('a bookmark' if bare else 'a table-level content control holding only a bookmark') + ', which stays there',
+            body(), [('Reviewer A', body(first_edit=True)), ('Reviewer B', body(second_edit=True))],
+            body(True, True), lambda rev: body(True, True, rev), assertions)

@@ -1,3 +1,19 @@
+`redline-v58` adds fourteen reproducers and twelve controls for [Docxodus #1809](https://github.com/JSv4/Docxodus/issues/1809),
+[#1810](https://github.com/JSv4/Docxodus/issues/1810) and [#1812](https://github.com/JSv4/Docxodus/issues/1812). Six
+merge, move or split the paragraph that holds a section break whose header the last section inherits, as the revision
+turns two sections into one; each control makes the same merge, move or split on a paragraph without the break. Seven
+change only a table's content controls (a row wrapped in a new control, a control renamed beside an edit, a row moved
+into the next control, a cell given a row-level control) or keep them beside an edit. Thirteen are consolidations: two
+reviewers editing a table with a controlled row, and a reviewer's comment or bookmark beside another reviewer's edit or
+table formatting, or a control holding only a bookmark between two rows another two reviewers edit. Docxodus main
+c70ea5e9 fails every reproducer and passes every control: it lost the header or the first section, kept revised controls
+on reject or replaced a table whole, kept the base's table, and dropped the comments and bookmarks. A scoring-only merge
+of the fixes ([#1820](https://github.com/JSv4/Docxodus/pull/1820), [#1826](https://github.com/JSv4/Docxodus/pull/1826)
+and [#1827](https://github.com/JSv4/Docxodus/pull/1827)) passes all twenty-six. No new assertion or
+metric contract is added. The comparison's preserved-input-revisions shape of #1809 is not benched, since the adapter
+never preserves input revisions. All earlier DOCX files remain byte-identical, and the PDF suite stays `core-v175`. See
+[the redline notes](docs/REDLINE.md#break-paragraphs-merged-moved-or-split-content-control-changes-reviewers-markers-docxodus-1809-1810-1812).
+
 `redline-v57` adds seven reproducers and six controls for [Docxodus #1804](https://github.com/JSv4/Docxodus/issues/1804)
 and [#1805](https://github.com/JSv4/Docxodus/issues/1805). Nine share a two-column table of depot notes: each
 reproducer puts a row in a table-level content control, as a repeating section does, or a cell in a row-level one, and
