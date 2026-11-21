@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v57')
-        self.assertEqual(len(registry['cases']), 375)
+        self.assertEqual(registry['suite']['id'], 'redline-v58')
+        self.assertEqual(len(registry['cases']), 401)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794, 1797, 1803, 1804, 1805)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794, 1797, 1803, 1804, 1805, 1809, 1810, 1812)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -2064,6 +2064,112 @@ class ContentControlRowsAndRemovedBreaks(unittest.TestCase):
                 self.assertNotEqual(rejected, revisions.view(load(record['expected']['rejected'])))
                 self.assertEqual(views(load(record['authored'])), (revisions.view(load(record['expected']['accepted'])),
                                                                  revisions.view(load(record['expected']['rejected']))))
+
+
+class BreakParagraphsControlChangesAndReviewerMarkers(unittest.TestCase):
+    """A merged, moved or split paragraph that holds a section break (#1809), a change to a table's content controls
+    alone (#1810) and a reviewer's comment or bookmark beside another reviewer's change (#1812)."""
+
+    def failures(self, record, package):
+        """The checks `package` fails as a redline for `record`: each markup round trip, each reviewer's projection
+        and each declared assertion."""
+        parts = package.story_parts()
+        resolved = {'redline': None, 'output': None, 'accepted': revisions.resolve(parts, 'accept'),
+                    'rejected': revisions.resolve(parts, 'reject')}
+        failed = [scope for scope in ('accepted', 'rejected')
+                  if revisions.view(package, resolved[scope]) != revisions.view(load(record['expected'][scope]))]
+        if record['operation'] == 'consolidate':
+            failed += ['reviewer:' + item['author'] for item in record['inputs'][1:]
+                       if revisions.view(package, revisions.resolve(parts, 'accept', item['author'])) != revisions.view(load(item))]
+        return failed + [a['type'] + '@' + a['scope'] for a in record['assertions']
+                         if not redline._assertion(a, package, resolved)['passed']]
+
+    def test_the_authored_redlines_pass_every_check(self):
+        for record in cases():
+            if record['issue'] in {'JSv4/Docxodus#1809', 'JSv4/Docxodus#1810', 'JSv4/Docxodus#1812'}:
+                self.assertEqual(self.failures(record, load(record['authored'])), [], record['id'])
+
+    def test_a_break_without_its_story_its_section_or_its_margin_cannot_pass(self):
+        body = lambda root: root.find(W + 'body')
+        def unname(root):
+            # Accepting leaves the one section with no header, as when the map misses the merged paragraph's break.
+            final = body(root).findall(W + 'sectPr')[-1]
+            final.remove(final.find(W + 'headerReference'))
+        def drop_break(root):
+            # The break dropped from the deleted copy, so rejecting gives one section.
+            properties = next(body(root).iter(W + 'p')).find(W + 'pPr')
+            properties.remove(properties.find(W + 'sectPr'))
+        def plain_margin(root):
+            # The break restored without its own top margin: only the declared section values see it.
+            next(body(root).iter(W + 'p')).find(W + 'pPr/' + W + 'sectPr/' + W + 'pgMar').set(W + 'top', '1440')
+        record = case('redline-break-paragraph-merged')
+        # Both round trips see it; section-stories reads the last section as inheriting the story, as Word shows it.
+        self.assertEqual(self.failures(record, rewrite(record['authored'], unname)), ['accepted', 'rejected'])
+        record = case('redline-break-paragraph-split')
+        self.assertEqual(self.failures(record, rewrite(record['authored'], drop_break)),
+                         ['rejected', 'section-stories@redline', 'section-boundaries@rejected', 'section-change-values@rejected'])
+        self.assertEqual(self.failures(record, rewrite(record['authored'], plain_margin)), ['section-change-values@rejected'])
+
+    def test_an_untracked_control_change_passes_the_markup_view_but_not_table_state(self):
+        # The markup view looks through a table's content controls, so the revised table copied untracked round-trips.
+        for case_id in ('redline-control-wraps-row', 'redline-control-row-moves-on', 'redline-control-wraps-cell'):
+            record = case(case_id)
+            self.assertEqual(self.failures(record, load(record['expected']['accepted'])), ['table-state@rejected'], case_id)
+
+    def test_a_table_replaced_whole_beside_a_renamed_control_cannot_pass(self):
+        record = case('redline-control-renamed-beside-edit')
+        rev = redline_fixtures.Revisions()
+        (l1, x1), (l2, x2) = redline_fixtures.GRANARY_ROWS[:2]
+        row, control = redline_fixtures.granary_row, redline_fixtures.granary_control
+        def whole(edit, alias, kind):
+            body = redline_fixtures.depot_document([row(l1, x1 + edit, rev=rev, kind=kind),
+                                                    control(row(l2, x2, rev=rev, kind=kind), alias, 4302)])['body']
+            return body[:body.index('</w:tbl>') + len('</w:tbl>')]
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'whole.docx'
+            redline_fixtures.package(path, body=whole('', 'Mill rows', 'del') + whole(' east', 'Mill rows, spare', 'ins')
+                                     + redline_fixtures.p(redline_fixtures.t(redline_fixtures.CLOSING)))
+            self.assertEqual(self.failures(record, revisions.Package(str(path))), ['revision-count@redline', 'untracked-text@redline'])
+
+    def test_a_reviewers_marker_must_survive_and_stay_tracked(self):
+        families = {'comment': {W + 'commentRangeStart', W + 'commentRangeEnd', W + 'commentReference'},
+                    'bookmark': {W + 'bookmarkStart', W + 'bookmarkEnd'}}
+        def change(family, keep):
+            # Reviewer B's insertions of the marker family: removed with their markers, or replaced by them (untracked).
+            def apply(root):
+                for parent in list(root.iter()):
+                    for ins in [c for c in parent if c.tag == W + 'ins' and any(e.tag in families[family] for e in c.iter())]:
+                        index = list(parent).index(ins)
+                        parent.remove(ins)
+                        for offset, child in enumerate(list(ins) if keep else []):
+                            parent.insert(index + offset, child)
+            return apply
+        for case_id, family in (('redline-consolidate-comment-beside-edit', 'comment'),
+                                ('redline-consolidate-comment-in-table', 'comment'),
+                                ('redline-consolidate-control-row-bookmark', 'bookmark'),
+                                ('redline-consolidate-table-format-bookmark', 'bookmark')):
+            record = case(case_id)
+            self.assertEqual(self.failures(record, rewrite(record['authored'], change(family, False)))[:2],
+                             ['accepted', 'reviewer:Reviewer B'], case_id)
+            self.assertIn('rejected', self.failures(record, rewrite(record['authored'], change(family, True))), case_id)
+
+    def test_a_bookmark_control_between_rows_is_read_in_place_and_as_a_control(self):
+        record = case('redline-consolidate-bookmark-control-between-rows')
+        def to_head(root):
+            table = next(root.iter(W + 'tbl'))
+            control = table.find(W + 'sdt')
+            table.remove(control)
+            table.insert(list(table).index(table.find(W + 'tr')), control)
+        def unwrap(root):
+            table = next(root.iter(W + 'tbl'))
+            control = table.find(W + 'sdt')
+            index = list(table).index(control)
+            table.remove(control)
+            for offset, child in enumerate(control.find(W + 'sdtContent')):
+                table.insert(index + offset, child)
+        self.assertEqual(self.failures(record, rewrite(record['authored'], to_head)), ['accepted', 'rejected', 'reviewer:Reviewer A', 'reviewer:Reviewer B'])
+        # The markup view looks through the control, so only the declared control trees see it unwrapped.
+        self.assertEqual(self.failures(record, rewrite(record['authored'], unwrap)), ['content-controls@accepted', 'content-controls@rejected'])
 
 if __name__ == '__main__':
     unittest.main()
