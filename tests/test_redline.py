@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v56')
-        self.assertEqual(len(registry['cases']), 362)
+        self.assertEqual(registry['suite']['id'], 'redline-v57')
+        self.assertEqual(len(registry['cases']), 374)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794, 1797, 1803)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794, 1797, 1803, 1804, 1805)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -1961,6 +1961,96 @@ class RevisionResolution(unittest.TestCase):
         self.assertFalse(redline.valid_table_state(declaration['state']))
         self.assertTrue(redline.valid_table_state(declaration['state'], controls=True))
 
+
+
+class ContentControlRowsAndRemovedBreaks(unittest.TestCase):
+    """table-state v3 reads rows through table-level content controls (#1804); a removed break's story (#1805)."""
+
+    def test_table_state_v3_sees_row_controls_the_text_view_ignores(self):
+        record = case('redline-control-removed')
+        package = load(record['authored'])
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-state' and a['scope'] == 'rejected')
+        self.assertEqual(declaration['version'], 3)
+        rejected = lambda: revisions.resolve(package.story_parts(), 'reject')
+        self.assertTrue(redline._assertion(declaration, package, {'rejected': rejected()})['passed'])
+        table_of = lambda parts: next(parts[package.main].iter(revisions.w('tbl')))
+        def unwrap(parts):
+            # The rows come back without their control, as a redline that drops a removed control writes them.
+            table = table_of(parts)
+            control = table.find(revisions.w('sdt'))
+            index = list(table).index(control)
+            for offset, row in enumerate(control.find(revisions.w('sdtContent')).findall(revisions.w('tr'))):
+                table.insert(index + offset, row)
+            table.remove(control)
+        def split(parts):
+            # The second row in a control of its own.
+            table = table_of(parts)
+            content = table.find(revisions.w('sdt') + '/' + revisions.w('sdtContent'))
+            row = content.findall(revisions.w('tr'))[1]
+            content.remove(row)
+            copy_ = copy.deepcopy(table.find(revisions.w('sdt')))
+            held = copy_.find(revisions.w('sdtContent'))
+            for child in list(held):
+                held.remove(child)
+            held.append(row)
+            table.append(copy_)
+        def empty_control(parts):
+            control = ET.SubElement(table_of(parts), revisions.w('sdt'))
+            ET.SubElement(control, revisions.w('sdtContent'))
+        for change in (unwrap, split, empty_control):
+            parts = rejected()
+            change(parts)
+            # The markup view looks through a table's content controls, so only table-state sees the change.
+            self.assertEqual(revisions.view(package, parts), revisions.view(package, rejected()), change.__name__)
+            self.assertFalse(redline._assertion(declaration, package, {'rejected': parts})['passed'], change.__name__)
+        # Version 2 reads only a table's direct rows, so it cannot see the rows inside the control.
+        self.assertFalse(redline._assertion(dict(declaration, version=2), package, {'rejected': rejected()})['passed'])
+        self.assertFalse(redline.valid_table_state(declaration['state'], controls=True))
+        self.assertTrue(redline.valid_table_state(declaration['state'], controls=True, rows=True))
+
+    def test_table_state_scopes_are_validated(self):
+        for version, scope in [(3, 'redline'), (2, 'accepted'), (1, 'rejected')]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['id'] == 'redline-control-removed')
+            declaration = next(a for a in target['assertions'] if a['type'] == 'table-state')
+            declaration.update(version=version, scope=scope)
+            if version < 3:
+                for row in declaration['state']['rows']:
+                    row.pop('control')
+            with self.subTest(version=version, scope=scope), self.assertRaises(ValueError):
+                redline.validate_registry(registry)
+
+    def test_a_row_written_twice_or_a_whole_table_replacement_cannot_pass(self):
+        # #1804: the revision's control copied ahead of the rows, which are then written again without it; and a
+        # table replaced whole, which round-trips but records far more than the one inserted word.
+        record = case('redline-control-row-beside-edit')
+        def duplicate(root):
+            table = next(root.iter(revisions.w('tbl')))
+            control = table.find(revisions.w('sdt'))
+            table.append(copy.deepcopy(control.find(revisions.w('sdtContent') + '/' + revisions.w('tr'))))
+            table.remove(control)
+            table.insert(2, control)
+        accepted, rejected = views(rewrite(record['authored'], duplicate))
+        self.assertNotEqual(accepted, revisions.view(load(record['expected']['accepted'])))
+        self.assertNotEqual(rejected, revisions.view(load(record['expected']['rejected'])))
+        bound = next(a for a in case('redline-control-cell-same-row')['assertions'] if a['type'] == 'revision-count')
+        self.assertEqual(bound['max'], 1)
+
+    def test_a_removed_break_without_the_named_story_cannot_pass(self):
+        # #1805: the redline keeps the original's last section break, which names no story, so accepting removes
+        # the only reference to it.
+        for case_id in ('redline-removed-break-inherited-header', 'redline-removed-break-inherited-footer'):
+            record = case(case_id)
+            def unname(root):
+                final = root.find(revisions.w('body')).findall(revisions.w('sectPr'))[-1]
+                for reference in [r for r in final if r.tag.endswith('Reference')]:
+                    final.remove(reference)
+            accepted, rejected = views(rewrite(record['authored'], unname))
+            with self.subTest(case=case_id):
+                self.assertNotEqual(accepted, revisions.view(load(record['expected']['accepted'])))
+                self.assertNotEqual(rejected, revisions.view(load(record['expected']['rejected'])))
+                self.assertEqual(views(load(record['authored'])), (revisions.view(load(record['expected']['accepted'])),
+                                                                 revisions.view(load(record['expected']['rejected']))))
 
 if __name__ == '__main__':
     unittest.main()

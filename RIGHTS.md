@@ -1,3 +1,11 @@
+The twelve content-control table and removed-section-break redline cases for Docxodus #1804 and #1805 contain
+original depot text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper,
+document, image or font program is imported. The shapes follow the issues' descriptions, which the repository
+owner wrote: a table row or cell inside a content control (#1804) and a removed section break whose header the next
+section inherited (#1805). The XML and text were written afresh; nothing was copied from either issue. The
+screenshot sheets in `docs/results/content-control-rows-and-removed-breaks/` are LibreOffice 25.8.7.3 renders of
+those fixtures and of Docxodus output, not Word page renders.
+
 The nine table-cell formatting and untyped-reference redline cases for Docxodus #1797 and #1803 contain original
 harbor and signal-tower text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture,
 helper, document, image or font program is imported. The shapes follow the issues' descriptions: a cell run
