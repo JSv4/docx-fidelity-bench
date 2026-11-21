@@ -8,7 +8,7 @@ inherited its story from, so accepting left the document without one. The markup
 content controls, so the #1804 cases declare `table-state` v3, which names each row's and cell's control; the bold
 cases declare `run-formatting`; every case bounds `revision-count`.
 
-| Case | Kind | Baseline `f5cefdd1` | #1805 fix `1b7689b0` | #1804 fix `29bbb623` | Both fixes `77cfa753` |
+| Case | Kind | Baseline `f5cefdd1` | #1805 fix `5223451d` | #1804 fix `eb527f50` | Both fixes `70ee2e03` |
 | --- | --- | --- | --- | --- | --- |
 | `redline-control-row-beside-edit` | reproducer | `assertion-table-state`, `libreoffice-accepted`, `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | `assertion-table-state`, `libreoffice-accepted`, `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | none |
 | `redline-plain-row-beside-edit-control` | control | none | none | none | none |
@@ -25,8 +25,8 @@ cases declare `run-formatting`; every case bounds `revision-count`.
 | `redline-removed-break-deleted-paragraph-control` | control | none | none | none | none |
 
 Each cell lists the failed checks. The fix commits are the heads of
-[JSv4/Docxodus#1808](https://github.com/JSv4/Docxodus/pull/1808) (#1805) and [JSv4/Docxodus#1811](https://github.com/JSv4/Docxodus/pull/1811) (#1804). `77cfa753` is a merge of
-the two, made only for scoring (its tree, `58c9a883`, is what `git merge-tree` gives for the two heads):
+[JSv4/Docxodus#1808](https://github.com/JSv4/Docxodus/pull/1808) (#1805) and [JSv4/Docxodus#1811](https://github.com/JSv4/Docxodus/pull/1811) (#1804). `70ee2e03` is a merge of
+the two, made only for scoring (its tree, `daa7f007`, is what `git merge-tree` gives for the two heads):
 each fix passes its own reproducers and all six controls, and the merge passes all thirteen cases. The authored redlines pass
 every check. Checks are the bench's markup comparisons, SDK validation, assertions and the LibreOffice text round
 trips, run on Linux with LibreOffice 25.8.7.3. No reference application capture was made for these cases.
@@ -36,7 +36,7 @@ trips, run on Linux with LibreOffice 25.8.7.3. No reference application capture 
 
 Each sheet shows the top of the first page (for the section-break cases, of the first two pages) as LibreOffice 25.8.7.3 exports it to PDF: the redline as opened, after
 LibreOffice's own Reject All, and after its Accept All (`bench/lo_revisions.py`). Rows are the authored redline, the
-baseline `f5cefdd1` and both fixes `77cfa753`. LibreOffice does not draw a content control's
+baseline `f5cefdd1` and both fixes `70ee2e03`. LibreOffice does not draw a content control's
 boundary in a table, so the control cases show rows written twice or a table replaced whole, and `table-state`
 reads the controls.
 

@@ -1101,7 +1101,7 @@ redline. LibreOffice 25.8.7.3 keeps an empty paragraph and its section break whe
 paragraph that holds the break, so its accepted document has two sections; the four cases declare that one
 LibreOffice comparison ineligible and keep the rejected one.
 
-| Case | Kind | Baseline `f5cefdd1` | #1805 fix `1b7689b0` | #1804 fix `29bbb623` | Both fixes `77cfa753` |
+| Case | Kind | Baseline `f5cefdd1` | #1805 fix `5223451d` | #1804 fix `eb527f50` | Both fixes `70ee2e03` |
 | --- | --- | --- | --- | --- | --- |
 | `redline-control-row-beside-edit` | reproducer | `assertion-table-state`, `libreoffice-accepted`, `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | `assertion-table-state`, `libreoffice-accepted`, `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | none |
 | `redline-plain-row-beside-edit-control` | control | none | none | none | none |
@@ -1119,6 +1119,6 @@ LibreOffice comparison ineligible and keep the rejected one.
 
 Each cell lists the failed checks. The fix commits are the heads of
 [JSv4/Docxodus#1808](https://github.com/JSv4/Docxodus/pull/1808) (#1805) and
-[JSv4/Docxodus#1811](https://github.com/JSv4/Docxodus/pull/1811) (#1804). `77cfa753` is a merge of the two,
+[JSv4/Docxodus#1811](https://github.com/JSv4/Docxodus/pull/1811) (#1804). `70ee2e03` is a merge of the two,
 made only for scoring. The authored redlines pass every check. See
 [the evidence and labelled review sheets](results/content-control-rows-and-removed-breaks/README.md).
