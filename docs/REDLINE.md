@@ -1001,3 +1001,41 @@ realism. It passes both controls. [JSv4/Docxodus#1798](https://github.com/JSv4/D
 mark cases and [JSv4/Docxodus#1799](https://github.com/JSv4/Docxodus/pull/1799) (#1793) the indented pair; each
 passes both controls, and the head of #1799, which carries both, passes all six. See
 [the evidence](results/mark-formatting-and-indentation/README.md).
+
+## Formatting inside table cells and untyped story references (Docxodus #1797, #1803)
+
+`redline-v56` adds seven original cases. The first four share a two-by-two table of harbor notes between an
+opening and a closing paragraph.
+
+- `redline-cell-bold` (reproducer): the revision bolds the second cell's run and changes nothing else.
+- `redline-cell-mark-size` (reproducer): the second cell ends with an empty paragraph; the revision grows its mark
+  to 36pt (`w:sz w:val="72"`) and changes nothing else.
+- `redline-cell-bold-beside-edit` (reproducer): the revision changes "noon" to "dawn" in the first cell and bolds
+  the second cell's run and the last cell's, whose row has no other change.
+- `redline-cell-bold-edit-control` (control): the revision bolds the second cell's run and changes "dusk" to "dawn"
+  in that same cell, so the cell's text changes too.
+- `redline-untyped-header-changed` (reproducer): one section whose header is referenced without `w:type`; the
+  revision adds " revised" to the header.
+- `redline-untyped-footer-changed` (reproducer): the same change to a footer referenced without `w:type`.
+- `redline-typed-header-changed-control` (control): the same change to a header referenced with
+  `w:type="default"`.
+
+Neither round trip reads character formatting or paragraph marks, so the cell cases declare the bold spans with
+`run-formatting` and every paragraph mark's size with `mark-formatting` in both endpoints, and each case bounds
+`revision-count` to its own records. No assertion reads a paragraph's own properties inside a table cell, so the
+third shape #1797 reports, a cell paragraph's alignment, is not pinned here. The story cases read the section's
+single default reference and the story text it reaches with `section-stories`.
+
+The schema requires `w:type` on a header or footer reference, and the SDK validator reports both endpoints of the
+untyped cases; validity is judged against the inputs, so it stays a valid check of the redline. LibreOffice 25.8.7.3
+does not import a reference without `w:type`: the exported PDF of either endpoint has no header or footer, and the
+authored redline exposes no revision, so both untyped cases declare their LibreOffice comparisons ineligible. It also
+shows no revision for the mark-only change in the cell, so `redline-cell-mark-size` declares both comparisons
+ineligible. Markup endpoints, declared formatting, the section story, revision counts and SDK checks stay mandatory
+in all three.
+
+Docxodus `fbabfaf4` compared a table's cells by their text alone, so it recorded none of the cell formatting
+changes and rejected to the revised formatting; it passes the cell control, whose cell text changes. Binding the
+changed story to its section looked for a literal `w:type="default"`, so it added a typed default reference beside
+the untyped one and the section held two; it passes the typed control. See
+[the evidence](results/cell-formatting-and-untyped-story-references/README.md).

@@ -1,0 +1,432 @@
+{
+ "commits": {
+  "baseline": "fbabfaf42572f80c984cb0b630456a2219873e6a",
+  "fix1797": "c4d7be1387329d1ce80cb3527d1050eb7a51a581",
+  "fix1803": "701bbec809a369c702f1e0708bddd70dba20f197",
+  "both": "4cad9beed5367405ab8a99332b01b37ef6897a0a"
+ },
+ "bothTree": "7d96130598dd9c04b34ccc469367d3ef548499d6",
+ "bothNote": "a merge of fix1797 and fix1803 made only for scoring; its tree is the merge-tree of the two heads",
+ "libreoffice": "25.8.7.3",
+ "reference": "not captured: these cases are scored by the bench engine, the SDK validator and LibreOffice only",
+ "cases": {
+  "redline-cell-bold": {
+   "authored": {
+    "failedChecks": [],
+    "revisions": 1,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-run-formatting"
+    ],
+    "revisions": 0,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.",
+      []
+     ],
+     [
+      "Pilot boats return to the inner mooring after dusk.",
+      [
+       "b"
+      ]
+     ],
+     [
+      "Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "fix1797": {
+    "failedChecks": [],
+    "revisions": 1,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "fix1803": {
+    "failedChecks": [
+     "assertion-run-formatting"
+    ],
+    "revisions": 0,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.",
+      []
+     ],
+     [
+      "Pilot boats return to the inner mooring after dusk.",
+      [
+       "b"
+      ]
+     ],
+     [
+      "Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "both": {
+    "failedChecks": [],
+    "revisions": 1,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   }
+  },
+  "redline-cell-mark-size": {
+   "authored": {
+    "failedChecks": [],
+    "revisions": 1,
+    "rejectedMarks": [
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     []
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-mark-formatting"
+    ],
+    "revisions": 0,
+    "rejectedMarks": [
+     [],
+     [],
+     [],
+     [
+      "sz=72"
+     ],
+     [],
+     [],
+     []
+    ]
+   },
+   "fix1797": {
+    "failedChecks": [],
+    "revisions": 1,
+    "rejectedMarks": [
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     []
+    ]
+   },
+   "fix1803": {
+    "failedChecks": [
+     "assertion-mark-formatting"
+    ],
+    "revisions": 0,
+    "rejectedMarks": [
+     [],
+     [],
+     [],
+     [
+      "sz=72"
+     ],
+     [],
+     [],
+     []
+    ]
+   },
+   "both": {
+    "failedChecks": [],
+    "revisions": 1,
+    "rejectedMarks": [
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     []
+    ]
+   }
+  },
+  "redline-cell-bold-beside-edit": {
+   "authored": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-run-formatting"
+    ],
+    "revisions": 2,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.",
+      []
+     ],
+     [
+      "Pilot boats return to the inner mooring after dusk.",
+      [
+       "b"
+      ]
+     ],
+     [
+      "Ferry crews stow the gangway before casting off.",
+      []
+     ],
+     [
+      "The harbor master posts the berth list at dawn.",
+      [
+       "b"
+      ]
+     ],
+     [
+      "Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "fix1797": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "fix1803": {
+    "failedChecks": [
+     "assertion-run-formatting"
+    ],
+    "revisions": 2,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.",
+      []
+     ],
+     [
+      "Pilot boats return to the inner mooring after dusk.",
+      [
+       "b"
+      ]
+     ],
+     [
+      "Ferry crews stow the gangway before casting off.",
+      []
+     ],
+     [
+      "The harbor master posts the berth list at dawn.",
+      [
+       "b"
+      ]
+     ],
+     [
+      "Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "both": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   }
+  },
+  "redline-cell-bold-edit-control": {
+   "authored": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "baseline": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "fix1797": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "fix1803": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   },
+   "both": {
+    "failedChecks": [],
+    "revisions": 4,
+    "rejectedSpans": [
+     [
+      "Opening line remains unchanged.Harbor pilots log the tide charts before noon.Pilot boats return to the inner mooring after dusk.Ferry crews stow the gangway before casting off.The harbor master posts the berth list at dawn.Closing line remains unchanged.",
+      []
+     ]
+    ]
+   }
+  },
+  "redline-untyped-header-changed": {
+   "authored": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-section-stories"
+    ],
+    "revisions": 1,
+    "sectionStories": [
+     null
+    ]
+   },
+   "fix1797": {
+    "failedChecks": [
+     "assertion-section-stories"
+    ],
+    "revisions": 1,
+    "sectionStories": [
+     null
+    ]
+   },
+   "fix1803": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "both": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   }
+  },
+  "redline-untyped-footer-changed": {
+   "authored": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "baseline": {
+    "failedChecks": [
+     "assertion-section-stories"
+    ],
+    "revisions": 1,
+    "sectionStories": [
+     null
+    ]
+   },
+   "fix1797": {
+    "failedChecks": [
+     "assertion-section-stories"
+    ],
+    "revisions": 1,
+    "sectionStories": [
+     null
+    ]
+   },
+   "fix1803": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "both": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   }
+  },
+  "redline-typed-header-changed-control": {
+   "authored": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "baseline": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "fix1797": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "fix1803": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   },
+   "both": {
+    "failedChecks": [],
+    "revisions": 1,
+    "sectionStories": [
+     "Tower ledger revised"
+    ]
+   }
+  }
+ }
+}

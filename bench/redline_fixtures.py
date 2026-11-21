@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v55', 'version': 55}
+SUITE = {'id': 'redline-v56', 'version': 56}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -215,6 +215,11 @@ LIBREOFFICE_INELIGIBLE = {
        for case in ('redline-inline-title-page-off', 'redline-inline-title-page-off-margin-control')},
     'redline-mark-size-text': (('accepted', 'rejected'),
         'LibreOffice 25.8.7.3 exposes zero revisions for the authored mark-only change on a text paragraph; independent markup endpoints, declared marks, revision count and SDK checks remain mandatory'),
+    'redline-cell-mark-size': (('accepted', 'rejected'),
+        'LibreOffice 25.8.7.3 exposes zero revisions for the authored mark-only change on an empty paragraph in a table cell; independent markup endpoints, declared marks, revision count and SDK checks remain mandatory'),
+    **{f'redline-untyped-{story}-changed': (('accepted', 'rejected'),
+       f'LibreOffice 25.8.7.3 does not import a {story} reference without w:type, so neither document shows the {story} and the authored redline exposes zero revisions; independent markup endpoints, the section story, revision count and SDK checks remain mandatory')
+       for story in ('header', 'footer')},
     'redline-consolidated-note-prefix': (('rejected',),
         'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
@@ -375,6 +380,8 @@ def generate():
     format_only_run_formatting(corpus)
     paragraph_mark_formatting(corpus)
     indented_copies(corpus)
+    cell_formatting(corpus)
+    untyped_story_references(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3451,3 +3458,137 @@ def indented_copies(corpus):
                    + '; a correct redline records the edit and nothing else', 'compare',
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
                    [{'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 2}, untracked(INDENT_NOTES[0], 'Closing note.')])
+
+
+CELL_NOTES = ['Harbor pilots log the tide charts before noon.', 'Pilot boats return to the inner mooring after dusk.',
+              'Ferry crews stow the gangway before casting off.', 'The harbor master posts the berth list at dawn.']
+
+
+def cell_formatting(corpus):
+    """The revision changes only the formatting of text inside a table cell; the cell's text is unchanged.
+
+    A correct redline records the change inside its cell, as it would in a body paragraph, and reject restores the
+    original formatting. Docxodus #1797 found a comparison whose table, row and cell checks compared only the
+    cells' text, so a cell changed only in formatting was copied from the revision with no revision, and reject
+    kept the new formatting. The two-by-two table of harbor notes sits between an opening and a closing paragraph.
+    `redline-cell-bold` bolds the second cell's run; `redline-cell-mark-size` grows the mark of an empty paragraph
+    at the end of that cell to 36pt (`w:sz w:val="72"`); `redline-cell-bold-beside-edit` also bolds the last
+    cell's run and changes a word of the first cell, so the table is compared row by row and cell by cell. The
+    control, `redline-cell-bold-edit-control`, bolds the second cell's run and changes a word of that same cell,
+    which the comparison already records. Neither round trip reads character formatting or paragraph marks, so
+    `run-formatting` and `mark-formatting` declare them in both endpoints, and `revision-count` bounds each
+    redline to its own records."""
+    a, b, c, d = CELL_NOTES
+    bold = '<w:b/>'
+    big = '<w:sz w:val="72"/>'
+    opening = CLOSING.replace('Closing', 'Opening')
+
+    def document(cells, blank_mark=None):
+        """`cells` holds the four cells' paragraph content; `blank_mark`, when given, ends the second cell with an
+        empty paragraph carrying that mark (an empty string for an unformatted mark)."""
+        second = p(cells[1]) + (p(mark=blank_mark) if blank_mark is not None else '')
+        return dict(body=p(t(opening)) + table([[p(cells[0]), second], [p(cells[2]), p(cells[3])]]) + p(t(CLOSING)))
+
+    runs = lambda scope, spans: {'type': 'run-formatting', 'version': 1, 'scope': scope, 'properties': ['b'], 'spans': spans}
+    marks = lambda scope, values: {'type': 'mark-formatting', 'version': 1, 'scope': scope, 'properties': ['sz'], 'marks': values}
+    plain = [[opening + a + b + c + d + CLOSING, []]]
+
+    # redline-cell-bold: the second cell's run turns bold.
+    case_id = 'redline-cell-bold'
+    rev = Revisions()
+    left = corpus.file(case_id, 'left', **document([t(a), t(b), t(c), t(d)]))
+    right = corpus.file(case_id, 'right', **document([t(a), t(b, bold), t(c), t(d)]))
+    authored = corpus.file(case_id, 'authored-redline', **document(
+        [t(a), t(b, bold + f'<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'), t(c), t(d)]))
+    corpus.add(case_id, 'revisions', 'reproducer', 'JSv4/Docxodus#1797',
+               'The revision bolds the text of one table cell and changes nothing else; reject restores the plain text',
+               'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+               [runs('rejected', plain), runs('accepted', [[opening + a, []], [b, ['b']], [c + d + CLOSING, []]]),
+                revision_bound(1), untracked(opening, a, b, c, d, CLOSING)])
+
+    # redline-cell-mark-size: the mark of an empty paragraph at the end of the second cell grows to 36pt.
+    case_id = 'redline-cell-mark-size'
+    rev = Revisions()
+    cells = [t(a), t(b), t(c), t(d)]
+    left = corpus.file(case_id, 'left', **document(cells, blank_mark=''))
+    right = corpus.file(case_id, 'right', **document(cells, blank_mark=big))
+    authored = corpus.file(case_id, 'authored-redline', **document(
+        cells, blank_mark=big + f'<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'))
+    corpus.add(case_id, 'revisions', 'reproducer', 'JSv4/Docxodus#1797',
+               'The revision grows the mark of an empty paragraph in a table cell to 36pt and changes nothing else; '
+               'reject restores the original mark', 'compare', [dict(left, role='left'), dict(right, role='right')],
+               {'accepted': right, 'rejected': left}, authored,
+               [marks('rejected', [[], [], [], [], [], [], []]), marks('accepted', [[], [], [], ['sz=72'], [], [], []]),
+                revision_bound(1), untracked(opening, a, b, c, d, CLOSING)])
+
+    # redline-cell-bold-beside-edit and its control: a word of the first cell (or, in the control, of the bolded
+    # cell itself) changes as well.
+    for control in (False, True):
+        case_id = 'redline-cell-bold-edit-control' if control else 'redline-cell-bold-beside-edit'
+        rev = Revisions()
+        def archived():
+            return bold + f'<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'
+        if control:
+            lead = b.removesuffix('dusk.')
+            left_cells = [t(a), t(b), t(c), t(d)]
+            right_cells = [t(a), t(lead + 'dawn.', bold), t(c), t(d)]
+            authored_cells = [t(a), t(lead, archived()) + rev.dele(t('dusk')) + rev.ins(t('dawn', bold)) + t('.', archived()), t(c), t(d)]
+            accepted = [[opening + a, []], [lead + 'dawn.', ['b']], [c + d + CLOSING, []]]
+            texts, records = (opening, a, c, d, CLOSING), 4
+        else:
+            lead = a.removesuffix('noon.')
+            left_cells = [t(a), t(b), t(c), t(d)]
+            right_cells = [t(lead + 'dawn.'), t(b, bold), t(c), t(d, bold)]
+            authored_cells = [t(lead) + rev.dele(t('noon')) + rev.ins(t('dawn')) + t('.'), t(b, archived()), t(c), t(d, archived())]
+            accepted = [[opening + lead + 'dawn.', []], [b, ['b']], [c, []], [d, ['b']], [CLOSING, []]]
+            texts, records = (opening, b, c, d, CLOSING), 4
+        left = corpus.file(case_id, 'left', **document(left_cells))
+        right = corpus.file(case_id, 'right', **document(right_cells))
+        authored = corpus.file(case_id, 'authored-redline', **document(authored_cells))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1797',
+                   ('The revision bolds a table cell\'s text and changes a word of that same cell, which a comparison '
+                    'already compares; reject restores the plain text and the word' if control else
+                    'The revision changes a word of a table\'s first cell and bolds the text of two other cells, one '
+                    'in a row whose text is unchanged; reject restores the word and the plain text'),
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   [runs('rejected', plain), runs('accepted', accepted), revision_bound(records), untracked(*texts)])
+
+
+STORY_NOTES = ['Keepers raise the storm cone above the signal tower when the glass falls.',
+               'The night watch logs every passing lantern in the tower book.']
+
+
+def untyped_story_references(corpus):
+    """The revision changes a header or footer that the section references without `w:type`.
+
+    The schema requires `w:type` (the SDK validator reports the original and the revision alike), and a reader
+    that accepts such a reference reads it as the default story, as Docxodus does. Whatever the reader, a
+    correct redline keeps one default reference in the section, bound to the part carrying the tracked story
+    change, and adds no second one. Docxodus #1803 found a redline that kept the untyped reference and added a
+    typed default one to the same part, so the section had two default references.
+    `redline-untyped-header-changed` and `redline-untyped-footer-changed` add a word to the story; the control,
+    `redline-typed-header-changed-control`, makes the same change through a typed reference. `section-stories`
+    reads each section's single default reference (an absent type counts as default, and two of one kind fail)
+    and the story text it reaches in the raw redline."""
+    for story, typed in (('header', False), ('footer', False), ('header', True)):
+        case_id = f'redline-{"typed" if typed else "untyped"}-{story}-changed' + ('-control' if typed else '')
+        element, root = ('headerReference', 'hdr') if story == 'header' else ('footerReference', 'ftr')
+        type_attribute = ' w:type="default"' if typed else ''
+        def document(content):
+            reference = f'<w:{element}{type_attribute} r:id="rStory"/>'
+            return dict(body=''.join(p(t(text)) for text in STORY_NOTES), section=SECTION.format(refs=reference),
+                        relations_extra=[('rStory', story, f'{story}1.xml')],
+                        content_types_extra=f'<Override PartName="/word/{story}1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{story}+xml"/>',
+                        extra_parts={f'word/{story}1.xml': f'<w:{root} {NAMESPACES}>{content}</w:{root}>'})
+        rev = Revisions()
+        label = 'Tower ledger'
+        left = corpus.file(case_id, 'left', **document(p(t(label))))
+        right = corpus.file(case_id, 'right', **document(p(t(label + ' revised'))))
+        authored = corpus.file(case_id, 'authored-redline', **document(p(t(label) + rev.ins(t(' revised')))))
+        corpus.add(case_id, 'revisions', 'control' if typed else 'reproducer', 'JSv4/Docxodus#1803',
+                   f'The revision adds a word to the {story} the only section references '
+                   + ('with w:type="default"' if typed else 'without w:type')
+                   + f'; the redline keeps one default {story} reference, bound to the tracked change', 'compare',
+                   [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story, 'kind': 'default',
+                     'values': [label + ' revised']}, revision_bound(1), untracked(*STORY_NOTES)])
