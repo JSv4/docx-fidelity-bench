@@ -1,3 +1,16 @@
+`redline-v57` adds seven reproducers and six controls for [Docxodus #1804](https://github.com/JSv4/Docxodus/issues/1804)
+and [#1805](https://github.com/JSv4/Docxodus/issues/1805). Nine share a two-column table of depot notes: each
+reproducer puts a row in a table-level content control, as a repeating section does, or a cell in a row-level one, and
+adds a word beside it, removes the control with its rows, adds a word in the row of a controlled cell, or bolds a
+controlled row's or cell's text; each control is the same case with no content control. Four hold two paragraphs whose first
+ends a section that names a header or footer the last section inherits; the revision removes that break. Docxodus
+f5cefdd1 wrote a controlled row twice, dropped a removed control on reject, redlined a whole table for one word,
+left the bold untracked, and lost the inherited story on accept. Metric contract 35 adds `table-state` v3, which reads
+rows through table-level content controls and names each row's controls. LibreOffice 25.8.7.3 keeps the deleted
+paragraph's section break when it accepts the section cases, so those declare its accepted comparison ineligible.
+All earlier DOCX files remain byte-identical, and the PDF suite stays `core-v175`. See
+[the redline notes](docs/REDLINE.md#content-control-rows-and-a-removed-section-break-docxodus-1804-1805).
+
 `redline-v56` adds five reproducers and four controls for [Docxodus #1797](https://github.com/JSv4/Docxodus/issues/1797)
 and [#1803](https://github.com/JSv4/Docxodus/issues/1803). Five share a two-by-two table: `redline-cell-bold` bolds
 one cell's text, `redline-cell-mark-size` grows the mark of an empty paragraph in that cell to 36pt, and

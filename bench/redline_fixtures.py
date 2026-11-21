@@ -24,7 +24,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v56', 'version': 56}
+SUITE = {'id': 'redline-v57', 'version': 57}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -221,6 +221,10 @@ LIBREOFFICE_INELIGIBLE = {
     **{f'redline-untyped-{story}-changed': (('accepted', 'rejected'),
        f'LibreOffice 25.8.7.3 does not import a {story} reference without w:type, so neither document shows the {story} and the authored redline exposes zero revisions; independent markup endpoints, the section story, revision count and SDK checks remain mandatory')
        for story in ('header', 'footer')},
+    **{case: (('accepted',),
+       'LibreOffice 25.8.7.3 keeps an empty paragraph and its section break when accepting the authored deleted paragraph that holds the break, so its accepted document has two sections; independent markup endpoints, section stories, revision count and SDK checks remain mandatory')
+       for case in ('redline-removed-break-inherited-header', 'redline-removed-break-inherited-footer',
+                    'redline-removed-break-named-header-control', 'redline-removed-break-deleted-paragraph-control')},
     'redline-consolidated-note-prefix': (('rejected',),
         'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
@@ -383,6 +387,8 @@ def generate():
     indented_copies(corpus)
     cell_formatting(corpus)
     untyped_story_references(corpus)
+    content_control_rows(corpus)
+    removed_section_breaks(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3606,3 +3612,230 @@ def untyped_story_references(corpus):
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
                    [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story, 'kind': 'default',
                      'values': [label + ' revised']}, revision_bound(1), untracked(*STORY_NOTES)])
+
+
+# The authored redlines' revision-record counts: a redline with more records fails. redline-control-removed's count
+# includes the four custom-XML range markers around the deleted control, which the bench's resolver does not need
+# (it drops an emptied control either way), so a redline without them has four records to spare.
+BOUNDS = {'redline-control-removed': 14, 'redline-plain-rows-removed-control': 10,
+          'redline-removed-break-inherited-header': 5, 'redline-removed-break-inherited-footer': 4,
+          'redline-removed-break-named-header-control': 5, 'redline-removed-break-deleted-paragraph-control': 3}
+DEPOT_ROWS = [('Depot', 'Platform one'), ('Signal', 'Lamp two'), ('Siding', 'Buffer three')]
+DEPOT_WIDTHS = (4680, 4680)
+
+
+def depot_row(cells, row_props=''):
+    """One table row; a cell is a (label, text) pair's paragraph content, or literal `w:sdt` XML holding a cell."""
+    def cell(content):
+        return content if content.startswith('<w:sdt>') else (
+            f'<w:tc><w:tcPr><w:tcW w:w="{DEPOT_WIDTHS[0]}" w:type="dxa"/></w:tcPr>{p(content)}</w:tc>')
+    return '<w:tr>' + (f'<w:trPr>{row_props}</w:trPr>' if row_props else '') + ''.join(cell(c) for c in cells) + '</w:tr>'
+
+
+def depot_cell_control(content, identifier):
+    return sdt(f'<w:tc><w:tcPr><w:tcW w:w="{DEPOT_WIDTHS[1]}" w:type="dxa"/></w:tcPr>{p(content)}</w:tc>', 'Lamp', identifier)
+
+
+def depot_document(children):
+    """A two-column table of depot notes whose children (rows, and content controls holding rows) are literal XML,
+    and a closing paragraph after it."""
+    grid = ''.join(f'<w:gridCol w:w="{x}"/>' for x in DEPOT_WIDTHS)
+    borders = ''.join(f'<w:{s} w:val="single" w:sz="4" w:space="0" w:color="444444"/>' for s in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'))
+    return dict(body=f'<w:tbl><w:tblPr><w:tblW w:w="{sum(DEPOT_WIDTHS)}" w:type="dxa"/><w:tblBorders>{borders}</w:tblBorders>'
+                     f'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>{grid}</w:tblGrid>{"".join(children)}</w:tbl>' + p(t(CLOSING)))
+
+
+def depot_state(rows):
+    """The table-state v3 declaration of the depot table: `rows` holds each row's control (or None) and its cells'
+    controls (or None)."""
+    return {'grid': list(DEPOT_WIDTHS), 'rows': [
+        {'before': 0, 'after': 0, 'height': None, 'control': row_control,
+         'cells': [{'span': 1, 'width': DEPOT_WIDTHS[0], 'type': 'dxa', 'fill': None, 'control': c} for c in cells]}
+        for row_control, cells in rows]}
+
+
+def content_control_rows(corpus):
+    """A table row or cell that a content control delivers, as a repeating section writes it.
+
+    A correct redline writes such a row (`w:tbl/w:sdt/w:tr`) or cell (`w:tr/w:sdt/w:tc`) once, inside its control,
+    with its edits tracked; a control only one document has is marked as inserted or deleted with paired custom-XML
+    ranges, as Docxodus marks a whole block-level control, so the view without it drops the control with its rows
+    (the bench's own resolver drops an emptied control either way, so it does not measure the markers). Docxodus
+    #1804 found a redline that copied the revision's table-level control, rows and all, ahead of the table's rows and then
+    wrote those rows again without it; that dropped a removed control on reject; that redlined the whole table as a
+    deletion and an insertion when a row held a cell in a control; and that left a formatting change in such a table
+    untracked. The table holds depot notes: `Depot`/`Platform one`, then `Signal`/`Lamp two`, with `Siding`/`Buffer
+    three` in two cases. Each reproducer has a control that is the same case with no content control:
+    `redline-control-row-beside-edit` adds a word to the first row while the second sits in a control;
+    `redline-control-removed` removes a control holding the second and third rows; `redline-control-cell-same-row`
+    adds a word to the second row's first cell while its second cell sits in a control; `redline-control-row-bold`
+    bolds the text of the second row's second cell, in a control, and changes nothing else; `redline-control-cell-bold`
+    bolds the same text where only that cell sits in a row-level control, and shares the row-bold control.
+    `table-state` v3 reads rows through table-level controls and names each row's and cell's control, since the markup view looks through
+    them; `revision-count` bounds each redline to its own records."""
+    every = sorted(RUN_TOGGLES | RUN_VALUED)
+    runs = lambda scope, spans: {'type': 'run-formatting', 'version': 1, 'scope': scope, 'properties': every, 'spans': spans}
+    def states(accepted, rejected):
+        return [{'type': 'table-state', 'version': 3, 'scope': 'accepted', 'state': depot_state(accepted)},
+                {'type': 'table-state', 'version': 3, 'scope': 'rejected', 'state': depot_state(rejected)}]
+    (label1, text1), (label2, text2), (label3, text3) = DEPOT_ROWS
+    for controlled in (True, False):
+        row_id, cell_id = (4201, 4202) if controlled else (None, None)
+        wrap = (lambda rows: sdt(''.join(rows), 'Signals', row_id)) if controlled else (lambda rows: ''.join(rows))
+        rc = str(row_id) if controlled else None
+        cc = str(cell_id) if controlled else None
+        suffix = '' if controlled else '-control'
+        kind = 'reproducer' if controlled else 'control'
+        where = ' in a content control' if controlled else ' with no content control'
+
+        # A word added to the first row beside a second row in a control.
+        case_id = 'redline-control-row-beside-edit' if controlled else 'redline-plain-row-beside-edit-control'
+        rev = Revisions()
+        left = corpus.file(case_id, 'left', **depot_document([depot_row([t(label1), t(text1)]), wrap([depot_row([t(label2), t(text2)])])]))
+        right = corpus.file(case_id, 'right', **depot_document([depot_row([t(label1), t(text1 + ' north')]), wrap([depot_row([t(label2), t(text2)])])]))
+        authored = corpus.file(case_id, 'authored-redline', **depot_document(
+            [depot_row([t(label1), t(text1) + rev.ins(t(' north'))]), wrap([depot_row([t(label2), t(text2)])])]))
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1804',
+                   f'The revision adds a word to a table\'s first row; the second row sits{where}. The redline writes each row once',
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   states([(None, [None, None]), (rc, [None, None])], [(None, [None, None]), (rc, [None, None])])
+                   + [revision_bound(1), untracked(label1, text1, label2, text2, CLOSING)])
+
+        # A control holding the second and third rows removed with its rows.
+        case_id = 'redline-control-removed' if controlled else 'redline-plain-rows-removed-control'
+        rev = Revisions()
+        kept = [depot_row([t(label1), t(text1)])]
+        removed = [depot_row([t(label2), t(text2)]), depot_row([t(label3), t(text3)])]
+        def deleted_row(label, text):
+            cells = ''.join(f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>{p(rev.dele(t(x)), mark=rev.mark("del"))}</w:tc>'
+                            for width, x in zip(DEPOT_WIDTHS, (label, text)))
+            return f'<w:tr><w:trPr>{rev.mark("del")}</w:trPr>{cells}</w:tr>'
+        deleted = deleted_row(label2, text2) + deleted_row(label3, text3)
+        if controlled:
+            start, end = rev.attrs(AUTHOR), rev.attrs(AUTHOR)
+            start_id, end_id = start.split('"')[1], end.split('"')[1]
+            envelope = (f'<w:customXmlDelRangeStart {start}/>' + sdt(f'<w:customXmlDelRangeEnd w:id="{start_id}"/>' + deleted
+                        + f'<w:customXmlDelRangeStart {end}/>', 'Signals', row_id) + f'<w:customXmlDelRangeEnd w:id="{end_id}"/>')
+        else:
+            envelope = deleted
+        left = corpus.file(case_id, 'left', **depot_document(kept + [wrap(removed)]))
+        right = corpus.file(case_id, 'right', **depot_document(kept))
+        authored = corpus.file(case_id, 'authored-redline', **depot_document(kept + [envelope]))
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1804',
+                   f'The revision removes a table\'s second and third rows, which sit{where}. Reject restores them' + (' in their control' if controlled else ''),
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   states([(None, [None, None])], [(None, [None, None]), (rc, [None, None]), (rc, [None, None])])
+                   + [revision_bound(BOUNDS[case_id]), untracked(label1, text1, CLOSING)])
+
+        # A word added to the second row's first cell, whose second cell sits in a control.
+        case_id = 'redline-control-cell-same-row' if controlled else 'redline-plain-cell-same-row-control'
+        rev = Revisions()
+        second = (lambda: depot_cell_control(t(text2), cell_id)) if controlled else (lambda: t(text2))
+        left = corpus.file(case_id, 'left', **depot_document([depot_row([t(label1), t(text1)]), depot_row([t(label2), second()])]))
+        right = corpus.file(case_id, 'right', **depot_document([depot_row([t(label1), t(text1)]), depot_row([t(label2 + ' box'), second()])]))
+        authored = corpus.file(case_id, 'authored-redline', **depot_document(
+            [depot_row([t(label1), t(text1)]), depot_row([t(label2) + rev.ins(t(' box')), second()])]))
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1804',
+                   f'The revision adds a word to the first cell of a row whose second cell sits{where}. The redline tracks the word in its cell, '
+                   'not the whole table', 'compare', [dict(left, role='left'), dict(right, role='right')],
+                   {'accepted': right, 'rejected': left}, authored,
+                   states([(None, [None, None]), (None, [None, cc])], [(None, [None, None]), (None, [None, cc])])
+                   + [revision_bound(1), untracked(label1, text1, label2, text2, CLOSING)])
+
+        if controlled:
+            # A cell held by a row-level control turns bold; its control is redline-plain-row-bold-control, the same
+            # table with no content control.
+            case_id = 'redline-control-cell-bold'
+            rev = Revisions()
+            first = depot_row([t(label1), t(text1)])
+            left = corpus.file(case_id, 'left', **depot_document([first, depot_row([t(label2), depot_cell_control(t(text2), cell_id)])]))
+            right = corpus.file(case_id, 'right', **depot_document([first, depot_row([t(label2), depot_cell_control(t(text2, '<w:b/>'), cell_id)])]))
+            authored = corpus.file(case_id, 'authored-redline', **depot_document([first, depot_row([t(label2), depot_cell_control(
+                t(text2, f'<w:b/><w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'), cell_id)])]))
+            corpus.add(case_id, 'revisions', 'reproducer', 'JSv4/Docxodus#1804',
+                       'The revision bolds the text of a table cell that sits in a row-level content control and changes nothing else; '
+                       'reject restores the plain text', 'compare', [dict(left, role='left'), dict(right, role='right')],
+                       {'accepted': right, 'rejected': left}, authored,
+                       states([(None, [None, None]), (None, [None, cc])], [(None, [None, None]), (None, [None, cc])])
+                       + [runs('rejected', [[label1 + text1 + label2 + text2 + CLOSING, []]]),
+                          runs('accepted', [[label1 + text1 + label2, []], [text2, ['b']], [CLOSING, []]]),
+                          revision_bound(1), untracked(label1, text1, label2, text2, CLOSING)])
+
+        # The second row's second cell, in a control, turns bold; nothing else changes.
+        case_id = 'redline-control-row-bold' if controlled else 'redline-plain-row-bold-control'
+        rev = Revisions()
+        first = depot_row([t(label1), t(text1)])
+        left = corpus.file(case_id, 'left', **depot_document([first, wrap([depot_row([t(label2), t(text2)])])]))
+        right = corpus.file(case_id, 'right', **depot_document([first, wrap([depot_row([t(label2), t(text2, '<w:b/>')])])]))
+        authored = corpus.file(case_id, 'authored-redline', **depot_document(
+            [first, wrap([depot_row([t(label2), t(text2, f'<w:b/><w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>')])])]))
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1804',
+                   f'The revision bolds the text of a table cell in a row that sits{where} and changes nothing else; reject restores the plain text',
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
+                   states([(None, [None, None]), (rc, [None, None])], [(None, [None, None]), (rc, [None, None])])
+                   + [runs('rejected', [[label1 + text1 + label2 + text2 + CLOSING, []]]),
+                      runs('accepted', [[label1 + text1 + label2, []], [text2, ['b']], [CLOSING, []]]),
+                      revision_bound(1), untracked(label1, text1, label2, text2, CLOSING)])
+
+
+DEPOT_NOTES = ['The night train leaves the depot after the signal check.',
+               'Porters load the mail vans before the last whistle.']
+
+
+def depot_sections(story, refs, kind, body):
+    """A document whose body paragraphs are the literal `body` and whose one header or footer part, `rStory`, holds
+    `story`. `refs[-1]` says whether the final section break references it; an inline break in `body` names it
+    itself."""
+    element, root = ('headerReference', 'hdr') if kind == 'header' else ('footerReference', 'ftr')
+    ref = f'<w:{element} w:type="default" r:id="rStory"/>'
+    return dict(relations_extra=[('rStory', kind, f'{kind}1.xml')],
+                content_types_extra=f'<Override PartName="/word/{kind}1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>',
+                extra_parts={f'word/{kind}1.xml': f'<w:{root} {NAMESPACES}>{story}</w:{root}>'},
+                body=body, section=SECTION.format(refs=ref if refs[-1] else ''))
+
+
+def removed_section_breaks(corpus):
+    """The revision removes the section break of a paragraph both documents keep.
+
+    A section with no reference of its own for a header or footer shows the story of the section before it, as Word
+    writes a section linked to the previous one. In the original the first paragraph's break names the story and the
+    last section inherits it; the revision has one section, naming the story. A correct redline draws the paragraph as
+    the original's copy, with its break, deleted and the revision's copy inserted, and keeps a reference in every
+    section, since references cannot be tracked: the original's last section names the story itself, so its rejected
+    expectation is the original with that reference written out. Docxodus #1805 found a redline that kept the
+    original's last section break, which names no story, so accepting, which removes the first paragraph's break,
+    left the document with no header or footer at all. `redline-removed-break-inherited-header` also adds a word to
+    the header; `redline-removed-break-inherited-footer` leaves the footer unchanged. The controls:
+    `redline-removed-break-named-header-control`, whose original names the header in both sections, and
+    `redline-removed-break-deleted-paragraph-control`, whose revision deletes the paragraph holding the break."""
+    first, second = DEPOT_NOTES
+    label = 'Depot timetable'
+    for case_id, kind, story, changed, named, deleted_paragraph in (
+            ('redline-removed-break-inherited-header', 'reproducer', 'header', True, False, False),
+            ('redline-removed-break-inherited-footer', 'reproducer', 'footer', False, False, False),
+            ('redline-removed-break-named-header-control', 'control', 'header', True, True, False),
+            ('redline-removed-break-deleted-paragraph-control', 'control', 'header', True, False, True)):
+        rev = Revisions()
+        element = 'headerReference' if story == 'header' else 'footerReference'
+        ref = f'<w:{element} w:type="default" r:id="rStory"/>'
+        inline = SECTION.format(refs=ref)
+        revised_story = p(t(label + (', winter' if changed else '')))
+        original = [p(t(first), props=inline), p(t(second))]
+        left = corpus.file(case_id, 'left', **depot_sections(p(t(label)), [True, named], story, ''.join(original)))
+        revised = [p(t(second))] if deleted_paragraph else [p(t(first)), p(t(second))]
+        right = corpus.file(case_id, 'right', **depot_sections(revised_story, [True], story, ''.join(revised)))
+        rejected = left if named else corpus.file(case_id, 'rejected', **depot_sections(p(t(label)), [True, True], story, ''.join(original)))
+        deleted_copy = f'<w:p><w:pPr><w:rPr>{rev.mark("del")}</w:rPr>{inline}</w:pPr>{rev.dele(t(first))}</w:p>'
+        inserted_copy = '' if deleted_paragraph else p(rev.ins(t(first)), mark=rev.mark('ins'))
+        redline_story = p(t(label) + rev.ins(t(', winter'))) if changed else p(t(label))
+        authored = corpus.file(case_id, 'authored-redline', **depot_sections(
+            redline_story, [True, True], story, deleted_copy + inserted_copy + p(t(second))))
+        corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1805',
+                   ('The revision deletes the paragraph whose section break names the ' if deleted_paragraph else
+                    'The revision removes the section break of a kept paragraph, which names the ') + story
+                   + (' the original\'s last section names too' if named else ' the last section inherits')
+                   + (', and adds a word to it' if changed else '') + '; accept and reject each show their document\'s ' + story,
+                   'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': rejected}, authored,
+                   [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story, 'kind': 'default',
+                     'values': [label + (', winter' if changed else '')] * 2},
+                    revision_bound(BOUNDS[case_id]), untracked(second)])

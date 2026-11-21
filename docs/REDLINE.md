@@ -540,7 +540,8 @@ assertions; it does not claim to execute a candidate API.
 controls (`w:tr/w:sdt/w:sdtContent/w:tc`) and adds a `control` entry to every cell: the `w:id` of
 the control around it, or null. A control left holding no cell is reported as an entry without a
 span, so it cannot match a declared state. Version 1 still reads only a row's direct cells, so
-earlier declarations and measurements are unchanged.
+earlier declarations and measurements are unchanged. Version 3 (`redline-v57`) also reads a table's rows through table-level
+content controls; see [Content-control rows and a removed section break](#content-control-rows-and-a-removed-section-break-docxodus-1804-1805).
 
 ### Cell revisions (Docxodus #1404)
 
@@ -1046,3 +1047,78 @@ the untyped one and the section held two; it passes both typed controls. The fix
 [JSv4/Docxodus#1807](https://github.com/JSv4/Docxodus/pull/1807) (#1797) and
 [JSv4/Docxodus#1806](https://github.com/JSv4/Docxodus/pull/1806) (#1803). See
 [the evidence](results/cell-formatting-and-untyped-story-references/README.md).
+
+## Content-control rows and a removed section break (Docxodus #1804, #1805)
+
+`redline-v57` adds seven reproducers and six controls. Metric contract 35 adds `table-state` v3.
+
+**Rows and cells in content controls (#1804).** Nine cases share a two-column, fixed-width table of depot notes
+(`Depot`/`Platform one`, `Signal`/`Lamp two`, and in two cases `Siding`/`Buffer three`) and a closing paragraph.
+Each reproducer puts a row in a table-level content control (`w:tbl/w:sdt/w:tr`, the shape a repeating section
+writes) or a cell in a row-level one (`w:tr/w:sdt/w:tc`); its control is the same case with no content control.
+
+| Reproducer | The revision | Control |
+| --- | --- | --- |
+| `redline-control-row-beside-edit` | adds a word to the first row; the second row sits in a control | `redline-plain-row-beside-edit-control` |
+| `redline-control-removed` | removes a control holding the second and third rows | `redline-plain-rows-removed-control` |
+| `redline-control-cell-same-row` | adds a word to the first cell of a row whose second cell sits in a control | `redline-plain-cell-same-row-control` |
+| `redline-control-row-bold` | bolds the text of the second row's second cell, in a control, and changes nothing else | `redline-plain-row-bold-control` |
+| `redline-control-cell-bold` | bolds the same text where only that cell sits in a row-level control | `redline-plain-row-bold-control` |
+
+A correct redline writes each row or cell once, inside its control, with its edits tracked. A control only one
+document has is marked with the paired custom-XML ranges Word writes around a whole control, so the view without it
+drops the control with its rows (`redline-control-removed`'s authored redline crosses the control's opening and
+closing tags with `w:customXmlDelRangeStart`/`End`, the shape Docxodus writes for a whole deleted block-level control;
+no reference capture was made). The bench's own resolver drops an emptied control either way, so it does not measure
+those markers, and the case's `revision-count` bound, which counts them, leaves a redline without them four records
+to spare. The markup view looks
+through a table's content controls, so it cannot see a lost or doubled control. `table-state` v3 can: it reads a
+table's rows through table-level controls and adds a `control` entry to every row, the `w:id` of each control
+around it, outermost first and joined by `/`, or null; a later control that reuses an id is named with `#2`, `#3`, …,
+so one control written twice does not read as one. Cells are read as in v2, except that a cell control reusing an id
+already seen in the table, at row or cell level, is named apart in the same way. Unlike v1 and v2 it may be declared
+on an accepted or rejected endpoint. A control holding no row but something else (a bookmark) is a row with no
+cells, so it cannot match a declared state; an empty control is pruned before either endpoint is read, so v3 does not
+see one. Every case declares the state of both endpoints and bounds `revision-count`; the bold cases also
+declare `run-formatting`.
+
+**A removed section break (#1805).** Four cases hold two paragraphs of depot notes and one header or footer part,
+`Depot timetable`. In the original the first paragraph's break names the story and the last section inherits it;
+the revision keeps both paragraphs in one section, whose break names the story.
+
+| Case | Kind | The revision |
+| --- | --- | --- |
+| `redline-removed-break-inherited-header` | reproducer | removes the break and adds `, winter` to the header |
+| `redline-removed-break-inherited-footer` | reproducer | removes the break; the footer is unchanged |
+| `redline-removed-break-named-header-control` | control | as the header reproducer, but the original's last section names the header itself |
+| `redline-removed-break-deleted-paragraph-control` | control | deletes the paragraph holding the break and adds `, winter` to the header |
+
+A correct redline draws the kept paragraph as the original's copy, with its break, deleted and the revision's copy
+inserted. Header references cannot be tracked, so it keeps a reference in every section: the original's last
+section names the story itself, and the rejected expectation of each case but the named control is the original
+with that reference written out, which shows the same story. `section-stories` reads both sections of the raw
+redline. LibreOffice 25.8.7.3 keeps an empty paragraph and its section break when it accepts the authored deleted
+paragraph that holds the break, so its accepted document has two sections; the four cases declare that one
+LibreOffice comparison ineligible and keep the rejected one.
+
+| Case | Kind | Baseline `f5cefdd1` | #1805 fix `5223451d` | #1804 fix `eb527f50` | Both fixes `70ee2e03` |
+| --- | --- | --- | --- | --- | --- |
+| `redline-control-row-beside-edit` | reproducer | `assertion-table-state`, `libreoffice-accepted`, `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | `assertion-table-state`, `libreoffice-accepted`, `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | none |
+| `redline-plain-row-beside-edit-control` | control | none | none | none | none |
+| `redline-control-removed` | reproducer | `assertion-table-state`, `libreoffice-rejected` | `assertion-table-state`, `libreoffice-rejected` | none | none |
+| `redline-plain-rows-removed-control` | control | none | none | none | none |
+| `redline-control-cell-same-row` | reproducer | `assertion-revision-count`, `assertion-untracked-text` | `assertion-revision-count`, `assertion-untracked-text` | none | none |
+| `redline-plain-cell-same-row-control` | control | none | none | none | none |
+| `redline-control-row-bold` | reproducer | `assertion-run-formatting` | `assertion-run-formatting` | none | none |
+| `redline-control-cell-bold` | reproducer | `assertion-run-formatting` | `assertion-run-formatting` | none | none |
+| `redline-plain-row-bold-control` | control | none | none | none | none |
+| `redline-removed-break-inherited-header` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
+| `redline-removed-break-inherited-footer` | reproducer | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none | `libreoffice-rejected`, `markup-accepted`, `markup-rejected` | none |
+| `redline-removed-break-named-header-control` | control | none | none | none | none |
+| `redline-removed-break-deleted-paragraph-control` | control | none | none | none | none |
+
+Each cell lists the failed checks. The fix commits are the heads of
+[JSv4/Docxodus#1808](https://github.com/JSv4/Docxodus/pull/1808) (#1805) and
+[JSv4/Docxodus#1811](https://github.com/JSv4/Docxodus/pull/1811) (#1804). `70ee2e03` is a merge of the two,
+made only for scoring. The authored redlines pass every check. See
+[the evidence and labelled review sheets](results/content-control-rows-and-removed-breaks/README.md).

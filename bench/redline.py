@@ -26,13 +26,13 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'relationship-ids': {1}, 'deleted-text-owned': {1}, 'picture-bullets': {1}, 'section-change-values': {1}, 'run-formatting': {1}, 'mark-formatting': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2, 3}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'relationship-ids': {1}, 'deleted-text-owned': {1}, 'picture-bullets': {1}, 'section-change-values': {1}, 'run-formatting': {1}, 'mark-formatting': {1}}
 # Operations whose candidate returns the resolved document itself, not a redline.
 OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 34, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 35, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -46,6 +46,7 @@ CONTRACT = {'version': 34, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'acceptOperation': 'accept cases compare the whole-document acceptance of one tracked input by the candidate with an authored output, as reject cases do for rejection',
             'shortRows': 'a table-state row may declare fewer grid columns than the table grid, as Word leaves a row whose deleted cell took its column with it; never more',
             'resolutionReview': 'revision-resolve cases require the declared typed registry count/status of the input, successful public bulk resolution and an empty final registry; table-state v2 reads cells through cell-level content controls and names each cell\'s control',
+            'tableStateRows': 'table-state v3 also reads a table\'s rows through table-level content controls and names each row\'s controls by w:id, outermost first, a later control reusing an id with #n; unlike v1 and v2 it may be declared on an accepted or rejected endpoint',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
             'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships',
             'sectionFlags': 'declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories',
@@ -340,7 +341,8 @@ def validate_registry(registry=None):
                          and isinstance(a.get('cells'), list) and a['cells'] and all(isinstance(row, list) and row
                              and all(type(v) is int and v > 0 for v in row) for row in a['cells'])
                          and type(a.get('table')) is int and a['table'] > 0,
-                     'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state'), controls=a['version'] == 2),
+                     'table-state': lambda a: (a['scope'] == 'output' or a['version'] == 3 and a['scope'] in {'accepted', 'rejected'})
+                         and valid_table_state(a.get('state'), controls=a['version'] >= 2, rows=a['version'] == 3),
                      'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
                          and revision_ownership.valid_identities(a.get('identities')),
                      'inline-trees': lambda a: a['scope'] in {'accepted', 'rejected'} and valid_inline_trees(a),
@@ -363,8 +365,9 @@ def validate_registry(registry=None):
     return registry
 
 
-def valid_table_state(state, controls=False):
+def valid_table_state(state, controls=False, rows=False):
     cell_keys = {'span', 'width', 'type', 'fill'} | ({'control'} if controls else set())
+    row_keys = {'before', 'after', 'height', 'cells'} | ({'control'} if rows else set())
     if not isinstance(state, dict) or set(state) != {'grid', 'rows'}:
         return False
     if not isinstance(state['grid'], list) or not state['grid'] or any(type(w) is not int or w < 0 for w in state['grid']):
@@ -372,7 +375,7 @@ def valid_table_state(state, controls=False):
     if not isinstance(state['rows'], list) or not state['rows']:
         return False
     for row in state['rows']:
-        if not isinstance(row, dict) or set(row) != {'before', 'after', 'height', 'cells'}:
+        if not isinstance(row, dict) or set(row) != row_keys or (rows and row['control'] is not None and not isinstance(row['control'], str)):
             return False
         if any(type(row[key]) is not int or row[key] < 0 for key in ('before', 'after')):
             return False
@@ -737,7 +740,33 @@ def _assertion(assertion, package, resolved):
             table = tables[0]
             grid = table.find(revisions.w('tblGrid'))
             rows = []
-            for row in table.findall(revisions.w('tr')):
+            owners = {}
+            def control_name(sdt, outer):
+                identity = sdt.find(revisions.w('sdtPr') + '/' + revisions.w('id'))
+                name = '' if identity is None else identity.get(revisions.w('val'), '')
+                if assertion['version'] == 3:
+                    # A later control reusing an id is named apart, so one control written twice is visible.
+                    seen = owners.setdefault(name, [])
+                    if not any(element is sdt for element in seen):
+                        seen.append(sdt)
+                    index = next(i for i, element in enumerate(seen) if element is sdt)
+                    name += f'#{index + 1}' if index else ''
+                return name if outer is None else outer + '/' + name
+            # Version 3 reads rows through table-level content controls and names each row's controls,
+            # outermost first; a control holding no row is reported as a row with no cells.
+            def table_rows(parent, control=None):
+                for child in parent:
+                    if child.tag == revisions.w('tr'):
+                        yield child, control
+                    elif assertion['version'] == 3 and child.tag == revisions.w('sdt'):
+                        name = control_name(child, control)
+                        content = child.find(revisions.w('sdtContent'))
+                        held = [] if content is None else list(table_rows(content, name))
+                        yield from held or [(None, name)]
+            for row, row_control in table_rows(table):
+                if row is None:
+                    rows.append({'before': 0, 'after': 0, 'height': None, 'cells': [], 'control': row_control})
+                    continue
                 row_pr = row.find(revisions.w('trPr'))
                 row_property = lambda name: None if row_pr is None else row_pr.find(revisions.w(name))
                 cells = []
@@ -747,9 +776,8 @@ def _assertion(assertion, package, resolved):
                     for child in parent:
                         if child.tag == revisions.w('tc'):
                             yield child, control
-                        elif assertion['version'] == 2 and child.tag == revisions.w('sdt'):
-                            identity = child.find(revisions.w('sdtPr') + '/' + revisions.w('id'))
-                            name = '' if identity is None else identity.get(revisions.w('val'), '')
+                        elif assertion['version'] >= 2 and child.tag == revisions.w('sdt'):
+                            name = control_name(child, None)
                             content = child.find(revisions.w('sdtContent'))
                             held = [] if content is None else list(row_cells(content, name))
                             yield from held or [(None, name)]
@@ -761,10 +789,11 @@ def _assertion(assertion, package, resolved):
                     cells.append({'span': None if cell is None else number(property_of('gridSpan'), 'val', 1), 'width': number(width, 'w'),
                                   'type': None if width is None else width.get(revisions.w('type')),
                                   'fill': None if fill is None else fill.get(revisions.w('fill')),
-                                  **({'control': control} if assertion['version'] == 2 else {})})
+                                  **({'control': control} if assertion['version'] >= 2 else {})})
                 rows.append({'before': number(row_property('gridBefore'), 'val', 0),
                              'after': number(row_property('gridAfter'), 'val', 0),
-                             'height': number(row_property('trHeight'), 'val'), 'cells': cells})
+                             'height': number(row_property('trHeight'), 'val'), 'cells': cells,
+                             **({'control': row_control} if assertion['version'] == 3 else {})})
             observed = {'grid': [] if grid is None else [number(c, 'w') for c in grid.findall(revisions.w('gridCol'))], 'rows': rows}
         check.update(passed=observed == assertion['state'], observed=observed)
     elif kind == 'table-widths':
