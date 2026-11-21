@@ -45,7 +45,7 @@ Main leaves the bold untracked, and Reject All keeps it; with the fixes it is a 
 
 ![redline-cell-mark-size](redline-cell-mark-size.png)
 
-LibreOffice shows no revision for a mark-only change, so its Reject All leaves the 36pt mark in every row, the authored one included; this case's LibreOffice comparisons are declared ineligible, and `mark-formatting` reads the marks.
+LibreOffice shows no revision for this mark-only change in a table cell, so its Reject All leaves the 36pt mark in every row, the authored one included; this case's LibreOffice comparisons are declared ineligible, and `mark-formatting` reads the marks.
 
 ### `redline-cell-bold-beside-edit`
 
@@ -63,7 +63,7 @@ The cell's text changes too, so main already tracks the bold and the word.
 
 ![redline-cell-mark-size-edit-control](redline-cell-mark-size-edit-control.png)
 
-The cell's text changes too, so main already tracks the word and the mark.
+The cell's text changes too, so main already tracks the word and the mark (`mark-formatting` reads the restored mark). LibreOffice shows no revision for the cell's mark, so its Reject All keeps the 36pt mark in every row; the case keeps its LibreOffice comparisons because the text view sees only the word.
 
 ### `redline-untyped-header-changed`
 
