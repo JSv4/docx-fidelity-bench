@@ -14,6 +14,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
+from .redline import RUN_TOGGLES, RUN_VALUED
 from .fixtures import png, PACKAGE_LINK_TARGET, PACKAGE_SHAPES, package_shape, custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -3474,10 +3475,12 @@ def cell_formatting(corpus):
     `redline-cell-bold` bolds the second cell's run; `redline-cell-mark-size` grows the mark of an empty paragraph
     at the end of that cell to 36pt (`w:sz w:val="72"`); `redline-cell-bold-beside-edit` also bolds the last
     cell's run and changes a word of the first cell, so the table is compared row by row and cell by cell. The
-    control, `redline-cell-bold-edit-control`, bolds the second cell's run and changes a word of that same cell,
-    which the comparison already records. Neither round trip reads character formatting or paragraph marks, so
-    `run-formatting` and `mark-formatting` declare them in both endpoints, and `revision-count` bounds each
-    redline to its own records."""
+    controls make the same changes in a cell whose text also changes, which the comparison already compares:
+    `redline-cell-bold-edit-control` bolds the second cell's run and changes a word of it, and
+    `redline-cell-mark-size-edit-control` grows the empty paragraph's mark and changes a word of the same cell.
+    Neither round trip reads character formatting or paragraph marks, so every case declares the spans of every
+    supported run property with `run-formatting` and every paragraph mark's with `mark-formatting`, in both
+    endpoints, and `revision-count` bounds each redline to its own records."""
     a, b, c, d = CELL_NOTES
     bold = '<w:b/>'
     big = '<w:sz w:val="72"/>'
@@ -3489,9 +3492,11 @@ def cell_formatting(corpus):
         second = p(cells[1]) + (p(mark=blank_mark) if blank_mark is not None else '')
         return dict(body=p(t(opening)) + table([[p(cells[0]), second], [p(cells[2]), p(cells[3])]]) + p(t(CLOSING)))
 
-    runs = lambda scope, spans: {'type': 'run-formatting', 'version': 1, 'scope': scope, 'properties': ['b'], 'spans': spans}
-    marks = lambda scope, values: {'type': 'mark-formatting', 'version': 1, 'scope': scope, 'properties': ['sz'], 'marks': values}
+    every = sorted(RUN_TOGGLES | RUN_VALUED)
+    runs = lambda scope, spans: {'type': 'run-formatting', 'version': 1, 'scope': scope, 'properties': every, 'spans': spans}
+    marks = lambda scope, values: {'type': 'mark-formatting', 'version': 1, 'scope': scope, 'properties': every, 'marks': values}
     plain = [[opening + a + b + c + d + CLOSING, []]]
+    unmarked = [marks('rejected', [[]] * 6), marks('accepted', [[]] * 6)]
 
     # redline-cell-bold: the second cell's run turns bold.
     case_id = 'redline-cell-bold'
@@ -3503,23 +3508,31 @@ def cell_formatting(corpus):
     corpus.add(case_id, 'revisions', 'reproducer', 'JSv4/Docxodus#1797',
                'The revision bolds the text of one table cell and changes nothing else; reject restores the plain text',
                'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
-               [runs('rejected', plain), runs('accepted', [[opening + a, []], [b, ['b']], [c + d + CLOSING, []]]),
+               [runs('rejected', plain), runs('accepted', [[opening + a, []], [b, ['b']], [c + d + CLOSING, []]]), *unmarked,
                 revision_bound(1), untracked(opening, a, b, c, d, CLOSING)])
 
-    # redline-cell-mark-size: the mark of an empty paragraph at the end of the second cell grows to 36pt.
-    case_id = 'redline-cell-mark-size'
-    rev = Revisions()
-    cells = [t(a), t(b), t(c), t(d)]
-    left = corpus.file(case_id, 'left', **document(cells, blank_mark=''))
-    right = corpus.file(case_id, 'right', **document(cells, blank_mark=big))
-    authored = corpus.file(case_id, 'authored-redline', **document(
-        cells, blank_mark=big + f'<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'))
-    corpus.add(case_id, 'revisions', 'reproducer', 'JSv4/Docxodus#1797',
-               'The revision grows the mark of an empty paragraph in a table cell to 36pt and changes nothing else; '
-               'reject restores the original mark', 'compare', [dict(left, role='left'), dict(right, role='right')],
-               {'accepted': right, 'rejected': left}, authored,
-               [marks('rejected', [[], [], [], [], [], [], []]), marks('accepted', [[], [], [], ['sz=72'], [], [], []]),
-                revision_bound(1), untracked(opening, a, b, c, d, CLOSING)])
+    # redline-cell-mark-size and its control: the mark of an empty paragraph at the end of the second cell grows to
+    # 36pt; in the control a word of that cell changes too.
+    lead = b.removesuffix('dusk.')
+    for control in (False, True):
+        case_id = 'redline-cell-mark-size' + ('-edit-control' if control else '')
+        rev = Revisions()
+        cells = [t(a), t(b), t(c), t(d)]
+        revised = [t(a), t(lead + 'dawn.'), t(c), t(d)] if control else cells
+        authored_cells = [t(a), t(lead) + rev.dele(t('dusk')) + rev.ins(t('dawn')) + t('.'), t(c), t(d)] if control else cells
+        left = corpus.file(case_id, 'left', **document(cells, blank_mark=''))
+        right = corpus.file(case_id, 'right', **document(revised, blank_mark=big))
+        authored = corpus.file(case_id, 'authored-redline', **document(
+            authored_cells, blank_mark=big + f'<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr/></w:rPrChange>'))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1797',
+                   'The revision grows the mark of an empty paragraph in a table cell to 36pt'
+                   + (' and changes a word of that cell, which a comparison already compares' if control else ' and changes nothing else')
+                   + '; reject restores the original mark', 'compare', [dict(left, role='left'), dict(right, role='right')],
+                   {'accepted': right, 'rejected': left}, authored,
+                   [runs('rejected', plain), runs('accepted', [[opening + a + (lead + 'dawn.' if control else b) + c + d + CLOSING, []]]),
+                    marks('rejected', [[]] * 7), marks('accepted', [[], [], [], ['sz=72'], [], [], []]),
+                    revision_bound(3 if control else 1),
+                    untracked(*((opening, a, lead, c, d, CLOSING) if control else (opening, a, b, c, d, CLOSING)))])
 
     # redline-cell-bold-beside-edit and its control: a word of the first cell (or, in the control, of the bolded
     # cell itself) changes as well.
@@ -3534,14 +3547,14 @@ def cell_formatting(corpus):
             right_cells = [t(a), t(lead + 'dawn.', bold), t(c), t(d)]
             authored_cells = [t(a), t(lead, archived()) + rev.dele(t('dusk')) + rev.ins(t('dawn', bold)) + t('.', archived()), t(c), t(d)]
             accepted = [[opening + a, []], [lead + 'dawn.', ['b']], [c + d + CLOSING, []]]
-            texts, records = (opening, a, c, d, CLOSING), 4
+            texts, records = (opening, a, lead, c, d, CLOSING), 4
         else:
             lead = a.removesuffix('noon.')
             left_cells = [t(a), t(b), t(c), t(d)]
             right_cells = [t(lead + 'dawn.'), t(b, bold), t(c), t(d, bold)]
             authored_cells = [t(lead) + rev.dele(t('noon')) + rev.ins(t('dawn')) + t('.'), t(b, archived()), t(c), t(d, archived())]
             accepted = [[opening + lead + 'dawn.', []], [b, ['b']], [c, []], [d, ['b']], [CLOSING, []]]
-            texts, records = (opening, b, c, d, CLOSING), 4
+            texts, records = (opening, lead, b, c, d, CLOSING), 4
         left = corpus.file(case_id, 'left', **document(left_cells))
         right = corpus.file(case_id, 'right', **document(right_cells))
         authored = corpus.file(case_id, 'authored-redline', **document(authored_cells))
@@ -3551,7 +3564,7 @@ def cell_formatting(corpus):
                     'The revision changes a word of a table\'s first cell and bolds the text of two other cells, one '
                     'in a row whose text is unchanged; reject restores the word and the plain text'),
                    'compare', [dict(left, role='left'), dict(right, role='right')], {'accepted': right, 'rejected': left}, authored,
-                   [runs('rejected', plain), runs('accepted', accepted), revision_bound(records), untracked(*texts)])
+                   [runs('rejected', plain), runs('accepted', accepted), *unmarked, revision_bound(records), untracked(*texts)])
 
 
 STORY_NOTES = ['Keepers raise the storm cone above the signal tower when the glass falls.',
@@ -3566,11 +3579,12 @@ def untyped_story_references(corpus):
     correct redline keeps one default reference in the section, bound to the part carrying the tracked story
     change, and adds no second one. Docxodus #1803 found a redline that kept the untyped reference and added a
     typed default one to the same part, so the section had two default references.
-    `redline-untyped-header-changed` and `redline-untyped-footer-changed` add a word to the story; the control,
-    `redline-typed-header-changed-control`, makes the same change through a typed reference. `section-stories`
+    `redline-untyped-header-changed` and `redline-untyped-footer-changed` add a word to the story; the controls,
+    `redline-typed-header-changed-control` and `redline-typed-footer-changed-control`, make the same change through
+    a typed reference. `section-stories`
     reads each section's single default reference (an absent type counts as default, and two of one kind fail)
     and the story text it reaches in the raw redline."""
-    for story, typed in (('header', False), ('footer', False), ('header', True)):
+    for story, typed in (('header', False), ('footer', False), ('header', True), ('footer', True)):
         case_id = f'redline-{"typed" if typed else "untyped"}-{story}-changed' + ('-control' if typed else '')
         element, root = ('headerReference', 'hdr') if story == 'header' else ('footerReference', 'ftr')
         type_attribute = ' w:type="default"' if typed else ''

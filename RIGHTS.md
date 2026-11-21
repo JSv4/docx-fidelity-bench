@@ -1,9 +1,10 @@
-The seven table-cell formatting and untyped-reference redline cases for Docxodus #1797 and #1803 contain original
+The nine table-cell formatting and untyped-reference redline cases for Docxodus #1797 and #1803 contain original
 harbor and signal-tower text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture,
 helper, document, image or font program is imported. The shapes follow the issues' descriptions: a cell run
 turning bold (#1797, which the repository owner wrote) and a header or footer referenced without `w:type` (#1803,
 from an outside reporter). The XML and text were written afresh; nothing was copied from either issue, and the
-script attached to #1803 was not run.
+script attached to #1803 was not run. The screenshot sheets in `docs/results/cell-formatting-and-untyped-story-references/`
+are LibreOffice 25.8.7.3 renders of those fixtures and of Docxodus output, not Word page renders.
 
 The six paragraph-mark and indented-copy redline cases for Docxodus #1794 and #1793 contain original lighthouse
 and harbour text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,

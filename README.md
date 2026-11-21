@@ -1,14 +1,14 @@
-`redline-v56` adds five reproducers and two controls for [Docxodus #1797](https://github.com/JSv4/Docxodus/issues/1797)
-and [#1803](https://github.com/JSv4/Docxodus/issues/1803). Four share a two-by-two table: `redline-cell-bold` bolds
+`redline-v56` adds five reproducers and four controls for [Docxodus #1797](https://github.com/JSv4/Docxodus/issues/1797)
+and [#1803](https://github.com/JSv4/Docxodus/issues/1803). Five share a two-by-two table: `redline-cell-bold` bolds
 one cell's text, `redline-cell-mark-size` grows the mark of an empty paragraph in that cell to 36pt, and
-`redline-cell-bold-beside-edit` bolds two cells while changing a word of the first; `redline-cell-bold-edit-control`
-bolds a cell and changes a word of that same cell. `redline-untyped-header-changed` and
-`redline-untyped-footer-changed` add a word to a header or footer the section references without `w:type`, which
-the schema requires; `redline-typed-header-changed-control` types the reference. Docxodus fbabfaf4 left the cell
-changes untracked and gave each untyped section a second, typed default reference. LibreOffice 25.8.7.3 shows no
-revision for the cell mark change and does not import an untyped reference, so those three cases declare their
-LibreOffice comparisons ineligible. All earlier DOCX files remain byte-identical, and the PDF suite stays
-`core-v175`. See [the redline notes](docs/REDLINE.md#formatting-inside-table-cells-and-untyped-story-references-docxodus-1797-1803).
+`redline-cell-bold-beside-edit` changes a word of the first cell and bolds two others; the controls make the bold or
+mark change in a cell whose text also changes. `redline-untyped-header-changed` and `redline-untyped-footer-changed`
+add a word to a header or footer the section references without `w:type`, which the schema requires; the two typed
+controls type the reference. Docxodus fbabfaf4 left the cell changes untracked and gave each untyped section a
+second, typed default reference. LibreOffice 25.8.7.3 shows no revision for the cell mark change and does not import
+an untyped reference, so those three cases declare their LibreOffice comparisons ineligible. All earlier DOCX files
+remain byte-identical, and the PDF suite stays `core-v175`. See
+[the redline notes](docs/REDLINE.md#formatting-inside-table-cells-and-untyped-story-references-docxodus-1797-1803).
 
 `redline-v55` adds four reproducers and two controls for [Docxodus #1794](https://github.com/JSv4/Docxodus/issues/1794)
 and [#1793](https://github.com/JSv4/Docxodus/issues/1793). Three change only a paragraph mark's size: of an empty
