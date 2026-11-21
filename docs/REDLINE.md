@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v55`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v56`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -457,7 +457,8 @@ remain mandatory; the assertion measures arrangement, not Word Compare parity.
 `redline-v29` adds inserted opening sections with explicitly empty headers/footers and
 a stable-section control. Metric contract 17 adds `section-stories` v1: in current
 section order, it follows the declared running-story kind and inheritance, requiring
-exact raw text including deleted text. Missing or wrong-kind relationships fail. Section
+exact raw text including deleted text. A reference without `w:type` counts as the default
+kind, and a section with two references of the declared kind observes no story, so it fails. Missing or wrong-kind relationships fail. Section
 property history and textboxes do not create extra sections for this assertion.
 
 For the two inserted-section reproductions, LibreOffice 25.8.7.3 cannot calibrate rejection:
@@ -1001,3 +1002,47 @@ realism. It passes both controls. [JSv4/Docxodus#1798](https://github.com/JSv4/D
 mark cases and [JSv4/Docxodus#1799](https://github.com/JSv4/Docxodus/pull/1799) (#1793) the indented pair; each
 passes both controls, and the head of #1799, which carries both, passes all six. See
 [the evidence](results/mark-formatting-and-indentation/README.md).
+
+## Formatting inside table cells and untyped story references (Docxodus #1797, #1803)
+
+`redline-v56` adds nine original cases. The first five share a two-by-two table of harbor notes between an
+opening and a closing paragraph.
+
+- `redline-cell-bold` (reproducer): the revision bolds the second cell's run and changes nothing else.
+- `redline-cell-mark-size` (reproducer): the second cell ends with an empty paragraph; the revision grows its mark
+  to 36pt (`w:sz w:val="72"`) and changes nothing else.
+- `redline-cell-bold-beside-edit` (reproducer): the revision changes "noon" to "dawn" in the first cell and bolds
+  the second cell's run and the last cell's, whose row has no other change.
+- `redline-cell-bold-edit-control` (control): the revision bolds the second cell's run and changes "dusk" to "dawn"
+  in that same cell, so the cell's text changes too.
+- `redline-cell-mark-size-edit-control` (control): the revision grows the same empty paragraph's mark and changes
+  "dusk" to "dawn" in that cell.
+- `redline-untyped-header-changed` (reproducer): one section whose header is referenced without `w:type`; the
+  revision adds " revised" to the header.
+- `redline-untyped-footer-changed` (reproducer): the same change to a footer referenced without `w:type`.
+- `redline-typed-header-changed-control` and `redline-typed-footer-changed-control` (controls): the same change
+  to a header or footer referenced with `w:type="default"`.
+
+Neither round trip reads character formatting or paragraph marks, and LibreOffice's text view cannot see them
+either, so every cell case declares the spans of every supported run property with `run-formatting` and every
+paragraph mark's properties with `mark-formatting` in both endpoints; a redline that adds untracked formatting fails
+too. Each case bounds `revision-count` to its own records, and the edited cells' unchanged text is declared
+untracked, so replacing a whole cell fails. No assertion reads a paragraph's own properties inside a table cell, so the
+third shape #1797 reports, a cell paragraph's alignment, is not pinned here. The story cases read the section's
+single default reference and the story text it reaches with `section-stories`.
+
+The schema requires `w:type` on a header or footer reference, and the SDK validator reports both endpoints of the
+untyped cases; validity is judged against the inputs, so it stays a valid check of the redline. LibreOffice 25.8.7.3
+does not import a reference without `w:type`: the exported PDF of either endpoint has no header or footer, and the
+authored redline exposes no revision, so both untyped cases declare their LibreOffice comparisons ineligible. It also
+shows no revision for the mark-only change in the cell, so `redline-cell-mark-size` declares both comparisons
+ineligible. Markup endpoints, declared formatting, the section story, revision counts and SDK checks stay mandatory
+in all three.
+
+Docxodus `fbabfaf4` compared a table's cells by their text alone, so it recorded none of the cell formatting
+changes and rejected to the revised formatting; it passes both cell controls, whose cell text changes. Binding the
+changed story to its section looked for a literal `w:type="default"`, so it added a typed default reference beside
+the untyped one and the section held two; it passes both typed controls. The fixes are
+[JSv4/Docxodus#1807](https://github.com/JSv4/Docxodus/pull/1807) (#1797) and
+[JSv4/Docxodus#1806](https://github.com/JSv4/Docxodus/pull/1806) (#1803). See
+[the evidence](results/cell-formatting-and-untyped-story-references/README.md).
