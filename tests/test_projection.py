@@ -10,7 +10,7 @@ from bench.projection_fixtures import validate
 class ProjectionTests(unittest.TestCase):
     def test_original_inputs_regenerate(self):
         manifest = validate()
-        self.assertEqual(41, len(manifest['cases']))
+        self.assertEqual(44, len(manifest['cases']))
         self.assertEqual(20, sum(c['control'] for c in manifest['cases']))
 
     def test_untracked_python_host_source_invalidates_candidate(self):

@@ -1,0 +1,250 @@
+{
+  "cases": {
+    "calendar-date": {
+      "fullDate": "2034-06-17T00:00:00Z",
+      "shown": "June 17, 2034",
+      "typed": [
+        "2034-06-17",
+        "June 17, 2034",
+        "17/06/2034"
+      ]
+    },
+    "calendar-local-timestamp": {
+      "note": "The control holds a calendar day: whatever was typed, the saved w:fullDate is the shown day at midnight UTC, re-derived from the visible text when the document is saved. Saving a control whose text is not a date (as this case's display override is) removes w:fullDate.",
+      "savedFromStored": [
+        {
+          "saved": "2026-12-15T00:00:00Z",
+          "stored": "2026-12-14T23:00:00Z",
+          "text": "2026-12-15"
+        },
+        {
+          "saved": "2026-12-15T00:00:00Z",
+          "stored": "2026-12-20T00:00:00Z",
+          "text": "15 December 2026"
+        },
+        {
+          "saved": "2026-12-15T00:00:00Z",
+          "stored": "2026-12-15T16:30:00Z",
+          "text": "2026-12-15"
+        },
+        {
+          "saved": "2032-03-04T00:00:00Z",
+          "stored": "2032-03-03T20:00:00Z",
+          "text": "2032-03-04"
+        },
+        {
+          "saved": null,
+          "stored": "2034-06-16T16:30:00Z",
+          "text": "Garden inspection"
+        }
+      ]
+    },
+    "calendar-utc-midnight-control": {
+      "fullDate": "2034-06-17T00:00:00Z"
+    },
+    "nested-adjacent-starts": {
+      "labels": {
+        "Cypress": "7.9",
+        "Hazel": "8.8",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "7.8"
+      }
+    },
+    "nested-advanced-parent": {
+      "labels": {
+        "Cypress": "9.",
+        "Hazel": "9.11",
+        "Laurel": "9.10",
+        "Maple": "7.",
+        "Willow": "8."
+      }
+    },
+    "nested-continued-legal": {
+      "labels": {
+        "Cypress": "3.",
+        "Laurel": "3.4",
+        "Maple": "1.",
+        "Willow": "2."
+      }
+    },
+    "nested-implicit-parent": {
+      "labels": {
+        "Maple": "7.8",
+        "Willow": "7.9"
+      }
+    },
+    "nested-start-one-control": {
+      "labels": {
+        "Cypress": "7.2",
+        "Hazel": "8.1",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "7.1"
+      }
+    },
+    "redline-numbered-entry-append-control": {
+      "authoredRedline": {
+        "accept": "right",
+        "reject": "left",
+        "remainingRevisions": 0
+      },
+      "compareWordLevel": [
+        "R1 … Oak supports the floor. unchanged",
+        "ins[R6, Felt cushions the bracket.]"
+      ],
+      "moves": false,
+      "trackedDescriptions": 0
+    },
+    "redline-numbered-entry-insert": {
+      "authoredRedline": {
+        "accept": "right",
+        "reject": "left",
+        "remainingRevisions": 0
+      },
+      "compareCharacterLevel": [
+        "R1",
+        "Chalk outlines the roof.",
+        "R2",
+        "ins-para[Felt cushions the bracket.]",
+        "ins-para[R3]",
+        "Copper covers the sill.",
+        "R[del:3][ins:4]",
+        "Slate protects the wall.",
+        "R[del:4][ins:5]",
+        "Glass encloses the porch.",
+        "R[del:5][ins:6]",
+        "Oak supports the floor."
+      ],
+      "compareWordLevel": [
+        "R1",
+        "Chalk outlines the roof.",
+        "R2",
+        "ins-para[Felt cushions the bracket.]",
+        "ins-para[R3]",
+        "Copper covers the sill.",
+        "del-para[R3]",
+        "ins-para[R4]",
+        "Slate protects the wall.",
+        "del-para[R4]",
+        "ins-para[R5]",
+        "Glass encloses the porch.",
+        "del-para[R5]",
+        "ins-para[R6]",
+        "Oak supports the floor."
+      ],
+      "moves": false,
+      "trackedDescriptions": 0
+    },
+    "redline-numbered-entry-remove": {
+      "authoredRedline": {
+        "accept": "right",
+        "reject": "left",
+        "remainingRevisions": 0
+      },
+      "compareCharacterLevel": [
+        "R1",
+        "Chalk outlines the roof.",
+        "R2",
+        "del-para[Felt cushions the bracket.]",
+        "del-para[R3]",
+        "Copper covers the sill.",
+        "R[del:4][ins:3]",
+        "Slate protects the wall.",
+        "R[del:5][ins:4]",
+        "Glass encloses the porch.",
+        "R[del:6][ins:5]",
+        "Oak supports the floor."
+      ],
+      "compareWordLevel": [
+        "R1",
+        "Chalk outlines the roof.",
+        "R2",
+        "del-para[Felt cushions the bracket.]",
+        "del-para[R3]",
+        "Copper covers the sill.",
+        "del-para[R4]",
+        "ins-para[R3]",
+        "Slate protects the wall.",
+        "del-para[R5]",
+        "ins-para[R4]",
+        "Glass encloses the porch.",
+        "del-para[R6]",
+        "ins-para[R5]",
+        "Oak supports the floor."
+      ],
+      "moves": false,
+      "trackedDescriptions": 0
+    },
+    "redline-reference-result-complex-control": {
+      "authoredRedline": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "compare": [
+        "del '16.4'",
+        "ins '21.8'"
+      ],
+      "fieldAfterResolution": {
+        "code": " REF RidgeMarker ",
+        "count": 1,
+        "locked": false
+      }
+    },
+    "redline-reference-result-literal-control": {
+      "authoredRedline": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "compare": [
+        "del '16.4'",
+        "ins '21.8'"
+      ]
+    },
+    "redline-reference-result-simple": {
+      "authoredRedline": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "compare": [
+        "del '16.4'",
+        "ins '21.8'"
+      ],
+      "fieldAfterResolution": {
+        "code": " REF RidgeMarker ",
+        "count": 1,
+        "locked": false
+      },
+      "writtenAs": "complex field: begin, instruction, separate, del 16.4, ins 21.8, end"
+    },
+    "redline-reference-result-simple-locked": {
+      "authoredRedline": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "compare": [
+        "del '16.4'",
+        "ins '21.8'"
+      ],
+      "fieldAfterResolution": {
+        "code": " REF RidgeMarker ",
+        "count": 1,
+        "locked": true
+      },
+      "writtenAs": "complex field: begin, instruction, separate, del 16.4, ins 21.8, end"
+    },
+    "short-paragraph-moves": {
+      "note": "Not a bench case: the same application marks a moved one-word paragraph ('Scope') and a moved two-word paragraph ('Payment Terms') as moveFrom/moveTo, so a global minimum anchor length is not its default."
+    }
+  },
+  "reference": {
+    "application": "desktop word processor",
+    "build": "16.0.20326",
+    "host": "Windows 11, time zone UTC-06:00",
+    "method": "List labels read from each numbered paragraph as opened. Date controls filled by typing the value into the control, then read as shown and as saved. Comparisons run by the application's own compare of each left/right pair (word level, its default, and character level); authored redlines opened, then Accept All or Reject All on every story range."
+  }
+}

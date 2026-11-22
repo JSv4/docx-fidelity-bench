@@ -5,17 +5,40 @@
     },
     "e0b33815": {
       "fullDate": "2034-06-17T00:00:00Z"
+    },
+    "f1f04108": {
+      "fullDate": "2034-06-17T00:00:00Z",
+      "host": "public stdio host fill on Windows at UTC-06:00"
     }
   },
-  "calendar-timestamp-control": {
+  "calendar-local-timestamp": {
     "965c3fde": {
       "fullDate": "2034-06-16T16:30:00Z"
     },
     "e0b33815": {
       "fullDate": "2034-06-16T16:30:00Z"
+    },
+    "f1f04108": {
+      "fullDate": "2034-06-17T00:00:00Z",
+      "host": "public stdio host fill on Windows at UTC-06:00"
+    }
+  },
+  "calendar-utc-midnight-control": {
+    "f1f04108": {
+      "fullDate": "2034-06-17T00:00:00Z",
+      "host": "public stdio host fill on Windows at UTC-06:00"
     }
   },
   "nested-adjacent-starts": {
+    "3d9efb03": {
+      "labels": {
+        "Cypress": "9.",
+        "Hazel": "8.8",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "8."
+      }
+    },
     "8ce8c31d": {
       "labels": {
         "Cypress": "7.9",
@@ -33,9 +56,79 @@
         "Maple": "7.",
         "Willow": "8."
       }
+    },
+    "e4330697": {
+      "labels": {
+        "Cypress": "7.9",
+        "Hazel": "8.8",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "7.8"
+      }
+    }
+  },
+  "nested-advanced-parent": {
+    "3d9efb03": {
+      "labels": {
+        "Cypress": "9.",
+        "Hazel": "11.",
+        "Laurel": "10.",
+        "Maple": "7.",
+        "Willow": "8."
+      }
+    },
+    "8ce8c31d": {
+      "labels": {
+        "Cypress": "9.",
+        "Hazel": "11.",
+        "Laurel": "10.",
+        "Maple": "7.",
+        "Willow": "8."
+      }
+    },
+    "e4330697": {
+      "labels": {
+        "Cypress": "9.",
+        "Hazel": "9.11",
+        "Laurel": "9.10",
+        "Maple": "7.",
+        "Willow": "8."
+      }
+    }
+  },
+  "nested-continued-legal": {
+    "3d9efb03": {
+      "labels": {
+        "Cypress": "3.",
+        "Laurel": "4.",
+        "Maple": "1.",
+        "Willow": "2."
+      }
+    },
+    "8ce8c31d": {
+      "labels": {
+        "Cypress": "3.",
+        "Laurel": "4.",
+        "Maple": "1.",
+        "Willow": "2."
+      }
+    },
+    "e4330697": {
+      "labels": {
+        "Cypress": "3.",
+        "Laurel": "3.4",
+        "Maple": "1.",
+        "Willow": "2."
+      }
     }
   },
   "nested-implicit-parent": {
+    "3d9efb03": {
+      "labels": {
+        "Maple": "8.",
+        "Willow": "9."
+      }
+    },
     "8ce8c31d": {
       "labels": {
         "Maple": "7.8",
@@ -47,9 +140,24 @@
         "Maple": "8.",
         "Willow": "9."
       }
+    },
+    "e4330697": {
+      "labels": {
+        "Maple": "7.8",
+        "Willow": "7.9"
+      }
     }
   },
   "nested-start-one-control": {
+    "3d9efb03": {
+      "labels": {
+        "Cypress": "7.2",
+        "Hazel": "8.1",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "7.1"
+      }
+    },
     "8ce8c31d": {
       "labels": {
         "Cypress": "7.2",
@@ -67,9 +175,31 @@
         "Maple": "7.",
         "Willow": "7.1"
       }
+    },
+    "e4330697": {
+      "labels": {
+        "Cypress": "7.2",
+        "Hazel": "8.1",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "7.1"
+      }
     }
   },
   "redline-numbered-entry-append-control": {
+    "3d9efb03": {
+      "failedChecks": [],
+      "score": 100.0
+    },
+    "68616fbf": {
+      "failedChecks": [],
+      "referenceResolution": {
+        "accept": "right",
+        "reject": "left",
+        "remainingRevisions": 0
+      },
+      "score": 100.0
+    },
     "baseline": {
       "renumbered-labels": {
         "changedParagraphMarks": false,
@@ -171,6 +301,21 @@
     }
   },
   "redline-numbered-entry-insert": {
+    "3d9efb03": {
+      "failedChecks": [
+        "conversion"
+      ],
+      "score": 0.0
+    },
+    "68616fbf": {
+      "failedChecks": [],
+      "referenceResolution": {
+        "accept": "right",
+        "reject": "left",
+        "remainingRevisions": 0
+      },
+      "score": 100.0
+    },
     "baseline": {
       "renumbered-labels": {
         "changedParagraphMarks": false,
@@ -341,6 +486,21 @@
     }
   },
   "redline-numbered-entry-remove": {
+    "3d9efb03": {
+      "failedChecks": [
+        "conversion"
+      ],
+      "score": 0.0
+    },
+    "68616fbf": {
+      "failedChecks": [],
+      "referenceResolution": {
+        "accept": "right",
+        "reject": "left",
+        "remainingRevisions": 0
+      },
+      "score": 100.0
+    },
     "baseline": {
       "renumbered-labels": {
         "changedParagraphMarks": false,
@@ -504,6 +664,72 @@
         "name": "assertion-untracked-text",
         "passed": true
       }
+    }
+  },
+  "redline-reference-result-complex-control": {
+    "3d9efb03": {
+      "failedChecks": [],
+      "score": 100.0
+    },
+    "c085b026": {
+      "failedChecks": [],
+      "referenceResolution": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "score": 100.0
+    }
+  },
+  "redline-reference-result-literal-control": {
+    "3d9efb03": {
+      "failedChecks": [],
+      "score": 100.0
+    },
+    "c085b026": {
+      "failedChecks": [],
+      "referenceResolution": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "score": 100.0
+    }
+  },
+  "redline-reference-result-simple": {
+    "3d9efb03": {
+      "failedChecks": [
+        "assertion-untracked-text",
+        "assertion-revision-count"
+      ],
+      "score": 0.0
+    },
+    "c085b026": {
+      "failedChecks": [],
+      "referenceResolution": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "score": 100.0
+    }
+  },
+  "redline-reference-result-simple-locked": {
+    "3d9efb03": {
+      "failedChecks": [
+        "assertion-untracked-text",
+        "assertion-revision-count"
+      ],
+      "score": 0.0
+    },
+    "c085b026": {
+      "failedChecks": [],
+      "referenceResolution": {
+        "accept": "21.8",
+        "reject": "16.4",
+        "remainingRevisions": 0
+      },
+      "score": 100.0
     }
   }
 }
