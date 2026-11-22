@@ -1,8 +1,10 @@
 """Run exact public Project/ProjectAnchor diagnostics against a source-bound native build."""
 import argparse
 import json
+import os
 import re
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from .common import ROOT, digest, execute, read_json, write_json
 from .projection_fixtures import validate
 from .redline_build import _build, _clean, _verify_files, dotnet
@@ -19,7 +21,11 @@ def checks(case, observation):
             'completeText': normalize(observation['markdown']) == case['expected'],
             'paragraphAnchors': all(any(p['text'] == text and normalize(p['markdown']) == text
                                        for p in observation['paragraphs']) for text in case['anchored'])}
-    if case.get('operation') == 'table-insert':
+    if case.get('operation') == 'date-fill':
+        result['storedDate'] = observation.get('fullDate') == case['fullDate']
+    elif case.get('operation') == 'list-labels':
+        result['generatedLabels'] = observation.get('labels') == case['labels']
+    elif case.get('operation') == 'table-insert':
         spec, observed = case['tableInsert'], observation.get('table') or {}
         result['tableInsert'] = (observed.get('success') is True and observed.get('error') is None
                                  and observed.get('revisionCount') == spec['revisions']
@@ -34,11 +40,20 @@ def checks(case, observation):
     return result
 
 
+def clean_projection_source(source, commit):
+    return (_clean(source, commit) and not execute([
+        'git', '-C', source, 'ls-files', '--others', '--exclude-standard', '--', 'tools/python-host']).strip())
+
+
 def build(source, commit, out):
     source = Path(source).resolve()
-    if not re.fullmatch('[0-9a-f]{40}', commit) or not _clean(source, commit):
+    if not re.fullmatch('[0-9a-f]{40}', commit) or not clean_projection_source(source, commit):
         raise ValueError('Source must be clean at the full requested commit')
     out, command, files = _build(SOURCES, out, 'DocxBenchProjection.csproj', {'DocxodusRoot': source})
+    for executable in ('DocxBenchProjection', 'docxodus-pyhost'):
+        for suffix in ('.deps.json', '.runtimeconfig.json'):
+            relative = 'bin/' + executable + suffix
+            files[relative] = digest(out / relative)
     record = {'schema': 1, 'source': str(source), 'commit': commit,
               'tree': execute(['git', '-C', source, 'rev-parse', 'HEAD^{tree}']).strip(),
               'adapterSources': {p: digest(ROOT / p) for p in SOURCES},
@@ -50,14 +65,18 @@ def build(source, commit, out):
 def run(build_dir, output):
     folder = Path(build_dir).resolve()
     record = read_json(folder / 'projection-build.json')
-    if (record['schema'] != 1 or not _clean(Path(record['source']), record['commit'])
+    if (record['schema'] != 1 or not clean_projection_source(Path(record['source']), record['commit'])
             or record['adapterSources'] != {p: digest(ROOT / p) for p in SOURCES}
             or record['recipeSha256'] != digest(Path(__file__))):
         raise ValueError('Projection build identity changed')
     _verify_files(folder, record)
+    if os.name != 'posix':
+        raise RuntimeError('The date host requires a POSIX TZ environment override')
+    ZoneInfo('Asia/Tokyo')
     manifest = validate()
     observations = json.loads(execute([dotnet(), folder / 'bin/DocxBenchProjection.dll'] +
                                      [json.dumps({'path': str(ROOT / c['input']), 'operation': c.get('operation'),
+                                                  'value': c.get('value'), 'display': c.get('display'),
                                                   'tracked': c.get('tracked', False), 'anchor': c.get('anchor'), 'tableMode': c.get('tableMode', 'GfmWithOpaqueFallback')}) for c in manifest['cases']], timeout=300))
     if len(observations) != len(manifest['cases']):
         raise ValueError('Missing projection observations')

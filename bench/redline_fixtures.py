@@ -24,7 +24,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v57', 'version': 57}
+SUITE = {'id': 'redline-v58', 'version': 58}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -389,6 +389,7 @@ def generate():
     untyped_story_references(corpus)
     content_control_rows(corpus)
     removed_section_breaks(corpus)
+    numbered_entries(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3839,3 +3840,36 @@ def removed_section_breaks(corpus):
                    [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story, 'kind': 'default',
                      'values': [label + (', winter' if changed else '')] * 2},
                     revision_bound(BOUNDS[case_id]), untracked(second)])
+
+def numbered_entries(corpus):
+    entries = ['Chalk outlines the roof.', 'Copper covers the sill.', 'Slate protects the wall.',
+               'Glass encloses the porch.', 'Oak supports the floor.']
+    extra = 'Felt cushions the bracket.'
+    def document(items):
+        return ''.join(p(t(f'R{i}')) + p(t(entry)) for i, entry in enumerate(items, 1))
+    for mode in ('insert', 'remove', 'append-control'):
+        rev = Revisions()
+        remove = mode == 'remove'
+        append = mode == 'append-control'
+        longer = entries + [extra] if append else entries[:1] + [extra] + entries[1:]
+        original, revised = (longer, entries) if remove else (entries, longer)
+        edit = rev.dele if remove else rev.ins
+        mark = 'del' if remove else 'ins'
+        def whole(text):
+            return p(edit(t(text)), mark=rev.mark(mark))
+        pairs = []
+        if append:
+            markup = document(entries) + whole('R6') + whole(extra)
+        else:
+            markup = p(t('R1')) + p(t(entries[0])) + p(t('R2')) + whole(extra) + whole('R3') + p(t(entries[1]))
+            for i, entry in enumerate(entries[2:], 3):
+                old, new = (f'R{i+1}', f'R{i}') if remove else (f'R{i}', f'R{i+1}')
+                pairs.append([old, new])
+                markup += p(rev.dele(t(old)) + rev.ins(t(new))) + p(t(entry))
+        corpus.compare('redline-numbered-entry-' + mode, 'revisions', 'control' if append else 'reproducer',
+                       'JSv4/Docxodus#1817', 'A numbered roof inventory with one entry ' + mode,
+                       dict(body=document(original)), dict(body=document(revised)), dict(body=markup),
+                       [untracked(*entries), {'type': 'renumbered-labels', 'version': 1, 'scope': 'redline',
+                                             'pairs': pairs}])
+        if not append:
+            corpus.cases[-1]['minimumAnchorWordCount'] = 2

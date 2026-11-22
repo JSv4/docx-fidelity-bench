@@ -1,14 +1,30 @@
 import copy
+import subprocess
+import tempfile
 import unittest
-from bench.projection import checks, normalize
+from pathlib import Path
+from bench.projection import checks, clean_projection_source, normalize
 from bench.projection_fixtures import validate
 
 
 class ProjectionTests(unittest.TestCase):
     def test_original_inputs_regenerate(self):
         manifest = validate()
-        self.assertEqual(36, len(manifest['cases']))
-        self.assertEqual(18, sum(c['control'] for c in manifest['cases']))
+        self.assertEqual(41, len(manifest['cases']))
+        self.assertEqual(20, sum(c['control'] for c in manifest['cases']))
+
+    def test_untracked_python_host_source_invalidates_candidate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            subprocess.run(['git', 'init', '-q', tmp], check=True)
+            subprocess.run(['git', '-C', tmp, '-c', 'user.name=Bench', '-c', 'user.email=bench@example.invalid',
+                            'commit', '-q', '--allow-empty', '-m', 'base'], check=True)
+            commit = subprocess.check_output(['git', '-C', tmp, 'rev-parse', 'HEAD'], text=True).strip()
+            self.assertTrue(clean_projection_source(root, commit))
+            host = root / 'tools/python-host'
+            host.mkdir(parents=True)
+            (host / 'Extra.cs').write_text('class Extra {}')
+            self.assertFalse(clean_projection_source(root, commit))
 
     def test_complete_text_and_anchor_checks_reject_loss_duplication_and_wrong_anchor(self):
         case = {'expected': '# Document AshHost AshInside AshFollowing', 'anchored': ['AshInside']}
@@ -54,6 +70,18 @@ class ProjectionTests(unittest.TestCase):
             self.assertFalse(checks(case, bad)['tableInsert'])
         del good['table']
         self.assertFalse(checks(case, good)['tableInsert'])
+
+    def test_session_values_require_exact_saved_date_and_every_generated_label(self):
+        cases = {c['id']: c for c in validate()['cases']}
+        for cid, name, key, check, wrong in (
+                ('calendar-date', 'fullDate', 'fullDate', 'storedDate', '2034-06-16T15:00:00Z'),
+                ('nested-adjacent-starts', 'labels', 'labels', 'generatedLabels', {'Willow': '8.'})):
+            case = cases[cid]
+            observed = {'errors': [], 'markdown': case['expected'], 'paragraphs': [], name: case[key]}
+            self.assertTrue(all(checks(case, observed).values()))
+            self.assertFalse(checks(case, {**observed, name: wrong})[check])
+            del observed[name]
+            self.assertFalse(checks(case, observed)[check])
 
     def test_normalization_keeps_table_structure_and_duplicate_words(self):
         self.assertEqual('| Ash | Ash |', normalize('{#tbl:body:123}\n| Ash | Ash |'))

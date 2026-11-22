@@ -1,3 +1,9 @@
+The eight cases for Docxodus #1817, #1842 and #1845 contain original roof inventory, garden inspection and tree names.
+Their literal OOXML and text were authored for this MIT-licensed corpus in `bench/redline_fixtures.py` and
+`bench/projection_fixtures.py`. They use no reporter documents, scripts, snippets or assets. The eight PNGs in
+`docs/results/numbered-entries-and-session-values/` show LibreOffice 25.8.7.3 rendering these documents or outputs
+made from them. The session sheets also display the observed Docxodus values.
+
 The thirteen content-control table and removed-section-break redline cases for Docxodus #1804 and #1805 contain
 original depot text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper,
 document, image or font program is imported. The shapes follow the issues' descriptions, which the repository

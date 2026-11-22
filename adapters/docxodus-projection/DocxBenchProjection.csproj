@@ -6,5 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <ItemGroup><ProjectReference Include="$(DocxodusRoot)/Docxodus/Docxodus.csproj" /></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(DocxodusRoot)/Docxodus/Docxodus.csproj" />
+    <ProjectReference Include="$(DocxodusRoot)/tools/python-host/pyhost.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 </Project>

@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v57')
-        self.assertEqual(len(registry['cases']), 375)
+        self.assertEqual(registry['suite']['id'], 'redline-v58')
+        self.assertEqual(len(registry['cases']), 378)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794, 1797, 1803, 1804, 1805)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763, 1771, 1775, 1784, 1793, 1794, 1797, 1803, 1804, 1805, 1817)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -132,6 +132,35 @@ class RedlineRegistry(unittest.TestCase):
 
 class AuthoredCalibration(unittest.TestCase):
     """The authored redline of every case satisfies the benchmark's own engine and assertions."""
+
+    def test_numbered_labels_allow_shared_prefix_and_require_retained_paragraphs(self):
+        record = case('redline-numbered-entry-insert')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'renumbered-labels')
+        def scorer(package):
+            return redline._assertion(assertion, package, {})['passed']
+        self.assertTrue(scorer(load(record['authored'])))
+        def changed_label(root):
+            return next(p for p in root.iter(W + 'p') if p.find(W + 'del') is not None and p.find(W + 'ins') is not None)
+        def prefix(root):
+            p = changed_label(root)
+            for tag in ('delText', 't'):
+                node = next(p.iter(W + tag))
+                node.text = node.text[1:]
+            run = ET.Element(W + 'r')
+            ET.SubElement(run, W + 't').text = 'R'
+            p.insert(0, run)
+        self.assertTrue(scorer(rewrite(record['authored'], prefix)))
+        def wrong(root):
+            next(changed_label(root).iter(W + 'delText')).text = 'R99'
+        def marked(root):
+            p = changed_label(root)
+            props = ET.Element(W + 'pPr')
+            p.insert(0, props)
+            ET.SubElement(ET.SubElement(props, W + 'rPr'), W + 'del')
+        def moved(root):
+            ET.SubElement(changed_label(root), W + 'moveToRangeStart', {W + 'id': '12'})
+        for mutate in (wrong, marked, moved):
+            self.assertFalse(scorer(rewrite(record['authored'], mutate)), mutate.__name__)
 
     def test_authored_redlines_round_trip(self):
         for record in cases():

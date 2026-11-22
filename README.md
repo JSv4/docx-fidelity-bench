@@ -1,3 +1,9 @@
+`redline-v58` adds numbered-entry insertion, removal and append cases for Docxodus #1817.
+Metric contract 36 checks the ordered label changes inside retained paragraphs. `projection-v5`
+adds saved calendar and timestamp values for #1842 and three nested-list cases for #1845.
+The eight original fixtures, measured outcomes, and LibreOffice Writer views are documented in
+[the comparison results](docs/results/numbered-entries-and-session-values/README.md).
+
 `redline-v57` adds seven reproducers and six controls for [Docxodus #1804](https://github.com/JSv4/Docxodus/issues/1804)
 and [#1805](https://github.com/JSv4/Docxodus/issues/1805). Nine share a two-column table of depot notes: each
 reproducer puts a row in a table-level content control, as a repeating section does, or a cell in a row-level one, and
