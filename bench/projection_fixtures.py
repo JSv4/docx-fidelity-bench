@@ -43,6 +43,56 @@ def table(row_sdt=False, cell_sdt=False):
             (control(row) if row_sdt else row) + '</w:tbl>')
 
 
+def session_values(root, folder):
+    rights = {'author': 'John Scrudato IV', 'license': 'MIT',
+              'origin': 'Original date and garden list documents generated here, with no imported assets'}
+    def make(cid, body, control, operation, expected, **kwargs):
+        path = folder / (cid + '.docx')
+        package(path, body, styles_xml=f'<w:styles xmlns:w="{W}"/>', **kwargs)
+        return {'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path),
+                'control': control, 'operation': operation, 'rights': rights, **expected}
+
+    day = '2034-06-17'
+    # A date control holds a calendar day: the desktop word processor (build 16.0.20326) stores the day it
+    # shows at midnight UTC, whatever time or offset the value came with. The host runs at UTC+9, so a
+    # local timestamp early on June 17 is June 16 in UTC. Before Docxodus #1848 only the UTC-midnight control kept its day.
+    for cid, value, override, shown, utc, control in (
+            ('calendar-date', day, None, day.replace('-', r'\-'), day + 'T00:00:00Z', False),
+            ('calendar-local-timestamp', day + 'T01:30:00', 'Garden inspection', 'Garden inspection',
+             day + 'T00:00:00Z', False),
+            ('calendar-utc-midnight-control', day + 'T00:00:00Z', None, day.replace('-', r'\-'),
+             day + 'T00:00:00Z', True)):
+        picker = ('<w:sdt><w:sdtPr><w:id w:val="713"/><w:date>'
+                  '<w:dateFormat w:val="MMMM d, yyyy"/></w:date></w:sdtPr>'
+                  '<w:sdtContent>' + run('Select day') + '</w:sdtContent></w:sdt>')
+        body = para(runs=run('Inspection: ') + picker)
+        yield make(cid, body, control, 'date-fill',
+                   {'value': value, 'display': override, 'fullDate': utc,
+                    'expected': '# Document Inspection: ' + shown, 'anchored': []})
+
+    # Labels are the desktop word processor's (build 16.0.20326). It keeps the parent's number on every
+    # child, including after the parent has counted on and the child's start continues that count, the
+    # shape a removed Docxodus rule rendered as a flat list (10. and 11., or 4.).
+    for cid, levels, starts, legal, labels in (
+            ('nested-adjacent-starts', [0, 1, 1, 0, 1], (7, 8), False, ['7.', '7.8', '7.9', '8.', '8.8']),
+            ('nested-implicit-parent', [1, 1], (7, 8), False, ['7.8', '7.9']),
+            ('nested-start-one-control', [0, 1, 1, 0, 1], (7, 1), False, ['7.', '7.1', '7.2', '8.', '8.1']),
+            ('nested-advanced-parent', [0, 0, 0, 1, 1], (7, 10), False, ['7.', '8.', '9.', '9.10', '9.11']),
+            ('nested-continued-legal', [0, 0, 0, 1], (1, 4), True, ['1.', '2.', '3.', '3.4'])):
+        words = ('Maple', 'Willow', 'Cypress', 'Laurel', 'Hazel')[:len(levels)]
+        definitions = ''.join(f'<w:lvl w:ilvl="{i}"><w:start w:val="{n}"/><w:numFmt w:val="decimal"/>'
+                              + ('<w:isLgl/>' if legal and i else '') + f'<w:lvlText w:val="{pattern}"/></w:lvl>'
+                              for i, n, pattern in ((0, starts[0], '%1.'), (1, starts[1], '%1.%2')))
+        numbering = (f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="0">{definitions}'
+                     '</w:abstractNum><w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>')
+        body = ''.join(para(text, props=f'<w:numPr><w:ilvl w:val="{level}"/><w:numId w:val="1"/></w:numPr>')
+                       for text, level in zip(words, levels))
+        yield make(cid, body, cid.endswith('-control'), 'list-labels',
+                   {'labels': dict(zip(words, labels)), 'anchored': [],
+                    'expected': '# Document ' + ' '.join(label + ' ' + word for label, word in zip(labels, words))},
+                   numbering_xml=numbering)
+
+
 def generate(root=ROOT):
     root = Path(root)
     folder = root / 'fixtures/projection'
@@ -148,7 +198,8 @@ def generate(root=ROOT):
                           'expected': ' '.join(('# Document ' + middle + ' LarchAfter').split()), 'anchored': ['LarchAfter'],
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                           'origin': 'Original literal OOXML and Larch row labels; no imported assets'}})
-    manifest = {'schema': 1, 'suite': 'projection-v4', 'version': 4,
+    cases.extend(session_values(root, folder))
+    manifest = {'schema': 1, 'suite': 'projection-v5', 'version': 5,
                 'generatorSha256': digest(Path(__file__)), 'cases': cases}
     write_json(folder / 'manifest.json', manifest)
     return manifest

@@ -593,10 +593,162 @@
       },
       "sha256": "6282f1c14ba0ca42b453b51d3f31841ea245ec3eccc8fbe442826e44cd5ea9dd",
       "tableMode": "AlwaysOpaque"
+    },
+    {
+      "anchored": [],
+      "control": false,
+      "display": null,
+      "expected": "# Document Inspection: 2034\\-06\\-17",
+      "fullDate": "2034-06-17T00:00:00Z",
+      "id": "calendar-date",
+      "input": "fixtures/projection/calendar-date.docx",
+      "operation": "date-fill",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "5e4efbe23af1120ecfc165e1616c47dede715539b47f604b1fc6cd5f0920501f",
+      "value": "2034-06-17"
+    },
+    {
+      "anchored": [],
+      "control": false,
+      "display": "Garden inspection",
+      "expected": "# Document Inspection: Garden inspection",
+      "fullDate": "2034-06-17T00:00:00Z",
+      "id": "calendar-local-timestamp",
+      "input": "fixtures/projection/calendar-local-timestamp.docx",
+      "operation": "date-fill",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "5e4efbe23af1120ecfc165e1616c47dede715539b47f604b1fc6cd5f0920501f",
+      "value": "2034-06-17T01:30:00"
+    },
+    {
+      "anchored": [],
+      "control": true,
+      "display": null,
+      "expected": "# Document Inspection: 2034\\-06\\-17",
+      "fullDate": "2034-06-17T00:00:00Z",
+      "id": "calendar-utc-midnight-control",
+      "input": "fixtures/projection/calendar-utc-midnight-control.docx",
+      "operation": "date-fill",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "5e4efbe23af1120ecfc165e1616c47dede715539b47f604b1fc6cd5f0920501f",
+      "value": "2034-06-17T00:00:00Z"
+    },
+    {
+      "anchored": [],
+      "control": false,
+      "expected": "# Document 7. Maple 7.8 Willow 7.9 Cypress 8. Laurel 8.8 Hazel",
+      "id": "nested-adjacent-starts",
+      "input": "fixtures/projection/nested-adjacent-starts.docx",
+      "labels": {
+        "Cypress": "7.9",
+        "Hazel": "8.8",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "7.8"
+      },
+      "operation": "list-labels",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "aafd1e3c6e6d263dc382fa977c7d9b896cd6ff7ce7543358cff6734b194749b7"
+    },
+    {
+      "anchored": [],
+      "control": false,
+      "expected": "# Document 7.8 Maple 7.9 Willow",
+      "id": "nested-implicit-parent",
+      "input": "fixtures/projection/nested-implicit-parent.docx",
+      "labels": {
+        "Maple": "7.8",
+        "Willow": "7.9"
+      },
+      "operation": "list-labels",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "e439ee83b926c48994641b790b8dc4fc08095a5f9dd37538e3cf2c93b9a37394"
+    },
+    {
+      "anchored": [],
+      "control": true,
+      "expected": "# Document 7. Maple 7.1 Willow 7.2 Cypress 8. Laurel 8.1 Hazel",
+      "id": "nested-start-one-control",
+      "input": "fixtures/projection/nested-start-one-control.docx",
+      "labels": {
+        "Cypress": "7.2",
+        "Hazel": "8.1",
+        "Laurel": "8.",
+        "Maple": "7.",
+        "Willow": "7.1"
+      },
+      "operation": "list-labels",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "d56fd0fedf79e463dc29907b9518660ed85553ba893934e5d98ff891725e63d3"
+    },
+    {
+      "anchored": [],
+      "control": false,
+      "expected": "# Document 7. Maple 8. Willow 9. Cypress 9.10 Laurel 9.11 Hazel",
+      "id": "nested-advanced-parent",
+      "input": "fixtures/projection/nested-advanced-parent.docx",
+      "labels": {
+        "Cypress": "9.",
+        "Hazel": "9.11",
+        "Laurel": "9.10",
+        "Maple": "7.",
+        "Willow": "8."
+      },
+      "operation": "list-labels",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "388caf205b77788a96914893617a4a3ba4add1699a9e5ba6c00a3477b206c217"
+    },
+    {
+      "anchored": [],
+      "control": false,
+      "expected": "# Document 1. Maple 2. Willow 3. Cypress 3.4 Laurel",
+      "id": "nested-continued-legal",
+      "input": "fixtures/projection/nested-continued-legal.docx",
+      "labels": {
+        "Cypress": "3.",
+        "Laurel": "3.4",
+        "Maple": "1.",
+        "Willow": "2."
+      },
+      "operation": "list-labels",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "3b4b4ec110c2f259b33efd00294c657442950aff2287663d494b6f6278f9e08c"
     }
   ],
-  "generatorSha256": "fef37f9558616007fc358e4e71fd28e2817f9da4c872e17c100fbc67c9f10cc7",
+  "generatorSha256": "5dcce11e750bbb8ae2036e5a08b8f4030a46e0fee7518f63fa5c93b649c833ad",
   "schema": 1,
-  "suite": "projection-v4",
-  "version": 4
+  "suite": "projection-v5",
+  "version": 5
 }

@@ -24,7 +24,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v57', 'version': 57}
+SUITE = {'id': 'redline-v58', 'version': 58}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -389,6 +389,8 @@ def generate():
     untyped_story_references(corpus)
     content_control_rows(corpus)
     removed_section_breaks(corpus)
+    numbered_entries(corpus)
+    cached_reference_results(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -3839,3 +3841,85 @@ def removed_section_breaks(corpus):
                    [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story, 'kind': 'default',
                      'values': [label + (', winter' if changed else '')] * 2},
                     revision_bound(BOUNDS[case_id]), untracked(second)])
+
+def numbered_entries(corpus):
+    entries = ['Chalk outlines the roof.', 'Copper covers the sill.', 'Slate protects the wall.',
+               'Glass encloses the porch.', 'Oak supports the floor.']
+    extra = 'Felt cushions the bracket.'
+    def document(items):
+        return ''.join(p(t(f'R{i}')) + p(t(entry)) for i, entry in enumerate(items, 1))
+    for mode in ('insert', 'remove', 'append-control'):
+        rev = Revisions()
+        remove = mode == 'remove'
+        append = mode == 'append-control'
+        longer = entries + [extra] if append else entries[:1] + [extra] + entries[1:]
+        original, revised = (longer, entries) if remove else (entries, longer)
+        edit = rev.dele if remove else rev.ins
+        mark = 'del' if remove else 'ins'
+        def whole(text):
+            return p(edit(t(text)), mark=rev.mark(mark))
+        pairs = []
+        if append:
+            markup = document(entries) + whole('R6') + whole(extra)
+        else:
+            markup = p(t('R1')) + p(t(entries[0])) + p(t('R2')) + whole(extra) + whole('R3') + p(t(entries[1]))
+            for i, entry in enumerate(entries[2:], 3):
+                old, new = (f'R{i+1}', f'R{i}') if remove else (f'R{i}', f'R{i+1}')
+                pairs.append([old, new])
+                markup += p(rev.dele(t(old)) + rev.ins(t(new))) + p(t(entry))
+        corpus.compare('redline-numbered-entry-' + mode, 'revisions', 'control' if append else 'reproducer',
+                       'JSv4/Docxodus#1817', 'A numbered roof inventory with one entry ' + mode,
+                       dict(body=document(original)), dict(body=document(revised)), dict(body=markup),
+                       [untracked(*entries), {'type': 'renumbered-labels', 'version': 1, 'scope': 'redline',
+                                             'pairs': pairs}])
+        if not append:
+            corpus.cases[-1]['minimumAnchorWordCount'] = 2
+
+
+def cached_reference_results(corpus):
+    """A reference's cached result changes in the middle of a sentence (Docxodus #1844).
+
+    The desktop word processor (build 16.0.20326) tracks only the old and new result, in every form below,
+    and writes a simple field back in complex form: begin, instruction, separator, the tracked result, end.
+    LibreOffice 25.8.7.3 also exports a simple field in complex form. The expected documents of a simple field
+    therefore hold it in complex form, as either application resolves it; the complex and literal cases resolve
+    to their own inputs.
+    """
+    lead, tail = 'Record the survey at point ', ' before leaving the ridge.'
+    target = p(bookmark(True, 1, 'RidgeMarker') + t('Survey checkpoint') + bookmark(False, 1))
+    instruction = ' REF RidgeMarker '
+    def complex_ref(result_runs, lock):
+        runs = field(instruction, result_runs)
+        return runs.replace('w:fldCharType="begin"/>', 'w:fldCharType="begin" w:fldLock="1"/>', 1) if lock else runs
+    def simple_ref(value, lock):
+        return f'<w:fldSimple w:instr="{instruction}"' + (' w:fldLock="1"' if lock else '') + f'>{t(value)}</w:fldSimple>'
+    def body(middle):
+        return p(t(lead) + middle + t(tail)) + target + p(t(CLOSING))
+    for shape, kind, description in (
+            ('simple', 'reproducer', 'A simple REF field between two phrases changes its cached result from 16.4 to 21.8'),
+            ('simple-locked', 'reproducer', 'A locked simple REF field between two phrases changes its cached result'),
+            ('complex-control', 'control', 'The same REF field in complex form changes its cached result'),
+            ('literal-control', 'control', 'The same characters as literal text change')):
+        lock = shape == 'simple-locked'
+        rev = Revisions()
+        tracked = rev.dele(t('16.4')) + rev.ins(t('21.8'))
+        if shape == 'literal-control':
+            left, right, redline = t('16.4'), t('21.8'), tracked
+        elif shape == 'complex-control':
+            left, right, redline = complex_ref(t('16.4'), False), complex_ref(t('21.8'), False), complex_ref(tracked, False)
+        else:
+            left, right, redline = simple_ref('16.4', lock), simple_ref('21.8', lock), complex_ref(tracked, lock)
+        case_id = 'redline-reference-result-' + shape
+        assertions = [untracked(lead, tail, 'Survey checkpoint', CLOSING), revision_bound(2)]
+        if shape.startswith('simple'):
+            a = corpus.file(case_id, 'left', body=body(left))
+            b = corpus.file(case_id, 'right', body=body(right))
+            accepted = corpus.file(case_id, 'accepted', body=body(complex_ref(t('21.8'), lock)))
+            rejected = corpus.file(case_id, 'rejected', body=body(complex_ref(t('16.4'), lock)))
+            authored = corpus.file(case_id, 'authored-redline', body=body(redline))
+            corpus.add(case_id, 'fields', kind, 'JSv4/Docxodus#1844', description, 'compare',
+                       [dict(a, role='left'), dict(b, role='right')], {'accepted': accepted, 'rejected': rejected},
+                       authored, assertions)
+        else:
+            corpus.compare(case_id, 'fields', kind, 'JSv4/Docxodus#1844', description,
+                           {'body': body(left)}, {'body': body(right)}, {'body': body(redline)}, assertions)

@@ -70,6 +70,13 @@ internal static class Program
             }
             WmlDocument result;
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
+            if (settings["minimumAnchorWordCount"] is JsonNode minimum)
+            {
+                // Older candidates can still build this adapter and run the default control.
+                var property = typeof(DocxDiffSettings).GetProperty("MinimumAnchorWordCount")
+                    ?? throw new NotSupportedException("Candidate does not support MinimumAnchorWordCount");
+                property.SetValue(diff, minimum.GetValue<int>());
+            }
             switch (operation)
             {
                 case "revision-ownership" when documents.Count == 1:

@@ -26,13 +26,14 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2, 3}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'relationship-ids': {1}, 'deleted-text-owned': {1}, 'picture-bullets': {1}, 'section-change-values': {1}, 'run-formatting': {1}, 'mark-formatting': {1}}
+ASSERTIONS = {'renumbered-labels': {1}, 'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2, 3}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'relationship-ids': {1}, 'deleted-text-owned': {1}, 'picture-bullets': {1}, 'section-change-values': {1}, 'run-formatting': {1}, 'mark-formatting': {1}}
 # Operations whose candidate returns the resolved document itself, not a redline.
 OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 35, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 36, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+            'renumberedLabels': 'ordered before and after labels in retained body paragraphs, including shared text, without move markup',
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -270,6 +271,9 @@ def validate_registry(registry=None):
             raise ValueError('Unexpected block insertion data: ' + case['id'])
         if operation != 'revision-ownership' and ('revisionOwnership' in case or 'authorNameStatus' in case):
             raise ValueError('Unexpected revision ownership data: ' + case['id'])
+        if 'minimumAnchorWordCount' in case and (operation != 'compare'
+                or type(case['minimumAnchorWordCount']) is not int or case['minimumAnchorWordCount'] < 0):
+            raise ValueError('Invalid paragraph anchor threshold: ' + case['id'])
         if 'semanticPreflight' in case:
             if (operation != 'compare' or case['category'] != 'identity'
                     or case['semanticPreflight'] != {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
@@ -329,6 +333,9 @@ def validate_registry(registry=None):
                      'section-stories': lambda a: a['scope'] == 'redline' and a.get('story') in {'header', 'footer'}
                          and a.get('kind') in {'default', 'first', 'even'} and isinstance(a.get('values'), list)
                          and bool(a['values']) and all(isinstance(v, str) for v in a['values']),
+                     'renumbered-labels': lambda a: a['scope'] == 'redline' and isinstance(a.get('pairs'), list)
+                         and all(isinstance(pair, list) and len(pair) == 2 and all(isinstance(s, str) and s for s in pair)
+                                 for pair in a['pairs']),
                      'revision-blocks': lambda a: a['scope'] == 'redline',
                      'positional-rewrites': lambda a: a['scope'] == 'redline'
                          and all(isinstance(a.get(side), list) and len(a[side]) >= 2
@@ -477,6 +484,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
     inputs = [{'path': str(contained(ROOT, i['path'])), 'sha256': i['sha256'], 'author': i.get('author')} for i in case['inputs']]
     request = {'protocol': 1, 'operation': case['operation'], 'inputs': inputs, 'output': str(output),
                'settings': {'author': 'Bench', 'date': '2026-01-01T00:00:00Z'}}
+    if 'minimumAnchorWordCount' in case:
+        request['settings']['minimumAnchorWordCount'] = case['minimumAnchorWordCount']
     if 'semanticPreflight' in case:
         request['settings']['semanticPreflight'] = case['semanticPreflight']
     if 'tableWidths' in case:
@@ -816,6 +825,27 @@ def _assertion(assertion, package, resolved):
         else:
             types_ok = False
         check.update(passed=types_ok and observed == {k: assertion[k] for k in ('grid', 'cells', 'table')}, observed=observed)
+    elif kind == 'renumbered-labels':
+        body = package.xml(package.main).find(revisions.w('body'))
+        pairs = []
+        changed_marks = False
+        for para in body.findall(revisions.w('p')):
+            if not all(para.find('.//' + revisions.w(tag) + '//' + revisions.w(text)) is not None
+                       for tag, text in (('ins', 't'), ('del', 'delText'))):
+                continue
+            marks = para.find(revisions.w('pPr') + '/' + revisions.w('rPr'))
+            if marks is not None and any(mark.tag in (revisions.w('ins'), revisions.w('del')) for mark in marks):
+                changed_marks = True
+            pair = []
+            for mode in ('reject', 'accept'):
+                resolved = revisions.resolve({'label': para}, mode)['label']
+                pair.append(''.join(text.text or '' for text in resolved.iter()
+                                    if text.tag in (revisions.w('t'), revisions.w('delText'))))
+            pairs.append(pair)
+        move_tags = {revisions.w(name + suffix) for name in ('moveFrom', 'moveTo') for suffix in ('', 'RangeStart', 'RangeEnd')}
+        moves = any(e.tag in move_tags for e in body.iter())
+        check.update(passed=pairs == assertion['pairs'] and not moves and not changed_marks,
+                     observed=pairs, moves=moves, changedParagraphMarks=changed_marks)
     elif kind == 'untracked-text':
         texts = revisions.untracked_text(package, assertion['story'])
         missing = [x for x in assertion['texts'] if not any(x in text for text in texts)]

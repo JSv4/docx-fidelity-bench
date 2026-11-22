@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Diagnostics;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using DocumentFormat.OpenXml;
@@ -12,6 +13,14 @@ var outputs = args.Select(argument =>
     var path = request.RootElement.GetProperty("path").GetString()!;
     var operation = request.RootElement.GetProperty("operation").GetString();
     var bytes = File.ReadAllBytes(path);
+    string? fullDate = null;
+    if (operation == "date-fill")
+    {
+        bytes = FillDate(bytes, request.RootElement);
+        using var savedStream = new MemoryStream(bytes);
+        using var saved = WordprocessingDocument.Open(savedStream, false);
+        fullDate = (string?)saved.MainDocumentPart!.GetXDocument().Descendants(W.date).Single().Attribute(W.fullDate);
+    }
     using var session = new DocxSession(bytes, new DocxSessionSettings
     {
         ProjectionSettings = new WmlToMarkdownConverterSettings
@@ -21,7 +30,14 @@ var outputs = args.Select(argument =>
     });
     object? raw = null;
     object? table = null;
-    if (operation == "table-insert")
+    Dictionary<string, string?>? labels = null;
+    if (operation == "list-labels")
+    {
+        var items = session.Project().AnchorIndex.Values.Where(a => a.Anchor.Kind == "li").ToArray();
+        var metadata = session.GetBlockMetadatas(items.Select(a => a.Anchor.Id).ToArray());
+        labels = items.ToDictionary(a => a.TextPreview, a => metadata[a.Anchor.Id]?.List?.GeneratedLabel);
+    }
+    else if (operation == "table-insert")
     {
         session.SetTrackedChanges(request.RootElement.GetProperty("tracked").GetBoolean()
             ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept);
@@ -42,7 +58,7 @@ var outputs = args.Select(argument =>
         table = new { success = edit.Success, error = edit.Error?.Code.ToString(), revisionCount,
             accepted = Resolve(true), rejected = Resolve(false), undo };
     }
-    else if (operation is not null)
+    else if (operation is not null and not "date-fill")
     {
         session.SetTrackedChanges(request.RootElement.GetProperty("tracked").GetBoolean()
             ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept);
@@ -69,7 +85,7 @@ var outputs = args.Select(argument =>
     var projection = session.Project();
     return new
     {
-        path, errors, raw, table, markdown = projection.Markdown,
+        path, errors, raw, table, fullDate, labels, markdown = projection.Markdown,
         paragraphs = projection.AnchorIndex.Values.Where(a => a.Anchor.Kind == "p")
             .Select(a => new { id = a.Anchor.Id, text = a.TextPreview,
                 markdown = session.ProjectAnchor(a.Anchor.Id, ProjectionDepth.SelfOnly).Markdown }).ToArray(),
@@ -87,4 +103,42 @@ static string[] Parts(byte[] bytes)
         using var content = e.Open();
         return e.FullName + ":" + Convert.ToHexString(SHA256.HashData(content));
     }).ToArray();
+}
+
+// Exercise the shipped string parser in a dedicated east-of-UTC host.
+static byte[] FillDate(byte[] bytes, JsonElement request)
+{
+    var start = new ProcessStartInfo(Environment.ProcessPath!)
+    {
+        UseShellExecute = false, RedirectStandardInput = true, RedirectStandardOutput = true,
+    };
+    start.ArgumentList.Add(Path.Combine(AppContext.BaseDirectory, "docxodus-pyhost.dll"));
+    start.Environment["TZ"] = "Asia/Tokyo";
+    using var host = Process.Start(start) ?? throw new InvalidOperationException("Could not start date host");
+    long id = 0;
+    JsonElement Call(string op, object args)
+    {
+        host.StandardInput.WriteLine(JsonSerializer.Serialize(new { id = ++id, op, args }));
+        host.StandardInput.Flush();
+        var line = host.StandardOutput.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(20)).GetAwaiter().GetResult();
+        using var reply = JsonDocument.Parse(line ?? throw new EndOfStreamException(op));
+        var envelope = reply.RootElement;
+        if (envelope.GetProperty("id").GetInt64() != id || !envelope.GetProperty("ok").GetBoolean())
+            throw new InvalidDataException($"Date host failed {op}: {envelope}");
+        return envelope.GetProperty("result").Clone();
+    }
+    try
+    {
+        var handle = Call("open_session", new { docxB64 = Convert.ToBase64String(bytes) }).GetInt32();
+        var anchorId = Call("list_content_controls", new { handle }).EnumerateArray().Single().GetProperty("anchorId").GetString();
+        var edit = Call("set_content_control_date", new { handle, anchorId, value = request.GetProperty("value"),
+            displayText = request.GetProperty("display") });
+        if (!edit.GetProperty("success").GetBoolean()) throw new InvalidDataException($"Date fill failed: {edit}");
+        return Call("save", new { handle }).GetProperty("docxB64").GetBytesFromBase64();
+    }
+    finally
+    {
+        host.StandardInput.Close();
+        if (!host.WaitForExit(5000)) host.Kill(entireProcessTree: true);
+    }
 }
