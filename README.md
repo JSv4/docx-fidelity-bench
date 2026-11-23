@@ -1,3 +1,8 @@
+`projection-v6` changes the default display text expected from a filled date control for Docxodus #1851: the
+control's own format and language, as a desktop word processor (build 16.0.20326) shows a picked date. It adds
+`calendar-display-german`, and gives `calendar-utc-midnight-control` explicit display text so it checks the stored
+day alone. [Results](docs/results/date-display-format/README.md).
+
 `redline-v58` adds numbered-entry insertion, removal and append cases for Docxodus #1817, and four cached
 reference-result cases for #1844. Metric contract 36 checks the ordered label changes inside retained paragraphs.
 `projection-v5` adds saved calendar values for #1842 and five nested-list cases for #1845. A desktop word

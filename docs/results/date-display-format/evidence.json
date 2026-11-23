@@ -1,0 +1,58 @@
+{
+  "reference": {
+    "application": "desktop word processor",
+    "build": "16.0.20326",
+    "host": "Windows 11, UTC-06:00",
+    "method": "The date typed into each fixture's empty control, then the control's text and w:fullDate read back"
+  },
+  "baseline": "b4eeb544",
+  "candidate": "265cbef9",
+  "cases": {
+    "calendar-date": {
+      "reference": {
+        "shown": "June 17, 2034",
+        "fullDate": "2034-06-17T00:00:00Z"
+      },
+      "b4eeb544": {
+        "shown": "2034-06-17",
+        "passed": false
+      },
+      "265cbef9": {
+        "shown": "June 17, 2034",
+        "passed": true
+      }
+    },
+    "calendar-display-german": {
+      "reference": {
+        "shown": "Samstag, 17. Juni 2034",
+        "fullDate": "2034-06-17T00:00:00Z"
+      },
+      "b4eeb544": {
+        "shown": "2034-06-17",
+        "passed": false
+      },
+      "265cbef9": {
+        "shown": "Samstag, 17. Juni 2034",
+        "passed": true
+      }
+    },
+    "calendar-utc-midnight-control": {
+      "display": "explicit",
+      "b4eeb544": {
+        "passed": true
+      },
+      "265cbef9": {
+        "passed": true
+      }
+    },
+    "calendar-local-timestamp": {
+      "display": "explicit",
+      "b4eeb544": {
+        "passed": true
+      },
+      "265cbef9": {
+        "passed": true
+      }
+    }
+  }
+}
