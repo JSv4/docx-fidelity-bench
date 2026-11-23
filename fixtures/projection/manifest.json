@@ -598,7 +598,7 @@
       "anchored": [],
       "control": false,
       "display": null,
-      "expected": "# Document Inspection: 2034\\-06\\-17",
+      "expected": "# Document Inspection: June 17, 2034",
       "fullDate": "2034-06-17T00:00:00Z",
       "id": "calendar-date",
       "input": "fixtures/projection/calendar-date.docx",
@@ -631,8 +631,8 @@
     {
       "anchored": [],
       "control": true,
-      "display": null,
-      "expected": "# Document Inspection: 2034\\-06\\-17",
+      "display": "June 17, 2034",
+      "expected": "# Document Inspection: June 17, 2034",
       "fullDate": "2034-06-17T00:00:00Z",
       "id": "calendar-utc-midnight-control",
       "input": "fixtures/projection/calendar-utc-midnight-control.docx",
@@ -644,6 +644,23 @@
       },
       "sha256": "5e4efbe23af1120ecfc165e1616c47dede715539b47f604b1fc6cd5f0920501f",
       "value": "2034-06-17T00:00:00Z"
+    },
+    {
+      "anchored": [],
+      "control": false,
+      "display": null,
+      "expected": "# Document Inspection: Samstag, 17. Juni 2034",
+      "fullDate": "2034-06-17T00:00:00Z",
+      "id": "calendar-display-german",
+      "input": "fixtures/projection/calendar-display-german.docx",
+      "operation": "date-fill",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original date and garden list documents generated here, with no imported assets"
+      },
+      "sha256": "9a6f0540d3ce44c5d5e7df4cb8c6843a6363871285cb1618b352f365c16b2bdc",
+      "value": "2034-06-17"
     },
     {
       "anchored": [],
@@ -747,8 +764,8 @@
       "sha256": "3b4b4ec110c2f259b33efd00294c657442950aff2287663d494b6f6278f9e08c"
     }
   ],
-  "generatorSha256": "5dcce11e750bbb8ae2036e5a08b8f4030a46e0fee7518f63fa5c93b649c833ad",
+  "generatorSha256": "2ecaee52aecaad228dc10ac85e1b402016b9c1123d7a8bdd8dcd66a14ec5ebfc",
   "schema": 1,
-  "suite": "projection-v5",
-  "version": 5
+  "suite": "projection-v6",
+  "version": 6
 }

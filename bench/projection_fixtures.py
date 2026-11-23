@@ -56,14 +56,21 @@ def session_values(root, folder):
     # A date control holds a calendar day: the desktop word processor (build 16.0.20326) stores the day it
     # shows at midnight UTC, whatever time or offset the value came with. The host runs at UTC+9, so a
     # local timestamp early on June 17 is June 16 in UTC. Before Docxodus #1848 only the UTC-midnight control kept its day.
-    for cid, value, override, shown, utc, control in (
-            ('calendar-date', day, None, day.replace('-', r'\-'), day + 'T00:00:00Z', False),
+    # With no display text it shows the day in the control's own format and language, US English when the
+    # control names none (Docxodus #1851); before that fix Docxodus showed 2034-06-17.
+    us = ('MMMM d, yyyy', None)
+    for cid, value, override, shown, utc, control, (picture, language) in (
+            ('calendar-date', day, None, 'June 17, 2034', day + 'T00:00:00Z', False, us),
             ('calendar-local-timestamp', day + 'T01:30:00', 'Garden inspection', 'Garden inspection',
-             day + 'T00:00:00Z', False),
-            ('calendar-utc-midnight-control', day + 'T00:00:00Z', None, day.replace('-', r'\-'),
-             day + 'T00:00:00Z', True)):
+             day + 'T00:00:00Z', False, us),
+            # The control passes its own display text, so it checks the stored day alone.
+            ('calendar-utc-midnight-control', day + 'T00:00:00Z', 'June 17, 2034', 'June 17, 2034',
+             day + 'T00:00:00Z', True, us),
+            ('calendar-display-german', day, None, 'Samstag, 17. Juni 2034', day + 'T00:00:00Z', False,
+             ('dddd, d. MMMM yyyy', 'de-DE'))):
+        lid = f'<w:lid w:val="{language}"/>' if language else ''
         picker = ('<w:sdt><w:sdtPr><w:id w:val="713"/><w:date>'
-                  '<w:dateFormat w:val="MMMM d, yyyy"/></w:date></w:sdtPr>'
+                  f'<w:dateFormat w:val="{picture}"/>{lid}</w:date></w:sdtPr>'
                   '<w:sdtContent>' + run('Select day') + '</w:sdtContent></w:sdt>')
         body = para(runs=run('Inspection: ') + picker)
         yield make(cid, body, control, 'date-fill',
@@ -199,7 +206,7 @@ def generate(root=ROOT):
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                           'origin': 'Original literal OOXML and Larch row labels; no imported assets'}})
     cases.extend(session_values(root, folder))
-    manifest = {'schema': 1, 'suite': 'projection-v5', 'version': 5,
+    manifest = {'schema': 1, 'suite': 'projection-v6', 'version': 6,
                 'generatorSha256': digest(Path(__file__)), 'cases': cases}
     write_json(folder / 'manifest.json', manifest)
     return manifest

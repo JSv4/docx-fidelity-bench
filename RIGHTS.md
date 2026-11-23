@@ -1,3 +1,7 @@
+`calendar-display-german` (Docxodus #1851) is an original date control authored in `bench/projection_fixtures.py`
+for this MIT-licensed corpus, with no imported text or assets. `docs/results/date-display-format/evidence.json`
+records text read from a desktop word processor; no file that application wrote is included.
+
 The fifteen cases for Docxodus #1817, #1842, #1844 and #1845 contain original roof inventory, garden inspection,
 ridge survey and tree names. Their literal OOXML and text were authored for this MIT-licensed corpus in
 `bench/redline_fixtures.py` and `bench/projection_fixtures.py`. They use no reporter documents, scripts, snippets
