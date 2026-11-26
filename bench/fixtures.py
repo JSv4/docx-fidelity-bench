@@ -4370,6 +4370,47 @@ def on_spelled_hidden_mark_cases(add):
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': 'RowanTail', 'tolerancePt': 1.5}])
 
 
+def split_direction_mark_cases(add):
+    """Original Tamarisk labels: text a renderer moves to a new parent keeps its invisible direction marks
+    (Docxodus #1862). An HTML renderer may write a left-to-right mark after a line break and right-to-left
+    marks around right-to-left runs; none is a visible word. Three reproducers move such text: a page break
+    splitting a left-to-right paragraph that holds a line break, a page break splitting a right-to-left
+    paragraph of right-to-left runs, and a link holding a line break inside a HYPERLINK field's result. Each
+    control is its reproducer without the page break, or without the field.
+
+    The line break comes before the page break because LibreOffice 25.8.7.3 drops a page break that a line
+    break directly follows. The right-to-left runs hold Latin labels: Poppler extracts Hebrew words from a
+    LibreOffice PDF in visual order, so a Hebrew inventory could not be met by the reference."""
+    page_break = '<w:r><w:br w:type="page"/></w:r>'
+    full_page = lambda label, page: {'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': page,
+                                     'rect': [0, 0, 612, 792]}
+    for direction in ('ltr', 'rtl'):
+        if direction == 'ltr':
+            labels = ['TamariskLanding', 'TamariskBeacon', 'TamariskCove']
+            before = run(labels[0]) + '<w:r><w:br/></w:r>' + run(labels[1] + ' ')
+            after, props, shape = run(labels[2]), '', 'Tamarisk paragraph with a line break'
+        else:
+            labels = ['TamariskQuay', 'TamariskMole']
+            # w:szCs gives the right-to-left runs the 11pt the other labels have; renderers differ on its default.
+            rtl = '<w:szCs w:val="22"/><w:rtl/>'
+            before, after = run(labels[0] + ' ', rtl), run(labels[1], rtl)
+            props, shape = '<w:bidi/>', 'Right-to-left Tamarisk paragraph of right-to-left runs'
+        for control in (False, True):
+            add(f'direction-mark-page-split-{direction}' + ('-control' if control else ''), 'paragraphs',
+                shape + (' (control: no page break)' if control else ', split by a page break') + ' (Docxodus #1862)',
+                labels, para(props=props, runs=before + ('' if control else page_break) + after),
+                assertions=[full_page(label, 1 if control or label != labels[-1] else 2) for label in labels])
+    labels = ['TamariskChart', 'TamariskSounding']
+    link = f'<w:hyperlink r:id="rTamariskLink"><w:r><w:t>{labels[0]}</w:t><w:br/><w:t>{labels[1]}</w:t></w:r></w:hyperlink>'
+    for control in (False, True):
+        add('direction-mark-field-link-line-break' + ('-control' if control else ''), 'paragraphs',
+            'Tamarisk link holding a line break' + (' (control: outside any field)' if control
+            else ' inside a HYPERLINK field\'s result') + ' (Docxodus #1862)',
+            labels, para(runs=link if control else complex_field(' HYPERLINK "https://example.com/" ', link)),
+            relations_extra=[('rTamariskLink', 'hyperlink', 'https://example.com/', 'External')],
+            assertions=[full_page(label, 1) for label in labels])
+
+
 def unused_grid_column_cases(add):
     """Original Quince labels: grid columns no row reaches leave the table (Docxodus #1750)."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -7525,7 +7566,8 @@ def generate():
     universal_measure_page_cases(add)
     strict_chart_part_cases(add)
     on_spelled_hidden_mark_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v175', 'version': 175, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    split_direction_mark_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v176', 'version': 176, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

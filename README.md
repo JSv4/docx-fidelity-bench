@@ -1,3 +1,15 @@
+`core-v176` adds three reproducers and three controls for [Docxodus #1862](https://github.com/JSv4/Docxodus/issues/1862):
+text that the HTML converter moved to a new parent printed its invisible direction marks as the words `#x200e` and
+`#x200f`. `direction-mark-page-split-ltr` holds a line break in a paragraph that a page break splits,
+`direction-mark-page-split-rtl` a right-to-left paragraph of right-to-left runs that a page break splits, and
+`direction-mark-field-link-line-break` a link holding a line break inside a HYPERLINK field's result; each control
+drops the page break or the field. The visible-word inventory leaves the marks out but counts the printed words, and
+a whole-page `marker-region` check pins each label to its page. In unscored public-API captures Docxodus 9af576ec
+fails the three reproducers and the fix ([JSv4/Docxodus#1866](https://github.com/JSv4/Docxodus/pull/1866), 5bdf3f8b)
+passes all six; all six LibreOffice references are eligible. All earlier DOCX files remain byte-identical, and
+the redline suite is unchanged. Word reference registration and full-suite scoring remain pending. See
+[the evidence](docs/results/split-direction-marks/README.md).
+
 `projection-v6` changes the default display text expected from a filled date control for Docxodus #1851: the
 control's own format and language, as a desktop word processor (build 16.0.20326) shows a picked date. It adds
 `calendar-display-german`, and gives `calendar-utc-midnight-control` explicit display text so it checks the stored

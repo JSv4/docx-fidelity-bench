@@ -1,0 +1,789 @@
+{
+  "scope": "Focused unscored public-API diagnostics; no candidate score, Word parity or full-suite result",
+  "manifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9",
+  "referenceBundleSha256": "d5b1be8920b85775294ba35af87055e802e81ac7597d5b6dabcf1e990a638d39",
+  "referenceRenderer": {
+    "name": "libreoffice",
+    "version": "LibreOffice 25.8.7.3 580(Build:3)"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "builds": {
+    "main": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-main/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "9af576ecded6cd820647b38e79864665e8d1568f",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "58ef9353572db7ecfc819d67b69a604753225f636c9ecd07a426d94158ff34e4",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "a69922835398430cd15281f5168284ee6b1c129c35f1341cff500a3ae073b297",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "3b1e1352ad11eaa2fdb8abc010ccd4a6bd63050d7f76432b8868813ac4ad682b",
+        "npm-export/dist/fonts/doctor.js": "67f9b4730ac19f63c864a4c52745b4a8b644440bc2b14aaf0245ab2e58f980bd",
+        "npm-export/dist/fonts/document.js": "71cd290ff360442416f4956e2a097cdab5f98abcd973a302fe2f5a62c50b670d",
+        "npm-export/dist/fonts/index.js": "ef3febc49ec719defa8dfafdfcc1b978c186968578d8ecf930fcd4c5da21337c",
+        "npm-export/dist/fonts/local.js": "d9f18d9db548ddd99e51c84b0de12d876804a3dcd5812caf4745e134ecc831e2",
+        "npm-export/dist/fonts/resolver.js": "ab91831b23074d2c0d251ebdea62bf9d2864651f1eec9b9a33e8e7e44dca5729",
+        "npm-export/dist/fonts/sfnt.js": "626c3dce361d156e1f1a6cc6dbd142adae446fb67f461a563df6638cfa547540",
+        "npm-export/dist/host.js": "0339943c76d4939b2b22a7131287215ce7d6d6b3b8f04b41de7b15e6529786f4",
+        "npm-export/dist/index.js": "39364f91d2cb92dd015bf9ab0e39528ca4b1f9cc61c91061be8231c381e71565",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "cf73cb6f254613d5bd2f2ad4b8c88b6d03ca8a5b9365b2111c8a7ea0bb8b783e",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "ed0eeb5083c8b0837fe2a058543a2b9576b35014f58f9947ec1cd544756f2bf2",
+      "schema": 1,
+      "tree": "ee0da1b96bd207ee60c08b55ec6d8be0c0ff31d8"
+    },
+    "fix": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/dfb-1862/dx-fix/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "5bdf3f8b317862f79538b3ccd9780b7d34d8a3a6",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "58ef9353572db7ecfc819d67b69a604753225f636c9ecd07a426d94158ff34e4",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "a69922835398430cd15281f5168284ee6b1c129c35f1341cff500a3ae073b297",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "3b1e1352ad11eaa2fdb8abc010ccd4a6bd63050d7f76432b8868813ac4ad682b",
+        "npm-export/dist/fonts/doctor.js": "67f9b4730ac19f63c864a4c52745b4a8b644440bc2b14aaf0245ab2e58f980bd",
+        "npm-export/dist/fonts/document.js": "71cd290ff360442416f4956e2a097cdab5f98abcd973a302fe2f5a62c50b670d",
+        "npm-export/dist/fonts/index.js": "ef3febc49ec719defa8dfafdfcc1b978c186968578d8ecf930fcd4c5da21337c",
+        "npm-export/dist/fonts/local.js": "d9f18d9db548ddd99e51c84b0de12d876804a3dcd5812caf4745e134ecc831e2",
+        "npm-export/dist/fonts/resolver.js": "ab91831b23074d2c0d251ebdea62bf9d2864651f1eec9b9a33e8e7e44dca5729",
+        "npm-export/dist/fonts/sfnt.js": "626c3dce361d156e1f1a6cc6dbd142adae446fb67f461a563df6638cfa547540",
+        "npm-export/dist/host.js": "0339943c76d4939b2b22a7131287215ce7d6d6b3b8f04b41de7b15e6529786f4",
+        "npm-export/dist/index.js": "39364f91d2cb92dd015bf9ab0e39528ca4b1f9cc61c91061be8231c381e71565",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "89476be6bb507f9bee9392dbcc15d412acf14fa02d6b07dc6dece4863e81d1eb",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "ed0eeb5083c8b0837fe2a058543a2b9576b35014f58f9947ec1cd544756f2bf2",
+      "schema": 1,
+      "tree": "c3fd57fa6a5509be795064cc850c338225bb5cab"
+    }
+  },
+  "captures": {
+    "main": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "9af576ecded6cd820647b38e79864665e8d1568f",
+      "sourceTree": "ee0da1b96bd207ee60c08b55ec6d8be0c0ff31d8",
+      "buildIdentitySha256": "f3c5e30d47db987cc9727aa454549a8444cdcbc39151696b9cdec0ab03ab00b7",
+      "manifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9",
+      "browserVersion": "158.0.8127.36",
+      "executableSha256": "08d5a3fba3197010b28113da201bd31a49b4439619dbf558f8040e4015c787bb",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "direction-mark-page-split-ltr",
+          "inputSha256": "e07d027e1f02417b647d54463d5e0d97713837289bfbd26c470b7ddc156a5698",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "df97b9c47e5e8a8527325f86d60c9b00fad371cfa84a070d19026977b22b11da",
+          "renderReportSha256": "0218874b12b05cf3611d111c6ab4eb057a1ae36e98356f4df0d1276fec22dfff",
+          "htmlSha256": "e7cb5b7b52b43b7c6a9e0085ec8a3ab51f153410b645d7f198c00bf9cbaac203",
+          "htmlFactsSha256": "44f0295466edab4e7beeb7e0a71c4775fc14a4fa2be2c3d235cdf1a464bf6bdd",
+          "mandatoryPdfFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-region"
+          ]
+        },
+        {
+          "id": "direction-mark-page-split-ltr-control",
+          "inputSha256": "2d95b402d6a0006798c6092cdb864d8b55fb4caf432e4cfde6cc6a15fe9da94b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "db831126182799a436d1a4b6d893ac168b40d1492872ca832d7074592ad75d48",
+          "renderReportSha256": "34fe70cec47f143254d8c8872b29375d2f4aeb269f41b35a16a705a66aad4b25",
+          "htmlSha256": "185af59573e4daa31dace5d56be0741aa40dd069c3c6115aae2d621593567ca3",
+          "htmlFactsSha256": "73525916e818fe05017c6831f2daff0eb60b54c1c3a1854de4c5ecc252a80014",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "direction-mark-page-split-rtl",
+          "inputSha256": "d4238847f6354198768283a4030ff1434242a0342fcfe9f808a404373139c406",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "c27d207aa7a20ff4ff760bfb273437b7eccec19cf4ab8f89a24ba8cab476252a",
+          "renderReportSha256": "cb0ea71241e40a8734ed9193230cb83a6ee26b93180cf957524a994062bac4e9",
+          "htmlSha256": "995aaeaaa619e3d0b7c80f735f8380d749e9320bec0785deaff43f8bd4e8bf31",
+          "htmlFactsSha256": "c7fcb1b2229f2a1348073a2ad119ed41f82daaa1bc5da058c7baee4587a6d389",
+          "mandatoryPdfFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        {
+          "id": "direction-mark-page-split-rtl-control",
+          "inputSha256": "401c5a88f48e942ebec37e4fe7dc763769ca8c5266b4d51993940b845ebec3af",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7c0730706720534591020067867f9a15b98529cc41ce455920d3d0b3eb48656b",
+          "renderReportSha256": "6062670d8c96837e9284b60fda2dfca6228295c331bcc144b585f97a7cd0c49e",
+          "htmlSha256": "1f346d681aa0d3d4e21598c69d2f44391deaaa4ac11699f83c7085010e3306f9",
+          "htmlFactsSha256": "a9b1c0d934b7d631653b38bd9ff0d87cc564fceab26da7272c5483cd7ec7bf84",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "direction-mark-field-link-line-break",
+          "inputSha256": "8f29261cab73bb090c34c85fd20494574a2acd1c2bcbdb02e920778bf55f2043",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "115e0b2c8b2dd1a959d17f735c6c568b152e6a793f069ffcd2c531db87dfd2d9",
+          "renderReportSha256": "0115ff6b821e4b8a04a6186a3c6cca1a03f529f7c0b90db2fc0ba38d0303967f",
+          "htmlSha256": "f9e5ec7a7e17ab215b384b7b90494bc7274d67ff495de934ce4a2743c714454b",
+          "htmlFactsSha256": "8bc1b08a22fedb8891cf62f89a189a7de7214b3bb3e17299ed595699d855be1f",
+          "mandatoryPdfFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-region"
+          ]
+        },
+        {
+          "id": "direction-mark-field-link-line-break-control",
+          "inputSha256": "e72addd1b053e0177b6438d53a3c03f8e4055141980906127b5eb2ce0964e49b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "3b48d0e56b3a6d9d85a66886fbdc9b9c49c2db1c84d6493b49f146edd4f01e1f",
+          "renderReportSha256": "695b26bf9cb29c2fa5e0172cf6718de455cdf1e3df58b4e3becf5062eb8f91c5",
+          "htmlSha256": "76f60849fe155bed1b9507e5b702a087a37ae434a4c16bf0f88ba989ac606a4e",
+          "htmlFactsSha256": "b3ddb4ab716b7ccec42a76f60316474eb4aef60553074425a93909bc715a5d72",
+          "mandatoryPdfFailures": []
+        }
+      ],
+      "htmlInspectorSha256": "85b55a36b1745ca06cf9102bbb234d37f2a9a4915fd5413d227ad1d7e3bb5e8d",
+      "inspectionManifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9"
+    },
+    "fix": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "5bdf3f8b317862f79538b3ccd9780b7d34d8a3a6",
+      "sourceTree": "c3fd57fa6a5509be795064cc850c338225bb5cab",
+      "buildIdentitySha256": "bb84a94cd6fa99e552f6ff2528044fc5e552e63ebdec7bfabf977b20ba6fb749",
+      "manifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9",
+      "browserVersion": "158.0.8127.36",
+      "executableSha256": "08d5a3fba3197010b28113da201bd31a49b4439619dbf558f8040e4015c787bb",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "direction-mark-page-split-ltr",
+          "inputSha256": "e07d027e1f02417b647d54463d5e0d97713837289bfbd26c470b7ddc156a5698",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "82a879f1fe40a4cd3d1a2e502cac8120ebf8a03e2378eaf3cda8d3f413bd8fa2",
+          "renderReportSha256": "6451d5d806e9eacd3e6c01285a842f15a7c07fcc1e239b28203b33131c20f199",
+          "htmlSha256": "a996dc0fbf3084f9d25263c8d0b8c1b5535ae8c64b30f7c9dfa37453abe14163",
+          "htmlFactsSha256": "d8c32b1a6cb8840eb2487c0b2716d384943ca91676881380c1e1aae727fb51bb",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "direction-mark-page-split-ltr-control",
+          "inputSha256": "2d95b402d6a0006798c6092cdb864d8b55fb4caf432e4cfde6cc6a15fe9da94b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "4ae72995d4d2eff264dfc0ea92b9f8c6621fde783614ba5dbe935005520be9f8",
+          "renderReportSha256": "665d3fc199a1be92af42c07edad5d607d16c6352844792291acf9ff9d016ac5c",
+          "htmlSha256": "185af59573e4daa31dace5d56be0741aa40dd069c3c6115aae2d621593567ca3",
+          "htmlFactsSha256": "73525916e818fe05017c6831f2daff0eb60b54c1c3a1854de4c5ecc252a80014",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "direction-mark-page-split-rtl",
+          "inputSha256": "d4238847f6354198768283a4030ff1434242a0342fcfe9f808a404373139c406",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "33259eb6691431e0bf2a14451d6f6ed0c4f4fafaf5795e50d31cb8a742323cee",
+          "renderReportSha256": "815011ea768507dff5a671a46b0d6ce37342a5bc30bb1c487930d50f9999df01",
+          "htmlSha256": "7eb8bbf9148e0a8e04bd4caeb186fde189b17edfed9fe05b937c76a10b83a959",
+          "htmlFactsSha256": "fc8fc326b8f5015aa07828c9e055da710ee5a933b2e0c7d358f37de8e9408260",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "direction-mark-page-split-rtl-control",
+          "inputSha256": "401c5a88f48e942ebec37e4fe7dc763769ca8c5266b4d51993940b845ebec3af",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "0c9c2c4708886bef9f4997a000ca113e4e646c8040b8cdb1bc2b5c0a0069dff3",
+          "renderReportSha256": "1e3bfb44bced81a8e0d64ccaaec6d109279c27b8073d2b8d66eca96cafd47bea",
+          "htmlSha256": "1f346d681aa0d3d4e21598c69d2f44391deaaa4ac11699f83c7085010e3306f9",
+          "htmlFactsSha256": "a9b1c0d934b7d631653b38bd9ff0d87cc564fceab26da7272c5483cd7ec7bf84",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "direction-mark-field-link-line-break",
+          "inputSha256": "8f29261cab73bb090c34c85fd20494574a2acd1c2bcbdb02e920778bf55f2043",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "74a8c2e175cfa75f1a82d5eca1a7ea0ef2220491f6de5549748ea9e2a0cd3144",
+          "renderReportSha256": "a0e997dee590b213af2c2e4a5af8f37fe175eef4ad8d41f51d777e1e497a8901",
+          "htmlSha256": "b62a0db388e084f69b021a932c8b46d8e496d4bf8e240cd8c581eedd79bc7312",
+          "htmlFactsSha256": "f0cc3aacf2a81ac7bff200cd918a2f95b43a248dfe78330922dfbec7add524de",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "direction-mark-field-link-line-break-control",
+          "inputSha256": "e72addd1b053e0177b6438d53a3c03f8e4055141980906127b5eb2ce0964e49b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "408b9f408984d942abdd7715e5910c6116eddaa3ff386532c212007694df0441",
+          "renderReportSha256": "dd79fd6c4a22c21a81633cfabee1f64e8ae590bdc07b25d8a72bf56dfd6df155",
+          "htmlSha256": "76f60849fe155bed1b9507e5b702a087a37ae434a4c16bf0f88ba989ac606a4e",
+          "htmlFactsSha256": "b3ddb4ab716b7ccec42a76f60316474eb4aef60553074425a93909bc715a5d72",
+          "mandatoryPdfFailures": []
+        }
+      ],
+      "htmlInspectorSha256": "85b55a36b1745ca06cf9102bbb234d37f2a9a4915fd5413d227ad1d7e3bb5e8d",
+      "inspectionManifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9"
+    }
+  },
+  "cases": [
+    {
+      "id": "direction-mark-page-split-ltr",
+      "inputSha256": "e07d027e1f02417b647d54463d5e0d97713837289bfbd26c470b7ddc156a5698",
+      "screenshot": "direction-mark-page-split-ltr.png",
+      "screenshotSha256": "4acdb94b08dcc6ca6db0bdd728f80fdd83093cd2849b476f3c5e230ebbe1ae2e",
+      "cropPx": [
+        72,
+        74,
+        262,
+        154
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "63cf23d7395f15f8bc48b89b6d413dee900ca45558bd4e944f47f5b60c0607a0",
+          "failures": [],
+          "words": [
+            "TamariskLanding",
+            "TamariskBeacon",
+            "TamariskCove"
+          ],
+          "pageRasterSha256": [
+            "ffc6962633a995aaeb4ca172134ebad805c2214439bdca17240bba0afb804734",
+            "cd978ad10638ed537ae7be1ec71e7ac4b5850587dc1582b4d8564518172940e6"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9af576ec",
+          "pdfSha256": "df97b9c47e5e8a8527325f86d60c9b00fad371cfa84a070d19026977b22b11da",
+          "failures": [
+            "expected-visible-tokens",
+            "assertion-marker-region"
+          ],
+          "words": [
+            "TamariskLanding",
+            "#x200eTamariskBeacon",
+            "TamariskCove"
+          ],
+          "pageRasterSha256": [
+            "9866a903edb02d887b62225582b09ffcac1bec22034c0c28859aff6eb47c196a",
+            "ec5f656a39c70210aba5f106d7211bd400ac0668fbaa9d1cd258c87cb3206b81"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 5bdf3f8b",
+          "pdfSha256": "82a879f1fe40a4cd3d1a2e502cac8120ebf8a03e2378eaf3cda8d3f413bd8fa2",
+          "failures": [],
+          "words": [
+            "TamariskLanding",
+            "TamariskBeacon",
+            "TamariskCove"
+          ],
+          "pageRasterSha256": [
+            "0223539fffa3be1f444b7ab199a72cfc64613bea2722d59716a5c3976408d565",
+            "ec5f656a39c70210aba5f106d7211bd400ac0668fbaa9d1cd258c87cb3206b81"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direction-mark-page-split-ltr-control",
+      "inputSha256": "2d95b402d6a0006798c6092cdb864d8b55fb4caf432e4cfde6cc6a15fe9da94b",
+      "screenshot": "direction-mark-page-split-ltr-control.png",
+      "screenshotSha256": "2264779c1ecbc81c500679cd2ecbb5cd5375da440e6a0d47dcc5098bf7bf19bf",
+      "cropPx": [
+        72,
+        74,
+        309,
+        154
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "c2e79761e20a421e61ba57d232a724e8475d2aec089a93583ca0f0406b6f0d0e",
+          "failures": [],
+          "words": [
+            "TamariskLanding",
+            "TamariskBeacon",
+            "TamariskCove"
+          ],
+          "pageRasterSha256": [
+            "752a7b5d8090912ad48766514b582acec4b6d4c8c9300559ca7ad7b1618a49cc"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9af576ec",
+          "pdfSha256": "db831126182799a436d1a4b6d893ac168b40d1492872ca832d7074592ad75d48",
+          "failures": [],
+          "words": [
+            "TamariskLanding",
+            "TamariskBeacon",
+            "TamariskCove"
+          ],
+          "pageRasterSha256": [
+            "f4f74b6ecf2fdeb5f59482ebb5a7c6a6a61acff7d3edec6b43b8e35bd9d97408"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 5bdf3f8b",
+          "pdfSha256": "4ae72995d4d2eff264dfc0ea92b9f8c6621fde783614ba5dbe935005520be9f8",
+          "failures": [],
+          "words": [
+            "TamariskLanding",
+            "TamariskBeacon",
+            "TamariskCove"
+          ],
+          "pageRasterSha256": [
+            "f4f74b6ecf2fdeb5f59482ebb5a7c6a6a61acff7d3edec6b43b8e35bd9d97408"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direction-mark-page-split-rtl",
+      "inputSha256": "d4238847f6354198768283a4030ff1434242a0342fcfe9f808a404373139c406",
+      "screenshot": "direction-mark-page-split-rtl.png",
+      "screenshotSha256": "0111c98b5afe306d634f359bbdff4997ab6dce3359c7b65fb0347144f7c96849",
+      "cropPx": [
+        480,
+        74,
+        744,
+        137
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "31f4d08d0fd0a8c1b5816ff7313786a791510d05e7e55fb105ab12990f9d1060",
+          "failures": [],
+          "words": [
+            "TamariskQuay",
+            "TamariskMole"
+          ],
+          "pageRasterSha256": [
+            "ff468c979c9a0b1926462ce5b3e55fdac06f7cecc33e35d316b069f0bfb86c83",
+            "9e4e1c3caf44e0c15fb77e0dc16f18994c30753c06afb190aa1e87df8e065f47"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9af576ec",
+          "pdfSha256": "c27d207aa7a20ff4ff760bfb273437b7eccec19cf4ab8f89a24ba8cab476252a",
+          "failures": [
+            "expected-visible-tokens",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "words": [
+            "x200f",
+            "#x200fTamariskQuay",
+            "#x200f",
+            "#",
+            "x200fTamariskMole#x200f#"
+          ],
+          "pageRasterSha256": [
+            "da7d4e1c8774034910632dbf9dee21e39a67c4ec93792fe4306769ddb90b1499",
+            "d2311cebadaa86741857ef73158eb8824bcb56bcba88c21e6ef6b945e75021b7"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 5bdf3f8b",
+          "pdfSha256": "33259eb6691431e0bf2a14451d6f6ed0c4f4fafaf5795e50d31cb8a742323cee",
+          "failures": [],
+          "words": [
+            "TamariskQuay",
+            "TamariskMole"
+          ],
+          "pageRasterSha256": [
+            "2c475a2b5bf20e69ddcd6563209a6a56096048f6dd7d1f0c0bf58b7526f2a62b",
+            "3263a4550611b5f18b4e38828f3bb907e2c370eea34d65c0b45697329be7751e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direction-mark-page-split-rtl-control",
+      "inputSha256": "401c5a88f48e942ebec37e4fe7dc763769ca8c5266b4d51993940b845ebec3af",
+      "screenshot": "direction-mark-page-split-rtl-control.png",
+      "screenshotSha256": "b4f4f64866dba1bbd705547afb759e356f57035a087d52749c8bb72bc10a5d67",
+      "cropPx": [
+        519,
+        74,
+        744,
+        137
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "932c461cdeec45fa31e68b5697cfe2f4cb3521ce40bea218585ea38c48d97315",
+          "failures": [],
+          "words": [
+            "TamariskQuay",
+            "TamariskMole"
+          ],
+          "pageRasterSha256": [
+            "7677057f7c27b06d3d257398d1ad6d14964254185e7dc81f7c0b15b4591dcbde"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9af576ec",
+          "pdfSha256": "7c0730706720534591020067867f9a15b98529cc41ce455920d3d0b3eb48656b",
+          "failures": [],
+          "words": [
+            "TamariskMole",
+            "TamariskQuay"
+          ],
+          "pageRasterSha256": [
+            "6098f4c300ca2db9f62b4b0e5a720689ad1a8a02ad67078d40967370f6dcacae"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 5bdf3f8b",
+          "pdfSha256": "0c9c2c4708886bef9f4997a000ca113e4e646c8040b8cdb1bc2b5c0a0069dff3",
+          "failures": [],
+          "words": [
+            "TamariskMole",
+            "TamariskQuay"
+          ],
+          "pageRasterSha256": [
+            "6098f4c300ca2db9f62b4b0e5a720689ad1a8a02ad67078d40967370f6dcacae"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direction-mark-field-link-line-break",
+      "inputSha256": "8f29261cab73bb090c34c85fd20494574a2acd1c2bcbdb02e920778bf55f2043",
+      "screenshot": "direction-mark-field-link-line-break.png",
+      "screenshotSha256": "4355f0705578fb00c0f9ea5fc51cedf7fdd3fc0ff98338bde141f267d14247ef",
+      "cropPx": [
+        72,
+        74,
+        275,
+        157
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "d59203ab176647eb420d7ae405c4b1141a34ffea5ee390441de7c57849bba217",
+          "failures": [],
+          "words": [
+            "TamariskChart",
+            "TamariskSounding"
+          ],
+          "pageRasterSha256": [
+            "bb9b453129ce38a6f24ddf3b4e5d9b5ff2439faf4be135c4f501209afa23f316"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9af576ec",
+          "pdfSha256": "115e0b2c8b2dd1a959d17f735c6c568b152e6a793f069ffcd2c531db87dfd2d9",
+          "failures": [
+            "expected-visible-tokens",
+            "assertion-marker-region"
+          ],
+          "words": [
+            "TamariskChart",
+            "#x200eTamariskSounding"
+          ],
+          "pageRasterSha256": [
+            "3723b85331699d67880acb33878f4677cdcf859335eadce816e53daa552b5aac"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 5bdf3f8b",
+          "pdfSha256": "74a8c2e175cfa75f1a82d5eca1a7ea0ef2220491f6de5549748ea9e2a0cd3144",
+          "failures": [],
+          "words": [
+            "TamariskChart",
+            "TamariskSounding"
+          ],
+          "pageRasterSha256": [
+            "a27d7c989484e36f6e5016e6a5e4b8acbbbd305654db1033a316ac5f24834f77"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direction-mark-field-link-line-break-control",
+      "inputSha256": "e72addd1b053e0177b6438d53a3c03f8e4055141980906127b5eb2ce0964e49b",
+      "screenshot": "direction-mark-field-link-line-break-control.png",
+      "screenshotSha256": "62249e67a60dca60ae7d88c7862cab3ac89dbe866c193420b9a4e7c6d61dd274",
+      "cropPx": [
+        72,
+        74,
+        232,
+        157
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "22a59a95bab592b686a28a21778c411f23a02e5a3f73f3dbe48db180a819ba4f",
+          "failures": [],
+          "words": [
+            "TamariskChart",
+            "TamariskSounding"
+          ],
+          "pageRasterSha256": [
+            "bb9b453129ce38a6f24ddf3b4e5d9b5ff2439faf4be135c4f501209afa23f316"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9af576ec",
+          "pdfSha256": "3b48d0e56b3a6d9d85a66886fbdc9b9c49c2db1c84d6493b49f146edd4f01e1f",
+          "failures": [],
+          "words": [
+            "TamariskChart",
+            "TamariskSounding"
+          ],
+          "pageRasterSha256": [
+            "d764e9872feba71cbfc897e30161c8db0d447b9e972a48e552cbfd545778314c"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 5bdf3f8b",
+          "pdfSha256": "408b9f408984d942abdd7715e5910c6116eddaa3ff386532c212007694df0441",
+          "failures": [],
+          "words": [
+            "TamariskChart",
+            "TamariskSounding"
+          ],
+          "pageRasterSha256": [
+            "d764e9872feba71cbfc897e30161c8db0d447b9e972a48e552cbfd545778314c"
+          ]
+        }
+      ]
+    }
+  ],
+  "tools": {
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631",
+    "docs/results/export-reliability/Inspect.py": "f52f51d657d3d0d06f85c2ab42664e1bd120c82c461849e5eef435545d3f22bc",
+    "docs/results/split-direction-marks/Compose.py": "6ca2d23e9359449cf76ba53be3eef2e72b951f5862e53920d6f95d2b8be22188"
+  }
+}
