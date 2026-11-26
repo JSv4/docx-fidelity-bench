@@ -4375,30 +4375,34 @@ def split_direction_mark_cases(add):
     (Docxodus #1862). An HTML renderer may write a left-to-right mark after a line break and right-to-left
     marks around right-to-left runs; none is a visible word. Three reproducers move such text: a page break
     splitting a left-to-right paragraph that holds a line break, a page break splitting a right-to-left
-    paragraph of right-to-left runs, and a link holding a line break inside a HYPERLINK field's result. Each
-    control is its reproducer without the page break, or without the field.
+    paragraph of right-to-left runs, and a link holding a line break inside a HYPERLINK field's result. The
+    left-to-right control drops the page break and the field control drops the field. The right-to-left control
+    has a line break in the page break's place, so each label keeps a line of its own and the order of two
+    right-to-left runs on one line, which the reproducer never sets, is not measured.
 
     The line break comes before the page break because LibreOffice 25.8.7.3 drops a page break that a line
     break directly follows. The right-to-left runs hold Latin labels: Poppler extracts Hebrew words from a
     LibreOffice PDF in visual order, so a Hebrew inventory could not be met by the reference."""
-    page_break = '<w:r><w:br w:type="page"/></w:r>'
+    page_break, line_break = '<w:r><w:br w:type="page"/></w:r>', '<w:r><w:br/></w:r>'
     full_page = lambda label, page: {'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': page,
                                      'rect': [0, 0, 612, 792]}
     for direction in ('ltr', 'rtl'):
         if direction == 'ltr':
             labels = ['TamariskLanding', 'TamariskBeacon', 'TamariskCove']
-            before = run(labels[0]) + '<w:r><w:br/></w:r>' + run(labels[1] + ' ')
-            after, props, shape = run(labels[2]), '', 'Tamarisk paragraph with a line break'
+            before = run(labels[0]) + line_break + run(labels[1] + ' ')
+            after, props, shape, instead = run(labels[2]), '', 'Tamarisk paragraph with a line break', ''
         else:
             labels = ['TamariskQuay', 'TamariskMole']
             # w:szCs gives the right-to-left runs the 11pt the other labels have; renderers differ on its default.
             rtl = '<w:szCs w:val="22"/><w:rtl/>'
             before, after = run(labels[0] + ' ', rtl), run(labels[1], rtl)
             props, shape = '<w:bidi/>', 'Right-to-left Tamarisk paragraph of right-to-left runs'
+            instead = line_break
         for control in (False, True):
             add(f'direction-mark-page-split-{direction}' + ('-control' if control else ''), 'paragraphs',
-                shape + (' (control: no page break)' if control else ', split by a page break') + ' (Docxodus #1862)',
-                labels, para(props=props, runs=before + ('' if control else page_break) + after),
+                shape + ((' (control: a line break instead of the page break)' if instead else ' (control: no page break)')
+                         if control else ', split by a page break') + ' (Docxodus #1862)',
+                labels, para(props=props, runs=before + (instead if control else page_break) + after),
                 assertions=[full_page(label, 1 if control or label != labels[-1] else 2) for label in labels])
     labels = ['TamariskChart', 'TamariskSounding']
     link = f'<w:hyperlink r:id="rTamariskLink"><w:r><w:t>{labels[0]}</w:t><w:br/><w:t>{labels[1]}</w:t></w:r></w:hyperlink>'

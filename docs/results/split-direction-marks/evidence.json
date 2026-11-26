@@ -1,7 +1,7 @@
 {
-  "scope": "Focused unscored public-API diagnostics; no candidate score, Word parity or full-suite result",
-  "manifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9",
-  "referenceBundleSha256": "d5b1be8920b85775294ba35af87055e802e81ac7597d5b6dabcf1e990a638d39",
+  "scope": "Focused unscored public-API diagnostics; no registered candidate score, Word parity or full-suite result",
+  "manifestSha256": "a66f7f8cafdafecfa784384bf310e66bd18d215efb9715ae573987fea0500487",
+  "referenceBundleSha256": "e25d52730a9a2ac538c60795165bca79c9c3d2df975ccba6ebf132b209292b07",
   "referenceRenderer": {
     "name": "libreoffice",
     "version": "LibreOffice 25.8.7.3 580(Build:3)"
@@ -47,6 +47,22 @@
         "version": "qpdf version 12.2.0"
       }
     }
+  },
+  "calibrationResultSha256": "fa45e9928865a555f1e3242822ef6eaf53f8cbc7272041b394a6b79cb4c30890",
+  "metric": {
+    "version": 3,
+    "clippedText": "declared exact-row tokens may be absent or whole up to their authored count",
+    "dpi": 96,
+    "inkThreshold": 24,
+    "inkRadius": 1,
+    "ssimWindow": 8,
+    "ssimC1": 6.5025,
+    "ssimC2": 58.5225,
+    "alignment": "none",
+    "pageScore": "100 * min(ssim, inkF1)",
+    "caseScore": "worst page; zero on mandatory failure",
+    "visibleText": "excludes UAX #9 bidi formatting controls",
+    "canvas": "rasters within 1 pixel per axis share a white union canvas at the CropBox top-left origin; larger differences fail"
   },
   "builds": {
     "main": {
@@ -247,7 +263,7 @@
       "candidate": "9af576ecded6cd820647b38e79864665e8d1568f",
       "sourceTree": "ee0da1b96bd207ee60c08b55ec6d8be0c0ff31d8",
       "buildIdentitySha256": "f3c5e30d47db987cc9727aa454549a8444cdcbc39151696b9cdec0ab03ab00b7",
-      "manifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9",
+      "manifestSha256": "a66f7f8cafdafecfa784384bf310e66bd18d215efb9715ae573987fea0500487",
       "browserVersion": "158.0.8127.36",
       "executableSha256": "08d5a3fba3197010b28113da201bd31a49b4439619dbf558f8040e4015c787bb",
       "sandbox": true,
@@ -277,8 +293,8 @@
           "inputSha256": "e07d027e1f02417b647d54463d5e0d97713837289bfbd26c470b7ddc156a5698",
           "status": "delivered",
           "pages": 2,
-          "pdfSha256": "df97b9c47e5e8a8527325f86d60c9b00fad371cfa84a070d19026977b22b11da",
-          "renderReportSha256": "0218874b12b05cf3611d111c6ab4eb057a1ae36e98356f4df0d1276fec22dfff",
+          "pdfSha256": "e4955021af5078cfd7ea16416ba3c5efbc6a1844b15f52fa7c075565c962ce91",
+          "renderReportSha256": "71abb8a20ef1b9d2594e2444b670b27ce76a20d125388c6549e40ee345be4cbd",
           "htmlSha256": "e7cb5b7b52b43b7c6a9e0085ec8a3ab51f153410b645d7f198c00bf9cbaac203",
           "htmlFactsSha256": "44f0295466edab4e7beeb7e0a71c4775fc14a4fa2be2c3d235cdf1a464bf6bdd",
           "mandatoryPdfFailures": [
@@ -291,8 +307,8 @@
           "inputSha256": "2d95b402d6a0006798c6092cdb864d8b55fb4caf432e4cfde6cc6a15fe9da94b",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "db831126182799a436d1a4b6d893ac168b40d1492872ca832d7074592ad75d48",
-          "renderReportSha256": "34fe70cec47f143254d8c8872b29375d2f4aeb269f41b35a16a705a66aad4b25",
+          "pdfSha256": "776303f68e9b5bf9ba1c22ef09e82b4f9f58e664981ae0a78d5c70154966915d",
+          "renderReportSha256": "1d82d929541bdfecb75813d9780bc48595fecc10208a8cff4af726101d208931",
           "htmlSha256": "185af59573e4daa31dace5d56be0741aa40dd069c3c6115aae2d621593567ca3",
           "htmlFactsSha256": "73525916e818fe05017c6831f2daff0eb60b54c1c3a1854de4c5ecc252a80014",
           "mandatoryPdfFailures": []
@@ -302,8 +318,8 @@
           "inputSha256": "d4238847f6354198768283a4030ff1434242a0342fcfe9f808a404373139c406",
           "status": "delivered",
           "pages": 2,
-          "pdfSha256": "c27d207aa7a20ff4ff760bfb273437b7eccec19cf4ab8f89a24ba8cab476252a",
-          "renderReportSha256": "cb0ea71241e40a8734ed9193230cb83a6ee26b93180cf957524a994062bac4e9",
+          "pdfSha256": "5a587060e142afa3b378f02544ac54eac49b03910a74c3747525848b3b6b1fdf",
+          "renderReportSha256": "81d011f009e18ae452d13350a7f8746cf0c7cb0d97b180438228e5f497fd5fa8",
           "htmlSha256": "995aaeaaa619e3d0b7c80f735f8380d749e9320bec0785deaff43f8bd4e8bf31",
           "htmlFactsSha256": "c7fcb1b2229f2a1348073a2ad119ed41f82daaa1bc5da058c7baee4587a6d389",
           "mandatoryPdfFailures": [
@@ -314,13 +330,13 @@
         },
         {
           "id": "direction-mark-page-split-rtl-control",
-          "inputSha256": "401c5a88f48e942ebec37e4fe7dc763769ca8c5266b4d51993940b845ebec3af",
+          "inputSha256": "7b38ce9c9672de5fb7d8428f88ffa61af88b1913508c73cfd81f7043e2cb4627",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "7c0730706720534591020067867f9a15b98529cc41ce455920d3d0b3eb48656b",
-          "renderReportSha256": "6062670d8c96837e9284b60fda2dfca6228295c331bcc144b585f97a7cd0c49e",
-          "htmlSha256": "1f346d681aa0d3d4e21598c69d2f44391deaaa4ac11699f83c7085010e3306f9",
-          "htmlFactsSha256": "a9b1c0d934b7d631653b38bd9ff0d87cc564fceab26da7272c5483cd7ec7bf84",
+          "pdfSha256": "e5de7735b2d4293b56d5613cc4af634ac50fd669c336f1f4402501dcdeeae4c5",
+          "renderReportSha256": "a4c522634c12b8e938e461338f3969e4fa090d9d9a49b0ccb5b776c9ee639e23",
+          "htmlSha256": "fe18abac367e9b43ca71b2408fb918494d482af431b3eaba07e9587b8dfa858a",
+          "htmlFactsSha256": "d1e7a27439225d6fb269d0dd6816053173fb057d475993a6b1ff7950f323b44d",
           "mandatoryPdfFailures": []
         },
         {
@@ -328,8 +344,8 @@
           "inputSha256": "8f29261cab73bb090c34c85fd20494574a2acd1c2bcbdb02e920778bf55f2043",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "115e0b2c8b2dd1a959d17f735c6c568b152e6a793f069ffcd2c531db87dfd2d9",
-          "renderReportSha256": "0115ff6b821e4b8a04a6186a3c6cca1a03f529f7c0b90db2fc0ba38d0303967f",
+          "pdfSha256": "c4701e16e21838487d0ed68963f58dcaca41b859b070a368aefdd225b3d45930",
+          "renderReportSha256": "56937cbe85ccb00a3fbb0beae7995aeb95712981277dc54c8a1dd0f50a71261d",
           "htmlSha256": "f9e5ec7a7e17ab215b384b7b90494bc7274d67ff495de934ce4a2743c714454b",
           "htmlFactsSha256": "8bc1b08a22fedb8891cf62f89a189a7de7214b3bb3e17299ed595699d855be1f",
           "mandatoryPdfFailures": [
@@ -342,15 +358,15 @@
           "inputSha256": "e72addd1b053e0177b6438d53a3c03f8e4055141980906127b5eb2ce0964e49b",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "3b48d0e56b3a6d9d85a66886fbdc9b9c49c2db1c84d6493b49f146edd4f01e1f",
-          "renderReportSha256": "695b26bf9cb29c2fa5e0172cf6718de455cdf1e3df58b4e3becf5062eb8f91c5",
+          "pdfSha256": "76c4b45b3b58cfafb506ffbb524811004bd5f991572b383922b8678d9499172c",
+          "renderReportSha256": "35d90a216002cc96d15652c31f0f58259a49c0aff526d075179bd811b8496ccc",
           "htmlSha256": "76f60849fe155bed1b9507e5b702a087a37ae434a4c16bf0f88ba989ac606a4e",
           "htmlFactsSha256": "b3ddb4ab716b7ccec42a76f60316474eb4aef60553074425a93909bc715a5d72",
           "mandatoryPdfFailures": []
         }
       ],
       "htmlInspectorSha256": "85b55a36b1745ca06cf9102bbb234d37f2a9a4915fd5413d227ad1d7e3bb5e8d",
-      "inspectionManifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9"
+      "inspectionManifestSha256": "a66f7f8cafdafecfa784384bf310e66bd18d215efb9715ae573987fea0500487"
     },
     "fix": {
       "schema": 1,
@@ -358,7 +374,7 @@
       "candidate": "5bdf3f8b317862f79538b3ccd9780b7d34d8a3a6",
       "sourceTree": "c3fd57fa6a5509be795064cc850c338225bb5cab",
       "buildIdentitySha256": "bb84a94cd6fa99e552f6ff2528044fc5e552e63ebdec7bfabf977b20ba6fb749",
-      "manifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9",
+      "manifestSha256": "a66f7f8cafdafecfa784384bf310e66bd18d215efb9715ae573987fea0500487",
       "browserVersion": "158.0.8127.36",
       "executableSha256": "08d5a3fba3197010b28113da201bd31a49b4439619dbf558f8040e4015c787bb",
       "sandbox": true,
@@ -388,8 +404,8 @@
           "inputSha256": "e07d027e1f02417b647d54463d5e0d97713837289bfbd26c470b7ddc156a5698",
           "status": "delivered",
           "pages": 2,
-          "pdfSha256": "82a879f1fe40a4cd3d1a2e502cac8120ebf8a03e2378eaf3cda8d3f413bd8fa2",
-          "renderReportSha256": "6451d5d806e9eacd3e6c01285a842f15a7c07fcc1e239b28203b33131c20f199",
+          "pdfSha256": "43a970ac2d260a4723ed7d2d2427e167db9035b051c14ad0e823944ac243ac29",
+          "renderReportSha256": "033e1594c489c1c8420dc454278ab7958f969d905ff088255c39b3031f97371d",
           "htmlSha256": "a996dc0fbf3084f9d25263c8d0b8c1b5535ae8c64b30f7c9dfa37453abe14163",
           "htmlFactsSha256": "d8c32b1a6cb8840eb2487c0b2716d384943ca91676881380c1e1aae727fb51bb",
           "mandatoryPdfFailures": []
@@ -399,8 +415,8 @@
           "inputSha256": "2d95b402d6a0006798c6092cdb864d8b55fb4caf432e4cfde6cc6a15fe9da94b",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "4ae72995d4d2eff264dfc0ea92b9f8c6621fde783614ba5dbe935005520be9f8",
-          "renderReportSha256": "665d3fc199a1be92af42c07edad5d607d16c6352844792291acf9ff9d016ac5c",
+          "pdfSha256": "86eaab252d1873c0acdb4ad503ecdf51ba877152f4ced057385ba5a79ba1d4fe",
+          "renderReportSha256": "c8fb069643fb211f6175c238e86d5e00e193c50e67243baf7431ba4a4bde45af",
           "htmlSha256": "185af59573e4daa31dace5d56be0741aa40dd069c3c6115aae2d621593567ca3",
           "htmlFactsSha256": "73525916e818fe05017c6831f2daff0eb60b54c1c3a1854de4c5ecc252a80014",
           "mandatoryPdfFailures": []
@@ -410,21 +426,21 @@
           "inputSha256": "d4238847f6354198768283a4030ff1434242a0342fcfe9f808a404373139c406",
           "status": "delivered",
           "pages": 2,
-          "pdfSha256": "33259eb6691431e0bf2a14451d6f6ed0c4f4fafaf5795e50d31cb8a742323cee",
-          "renderReportSha256": "815011ea768507dff5a671a46b0d6ce37342a5bc30bb1c487930d50f9999df01",
+          "pdfSha256": "d74154ffc0843318753286927656c6dc2ce106a31a471f34b638116aade936c1",
+          "renderReportSha256": "dd8164eb01be23090173b9f9f4d807f8449876d58e6cc16dd6d6ccda471b46b2",
           "htmlSha256": "7eb8bbf9148e0a8e04bd4caeb186fde189b17edfed9fe05b937c76a10b83a959",
           "htmlFactsSha256": "fc8fc326b8f5015aa07828c9e055da710ee5a933b2e0c7d358f37de8e9408260",
           "mandatoryPdfFailures": []
         },
         {
           "id": "direction-mark-page-split-rtl-control",
-          "inputSha256": "401c5a88f48e942ebec37e4fe7dc763769ca8c5266b4d51993940b845ebec3af",
+          "inputSha256": "7b38ce9c9672de5fb7d8428f88ffa61af88b1913508c73cfd81f7043e2cb4627",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "0c9c2c4708886bef9f4997a000ca113e4e646c8040b8cdb1bc2b5c0a0069dff3",
-          "renderReportSha256": "1e3bfb44bced81a8e0d64ccaaec6d109279c27b8073d2b8d66eca96cafd47bea",
-          "htmlSha256": "1f346d681aa0d3d4e21598c69d2f44391deaaa4ac11699f83c7085010e3306f9",
-          "htmlFactsSha256": "a9b1c0d934b7d631653b38bd9ff0d87cc564fceab26da7272c5483cd7ec7bf84",
+          "pdfSha256": "f49da4bbe30aa78084784ac69fef9ffe5d157e2c46de150d356c1d1d8adeca05",
+          "renderReportSha256": "03f0a49633383a001573159fd10ebcee78f44a65006fbf2e3d6dcbc95af4d44e",
+          "htmlSha256": "fe18abac367e9b43ca71b2408fb918494d482af431b3eaba07e9587b8dfa858a",
+          "htmlFactsSha256": "d1e7a27439225d6fb269d0dd6816053173fb057d475993a6b1ff7950f323b44d",
           "mandatoryPdfFailures": []
         },
         {
@@ -432,8 +448,8 @@
           "inputSha256": "8f29261cab73bb090c34c85fd20494574a2acd1c2bcbdb02e920778bf55f2043",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "74a8c2e175cfa75f1a82d5eca1a7ea0ef2220491f6de5549748ea9e2a0cd3144",
-          "renderReportSha256": "a0e997dee590b213af2c2e4a5af8f37fe175eef4ad8d41f51d777e1e497a8901",
+          "pdfSha256": "c6115be50c889a33068f0ebe5344dc2f73d7da0a8eb1a982addadc25ec3c92bf",
+          "renderReportSha256": "5efbd792627d762dbb8f97ad22696127a879a73738b24f3d17423c8da8ae54c9",
           "htmlSha256": "b62a0db388e084f69b021a932c8b46d8e496d4bf8e240cd8c581eedd79bc7312",
           "htmlFactsSha256": "f0cc3aacf2a81ac7bff200cd918a2f95b43a248dfe78330922dfbec7add524de",
           "mandatoryPdfFailures": []
@@ -443,15 +459,15 @@
           "inputSha256": "e72addd1b053e0177b6438d53a3c03f8e4055141980906127b5eb2ce0964e49b",
           "status": "delivered",
           "pages": 1,
-          "pdfSha256": "408b9f408984d942abdd7715e5910c6116eddaa3ff386532c212007694df0441",
-          "renderReportSha256": "dd79fd6c4a22c21a81633cfabee1f64e8ae590bdc07b25d8a72bf56dfd6df155",
+          "pdfSha256": "9280a3aff5b32f711362d56cc773164b1a880cf6bf17c5747a1c3253b6118208",
+          "renderReportSha256": "5c11b2140d7865616e3b74e89b0257b16f0c5ff6b98b0e43895ad478c9e99aa9",
           "htmlSha256": "76f60849fe155bed1b9507e5b702a087a37ae434a4c16bf0f88ba989ac606a4e",
           "htmlFactsSha256": "b3ddb4ab716b7ccec42a76f60316474eb4aef60553074425a93909bc715a5d72",
           "mandatoryPdfFailures": []
         }
       ],
       "htmlInspectorSha256": "85b55a36b1745ca06cf9102bbb234d37f2a9a4915fd5413d227ad1d7e3bb5e8d",
-      "inspectionManifestSha256": "c8a0b0ce334cc98b2c94a447d708a9d161ce49c4dc9df842bafcc5bd85e444e9"
+      "inspectionManifestSha256": "a66f7f8cafdafecfa784384bf310e66bd18d215efb9715ae573987fea0500487"
     }
   },
   "cases": [
@@ -459,7 +475,7 @@
       "id": "direction-mark-page-split-ltr",
       "inputSha256": "e07d027e1f02417b647d54463d5e0d97713837289bfbd26c470b7ddc156a5698",
       "screenshot": "direction-mark-page-split-ltr.png",
-      "screenshotSha256": "4acdb94b08dcc6ca6db0bdd728f80fdd83093cd2849b476f3c5e230ebbe1ae2e",
+      "screenshotSha256": "99078beb47a6cc00b413da3b2f14c14c0b0ca74a20c0e609d37fcbcea2a1adc1",
       "cropPx": [
         72,
         74,
@@ -469,21 +485,25 @@
       "panels": [
         {
           "renderer": "LibreOffice 25.8.7.3 reference",
-          "pdfSha256": "63cf23d7395f15f8bc48b89b6d413dee900ca45558bd4e944f47f5b60c0607a0",
+          "pdfSha256": "c96cf2f9005cbc25775f09ae6f721647a0e153efa4ea8314204f253a621211b3",
           "failures": [],
           "words": [
             "TamariskLanding",
             "TamariskBeacon",
             "TamariskCove"
           ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
           "pageRasterSha256": [
-            "ffc6962633a995aaeb4ca172134ebad805c2214439bdca17240bba0afb804734",
-            "cd978ad10638ed537ae7be1ec71e7ac4b5850587dc1582b4d8564518172940e6"
+            "affb52d0e05e4fe68c059b08dc13e27167d81eeda3a1060a52f5a01d8c556451",
+            "a70bc16584156a869c0c6b21f5f59b1ea0971ec73c605facc647af295e8aabb5"
           ]
         },
         {
           "renderer": "Docxodus main 9af576ec",
-          "pdfSha256": "df97b9c47e5e8a8527325f86d60c9b00fad371cfa84a070d19026977b22b11da",
+          "pdfSha256": "e4955021af5078cfd7ea16416ba3c5efbc6a1844b15f52fa7c075565c962ce91",
           "failures": [
             "expected-visible-tokens",
             "assertion-marker-region"
@@ -493,23 +513,71 @@
             "#x200eTamariskBeacon",
             "TamariskCove"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 85.46384462315194,
+                "ssim": 0.9967830156976653,
+                "inkF1": 0.8546384462315194,
+                "precision": 0.7677806341045416,
+                "recall": 0.9636552440290758,
+                "close": false
+              },
+              {
+                "score": 99.99564357607687,
+                "ssim": 0.9999564357607688,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 85.46384462315194,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 0.0
+          },
           "pageRasterSha256": [
-            "9866a903edb02d887b62225582b09ffcac1bec22034c0c28859aff6eb47c196a",
-            "ec5f656a39c70210aba5f106d7211bd400ac0668fbaa9d1cd258c87cb3206b81"
+            "0899ffce18b8b517349ce845bf75a13def4bd09b9aed69250b6ded3bbbfd1244",
+            "1b56e06cbab1c948ce8007b7619106855776ac433ab824b2bcf9fc11b597d09d"
           ]
         },
         {
           "renderer": "Docxodus fix 5bdf3f8b",
-          "pdfSha256": "82a879f1fe40a4cd3d1a2e502cac8120ebf8a03e2378eaf3cda8d3f413bd8fa2",
+          "pdfSha256": "43a970ac2d260a4723ed7d2d2427e167db9035b051c14ad0e823944ac243ac29",
           "failures": [],
           "words": [
             "TamariskLanding",
             "TamariskBeacon",
             "TamariskCove"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.85186160469935,
+                "ssim": 0.9985186160469935,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              },
+              {
+                "score": 99.99564357607687,
+                "ssim": 0.9999564357607688,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.85186160469935,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.85186160469935
+          },
           "pageRasterSha256": [
-            "0223539fffa3be1f444b7ab199a72cfc64613bea2722d59716a5c3976408d565",
-            "ec5f656a39c70210aba5f106d7211bd400ac0668fbaa9d1cd258c87cb3206b81"
+            "48744ac4e5141cdde158b789dbed769b24b050876507da225b203ddd27b33a60",
+            "1b56e06cbab1c948ce8007b7619106855776ac433ab824b2bcf9fc11b597d09d"
           ]
         }
       ]
@@ -518,7 +586,7 @@
       "id": "direction-mark-page-split-ltr-control",
       "inputSha256": "2d95b402d6a0006798c6092cdb864d8b55fb4caf432e4cfde6cc6a15fe9da94b",
       "screenshot": "direction-mark-page-split-ltr-control.png",
-      "screenshotSha256": "2264779c1ecbc81c500679cd2ecbb5cd5375da440e6a0d47dcc5098bf7bf19bf",
+      "screenshotSha256": "df26564cec2f59ba7f55fa2c5a2c292808d8fc293168ec59fb5c5f4b4e13b2a6",
       "cropPx": [
         72,
         74,
@@ -528,41 +596,77 @@
       "panels": [
         {
           "renderer": "LibreOffice 25.8.7.3 reference",
-          "pdfSha256": "c2e79761e20a421e61ba57d232a724e8475d2aec089a93583ca0f0406b6f0d0e",
+          "pdfSha256": "ba612fb4c46d8680c58df86dfb26db448406b513f335f2d8c301375ae78a2a11",
           "failures": [],
           "words": [
             "TamariskLanding",
             "TamariskBeacon",
             "TamariskCove"
           ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
           "pageRasterSha256": [
-            "752a7b5d8090912ad48766514b582acec4b6d4c8c9300559ca7ad7b1618a49cc"
+            "faea86bae8776b1ac2599e45af7d84da7ae14c9ba966704470d91a31c95c0ec1"
           ]
         },
         {
           "renderer": "Docxodus main 9af576ec",
-          "pdfSha256": "db831126182799a436d1a4b6d893ac168b40d1492872ca832d7074592ad75d48",
+          "pdfSha256": "776303f68e9b5bf9ba1c22ef09e82b4f9f58e664981ae0a78d5c70154966915d",
           "failures": [],
           "words": [
             "TamariskLanding",
             "TamariskBeacon",
             "TamariskCove"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.72517884841027,
+                "ssim": 0.9972517884841027,
+                "inkF1": 0.999630314232902,
+                "precision": 1.0,
+                "recall": 0.9992609016999261,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.72517884841027,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.72517884841027
+          },
           "pageRasterSha256": [
-            "f4f74b6ecf2fdeb5f59482ebb5a7c6a6a61acff7d3edec6b43b8e35bd9d97408"
+            "39c3a0764485d4a0f6b2e0f9a74d0bc904107e09aeeb0518d850f445750c4623"
           ]
         },
         {
           "renderer": "Docxodus fix 5bdf3f8b",
-          "pdfSha256": "4ae72995d4d2eff264dfc0ea92b9f8c6621fde783614ba5dbe935005520be9f8",
+          "pdfSha256": "86eaab252d1873c0acdb4ad503ecdf51ba877152f4ced057385ba5a79ba1d4fe",
           "failures": [],
           "words": [
             "TamariskLanding",
             "TamariskBeacon",
             "TamariskCove"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.72517884841027,
+                "ssim": 0.9972517884841027,
+                "inkF1": 0.999630314232902,
+                "precision": 1.0,
+                "recall": 0.9992609016999261,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.72517884841027,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.72517884841027
+          },
           "pageRasterSha256": [
-            "f4f74b6ecf2fdeb5f59482ebb5a7c6a6a61acff7d3edec6b43b8e35bd9d97408"
+            "39c3a0764485d4a0f6b2e0f9a74d0bc904107e09aeeb0518d850f445750c4623"
           ]
         }
       ]
@@ -571,7 +675,7 @@
       "id": "direction-mark-page-split-rtl",
       "inputSha256": "d4238847f6354198768283a4030ff1434242a0342fcfe9f808a404373139c406",
       "screenshot": "direction-mark-page-split-rtl.png",
-      "screenshotSha256": "0111c98b5afe306d634f359bbdff4997ab6dce3359c7b65fb0347144f7c96849",
+      "screenshotSha256": "05c031ebda9598ffe3d2dd0c574dac3238e7a519efc0147e263103e9faf5535b",
       "cropPx": [
         480,
         74,
@@ -581,20 +685,24 @@
       "panels": [
         {
           "renderer": "LibreOffice 25.8.7.3 reference",
-          "pdfSha256": "31f4d08d0fd0a8c1b5816ff7313786a791510d05e7e55fb105ab12990f9d1060",
+          "pdfSha256": "ca132ae7200b9603ff923fa50f0fcb60786e96a2873edef0ae5ca4fddec07872",
           "failures": [],
           "words": [
             "TamariskQuay",
             "TamariskMole"
           ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
           "pageRasterSha256": [
-            "ff468c979c9a0b1926462ce5b3e55fdac06f7cecc33e35d316b069f0bfb86c83",
-            "9e4e1c3caf44e0c15fb77e0dc16f18994c30753c06afb190aa1e87df8e065f47"
+            "ad37102c6dce30a2652bf7cc011ba9f2ff6b4b6344beef87d932f5990151078e",
+            "ebe78db7f8536cbcc572d0a6a6a222e695495efac76fed8fce93a0c1a4563928"
           ]
         },
         {
           "renderer": "Docxodus main 9af576ec",
-          "pdfSha256": "c27d207aa7a20ff4ff760bfb273437b7eccec19cf4ab8f89a24ba8cab476252a",
+          "pdfSha256": "5a587060e142afa3b378f02544ac54eac49b03910a74c3747525848b3b6b1fdf",
           "failures": [
             "expected-visible-tokens",
             "assertion-marker-region",
@@ -607,72 +715,156 @@
             "#",
             "x200fTamariskMole#x200f#"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 50.11348329119997,
+                "ssim": 0.9963287842628988,
+                "inkF1": 0.5011348329119997,
+                "precision": 0.34688090737240074,
+                "recall": 0.9024390243902439,
+                "close": false
+              },
+              {
+                "score": 63.38611673724913,
+                "ssim": 0.9973452541051441,
+                "inkF1": 0.6338611673724913,
+                "precision": 0.4725787631271879,
+                "recall": 0.9622641509433962,
+                "close": false
+              }
+            ],
+            "rasterScore": 50.11348329119997,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 0.0
+          },
           "pageRasterSha256": [
-            "da7d4e1c8774034910632dbf9dee21e39a67c4ec93792fe4306769ddb90b1499",
-            "d2311cebadaa86741857ef73158eb8824bcb56bcba88c21e6ef6b945e75021b7"
+            "7fc5fa9b664b11a60f5cceadd404ef5c25226f86bc098a1e34489568ea6a81ea",
+            "6e26e93865f15e45d847f03729a0df14fa4542eb896ee50b09fce2394c663981"
           ]
         },
         {
           "renderer": "Docxodus fix 5bdf3f8b",
-          "pdfSha256": "33259eb6691431e0bf2a14451d6f6ed0c4f4fafaf5795e50d31cb8a742323cee",
+          "pdfSha256": "d74154ffc0843318753286927656c6dc2ce106a31a471f34b638116aade936c1",
           "failures": [],
           "words": [
             "TamariskQuay",
             "TamariskMole"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.99399693378189,
+                "ssim": 0.9999399693378189,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              },
+              {
+                "score": 99.99597639748615,
+                "ssim": 0.9999597639748615,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.99399693378189,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.99399693378189
+          },
           "pageRasterSha256": [
-            "2c475a2b5bf20e69ddcd6563209a6a56096048f6dd7d1f0c0bf58b7526f2a62b",
-            "3263a4550611b5f18b4e38828f3bb907e2c370eea34d65c0b45697329be7751e"
+            "4c050131c8cdb923bb4ebf27eb4c8f441f28836731230010c768d1e647b154f4",
+            "4e70fd448c0ae289308384d4a2d9040b44f7d55a90d53e10f468d0d9e77ad756"
           ]
         }
       ]
     },
     {
       "id": "direction-mark-page-split-rtl-control",
-      "inputSha256": "401c5a88f48e942ebec37e4fe7dc763769ca8c5266b4d51993940b845ebec3af",
+      "inputSha256": "7b38ce9c9672de5fb7d8428f88ffa61af88b1913508c73cfd81f7043e2cb4627",
       "screenshot": "direction-mark-page-split-rtl-control.png",
-      "screenshotSha256": "b4f4f64866dba1bbd705547afb759e356f57035a087d52749c8bb72bc10a5d67",
+      "screenshotSha256": "a5b427bf18d6147b6a6e1e9a6450de5ab4ee89b20af6aaa34c593d1a284d354a",
       "cropPx": [
-        519,
+        609,
         74,
         744,
-        137
+        154
       ],
       "panels": [
         {
           "renderer": "LibreOffice 25.8.7.3 reference",
-          "pdfSha256": "932c461cdeec45fa31e68b5697cfe2f4cb3521ce40bea218585ea38c48d97315",
+          "pdfSha256": "8eec7621d00434f19efbef6ed710e0eaa77b9716f4578079cb8532c3d04d589b",
           "failures": [],
           "words": [
             "TamariskQuay",
             "TamariskMole"
           ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
           "pageRasterSha256": [
-            "7677057f7c27b06d3d257398d1ad6d14964254185e7dc81f7c0b15b4591dcbde"
+            "d06776118dea130e9fdc88ece4aea093cc6f5fc6841262693cccf3cd5107e6c3"
           ]
         },
         {
           "renderer": "Docxodus main 9af576ec",
-          "pdfSha256": "7c0730706720534591020067867f9a15b98529cc41ce455920d3d0b3eb48656b",
+          "pdfSha256": "e5de7735b2d4293b56d5613cc4af634ac50fd669c336f1f4402501dcdeeae4c5",
           "failures": [],
           "words": [
-            "TamariskMole",
-            "TamariskQuay"
+            "TamariskQuay",
+            "TamariskMole"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.86715876978009,
+                "ssim": 0.9986715876978008,
+                "inkF1": 0.9987995198079231,
+                "precision": 1.0,
+                "recall": 0.9976019184652278,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.86715876978009,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.86715876978009
+          },
           "pageRasterSha256": [
-            "6098f4c300ca2db9f62b4b0e5a720689ad1a8a02ad67078d40967370f6dcacae"
+            "4896b0d8b609212f6d45404f2120010e616a15421f7c6a29e7482c7b934f77fa"
           ]
         },
         {
           "renderer": "Docxodus fix 5bdf3f8b",
-          "pdfSha256": "0c9c2c4708886bef9f4997a000ca113e4e646c8040b8cdb1bc2b5c0a0069dff3",
+          "pdfSha256": "f49da4bbe30aa78084784ac69fef9ffe5d157e2c46de150d356c1d1d8adeca05",
           "failures": [],
           "words": [
-            "TamariskMole",
-            "TamariskQuay"
+            "TamariskQuay",
+            "TamariskMole"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.86715876978009,
+                "ssim": 0.9986715876978008,
+                "inkF1": 0.9987995198079231,
+                "precision": 1.0,
+                "recall": 0.9976019184652278,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.86715876978009,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.86715876978009
+          },
           "pageRasterSha256": [
-            "6098f4c300ca2db9f62b4b0e5a720689ad1a8a02ad67078d40967370f6dcacae"
+            "4896b0d8b609212f6d45404f2120010e616a15421f7c6a29e7482c7b934f77fa"
           ]
         }
       ]
@@ -681,7 +873,7 @@
       "id": "direction-mark-field-link-line-break",
       "inputSha256": "8f29261cab73bb090c34c85fd20494574a2acd1c2bcbdb02e920778bf55f2043",
       "screenshot": "direction-mark-field-link-line-break.png",
-      "screenshotSha256": "4355f0705578fb00c0f9ea5fc51cedf7fdd3fc0ff98338bde141f267d14247ef",
+      "screenshotSha256": "4a82ce07fae6f83e1bee77521e9e2c783a85353ee9e4d5f635e5611ff6e0e900",
       "cropPx": [
         72,
         74,
@@ -691,19 +883,23 @@
       "panels": [
         {
           "renderer": "LibreOffice 25.8.7.3 reference",
-          "pdfSha256": "d59203ab176647eb420d7ae405c4b1141a34ffea5ee390441de7c57849bba217",
+          "pdfSha256": "e42fa9eb42d91c0efa1c03ac4c94627fb52f4d39df1eeaa155c1698cb73b6091",
           "failures": [],
           "words": [
             "TamariskChart",
             "TamariskSounding"
           ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
           "pageRasterSha256": [
-            "bb9b453129ce38a6f24ddf3b4e5d9b5ff2439faf4be135c4f501209afa23f316"
+            "4303b25919cdad2e65f26da629b13ca118313a2c71cc24a56eb76d1738c34efe"
           ]
         },
         {
           "renderer": "Docxodus main 9af576ec",
-          "pdfSha256": "115e0b2c8b2dd1a959d17f735c6c568b152e6a793f069ffcd2c531db87dfd2d9",
+          "pdfSha256": "c4701e16e21838487d0ed68963f58dcaca41b859b070a368aefdd225b3d45930",
           "failures": [
             "expected-visible-tokens",
             "assertion-marker-region"
@@ -712,20 +908,52 @@
             "TamariskChart",
             "#x200eTamariskSounding"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 76.72810459559878,
+                "ssim": 0.9955327121058531,
+                "inkF1": 0.7672810459559878,
+                "precision": 0.6367552045944006,
+                "recall": 0.9651162790697675,
+                "close": false
+              }
+            ],
+            "rasterScore": 76.72810459559878,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 0.0
+          },
           "pageRasterSha256": [
-            "3723b85331699d67880acb33878f4677cdcf859335eadce816e53daa552b5aac"
+            "0c33b21ac218590211071db9425d338ca25ad31c838119662ac7e9110c5c5f7b"
           ]
         },
         {
           "renderer": "Docxodus fix 5bdf3f8b",
-          "pdfSha256": "74a8c2e175cfa75f1a82d5eca1a7ea0ef2220491f6de5549748ea9e2a0cd3144",
+          "pdfSha256": "c6115be50c889a33068f0ebe5344dc2f73d7da0a8eb1a982addadc25ec3c92bf",
           "failures": [],
           "words": [
             "TamariskChart",
             "TamariskSounding"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 91.04908565928778,
+                "ssim": 0.9979378913051501,
+                "inkF1": 0.9104908565928778,
+                "precision": 0.8356890459363958,
+                "recall": 1.0,
+                "close": false
+              }
+            ],
+            "rasterScore": 91.04908565928778,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 91.04908565928778
+          },
           "pageRasterSha256": [
-            "a27d7c989484e36f6e5016e6a5e4b8acbbbd305654db1033a316ac5f24834f77"
+            "1aebd579c89e7fe8a8cb640a9246263cb08276d0018a7f421f9a3ea55d343795"
           ]
         }
       ]
@@ -734,7 +962,7 @@
       "id": "direction-mark-field-link-line-break-control",
       "inputSha256": "e72addd1b053e0177b6438d53a3c03f8e4055141980906127b5eb2ce0964e49b",
       "screenshot": "direction-mark-field-link-line-break-control.png",
-      "screenshotSha256": "62249e67a60dca60ae7d88c7862cab3ac89dbe866c193420b9a4e7c6d61dd274",
+      "screenshotSha256": "6709949ce094ead75d496cc6e19b1feea656407389258b6875989fe33d2e5efd",
       "cropPx": [
         72,
         74,
@@ -744,38 +972,74 @@
       "panels": [
         {
           "renderer": "LibreOffice 25.8.7.3 reference",
-          "pdfSha256": "22a59a95bab592b686a28a21778c411f23a02e5a3f73f3dbe48db180a819ba4f",
+          "pdfSha256": "54e3777f21432113f413d31a7e376cba026b584b9704262bc8155b490d0850a7",
           "failures": [],
           "words": [
             "TamariskChart",
             "TamariskSounding"
           ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
           "pageRasterSha256": [
-            "bb9b453129ce38a6f24ddf3b4e5d9b5ff2439faf4be135c4f501209afa23f316"
+            "4303b25919cdad2e65f26da629b13ca118313a2c71cc24a56eb76d1738c34efe"
           ]
         },
         {
           "renderer": "Docxodus main 9af576ec",
-          "pdfSha256": "3b48d0e56b3a6d9d85a66886fbdc9b9c49c2db1c84d6493b49f146edd4f01e1f",
+          "pdfSha256": "76c4b45b3b58cfafb506ffbb524811004bd5f991572b383922b8678d9499172c",
           "failures": [],
           "words": [
             "TamariskChart",
             "TamariskSounding"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.84011368980772,
+                "ssim": 0.9984011368980772,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.84011368980772,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.84011368980772
+          },
           "pageRasterSha256": [
-            "d764e9872feba71cbfc897e30161c8db0d447b9e972a48e552cbfd545778314c"
+            "fc4c01ca915e3111f0d7abfced2c7b43cf07ab605d9810f6689f4bbe95fec314"
           ]
         },
         {
           "renderer": "Docxodus fix 5bdf3f8b",
-          "pdfSha256": "408b9f408984d942abdd7715e5910c6116eddaa3ff386532c212007694df0441",
+          "pdfSha256": "9280a3aff5b32f711362d56cc773164b1a880cf6bf17c5747a1c3253b6118208",
           "failures": [],
           "words": [
             "TamariskChart",
             "TamariskSounding"
           ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.84011368980772,
+                "ssim": 0.9984011368980772,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.84011368980772,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.84011368980772
+          },
           "pageRasterSha256": [
-            "d764e9872feba71cbfc897e30161c8db0d447b9e972a48e552cbfd545778314c"
+            "fc4c01ca915e3111f0d7abfced2c7b43cf07ab605d9810f6689f4bbe95fec314"
           ]
         }
       ]
@@ -784,6 +1048,6 @@
   "tools": {
     "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631",
     "docs/results/export-reliability/Inspect.py": "f52f51d657d3d0d06f85c2ab42664e1bd120c82c461849e5eef435545d3f22bc",
-    "docs/results/split-direction-marks/Compose.py": "6ca2d23e9359449cf76ba53be3eef2e72b951f5862e53920d6f95d2b8be22188"
+    "docs/results/split-direction-marks/Compose.py": "575f604139658c7ddcc8122e5c6ca76fc2fa5bc448b30bb626f2e045e735b348"
   }
 }

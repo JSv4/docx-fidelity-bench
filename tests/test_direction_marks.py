@@ -6,6 +6,7 @@ from bench.common import ROOT, read_json
 from bench.fixtures import complex_field
 
 PAGE_BREAK = '<w:r><w:br w:type="page"/></w:r>'
+LINE_BREAK_RUN = '<w:r><w:br/></w:r>'
 
 
 class SplitDirectionMarkInputs(unittest.TestCase):
@@ -26,11 +27,12 @@ class SplitDirectionMarkInputs(unittest.TestCase):
         self.assertEqual(self.cases[case_id]['tokens'], self.cases[case_id + '-control']['tokens'])
 
     def test_each_page_split_differs_from_its_control_only_by_the_page_break(self):
-        for direction in ('ltr', 'rtl'):
+        # The right-to-left control puts a line break in the page break's place, so each label keeps its own line.
+        for direction, instead in (('ltr', ''), ('rtl', LINE_BREAK_RUN)):
             case_id = 'direction-mark-page-split-' + direction
             document = self.parts(case_id)['word/document.xml'].decode()
             self.assertEqual(document.count(PAGE_BREAK), 1)
-            self.assert_pair(case_id, lambda text: text.replace(PAGE_BREAK, ''))
+            self.assert_pair(case_id, lambda text: text.replace(PAGE_BREAK, instead))
             pages = lambda name: [a['page'] for a in self.cases[name]['assertions']]
             self.assertEqual(pages(case_id)[-1], 2)
             self.assertEqual(set(pages(case_id)[:-1] + pages(case_id + '-control')), {1})
@@ -41,12 +43,12 @@ class SplitDirectionMarkInputs(unittest.TestCase):
         self.assertLess(document.index('<w:br/>'), document.index(PAGE_BREAK))
 
     def test_the_right_to_left_paragraph_holds_only_right_to_left_text_runs(self):
-        for case_id in ('direction-mark-page-split-rtl', 'direction-mark-page-split-rtl-control'):
+        for case_id, line_breaks in (('direction-mark-page-split-rtl', 0), ('direction-mark-page-split-rtl-control', 1)):
             document = self.parts(case_id)['word/document.xml'].decode()
             self.assertEqual(document.count('<w:pPr><w:bidi/></w:pPr>'), 1)
             self.assertEqual(document.count('<w:t '), 2)
             self.assertEqual(document.count('<w:rPr><w:szCs w:val="22"/><w:rtl/></w:rPr><w:t '), 2)
-            self.assertNotIn('<w:br/>', document)
+            self.assertEqual(document.count(LINE_BREAK_RUN), line_breaks)
 
     def test_the_field_link_differs_from_its_control_only_by_the_field(self):
         field = complex_field(' HYPERLINK "https://example.com/" ', '|').split('|')
