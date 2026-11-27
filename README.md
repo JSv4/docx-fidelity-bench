@@ -1,3 +1,18 @@
+`core-v177` adds three reproducers and two controls for [JSv4/Docxodus#1870](https://github.com/JSv4/Docxodus/issues/1870),
+links written as fields. `field-link-simple-hyperlink` holds two simple HYPERLINK fields (`w:fldSimple`); its
+control holds the same runs in `w:hyperlink` elements to the same addresses. `field-link-toc-complex-entries` and
+`field-link-toc-simple-entries` hold a three-entry table of contents whose entries are HYPERLINK fields nested in the
+TOC field's result, complex or simple. Each entry has its text and leader tab in the Hyperlink character style, then a
+PAGEREF field; the same link form also appears once outside the table of contents. Their control,
+`field-link-toc-element-entries-control`, writes every link as `w:hyperlink w:anchor`. Each reproducer differs from its
+control only in the form of its links. A `marker-attribute` check requires each label's delivered HTML link target. A
+`color-reference-geometry` check requires the Hyperlink style's blue to cover only what it covers in the reference:
+the outside link, never the contents entries. In unscored public-API captures, Docxodus 9fdec63c renders the simple
+fields as plain text with no link, and draws the field-form entries blue and underlined with no link. The fix
+(71641ebe) passes the mandatory PDF and HTML checks of all five. All five LibreOffice references are eligible and calibrate at 100.
+All earlier DOCX files remain byte-identical, and the redline suite is unchanged. `core-v176` is claimed by open PR
+#264. Word reference registration and full-suite scoring remain pending. See [the evidence](docs/results/field-links/README.md).
+
 `projection-v6` changes the default display text expected from a filled date control for Docxodus #1851: the
 control's own format and language, as a desktop word processor (build 16.0.20326) shows a picked date. It adds
 `calendar-display-german`, and gives `calendar-utc-midnight-control` explicit display text so it checks the stored
