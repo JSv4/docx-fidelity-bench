@@ -1,3 +1,9 @@
+The six direction-mark cases for Docxodus #1862 contain original Tamarisk labels and literal OOXML authored in
+`bench/fixtures.py`; the field and the link point at the reserved `https://example.com/`. No product fixture, helper,
+document, image or font program is imported, and no text, document or script from the issue was used. The six
+screenshot sheets in `docs/results/split-direction-marks/` show LibreOffice 25.8.7.3 PDFs and Docxodus PDFs of these
+inputs, rasterized by Poppler; no Word output is included.
+
 The five link-form cases for Docxodus #1870 contain original Wisteria labels and literal OOXML authored in
 `bench/fixtures.py`; their fields, links and relationships point at reserved `https://example.com/` addresses or at
 bookmarks in the same document. No product fixture, helper, document, image or font program is imported, and no
