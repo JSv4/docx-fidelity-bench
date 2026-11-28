@@ -4370,6 +4370,105 @@ def on_spelled_hidden_mark_cases(add):
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': 'RowanTail', 'tolerancePt': 1.5}])
 
 
+WISTERIA_LINK_STYLE = '<w:rStyle w:val="Hyperlink"/>'
+WISTERIA_STYLES = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" '
+                   f'w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/>'
+                   '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" '
+                   'w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+                   '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>'
+                   '<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/>'
+                   '<w:next w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="240"/><w:outlineLvl w:val="0"/></w:pPr>'
+                   '<w:rPr><w:b/><w:sz w:val="28"/></w:rPr></w:style>'
+                   '<w:style w:type="paragraph" w:styleId="TOC1"><w:name w:val="toc 1"/><w:basedOn w:val="Normal"/>'
+                   '<w:next w:val="Normal"/><w:pPr><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="9350"/></w:tabs>'
+                   '<w:spacing w:after="100"/></w:pPr></w:style>'
+                   '<w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont">'
+                   '<w:name w:val="Default Paragraph Font"/></w:style>'
+                   '<w:style w:type="character" w:styleId="Hyperlink"><w:name w:val="Hyperlink"/>'
+                   '<w:basedOn w:val="DefaultParagraphFont"/><w:rPr><w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr>'
+                   '</w:style></w:styles>')
+
+
+def wisteria_link(form, instruction, content, relation=None):
+    """The same link content in one of the forms Word writes a link in: a complex HYPERLINK field, a simple
+    one (`w:fldSimple`) or a `w:hyperlink`, which takes the field's `\\l` location or the relationship of
+    its address."""
+    if form == 'complex':
+        return complex_field(instruction, content)
+    if form == 'simple':
+        return f'<w:fldSimple w:instr="{escape(instruction, {chr(34): "&quot;"})}">{content}</w:fldSimple>'
+    location = re.fullmatch(r' HYPERLINK \\l "([^"]+)" ', instruction)
+    target = f'w:anchor="{location.group(1)}" w:history="1"' if location else f'r:id="{relation}"'
+    return f'<w:hyperlink {target}>{content}</w:hyperlink>'
+
+
+def field_link_cases(add, cases):
+    """Original Wisteria labels: links written as fields (Docxodus #1870).
+
+    A simple field, `w:fldSimple` with a HYPERLINK instruction, is a link to the field's address, as the
+    `w:hyperlink` control is. The delivered HTML checks each label's link target; a printed page cannot
+    tell plain text from a link drawn in the same ink. One label is a plain run and one is in the
+    Hyperlink character style, so a link that brings its own colour or underline shows on the page.
+
+    A table of contents whose entries are HYPERLINK fields, complex or simple, nested in the TOC field's
+    result: each entry's text and leader tab are in the Hyperlink character style, then a PAGEREF field
+    gives the heading's page. Word (in Word reference PDFs measured for Docxodus #1870) and LibreOffice
+    draw such an entry black and not underlined, as they draw the control's entries, written as
+    `w:hyperlink w:anchor`; the same link written in the same form outside the table of contents
+    (`WisteriaLantern`) keeps the style's blue and underline. Every entry must also be a link to its
+    heading's bookmark. Each case differs from its control only in the form of its links. Spaces around
+    each leader tab keep the leader's dots apart from the words in PDF text.
+
+    In every case the Hyperlink style's blue (0563C1) must cover what it covers in the reference: only
+    `WisteriaPergola`, or only `WisteriaLantern`, each with its underline. The bounds and coverage
+    tolerances are the static-image cases' 1.5pt and 8%."""
+    href = lambda label, target: {'type': 'marker-attribute', 'version': 1, 'marker': label, 'attribute': 'href',
+                                  'equals': target}
+    blue = lambda: [{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [5, 99, 193],
+                     'tolerancePt': 1.5, 'coverageTolerance': 0.08}]
+    links = [('WisteriaArbor', 'https://example.com/wisteria-arbor', ''),
+             ('WisteriaPergola', 'https://example.com/wisteria-pergola', WISTERIA_LINK_STYLE)]
+    relations = [('r' + label, 'hyperlink', target, 'External') for label, target, _ in links]
+    for form in ('simple', 'element'):
+        body = ''.join(para(runs=wisteria_link(form, f' HYPERLINK "{target}" ', run(label, props), 'r' + label))
+                       for label, target, props in links)
+        add('field-link-simple-hyperlink' + ('-control' if form == 'element' else ''), 'paragraphs',
+            'Wisteria links, a plain run and one in the Hyperlink style, written as ' +
+            ('w:hyperlink elements (control)' if form == 'element' else 'simple HYPERLINK fields (w:fldSimple)') +
+            ' (Docxodus #1870)', [label for label, _, _ in links], body, styles_xml=WISTERIA_STYLES,
+            relations_extra=relations, assertions=blue())
+        cases[-1]['htmlAssertions'] = [href(label, target) for label, target, _ in links]
+    entries = [('WisteriaGate', 'Garden gate'), ('WisteriaTerrace', 'Garden terrace'), ('WisteriaCourt', 'Garden court')]
+    toc_begin = complex_field(' TOC \\o "1-3" \\h \\z \\u ', '', end=False)
+    toc_end = '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
+    for form in ('complex', 'simple', 'element'):
+        body = ''
+        for i, (label, _) in enumerate(entries):
+            location = f'_Toc9000{i + 1}'
+            content = (run(label + ' ', WISTERIA_LINK_STYLE) + f'<w:r><w:rPr>{WISTERIA_LINK_STYLE}</w:rPr><w:tab/></w:r>' +
+                       run(' ') + complex_field(f' PAGEREF {location} \\h ', run('1', '<w:webHidden/>')))
+            body += para(props='<w:pStyle w:val="TOC1"/>', runs=(toc_begin if i == 0 else '') +
+                         wisteria_link(form, f' HYPERLINK \\l "{location}" ', content) +
+                         (toc_end if i == len(entries) - 1 else ''))
+        body += para(runs=run('See ') + wisteria_link(form, ' HYPERLINK \\l "_Toc90001" ',
+                                                       run('WisteriaLantern', WISTERIA_LINK_STYLE)))
+        for i, (_, heading) in enumerate(entries):
+            body += para(props='<w:pStyle w:val="Heading1"/>', runs=f'<w:bookmarkStart w:id="{i + 1}" '
+                         f'w:name="_Toc9000{i + 1}"/>' + run(heading) + f'<w:bookmarkEnd w:id="{i + 1}"/>')
+        add({'complex': 'field-link-toc-complex-entries', 'simple': 'field-link-toc-simple-entries',
+             'element': 'field-link-toc-element-entries-control'}[form], 'paragraphs',
+            'Wisteria table of contents whose entries are ' +
+            {'complex': "complex HYPERLINK fields nested in the TOC field's result",
+             'simple': "simple HYPERLINK fields (w:fldSimple) in the TOC field's result",
+             'element': 'w:hyperlink w:anchor elements (control)'}[form] +
+            ', and the same link outside it (Docxodus #1870)',
+            [f'{label} 1' for label, _ in entries] + ['See WisteriaLantern'] + [h for _, h in entries], body,
+            styles_xml=WISTERIA_STYLES, assertions=blue())
+        cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+        cases[-1]['htmlAssertions'] = [href(label, f'#_Toc9000{i + 1}') for i, (label, _) in enumerate(entries)]
+        cases[-1]['htmlAssertions'].append(href('WisteriaLantern', '#_Toc90001'))
+
+
 def unused_grid_column_cases(add):
     """Original Quince labels: grid columns no row reaches leave the table (Docxodus #1750)."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -7525,7 +7624,8 @@ def generate():
     universal_measure_page_cases(add)
     strict_chart_part_cases(add)
     on_spelled_hidden_mark_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v175', 'version': 175, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    field_link_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v177', 'version': 177, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
