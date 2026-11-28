@@ -4491,12 +4491,17 @@ def split_direction_mark_cases(add):
     has a line break in the page break's place, so each label keeps a line of its own and the order of two
     right-to-left runs on one line, which the reproducer never sets, is not measured.
 
+    The line break that writes the left-to-right mark is pinned too: the word after it must start where the
+    reference starts it, within 0.5pt, so a renderer that loses the break while moving the text (and prints
+    both words on one line) fails although every word is printed.
+
     The line break comes before the page break because LibreOffice 25.8.7.3 drops a page break that a line
     break directly follows. The right-to-left runs hold Latin labels: Poppler extracts Hebrew words from a
     LibreOffice PDF in visual order, so a Hebrew inventory could not be met by the reference."""
     page_break, line_break = '<w:r><w:br w:type="page"/></w:r>', '<w:r><w:br/></w:r>'
     full_page = lambda label, page: {'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': page,
                                      'rect': [0, 0, 612, 792]}
+    after_break = lambda label: [{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.5}]
     for direction in ('ltr', 'rtl'):
         if direction == 'ltr':
             labels = ['TamariskLanding', 'TamariskBeacon', 'TamariskCove']
@@ -4514,7 +4519,8 @@ def split_direction_mark_cases(add):
                 shape + ((' (control: a line break instead of the page break)' if instead else ' (control: no page break)')
                          if control else ', split by a page break') + ' (Docxodus #1862)',
                 labels, para(props=props, runs=before + (instead if control else page_break) + after),
-                assertions=[full_page(label, 1 if control or label != labels[-1] else 2) for label in labels])
+                assertions=[full_page(label, 1 if control or label != labels[-1] else 2) for label in labels]
+                + (after_break(labels[1]) if direction == 'ltr' else []))
     labels = ['TamariskChart', 'TamariskSounding']
     link = f'<w:hyperlink r:id="rTamariskLink"><w:r><w:t>{labels[0]}</w:t><w:br/><w:t>{labels[1]}</w:t></w:r></w:hyperlink>'
     for control in (False, True):
@@ -4523,7 +4529,7 @@ def split_direction_mark_cases(add):
             else ' inside a HYPERLINK field\'s result') + ' (Docxodus #1862)',
             labels, para(runs=link if control else complex_field(' HYPERLINK "https://example.com/" ', link)),
             relations_extra=[('rTamariskLink', 'hyperlink', 'https://example.com/', 'External')],
-            assertions=[full_page(label, 1) for label in labels])
+            assertions=[full_page(label, 1) for label in labels] + after_break(labels[1]))
 
 
 def unused_grid_column_cases(add):
