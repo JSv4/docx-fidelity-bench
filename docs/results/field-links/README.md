@@ -40,7 +40,7 @@ Two kinds of checks decide the cases:
 
 ## Measurements
 
-| Case | Kind | LibreOffice 25.8.7.3 | Docxodus main `9fdec63c` | Docxodus fix `71641ebe` |
+| Case | Kind | LibreOffice 25.8.7.3 | Docxodus main `9fdec63c` | Docxodus fix `38d060f9` |
 | --- | --- | --- | --- | --- |
 | `field-link-simple-hyperlink` | reproducer | pass; calibration 100.00 | PDF pass, raster 99.92, close; **HTML 0/2**: no link | PDF pass, raster 99.92, close; HTML 2/2 |
 | `field-link-simple-hyperlink-control` | control | pass; calibration 100.00 | PDF pass, raster 99.92, close; HTML 2/2 | PDF pass, raster 99.92, close; HTML 2/2 |
@@ -68,7 +68,8 @@ ink F1, precision and recall.
   - In both field forms, Docxodus ends each page number 8.7, 10.5 and 8.0pt short of the right tab stop on both
     builds. The control's numbers end within 0.1pt of LibreOffice's. This holds the reproducers' recall at 0.8486.
     Without the space run before the PAGEREF field, a diagnostic variant outside this suite still ends them 4.2–6.7pt
-    short. It is a separate layout difference, which these cases leave to the raster score.
+    short. It is a separate layout difference,
+    [JSv4/Docxodus#1877](https://github.com/JSv4/Docxodus/issues/1877), which these cases leave to the raster score.
 - **The outside link.** In the complex case, `WisteriaLantern` is already a link to `#_Toc90001` on `main`, since a
   complex HYPERLINK field outside another field already rendered as a link. Its check is there so that a fix which
   drops that link fails.
@@ -85,7 +86,10 @@ check. `Compose.py` therefore applies `bench.pdf.correctness` against the LibreO
 and reads each delivered HTML file with `bench.html_artifacts.check`.
 
 Both renderers were built with `bench build-docxodus` from clean detached worktrees: `main` at
-`9fdec63cc39018ebdf68031496c8162ad34e2d52` and the fix at `71641ebed61a659e6ebe3a268db449e14aa3f0b3`.
+`9fdec63cc39018ebdf68031496c8162ad34e2d52` and the fix at `38d060f9d9c959f8dea91f7da41d041701d096cc`. That
+fix adds review changes to an earlier fix commit, `71641ebed61a659e6ebe3a268db449e14aa3f0b3`. Measured the same
+way, the earlier commit gave the same result for every check, raster figure, colour region and page-number
+position.
 
 ## Pending
 

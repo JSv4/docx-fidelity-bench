@@ -9,7 +9,7 @@ control only in the form of its links. A `marker-attribute` check requires each 
 `color-reference-geometry` check requires the Hyperlink style's blue to cover only what it covers in the reference:
 the outside link, never the contents entries. In unscored public-API captures, Docxodus 9fdec63c renders the simple
 fields as plain text with no link, and draws the field-form entries blue and underlined with no link. The fix
-(71641ebe) passes the mandatory PDF and HTML checks of all five. All five LibreOffice references are eligible and calibrate at 100.
+(38d060f9) passes the mandatory PDF and HTML checks of all five. All five LibreOffice references are eligible and calibrate at 100.
 All earlier DOCX files remain byte-identical, and the redline suite is unchanged. `core-v176` is claimed by open PR
 #264. Word reference registration and full-suite scoring remain pending. See [the evidence](docs/results/field-links/README.md).
 
