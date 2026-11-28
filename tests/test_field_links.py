@@ -66,7 +66,8 @@ class FieldLinkInputs(unittest.TestCase):
         self.assertNotIn('fldChar', document)
         self.assert_pair('field-link-simple-hyperlink', 'field-link-simple-hyperlink-control',
                          lambda xml: simple_to_element(xml, lambda target: f'r:id="{relation[target]}"'))
-        expected = {a['marker']: a['equals'] for a in self.cases['field-link-simple-hyperlink']['htmlAssertions']}
+        expected = {a['marker']: a['equals'] for a in self.cases['field-link-simple-hyperlink']['htmlAssertions']
+                    if a['type'] == 'marker-attribute'}
         self.assertEqual(sorted(expected.values()), sorted(targets))
 
     def test_each_contents_case_differs_from_the_control_only_in_the_link_form(self):

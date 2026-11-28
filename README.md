@@ -1,3 +1,17 @@
+`core-v179` adds delivered-HTML colour and decoration checks to the five `field-link-*` cases of `core-v177`
+([JSv4/Docxodus#1870](https://github.com/JSv4/Docxodus/issues/1870)). An independent review found that their PDF
+colour check, which counts only the Hyperlink style's `0563C1`, passes contents entries drawn in a browser's default
+link blue and underlined, entries drawn black but underlined, and a plain `WisteriaArbor` drawn as a link. Version 1
+`marker-computed-style` now also declares `color` and `text-decoration-line`. For the latter the observer reports the
+lines painted on the marker's text, an ancestor's included, because a link's underline is drawn through a child
+whose own computed value is `none`. Each label must have the colour and lines its document gives it: black with none
+for the contents entries and `WisteriaArbor`, `rgb(5, 99, 193)` with an underline for `WisteriaPergola` and
+`WisteriaLantern`. In unscored public-API captures, Docxodus 9fdec63c fails the entries' new checks; Docxodus
+547fc77b, the merge of the fix ([JSv4/Docxodus#1879](https://github.com/JSv4/Docxodus/pull/1879)), passes every
+check of all five, and both controls pass on both builds. No DOCX input, token or PDF assertion changes. The other
+1,211 manifest records change only in the shared generator hash, and the redline suite is unchanged. See [the
+evidence](docs/results/field-links/README.md).
+
 `core-v178` adds three reproducers and three controls for [Docxodus
 #1862](https://github.com/JSv4/Docxodus/issues/1862): text that the HTML converter moved to a new parent printed its
 invisible direction marks as the words `#x200e` and `#x200f`. `direction-mark-page-split-ltr` holds a line break in a

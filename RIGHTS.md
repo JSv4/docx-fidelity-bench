@@ -8,7 +8,9 @@ The five link-form cases for Docxodus #1870 contain original Wisteria labels and
 `bench/fixtures.py`; their fields, links and relationships point at reserved `https://example.com/` addresses or at
 bookmarks in the same document. No product fixture, helper, document, image or font program is imported, and no
 text, document or script from the issue was used. The five screenshot sheets in `docs/results/field-links/` show
-LibreOffice 25.8.7.3 PDFs and Docxodus PDFs of these inputs, rasterized by Poppler; no Word output is included.
+LibreOffice 25.8.7.3 PDFs and Docxodus PDFs of these inputs, rasterized by Poppler; no Word output is included. The
+link renderings in `tests/test-link-style-browser.mjs` are original HTML written for that test; no renderer output
+is included there.
 
 `calendar-display-german` (Docxodus #1851) is an original date control authored in `bench/projection_fixtures.py`
 for this MIT-licensed corpus, with no imported text or assets. `docs/results/date-display-format/evidence.json`

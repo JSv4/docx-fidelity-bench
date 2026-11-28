@@ -53,6 +53,26 @@ export function collectReadableFacts(declarations) {
     return width - scale * ['paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth']
       .reduce((sum, name) => sum + parseFloat(style[name]), 0);
   };
+  // The decoration lines painted on an element's text. text-decoration-line is not inherited: an
+  // ancestor's line (an <a>'s default underline, say) is drawn through its in-flow inline content
+  // while each descendant's own computed value stays "none". So collect the lines of the element and
+  // of every ancestor whose decoration reaches it. Propagation stops at an inline block, a float or an
+  // out-of-flow box: its own lines still apply, those of the boxes around it do not. An element with
+  // display: contents has no box and paints no line of its own.
+  const paintedDecorationLines = element => {
+    const lines = new Set();
+    for (let parent = element; parent; parent = parent.parentElement) {
+      const style = getComputedStyle(parent);
+      if (style.display !== 'contents') {
+        for (const line of style.textDecorationLine.split(/\s+/)) if (line && line !== 'none') lines.add(line);
+      }
+      if (style.float !== 'none' || ['absolute', 'fixed'].includes(style.position) ||
+          ['inline-block', 'inline-table', 'inline-flex', 'inline-grid'].includes(style.display)) break;
+    }
+    const order = ['underline', 'overline', 'line-through'];
+    const painted = [...order.filter(line => lines.has(line)), ...[...lines].filter(line => !order.includes(line)).sort()];
+    return painted.length ? painted.join(' ') : 'none';
+  };
   const observations = [];
   for (let index = 0; index < declarations.length; index++) {
     const declaration = declarations[index];
@@ -144,9 +164,11 @@ export function collectReadableFacts(declarations) {
       };
     }
     if (declaration.type === 'marker-computed-style') {
-      if (declaration.property !== 'font-size') throw new Error('Unknown computed HTML style property');
+      if (!['font-size', 'color', 'text-decoration-line'].includes(declaration.property)) throw new Error('Unknown computed HTML style property');
+      const value = element => declaration.property === 'text-decoration-line' ? paintedDecorationLines(element)
+        : getComputedStyle(element).getPropertyValue(declaration.property);
       facts.computedStyle = { [declaration.property]: segments.filter(s => s.start < end && s.end > start)
-        .map(s => getComputedStyle(s.node.parentElement).getPropertyValue(declaration.property)) };
+        .map(s => value(s.node.parentElement)) };
     }
     const block = blockOf(start);
     if (declaration.type === 'marker-block-width') {

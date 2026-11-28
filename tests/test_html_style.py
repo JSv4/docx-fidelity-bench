@@ -57,3 +57,94 @@ class ComputedHtmlStyle(unittest.TestCase):
     def test_every_inline_fragment_of_a_marker_must_have_the_declared_style(self):
         value = observation(); value['computedStyle']['font-size'] = ['13.6px', '9.826px']
         self.assertFalse(html_artifacts.computed_style_pass(DECLARATION, value, 0))
+
+
+class ComputedLinkStyle(unittest.TestCase):
+    """Colour and painted decoration lines, as the field-link cases declare them (Docxodus #1870)."""
+
+    def setUp(self):
+        from bench.common import ROOT, read_json
+        self.cases = {c['id']: c for c in read_json(ROOT / 'fixtures/manifest.json')['cases']
+                      if c['id'].startswith('field-link-')}
+
+    @staticmethod
+    def observe(declaration, index, colour, lines):
+        value = observation()
+        value.update(index=index, marker=declaration['marker'], text=declaration['marker'],
+                     computedStyle={declaration['property']: [colour if declaration['property'] == 'color' else lines]})
+        return value
+
+    def failures(self, case_id, painted):
+        """The style checks a rendering fails; `painted` maps each label to its colour and decoration lines."""
+        failed = []
+        for index, declaration in enumerate(self.cases[case_id]['htmlAssertions']):
+            if declaration['type'] != 'marker-computed-style': continue
+            html_artifacts.validate_declaration(declaration)
+            if not html_artifacts.computed_style_pass(declaration, self.observe(declaration, index, *painted[declaration['marker']]), index):
+                failed.append((declaration['marker'], declaration['property']))
+        return failed
+
+    BLACK, STYLE_BLUE, LINK_BLUE = 'rgb(0, 0, 0)', 'rgb(5, 99, 193)', 'rgb(0, 0, 238)'
+    ENTRIES = ('WisteriaGate', 'WisteriaTerrace', 'WisteriaCourt')
+
+    def correct(self, case_id):
+        if 'simple-hyperlink' in case_id:
+            return {'WisteriaArbor': (self.BLACK, 'none'), 'WisteriaPergola': (self.STYLE_BLUE, 'underline')}
+        return {**{entry: (self.BLACK, 'none') for entry in self.ENTRIES}, 'WisteriaLantern': (self.STYLE_BLUE, 'underline')}
+
+    def test_colour_and_decoration_values_have_one_browser_serialization(self):
+        base = dict(DECLARATION)
+        for prop, value in [('color', 'rgb(0, 0, 0)'), ('color', 'rgb(5, 99, 193)'), ('color', 'rgb(255, 255, 255)'),
+                            ('text-decoration-line', 'none'), ('text-decoration-line', 'underline'),
+                            ('text-decoration-line', 'underline line-through')]:
+            html_artifacts.validate_declaration(dict(base, property=prop, equals=value))
+        for prop, value in [('color', '#0563C1'), ('color', 'rgb(5,99,193)'), ('color', 'rgb(256, 0, 0)'),
+                            ('color', 'rgb(05, 99, 193)'), ('color', 'rgba(0, 0, 0, 0.5)'), ('color', 'blue'),
+                            ('color', '13.6px'), ('font-size', 'rgb(0, 0, 0)'), ('text-decoration-line', 'underline '),
+                            ('text-decoration-line', 'line-through underline'), ('text-decoration-line', ''),
+                            ('text-decoration-line', 'underline underline'), ('text-decoration-line', 'solid'),
+                            ('text-decoration', 'underline')]:
+            with self.assertRaises(ValueError, msg=(prop, value)):
+                html_artifacts.validate_declaration(dict(base, property=prop, equals=value))
+
+    def test_every_label_declares_the_colour_and_decoration_its_document_gives_it(self):
+        self.assertEqual(len(self.cases), 5)
+        for case_id, case in self.cases.items():
+            styles = {(d['marker'], d['property']): d['equals'] for d in case['htmlAssertions']
+                      if d['type'] == 'marker-computed-style'}
+            expected = {(label, prop): value for label, (colour, lines) in self.correct(case_id).items()
+                        for prop, value in (('color', colour), ('text-decoration-line', lines))}
+            self.assertEqual(styles, expected, case_id)
+            # The link-target checks keep their places, so their check names do not move.
+            self.assertTrue(all(d['type'] == 'marker-attribute' for d in case['htmlAssertions'][:len(case['htmlAssertions']) - len(styles)]))
+
+    def test_a_correct_rendering_passes_every_style_check(self):
+        for case_id in self.cases:
+            self.assertEqual(self.failures(case_id, self.correct(case_id)), [], case_id)
+
+    def test_the_review_mutants_that_pass_the_pdf_colour_check_fail_here(self):
+        # The independent review's LibreOffice mutants passed every mandatory PDF check, because the colour
+        # check counts only 0563C1 ink: (a) contents entries black but underlined, (b) entries in the
+        # browser's link blue 0000EE and underlined, (b') the plain WisteriaArbor as a 0000EE underlined link.
+        for case_id in ('field-link-toc-complex-entries', 'field-link-toc-simple-entries', 'field-link-toc-element-entries-control'):
+            black_underlined = dict(self.correct(case_id), **{e: (self.BLACK, 'underline') for e in self.ENTRIES})
+            self.assertEqual(self.failures(case_id, black_underlined),
+                             [(e, 'text-decoration-line') for e in self.ENTRIES], case_id)
+            link_blue = dict(self.correct(case_id), **{e: (self.LINK_BLUE, 'underline') for e in self.ENTRIES})
+            self.assertEqual(self.failures(case_id, link_blue),
+                             [(e, p) for e in self.ENTRIES for p in ('color', 'text-decoration-line')], case_id)
+        for case_id in ('field-link-simple-hyperlink', 'field-link-simple-hyperlink-control'):
+            arbor = dict(self.correct(case_id), WisteriaArbor=(self.LINK_BLUE, 'underline'))
+            self.assertEqual(self.failures(case_id, arbor),
+                             [('WisteriaArbor', 'color'), ('WisteriaArbor', 'text-decoration-line')], case_id)
+            # The review's control mutant, WisteriaArbor in the Hyperlink style, already failed the PDF check.
+            styled = dict(self.correct(case_id), WisteriaArbor=(self.STYLE_BLUE, 'underline'))
+            self.assertEqual(self.failures(case_id, styled),
+                             [('WisteriaArbor', 'color'), ('WisteriaArbor', 'text-decoration-line')], case_id)
+
+    def test_a_link_that_loses_its_colour_or_underline_fails(self):
+        for case_id in self.cases:
+            outside = 'WisteriaPergola' if 'simple-hyperlink' in case_id else 'WisteriaLantern'
+            for painted, failed in [((self.BLACK, 'underline'), [(outside, 'color')]),
+                                    ((self.STYLE_BLUE, 'none'), [(outside, 'text-decoration-line')])]:
+                self.assertEqual(self.failures(case_id, dict(self.correct(case_id), **{outside: painted})), failed, case_id)

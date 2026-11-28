@@ -4,6 +4,7 @@ These feature checks accompany PDF evidence; they do not change the PDF raster s
 """
 from html.parser import HTMLParser
 from collections import Counter
+from itertools import combinations
 import re
 import json
 import math
@@ -19,6 +20,14 @@ BROWSER_SOURCE = Path(__file__).with_name('html_browser.mjs')
 BROWSER_POLICY = {'viewport': {'width': 1280, 'height': 1024}, 'javaScriptEnabled': False,
                   'offline': True, 'media': 'screen'}
 REVIEW_COUNTS = {'formatBalloons', 'commentBalloons', 'insertions', 'deletions', 'areas', 'layers'}
+# Each declarable computed style and the exact serialization a browser reports for it: a pixel size, an
+# opaque sRGB colour, or the decoration lines painted on the text (see html_browser.mjs), in this order.
+COMPUTED_STYLE_VALUES = {
+    'font-size': r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?px',
+    'color': r'rgb\((?:0|[1-9][0-9]{0,2}), (?:0|[1-9][0-9]{0,2}), (?:0|[1-9][0-9]{0,2})\)',
+    'text-decoration-line': '|'.join(['none'] + [' '.join(lines) for n in (1, 2, 3)
+                                                 for lines in combinations(['underline', 'overline', 'line-through'], n)]),
+}
 
 
 def needs_browser(declarations):
@@ -43,9 +52,11 @@ def validate_declaration(declaration):
                 any(not isinstance(t, str) or not t or re.search(r'\s', t) for t in tokens) or tokens[-1] != declaration['marker']):
             raise ValueError('Unknown or invalid readable HTML assertion')
     elif declaration.get('type') == 'marker-computed-style':
-        if (set(declaration) != {'type', 'version', 'marker', 'property', 'equals'} or
-                declaration.get('property') != 'font-size' or not isinstance(declaration.get('equals'), str) or
-                re.fullmatch(r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?px', declaration['equals']) is None):
+        grammar = COMPUTED_STYLE_VALUES.get(declaration.get('property'))
+        if (set(declaration) != {'type', 'version', 'marker', 'property', 'equals'} or grammar is None or
+                not isinstance(declaration.get('equals'), str) or re.fullmatch(grammar, declaration['equals']) is None or
+                declaration['property'] == 'color' and any(int(channel) > 255 for channel in
+                                                           re.findall('[0-9]+', declaration['equals']))):
             raise ValueError('Unknown or invalid computed HTML style assertion')
     elif declaration.get('type') == 'marker-block-width':
         tolerance = declaration.get('tolerancePx')
