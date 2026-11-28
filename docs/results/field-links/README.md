@@ -123,7 +123,16 @@ library source. The merge also holds `e98dd417`, which changes the converter's s
 HYPERLINK field inside another field's instruction no longer becomes a link), so `547fc77b` was measured instead. In all
 five cases it delivered the same HTML, byte for byte, as `38d060f9`, and the same page rasters, so every link
 check, mandatory PDF check, raster figure, colour region and page-number position above is unchanged. `9fdec63c`
-was captured again with it and also matches its earlier capture.
+was captured again with it and also matches its earlier capture. Both builds were captured once more after the
+observer learned to read SVG text's fill (see `docs/ADAPTERS.md`): the delivered HTML, every check result and every
+observed colour and decoration value are the same as in the capture before that change.
+
+`evidence.json` binds the five-case diagnostic manifest `diagnostic-4c809e741d16`, selected with
+`bench.suites.select_cases` from `core-v179` as `bench/fixtures.py` generates it (generator SHA-256
+`28c00ebc7fee22a1bdc01697df5d82d4f04b6353b74ff3918eee5cf4a87d09cc`), and the observer by its source digest.
+`reference-bundle.json` is the LibreOffice bundle registered for that manifest. LibreOffice writes a creation date
+and a document ID into each PDF, so every registration's reference PDFs hash differently; these references' page
+rasters and extracted words are the same as the earlier registration's.
 
 ## Pending
 
