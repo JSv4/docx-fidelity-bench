@@ -21,26 +21,45 @@ field's characters (`tests/test_direction_marks.py`). The right-to-left control 
 break was, so each label still has a line of its own: the order of two right-to-left runs sharing a line is a
 separate question the reproducer never asks. Every case pins each label to its page with a whole-page
 `marker-region` check, so a page break that a renderer dropped, or a label it printed glued to `#x200e`, fails too.
+The line break that writes the left-to-right mark is pinned as well: a `marker-reference-position` check requires
+`TamariskBeacon` and `TamariskSounding`, the words after it, to start where the LibreOffice reference starts them,
+within 0.5pt. A renderer that lost the break while moving the text, and printed both words on one line, would
+otherwise pass every check.
 
 ## Measurements
 
-| Case | Kind | LibreOffice 25.8.7.3 | Docxodus main `9af576ec` | Docxodus fix `5bdf3f8b` |
+| Case | Kind | LibreOffice 25.8.7.3 | Docxodus main `9af576ec` | Docxodus fix `d368acdc` |
 | --- | --- | --- | --- | --- |
-| `direction-mark-page-split-ltr` | reproducer | pass; calibration 100.00 | **fail** (`#x200eTamariskBeacon`); raster 85.46 | pass; raster 99.85, close |
+| `direction-mark-page-split-ltr` | reproducer | pass; calibration 100.00 | **fail** (`#x200eTamariskBeacon`; `TamariskBeacon` not found for its position); raster 85.46 | pass; raster 99.85, close |
 | `direction-mark-page-split-ltr-control` | control | pass; calibration 100.00 | pass; raster 99.73, close | pass; raster 99.73, close |
 | `direction-mark-page-split-rtl` | reproducer | pass; calibration 100.00 | **fail** (`x200f`, `#x200fTamariskQuay`, `#x200f`, `#`, `x200fTamariskMole#x200f#`); raster 50.11 | pass; raster 99.99, close |
 | `direction-mark-page-split-rtl-control` | control | pass; calibration 100.00 | pass; raster 99.87, close | pass; raster 99.87, close |
-| `direction-mark-field-link-line-break` | reproducer | pass; calibration 100.00 | **fail** (`#x200eTamariskSounding`); raster 76.73 | pass; raster 91.05, **not close** |
+| `direction-mark-field-link-line-break` | reproducer | pass; calibration 100.00 | **fail** (`#x200eTamariskSounding`; `TamariskSounding` not found for its position); raster 76.73 | pass; raster 91.05, **not close** |
 | `direction-mark-field-link-line-break-control` | control | pass; calibration 100.00 | pass; raster 99.84, close | pass; raster 99.84, close |
 
 "Pass" and "fail" are the **mandatory PDF checks only**: the complete visible-word inventory, the declared font
-family and the page of each label. Each failure on `main` is `expected-visible-tokens` plus the `marker-region`
-check of each label printed glued to a mark; the words in parentheses are the ones the inventory did not expect. A
-mandatory failure makes the case score zero, so the three reproducers score 0 on `main`; their raster figure is
-shown only to describe the page. The fix passes by keeping the marks as characters, not by dropping them: Poppler
-still reports U+200F in its raw words for the right-to-left reproducer. The standalone HTML each build delivered
-holds the text `#x200e` or `#x200f` once, five times and once in the three reproducers on `main`, and never on the
-fix or in any control.
+family, the page of each label and the position of the word after each line break. `Compose.py` applies them with
+`bench.pdf.correctness` against the LibreOffice reference, as `bench run` does. Each failure on `main` is
+`expected-visible-tokens` plus the `marker-region` check of each label printed glued to a mark, and, in the
+left-to-right and field-link reproducers, the `marker-reference-position` check of that same label; the words in
+parentheses are the ones the inventory did not expect. A mandatory failure makes the case score zero, so the three
+reproducers score 0 on `main`; their raster figure is shown only to describe the page. With the fix, and in every
+control on both builds, `TamariskBeacon` and `TamariskSounding` start 0.10pt left of and 0.003pt below the
+reference's position.
+
+The fix passes by keeping the marks as characters, not by dropping them. `evidence.json` records, for each delivered
+PDF and HTML file, the raw PDF words that still hold U+200E or U+200F and how often the HTML's visible text holds the
+mark characters and the printed names:
+
+| Case | `main` HTML text | fix HTML text | PDF raw words holding a mark, both builds where printed |
+| --- | --- | --- | --- |
+| `direction-mark-page-split-ltr` | `#x200e` ×1 | U+200E ×1 | none |
+| `direction-mark-page-split-rtl` | `#x200f` ×5 | U+200F ×5 | fix: `\u200f`, `\u200fTamariskMole` |
+| `direction-mark-field-link-line-break` | `#x200e` ×1 | U+200E ×1 | none |
+| each control | U+200E ×1 (U+200F ×6 right to left) | the same | right to left: `\u200f`, `\u200fTamariskMole` |
+
+Neither build prints a mark's name in any control, and the fix never does. Poppler keeps U+200F in the raw words of
+the right-to-left pages and reports none for the left-to-right mark after a line break.
 
 "Raster" is the worst page's `100 × min(SSIM, ink F1)` against the LibreOffice reference, computed with
 `bench.metrics.page_metrics` on Poppler's 96-DPI CropBox rasters exactly as `bench run` computes it; "close" is
@@ -57,12 +76,20 @@ with the `close` gate. The two Docxodus columns are **unscored diagnostics**, no
 benchmark's own adapter reports `ENVIRONMENT_INELIGIBLE` on this host, which denies the user namespaces its pinned
 Chromium sandbox needs, so the PDFs were captured with `docs/results/export-reliability/Capture.mjs` through the
 public export API in a system Chrome 158.0.8127.36 with its sandbox on, strict fonts and the hashed Liberation Serif
-directory, and checked with `Inspect.py`.
+directory, with the delivered HTML (`--html`).
 
-Both renderers were built with `bench build-docxodus`: `main` at `9af576ecded6cd820647b38e79864665e8d1568f`
-and the fix at `5bdf3f8b317862f79538b3ccd9780b7d34d8a3a6` ([JSv4/Docxodus#1866](https://github.com/JSv4/Docxodus/pull/1866)).
-The fix branch sits on two commits for Docxodus #1861, which leave `WmlToHtmlConverter.cs` unchanged, and was
-later amended to `73743aa9`, which differs from `5bdf3f8b` only in `CHANGELOG.md`.
+Both renderers were built with `bench build-docxodus` from clean detached worktrees: `main` at
+`9af576ecded6cd820647b38e79864665e8d1568f` and the fix at `d368acdc112216301271e293ddf4359a11fe7a4f`, the head
+with which [JSv4/Docxodus#1866](https://github.com/JSv4/Docxodus/pull/1866) merged (as `2d8ca447`). Both are on
+Docxodus `main`. An earlier version of this page measured `5bdf3f8b`, a local commit of that pull request that was
+never published. `d368acdc` changes no line of `Docxodus/WmlToHtmlConverter.cs` against it (its other changes are
+the #1861 session commits it sits on), and every page raster and extracted word above is identical to that earlier
+measurement.
+
+`evidence.json` binds the six-case diagnostic manifest `diagnostic-e7cd6d679764`, selected with
+`bench.suites.select_cases` from `core-v178` as `bench/fixtures.py` generates it (generator SHA-256
+`16d6f2d167d950b95085a3fe77be54ff52e98022fc94f9da05b69a35ce858dac`). `reference-bundle.json` is the LibreOffice bundle
+registered for that manifest.
 
 ## Shapes
 
@@ -75,13 +102,13 @@ later amended to `73743aa9`, which differs from `5bdf3f8b` only in `CHANGELOG.md
 ## Pending
 
 Word reference registration and full-suite scoring for `core-v178` remain pending; no Word capture was made for
-these cases. The cases were measured when this suite was numbered `core-v176`; renumbering changed no input.
+these cases. The suite was first numbered `core-v176`; renumbering changed no input.
 
 ## Reproduce
 
 `evidence.json` binds the manifest, the reference bundle and its environment, the calibration result, both build
-identities, the capture and inspection records, every page measurement, and the hashes of every PDF, page raster
-and screenshot. `reference-bundle.json` is the LibreOffice bundle. With `MANIFEST` holding only these six cases,
+identities, the capture and inspection records, every check result and page measurement, where each build's marks
+went, and the hashes of every PDF, delivered HTML file, page raster and screenshot. `reference-bundle.json` is the LibreOffice bundle. With `MANIFEST` holding only these six cases,
 `ENVIRONMENT` the JSON that `bench.environment.environment(['Liberation Serif'])` returns, and `RUN` a scratch
 directory:
 

@@ -4,14 +4,19 @@ Usage: python3 docs/results/split-direction-marks/Compose.py RUN
 
 RUN holds manifest.json, reference/bundle.json (`bench reference libreoffice --manifest`),
 calibration/result.json (`bench run --adapter libreoffice` against that bundle), capture-main/
-and capture-fix/ (export-reliability Capture.mjs then Inspect.py) and each build's identity
-record copied as main-docx-bench-build.json and fix-docx-bench-build.json.
+and capture-fix/ (export-reliability Capture.mjs with --html, then Inspect.py) and each build's
+identity record copied as main-docx-bench-build.json and fix-docx-bench-build.json.
 
-Each Docxodus PDF is measured against the LibreOffice reference exactly as `bench run` measures
-a page: Poppler at 96 DPI on the CropBox, `bench.metrics.page_metrics`, the worst page for the
-case. These are diagnostics of a borrowed browser, not registered candidate scores. The sheets
-show the same unchanged pixels, every page of a case cropped to the box around all three
-renderers' ink plus a margin.
+Each Docxodus PDF is checked and measured against the LibreOffice reference as `bench run` checks
+and measures a candidate: `bench.pdf.correctness` for the mandatory checks (the position of the
+word after each line break is relative to the reference, so Inspect.py, which checks a PDF against
+itself, cannot decide it), and Poppler at 96 DPI on the CropBox with `bench.metrics.page_metrics`
+for the raster, the worst page for the case. For each delivered PDF and HTML file it also records
+where the direction marks went: the raw PDF words that still hold U+200E or U+200F, and how often
+the HTML's visible text holds the mark characters and the printed names `#x200e` and `#x200f`.
+These are diagnostics of a borrowed browser, not registered candidate scores. The sheets show the
+same unchanged pixels, every page of a case cropped to the box around all three renderers' ink
+plus a margin.
 """
 import json
 import shutil
@@ -21,7 +26,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 root = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(root))
-from bench import metrics, pdf as bench_pdf
+from bench import html_artifacts, metrics, pdf as bench_pdf
 from bench.common import digest, identity
 
 run = Path(sys.argv[1]).resolve()
@@ -47,6 +52,15 @@ for name, capture in captures.items():
 font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 14)
 bold = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 16)
 INK, MARGIN, GAP = 231, 24, 16
+MARKS = {'U+200E': '\u200e', 'U+200F': '\u200f', '#x200e': '#x200e', '#x200f': '#x200f'}
+
+
+def marks(words, html_path):
+    """Where the marks went: raw PDF words holding a mark, and mark characters and printed names in the HTML text."""
+    text = ''.join(value for value, _ in html_artifacts.Document(html_path.read_text(encoding='utf-8')).chunks)
+    return {'pdfRawWordsWithMarks': [w['raw'].encode('unicode_escape').decode() for w in words
+                                     if any(m in w.get('raw', '') for m in ('\u200e', '\u200f'))],
+            'htmlText': {name: text.count(value) for name, value in MARKS.items()}}
 
 
 def rasters(pdf_path, folder):
@@ -89,6 +103,7 @@ for case in manifest['cases']:
     ref = reference['cases'][cid]
     assert ref['inputSha256'] == case['sha256'] and ref['eligible']
     reference_pdf = run / 'reference' / ref['pdf']
+    reference_info = bench_pdf.inspect_case_pdf(reference_pdf, case)
     reference_pages = rasters(reference_pdf, run / 'raster' / cid / 'reference')
     calibration_case = calibrated[cid]
     panels = [{'renderer': ref['renderer']['version'].split(' ')[0] + ' ' + ref['renderer']['version'].split(' ')[1] + ' reference',
@@ -99,15 +114,18 @@ for case in manifest['cases']:
         record = next(c for c in captures[name]['cases'] if c['id'] == cid)
         assert record['inputSha256'] == case['sha256'] and record['status'] == 'delivered'
         folder = run / f'capture-{name}' / cid
-        candidate_pdf = folder / 'candidate.pdf'
-        assert digest(candidate_pdf) == record['pdfSha256']
+        candidate_pdf, candidate_html = folder / 'candidate.pdf', folder / 'candidate.html'
+        assert digest(candidate_pdf) == record['pdfSha256'] and digest(candidate_html) == record['htmlSha256']
+        candidate_info = bench_pdf.inspect_case_pdf(candidate_pdf, case)
+        checks = bench_pdf.correctness(bench_pdf.binding_case(case, 'libreoffice'), reference_info, candidate_info)
+        failures = [check['name'] for check in checks if not check['passed']]
         pages = rasters(candidate_pdf, run / 'raster' / cid / name)
         measured = raster(reference_pages, pages)
-        failures = record['mandatoryPdfFailures']
         measured.update(caseScore=0.0 if failures else measured['rasterScore'], close=measured['close'] and not failures)
         panels.append({'renderer': f'Docxodus {name} {captures[name]["candidate"][:8]}', 'pdf': candidate_pdf,
-                       'failures': failures, 'pages': pages, 'measurement': measured,
-                       'words': [w['text'] for w in json.loads((folder / 'inspection.json').read_text())['words'] if w['text']]})
+                       'html': candidate_html, 'failures': failures, 'pages': pages, 'measurement': measured,
+                       'marks': marks(candidate_info['words'], candidate_html),
+                       'words': [w['text'] for w in candidate_info['words'] if w['text']]})
     images = {id(panel): [Image.open(page).convert('RGB') for page in panel['pages']] for panel in panels}
     size = images[id(panels[0])][0].size
     assert all(image.size == size for group in images.values() for image in group), 'one crop needs one page size'
@@ -116,8 +134,8 @@ for case in manifest['cases']:
             min(size[0], max(b[2] for b in boxes) + MARGIN), min(size[1], max(b[3] for b in boxes) + MARGIN))
     columns = max(len(panel['pages']) for panel in panels)
     cell_w, cell_h = crop[2] - crop[0], crop[3] - crop[1]
-    row_h = 110 + cell_h + 22
-    sheet = Image.new('RGB', (max(24 + columns * (cell_w + GAP), 780), 64 + len(panels) * row_h), '#e9eef3')
+    row_h = 130 + cell_h + 22
+    sheet = Image.new('RGB', (max(24 + columns * (cell_w + GAP), 1000), 64 + len(panels) * row_h), '#e9eef3')
     draw = ImageDraw.Draw(sheet)
     draw.text((12, 10), cid, font=bold, fill='#16283b')
     draw.text((12, 34), f'Pages at 96 DPI, cropped to x {crop[0]}-{crop[2]}, y {crop[1]}-{crop[3]} px, '
@@ -137,10 +155,15 @@ for case in manifest['cases']:
                     + ('close' if measured['close'] else 'not close'))
         draw.text((12, y + 42), line, font=font, fill='#33475b')
         draw.text((12, y + 62), 'Extracted words: ' + ' | '.join(panel['words']), font=font, fill='#33475b')
+        if 'marks' in panel:
+            counts = panel['marks']['htmlText']
+            draw.text((12, y + 82), 'Delivered HTML text: ' + ', '.join(f'{name} x{count}' for name, count in counts.items()) +
+                      f'; PDF words still holding a mark: {len(panel["marks"]["pdfRawWordsWithMarks"])}', font=font,
+                      fill='#8b2a15' if counts['#x200e'] or counts['#x200f'] else '#33475b')
         for index, image in enumerate(images[id(panel)]):
             x = 12 + index * (cell_w + GAP)
-            draw.text((x, y + 84), f'Page {index + 1}', font=font, fill='#33475b')
-            sheet.paste(image.crop(crop), (x, y + 104))
+            draw.text((x, y + 104), f'Page {index + 1}', font=font, fill='#33475b')
+            sheet.paste(image.crop(crop), (x, y + 124))
         y += row_h
     target = out / (cid + '.png')
     sheet.save(target, optimize=True)
@@ -148,6 +171,7 @@ for case in manifest['cases']:
         'screenshotSha256': digest(target), 'cropPx': list(crop),
         'panels': [{'renderer': panel['renderer'], 'pdfSha256': digest(panel['pdf']), 'failures': panel['failures'],
                     'words': panel['words'], 'measurement': panel['measurement'],
+                    **({'htmlSha256': digest(panel['html']), 'marks': panel['marks']} if 'html' in panel else {}),
                     'pageRasterSha256': [digest(page) for page in panel['pages']]} for panel in panels]})
 evidence['tools'] = {name: digest(root / name) for name in ['docs/results/export-reliability/Capture.mjs',
     'docs/results/export-reliability/Inspect.py', 'docs/results/split-direction-marks/Compose.py']}

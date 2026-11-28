@@ -4,9 +4,11 @@ invisible direction marks as the words `#x200e` and `#x200f`. `direction-mark-pa
 paragraph that a page break splits, `direction-mark-page-split-rtl` a right-to-left paragraph of right-to-left runs
 that a page break splits, and `direction-mark-field-link-line-break` a link holding a line break inside a HYPERLINK
 field's result; the controls drop the page break (the right-to-left one puts a line break in its place) or the field.
-The visible-word inventory leaves the marks out but counts the printed words, and a whole-page `marker-region` check
-pins each label to its page. In unscored public-API captures Docxodus 9af576ec fails the three reproducers and the fix
-([JSv4/Docxodus#1866](https://github.com/JSv4/Docxodus/pull/1866), 5bdf3f8b) passes the mandatory checks of all six;
+The visible-word inventory leaves the marks out but counts the printed words, a whole-page `marker-region` check
+pins each label to its page, and a `marker-reference-position` check pins the word after each line break that writes
+a mark. In unscored public-API captures Docxodus 9af576ec fails the three reproducers and the fix
+([JSv4/Docxodus#1866](https://github.com/JSv4/Docxodus/pull/1866), merged with head d368acdc) passes the mandatory
+checks of all six;
 all six LibreOffice references are eligible. The field-link case's raster stays below close until Docxodus #1869 (an
 underline on HYPERLINK field links) is fixed. All earlier DOCX files remain byte-identical, and the redline suite is
 unchanged. These cases were first numbered `core-v176`; they became `core-v178` when `core-v177` merged first. Word
