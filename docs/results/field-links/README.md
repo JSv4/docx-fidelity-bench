@@ -7,7 +7,7 @@ A link can be written three ways: as a `w:hyperlink` element, as a complex HYPER
 - **A table-of-contents entry written as a HYPERLINK field is drawn blue and underlined, and is no link.** Each
   entry's text and leader tab are in the `Hyperlink` character style. Word draws a contents entry black and not
   underlined whether it is written as a field or as a `w:hyperlink` (measured in Word reference PDFs; see the
-  Docxodus pull request for #1870), and LibreOffice 25.8.7.3 draws all three forms the same way. Docxodus drew the
+  Docxodus pull request for #1870, [JSv4/Docxodus#1879](https://github.com/JSv4/Docxodus/pull/1879)), and LibreOffice 25.8.7.3 draws all three forms the same way. Docxodus drew the
   `w:hyperlink` entries that way already, but drew field-form entries in the style's blue (0563C1) and underline, with
   a solid underline in place of the leader dots. It also wrote them into the HTML with no link. The same field outside
   the table of contents keeps the style's blue and underline in every renderer.
@@ -89,7 +89,9 @@ Both renderers were built with `bench build-docxodus` from clean detached worktr
 `9fdec63cc39018ebdf68031496c8162ad34e2d52` and the fix at `38d060f9d9c959f8dea91f7da41d041701d096cc`. That
 fix adds review changes to an earlier fix commit, `71641ebed61a659e6ebe3a268db449e14aa3f0b3`. Measured the same
 way, the earlier commit gave the same result for every check, raster figure, colour region and page-number
-position.
+position. The pull request's head, `073b38e0c03c4b22fa2e0afa3e86b5e391c31f3a`, differs from `38d060f9` only in a
+test file, the changelog and documentation. Its library source (`Docxodus/`) is byte-identical, so it was not
+measured again.
 
 ## Pending
 
