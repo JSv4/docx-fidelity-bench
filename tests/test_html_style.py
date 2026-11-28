@@ -148,3 +148,53 @@ class ComputedLinkStyle(unittest.TestCase):
             for painted, failed in [((self.BLACK, 'underline'), [(outside, 'color')]),
                                     ((self.STYLE_BLUE, 'none'), [(outside, 'text-decoration-line')])]:
                 self.assertEqual(self.failures(case_id, dict(self.correct(case_id), **{outside: painted})), failed, case_id)
+
+
+class RecordedLinkStyleObservations(unittest.TestCase):
+    """Replay what the real browser observer saw (tests/test-link-style-browser.mjs records it).
+
+    The validate workflow runs no browser. This record is bound to the observer's source digest, so CI
+    fails once bench/html_browser.mjs changes until the browser test records it again."""
+
+    def setUp(self):
+        from bench.common import ROOT, digest, read_json
+        self.record = read_json(ROOT / 'tests/link-style-observations.json')
+        self.observer = digest(ROOT / 'bench/html_browser.mjs')
+        self.cases = {c['id']: c for c in read_json(ROOT / 'fixtures/manifest.json')['cases'] if c['id'].startswith('field-link-')}
+
+    def test_the_record_comes_from_the_current_observer(self):
+        self.assertEqual(self.record['inspectorSha256'], self.observer,
+                         'Record again: LINK_STYLE_RECORD=1 node --test tests/test-link-style-browser.mjs')
+
+    def test_recorded_observations_give_the_expected_verdicts(self):
+        names = [c['name'] for c in self.record['cases']]
+        self.assertEqual(len(names), len(set(names)))
+        for case in self.record['cases']:
+            declarations = case['declarations']
+            if 'id' in case:
+                # The field-link cases' own declarations, not a copy that could drift from the manifest.
+                self.assertEqual(declarations, [d for d in self.cases[case['id']]['htmlAssertions']
+                                                if d['type'] == 'marker-computed-style'], case['name'])
+            self.assertEqual([o['index'] for o in case['observations']], list(range(len(declarations))))
+            failed = []
+            for index, (declaration, observation) in enumerate(zip(declarations, case['observations'])):
+                html_artifacts.validate_declaration(declaration)
+                if not html_artifacts.computed_style_pass(declaration, observation, index):
+                    failed.append(f"{declaration['marker']} {declaration['property']}")
+            self.assertEqual(failed, case['failed'], case['name'])
+            if 'painted' in case:
+                lines = case['observations'][0]['computedStyle']['text-decoration-line']
+                self.assertEqual(lines != ['none'], case['painted'], case['name'])
+
+    def test_the_record_covers_the_review_mutants_svg_text_and_each_propagation_stop(self):
+        names = {c['name'] for c in self.record['cases']}
+        for name in ["review mutant (a): black, underlined entries", "review mutant (b): entries in the link blue, underlined",
+                     "review mutant (b'): WisteriaArbor as a link-blue underlined link",
+                     'WisteriaPergola as black SVG text in a blue, underlined link',
+                     'correct simple fields, WisteriaArbor as black SVG text in a default link',
+                     'inline table in an underlined paragraph', 'inline flex box in an underlined paragraph',
+                     'inline grid in an underlined paragraph', 'float in an underlined paragraph',
+                     'absolutely positioned in an underlined paragraph', 'fixed in an underlined paragraph',
+                     'underlined flex container', 'underlined grid container', 'SVG text in an underlined link']:
+            self.assertIn(name, names)
+        self.assertEqual({c['id'] for c in self.record['cases'] if 'id' in c}, set(self.cases))

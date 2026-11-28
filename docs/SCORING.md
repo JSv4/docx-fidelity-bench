@@ -167,14 +167,19 @@ Version 1 `marker-computed-style` adds exact computed-style checks for unique HT
 (a pixel size), `color` (an opaque `rgb(R, G, B)` value) and `text-decoration-line`. Every visible inline
 fragment of the marker must have the declared value, and the marker must have positive, accessible
 geometry under the same clipping policy as readability assertions. Mixed styles cannot pass by reporting
-only the first fragment. A font size or colour is the computed value of the fragment's element, which
-inherits it. A decoration line is not inherited: a link's underline is painted through a child element
-whose own computed value is `none`. So the observer reports the lines painted on the text, the union of
-the lines of the fragment's element and of each ancestor whose decoration reaches it, stopping at an
-inline block, a float or an absolutely or fixed positioned box, as CSS propagation does (an element with
-`display: contents` has no box and adds none); `none` means no line reaches it. The colour check reads CSS `color`, not pixels, and the decoration check names lines,
-not their colour or thickness; an underline drawn as a border is outside it. `font-size` declarations
-are read as before. These checks remain separate from PDF scores.
+only the first fragment. A font size is the computed value of the fragment's element. A colour is the
+colour the text is drawn in: the computed `color` of HTML text, or the `fill` of SVG text, written as the
+sRGB `rgb()` it paints whatever notation the page used. A decoration line is not inherited: a link's
+underline is painted through a child element whose own computed value is `none`. So the observer reports
+the lines painted on the text, the union of the lines of the fragment's element and of each ancestor
+whose decoration reaches it. In HTML that stops at an inline block, a float or an absolutely or fixed
+positioned box. Text in an `<svg>` takes lines only from SVG elements, the `<svg>` included, since no
+HTML decoration reaches into it. An element with `display: contents`, a `blink` line and a fully
+transparent line add nothing; `none` means no line reaches the text. `docs/ADAPTERS.md` gives the rules;
+`tests/test-link-style-browser.mjs` checks each against what Chrome paints. The colour check reads the
+computed colour, not pixels, and the decoration check names lines, not their colour or thickness. A
+colour or line that a `::first-line` rule gives the text, or an underline drawn as a border, is outside them. `font-size` declarations are read
+as before. These checks remain separate from PDF scores.
 
 Version 1 `marker-block-width` compares the content-box width of a unique marker's nearest block with
 that of a unique `reference` marker's block, within a declared `tolerancePx` of at most 2px. The

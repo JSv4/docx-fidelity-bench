@@ -33,11 +33,14 @@ Three kinds of checks decide the cases:
   reported apart from the PDF score, as the scoring contract describes. They read the attribute only: they do not
   check that the element holding it is an `<a>`, or that a `#_Toc9000N` target exists in the HTML.
 - **Delivered HTML colour and decoration** (from `core-v179`). Version 1 `marker-computed-style` checks on each label
-  require the computed `color` and the painted `text-decoration-line` the document gives it: `rgb(0, 0, 0)` and
-  `none` for the contents entries and `WisteriaArbor`, `rgb(5, 99, 193)` and `underline` for `WisteriaPergola` and
-  `WisteriaLantern`. A decoration line is not inherited, so the observer reports the lines painted on the text: those
-  of its element and of every ancestor whose decoration reaches it, such as a link's default underline (see
-  `docs/SCORING.md`). These checks are reported with the link checks, apart from the PDF score.
+  require the colour and the painted `text-decoration-line` the document gives it: `rgb(0, 0, 0)` and `none` for the
+  contents entries and `WisteriaArbor`, `rgb(5, 99, 193)` and `underline` for `WisteriaPergola` and `WisteriaLantern`.
+  The colour is the one the text is drawn in: the computed `color` of HTML text, or the `fill` of SVG text. A
+  decoration line is not inherited, so the observer reports the lines painted on the text: those of its element and of
+  every ancestor whose decoration reaches it, such as a link's default underline, and none from the HTML around an
+  `<svg>`, which does not decorate the text inside it (see `docs/ADAPTERS.md`). These checks are reported with the
+  link checks, apart from the PDF score. Docxodus `9fdec63c` delivers the simple field's `WisteriaArbor` as SVG text;
+  the observer reads its black fill.
 - **The Hyperlink style's blue.** A version 1 `color-reference-geometry` check on 0563C1 requires the blue ink to have
   the reference's bounds within 1.5pt and its coverage within 8%. These are the tolerances the static-image cases use.
   In each LibreOffice reference that ink is only `WisteriaPergola` or `WisteriaLantern` with its underline. So the

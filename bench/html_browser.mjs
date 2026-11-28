@@ -53,20 +53,37 @@ export function collectReadableFacts(declarations) {
     return width - scale * ['paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth']
       .reduce((sum, name) => sum + parseFloat(style[name]), 0);
   };
+  const SVG = 'http://www.w3.org/2000/svg';
+  // A colour as opaque sRGB `rgb(R, G, B)` where it is one. The browser already writes most computed
+  // colours that way; another notation (oklch(), lab(), color(srgb ...)) is drawn on a canvas and read
+  // back. A value that is not a colour, such as an SVG paint server, is returned unchanged.
+  const srgb = value => {
+    if (/^rgba?\(/.test(value) || !CSS.supports('color', value)) return value;
+    const context = Object.assign(document.createElement('canvas'), { width: 1, height: 1 }).getContext('2d');
+    context.fillStyle = value; context.fillRect(0, 0, 1, 1);
+    const [r, g, b, a] = context.getImageData(0, 0, 1, 1).data;
+    return a === 255 ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${+(a / 255).toFixed(3)})`;
+  };
+  // Text paints with its colour in HTML and with its fill in SVG.
+  const paintedColour = element => srgb(getComputedStyle(element).getPropertyValue(element.namespaceURI === SVG ? 'fill' : 'color'));
   // The decoration lines painted on an element's text. text-decoration-line is not inherited: an
   // ancestor's line (an <a>'s default underline, say) is drawn through its in-flow inline content
   // while each descendant's own computed value stays "none". So collect the lines of the element and
-  // of every ancestor whose decoration reaches it. Propagation stops at an inline block, a float or an
-  // out-of-flow box: its own lines still apply, those of the boxes around it do not. An element with
-  // display: contents has no box and paints no line of its own.
+  // of every ancestor whose decoration reaches it. In HTML, propagation stops at an inline block, a
+  // float or an out-of-flow box: its own lines still apply, those of the boxes around it do not. An
+  // <svg> in HTML is a replaced element, so no HTML ancestor decorates the text inside it, while the
+  // SVG elements down to the text (the <svg> itself included) do. An element with display: contents has
+  // no box and paints no line of its own. A blink line is never painted, nor is an HTML line whose
+  // text-decoration-color is fully transparent (SVG paints its lines with the fill instead).
   const paintedDecorationLines = element => {
     const lines = new Set();
     for (let parent = element; parent; parent = parent.parentElement) {
-      const style = getComputedStyle(parent);
-      if (style.display !== 'contents') {
-        for (const line of style.textDecorationLine.split(/\s+/)) if (line && line !== 'none') lines.add(line);
+      const style = getComputedStyle(parent), svg = parent.namespaceURI === SVG;
+      if (style.display !== 'contents' && (svg || !/^rgba\(.*, 0\)$/.test(srgb(style.textDecorationColor)))) {
+        for (const line of style.textDecorationLine.split(/\s+/)) if (line && !['none', 'blink'].includes(line)) lines.add(line);
       }
-      if (style.float !== 'none' || ['absolute', 'fixed'].includes(style.position) ||
+      if (svg ? parent.localName === 'svg' && parent.parentElement?.namespaceURI !== SVG
+        : style.float !== 'none' || ['absolute', 'fixed'].includes(style.position) ||
           ['inline-block', 'inline-table', 'inline-flex', 'inline-grid'].includes(style.display)) break;
     }
     const order = ['underline', 'overline', 'line-through'];
@@ -166,7 +183,7 @@ export function collectReadableFacts(declarations) {
     if (declaration.type === 'marker-computed-style') {
       if (!['font-size', 'color', 'text-decoration-line'].includes(declaration.property)) throw new Error('Unknown computed HTML style property');
       const value = element => declaration.property === 'text-decoration-line' ? paintedDecorationLines(element)
-        : getComputedStyle(element).getPropertyValue(declaration.property);
+        : declaration.property === 'color' ? paintedColour(element) : getComputedStyle(element).getPropertyValue(declaration.property);
       facts.computedStyle = { [declaration.property]: segments.filter(s => s.start < end && s.end > start)
         .map(s => value(s.node.parentElement)) };
     }

@@ -90,18 +90,34 @@ Version 1 `marker-computed-style` declares a unique `marker`, a `property` and i
 
 Other properties and malformed values are rejected. The same independent browser observer records
 `computedStyle`, mapping the property to its value for every visible text-node fragment covered by the
-marker. For `font-size` and `color` that is the computed value of the fragment's parent element.
-`text-decoration-line` is not inherited: an ancestor's line, such as a link's default underline, is
-drawn through an inline child whose own computed value is `none`. So for it the observer reports the
-union of the lines of the parent element and of every ancestor whose decoration reaches the text, and
-stops at the first inline block, float or absolutely or fixed positioned box, which an outer decoration
-does not enter. An element with `display: contents` has no box and adds no line. Python requires every value to match, in addition to a positive range fully contained in
-the final viewport and each clipping ancestor. A missing observation is unmeasured; an observed mismatch
-or clipped marker is a measured failure. This does not claim to inspect every character's font across
-the whole document or to measure paint occlusion. A colour check reads the CSS `color`, not the pixels:
-a paint override such as `-webkit-text-fill-color`, opacity or a filter is outside it. A decoration
-check names the lines, not their colour, style or thickness, and a line drawn some other way, such as a
-border, is outside it. The source-bound observer, browser policy and artifact identities are unchanged.
+marker, read from the fragment's parent element:
+
+- `font-size` is its computed value.
+- `color` is the colour the text is drawn in: the computed `color` of HTML text and the computed `fill`
+  of SVG text. A colour the browser writes in another notation, such as `oklch()`, `lab()` or
+  `color(srgb …)`, is drawn on a canvas and reported as the `rgb(R, G, B)` it paints, or `rgba(…)` when
+  it is not opaque. A paint that is not a colour, such as an SVG gradient, is reported unchanged, so it
+  cannot match.
+- `text-decoration-line` is not inherited: an ancestor's line, such as a link's default underline, is
+  drawn through an inline child whose own computed value is `none`. So the observer reports the union of
+  the lines of the parent element and of every ancestor whose decoration reaches the text. In HTML it
+  stops at the first inline block, inline table, inline flex or grid box, float, or absolutely or fixed
+  positioned box, which an outer decoration does not enter. An `<svg>` in HTML is a replaced element:
+  no HTML ancestor decorates its text, while the SVG elements down to the text, the `<svg>` included, do,
+  so the observer stops there. An element with `display: contents` adds no line, nor does a `blink` line,
+  which is never drawn, or an HTML line whose `text-decoration-color` is fully transparent.
+
+Python requires every value to match, in addition to a positive range fully contained in the final
+viewport and each clipping ancestor. A missing observation is unmeasured; an observed mismatch or clipped
+marker is a measured failure. This does not claim to inspect every character's font across the whole
+document or to measure paint occlusion. A colour check reads the computed colour or fill, not the pixels:
+a paint override such as `-webkit-text-fill-color`, a `::first-line` rule, opacity, `fill-opacity` or a
+filter is outside it. A
+decoration check names the lines, not their colour, style or thickness; a line drawn some other way, such
+as a border, and lines a `::first-line` rule draws are outside it. The source-bound observer, browser
+policy and artifact identities are unchanged. `tests/test-link-style-browser.mjs` checks these rules
+against what Chrome paints; it needs a browser, so it runs locally, and CI replays its committed
+observations (`tests/link-style-observations.json`), which are bound to the observer's source digest.
 
 Version 1 `marker-block-width` declares a unique `marker`, a different unique `reference` marker and a
 `tolerancePx` greater than 0 and at most 2. The observer records `blockWidth`, the content-box width
