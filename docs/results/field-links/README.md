@@ -5,12 +5,14 @@ A link can be written three ways: as a `w:hyperlink` element, as a complex HYPER
 
 - **A simple HYPERLINK field is not a link.** Its text renders as plain text with no `<a>`, so it cannot be followed.
 - **A table-of-contents entry written as a HYPERLINK field is drawn blue and underlined, and is no link.** Each
-  entry's text and leader tab are in the `Hyperlink` character style. Word draws a contents entry black and not
-  underlined whether it is written as a field or as a `w:hyperlink` (measured in Word reference PDFs; see the
-  Docxodus pull request for #1870, [JSv4/Docxodus#1879](https://github.com/JSv4/Docxodus/pull/1879)), and LibreOffice 25.8.7.3 draws all three forms the same way. Docxodus drew the
-  `w:hyperlink` entries that way already, but drew field-form entries in the style's blue (0563C1) and underline, with
-  a solid underline in place of the leader dots. It also wrote them into the HTML with no link. The same field outside
-  the table of contents keeps the style's blue and underline in every renderer.
+  entry's text and leader tab are in the `Hyperlink` character style. LibreOffice 25.8.7.3 draws a contents entry
+  black and not underlined in all three forms. So did Word in the Word reference PDFs measured for #1870 (see
+  [JSv4/Docxodus#1879](https://github.com/JSv4/Docxodus/pull/1879)): there the `w:hyperlink` and complex-field
+  entries had a leader tab and a PAGEREF field, and the simple-field entry had neither, so Word was not measured on
+  a simple-field entry shaped like `field-link-toc-simple-entries`. Docxodus drew the `w:hyperlink` entries that way
+  already, but drew field-form entries in the style's blue (0563C1) and underline, with a solid underline in place
+  of the leader dots. It also wrote them into the HTML with no link. The same field outside the table of contents
+  keeps the style's blue and underline in every renderer.
 
 | Case | What it holds | Its control |
 | --- | --- | --- |
@@ -24,29 +26,48 @@ packages of the simple pair carry the two address relationships. The `TOC` field
 and ends in the last, outside the entry's link, as Word writes it. Spaces either side of each leader tab keep its dots
 apart from the words in the PDF text, so `isolated-dot-leaders-v1` can set them aside.
 
-Two kinds of checks decide the cases:
+Three kinds of checks decide the cases:
 
 - **Delivered HTML links.** A version 1 `marker-attribute` check on each label requires its nearest `href` to be the
   field's address or `#_Toc9000N`. A printed page cannot tell a link from plain text in the same ink. These checks are
-  reported apart from the PDF score, as the scoring contract describes.
+  reported apart from the PDF score, as the scoring contract describes. They read the attribute only: they do not
+  check that the element holding it is an `<a>`, or that a `#_Toc9000N` target exists in the HTML.
+- **Delivered HTML colour and decoration** (from `core-v179`). Version 1 `marker-computed-style` checks on each label
+  require the colour and the painted `text-decoration-line` the document gives it: `rgb(0, 0, 0)` and `none` for the
+  contents entries and `WisteriaArbor`, `rgb(5, 99, 193)` and `underline` for `WisteriaPergola` and `WisteriaLantern`.
+  The colour is the one the text is drawn in: the computed `color` of HTML text, or the `fill` of SVG text. A
+  decoration line is not inherited, so the observer reports the lines painted on the text: those of its element and of
+  every ancestor whose decoration reaches it, such as a link's default underline, and none from the HTML around an
+  `<svg>`, which does not decorate the text inside it (see `docs/ADAPTERS.md`). These checks are reported with the
+  link checks, apart from the PDF score. Docxodus `9fdec63c` delivers the simple field's `WisteriaArbor` as SVG text;
+  the observer reads its black fill.
 - **The Hyperlink style's blue.** A version 1 `color-reference-geometry` check on 0563C1 requires the blue ink to have
   the reference's bounds within 1.5pt and its coverage within 8%. These are the tolerances the static-image cases use.
   In each LibreOffice reference that ink is only `WisteriaPergola` or `WisteriaLantern` with its underline. So the
-  check fails a renderer that draws the contents entries blue, and also one that turns the outside link, or the plain
-  `WisteriaArbor`, into a blue link. The suite's earlier uses of this check measure pictures and drawn lines. Here it
+  check fails a renderer that draws the contents entries, or the plain `WisteriaArbor`, in that blue, and one that
+  draws the outside link without it. The suite's earlier uses of this check measure pictures and drawn lines. Here it
   measures text ink with no change to its code or tolerances: it counts only pixels that are the declared colour
   blended over white, so black text and gray antialiasing stay out of the region, and the reference and candidate
-  are measured by the same rule.
+  are measured by the same rule. **It sees that one colour only.** Entries drawn in a browser's default link blue
+  (`0000EE`) and underlined, entries drawn black but underlined, or a plain `WisteriaArbor` drawn as a `0000EE`
+  underlined link all pass it: an independent review rendered each of these as a LibreOffice mutant of the reference
+  input and every mandatory PDF check passed. The HTML colour and decoration checks fail all three
+  (`tests/test_html_style.py`, `tests/test-link-style-browser.mjs`).
+
+The colour and decoration checks read each entry's label, not its leader tab: the tab holds no word a check can name
+uniquely. A renderer that drew the labels correctly but kept a black underline under the tab alone would pass every
+check, and only the raster score would show it. `main` underlines the tab in `0563C1`, which the PDF colour check
+does see.
 
 ## Measurements
 
-| Case | Kind | LibreOffice 25.8.7.3 | Docxodus main `9fdec63c` | Docxodus fix `38d060f9` |
+| Case | Kind | LibreOffice 25.8.7.3 | Docxodus main `9fdec63c` | Docxodus `547fc77b` (with the fix) |
 | --- | --- | --- | --- | --- |
-| `field-link-simple-hyperlink` | reproducer | pass; calibration 100.00 | PDF pass, raster 99.92, close; **HTML 0/2**: no link | PDF pass, raster 99.92, close; HTML 2/2 |
-| `field-link-simple-hyperlink-control` | control | pass; calibration 100.00 | PDF pass, raster 99.92, close; HTML 2/2 | PDF pass, raster 99.92, close; HTML 2/2 |
-| `field-link-toc-complex-entries` | reproducer | pass; calibration 100.00 | **PDF fail** (colour geometry), raster 87.76; **HTML 1/4**: no entry is a link | PDF pass, raster 91.38; HTML 4/4 |
-| `field-link-toc-simple-entries` | reproducer | pass; calibration 100.00 | **PDF fail** (colour geometry), raster 87.76; **HTML 0/4**: no link at all | PDF pass, raster 91.38; HTML 4/4 |
-| `field-link-toc-element-entries-control` | control | pass; calibration 100.00 | PDF pass, raster 92.52; HTML 4/4 | PDF pass, raster 92.52; HTML 4/4 |
+| `field-link-simple-hyperlink` | reproducer | pass; calibration 100.00 | PDF pass, raster 99.92, close; **links 0/2**: no link; styles 4/4 | PDF pass, raster 99.92, close; links 2/2; styles 4/4 |
+| `field-link-simple-hyperlink-control` | control | pass; calibration 100.00 | PDF pass, raster 99.92, close; links 2/2; styles 4/4 | PDF pass, raster 99.92, close; links 2/2; styles 4/4 |
+| `field-link-toc-complex-entries` | reproducer | pass; calibration 100.00 | **PDF fail** (colour geometry), raster 87.76; **links 1/4**: no entry is a link; **styles 2/8**: entries blue and underlined | PDF pass, raster 91.38; links 4/4; styles 8/8 |
+| `field-link-toc-simple-entries` | reproducer | pass; calibration 100.00 | **PDF fail** (colour geometry), raster 87.76; **links 0/4**: no link at all; **styles 2/8**: entries blue and underlined | PDF pass, raster 91.38; links 4/4; styles 8/8 |
+| `field-link-toc-element-entries-control` | control | pass; calibration 100.00 | PDF pass, raster 92.52; links 4/4; styles 8/8 | PDF pass, raster 92.52; links 4/4; styles 8/8 |
 
 "PDF pass" and "PDF fail" are the mandatory PDF checks: the complete visible-word inventory, the declared font family,
 page geometry and the colour geometry. A mandatory failure makes the case score 0, so both contents reproducers score
@@ -55,11 +76,17 @@ page geometry and the colour geometry. A mandatory failure makes the case score 
 pixels against 339. With the fix and in the control, the bounds equal the reference's and the coverage is within 0.2%.
 "Raster" is the worst page's `100 × min(SSIM, ink F1)` against the LibreOffice reference, as `bench run` computes it.
 "Close" is SSIM ≥ 0.98 and ink F1 ≥ 0.95 with every mandatory check passing. `evidence.json` holds each page's SSIM,
-ink F1, precision and recall.
+ink F1, precision and recall. "Links" are the delivered HTML's `href` checks and "styles" its colour and decoration
+checks. On `main` each contents entry's computed colour is `rgb(5, 99, 193)` and it is underlined; with the fix, and in
+the control on both builds, each entry is `rgb(0, 0, 0)` with no line, and `WisteriaLantern` keeps `rgb(5, 99, 193)`
+and its underline.
 
 - **The simple pair.** Every renderer draws the same page, raster 99.92 on both builds, so the delivered HTML decides
   it. On `main`, neither label in the reproducer is in a link. With the fix, each is in an `<a>` to its address. The
-  plain run stays black and the styled one blue: the colour-geometry check passes on both builds.
+  plain run stays black with no line and the styled one blue and underlined: the colour-geometry check and the colour
+  and decoration checks pass on both builds. The reproducer's PDF score is the same on both builds; a check of the
+  PDF's link annotations would let the PDF tell the two apart, but the suite has no such check, so the HTML `href`
+  decides.
 - **The contents cases' raster.** It moves the way the drawing does. Precision rises from 0.9085 on `main` to 0.9898
   with the fix; the control's is 0.9994. No contents case reaches close on either build, for two reasons outside
   #1870:
@@ -82,20 +109,34 @@ unprivileged user namespaces that its pinned Chromium's sandbox needs). So the P
 158.0.8127.36, with its sandbox on, strict fonts and the Liberation Serif directory. The HTML comes from
 `renderDocxArtifacts`, which builds its HTML through the same internal path as the adapter's
 `convertDocxToStandaloneHtml`. `Inspect.py` checks a PDF against itself, so it cannot decide a reference-relative
-check. `Compose.py` therefore applies `bench.pdf.correctness` against the LibreOffice reference, as `bench run` does,
-and reads each delivered HTML file with `bench.html_artifacts.check`.
+check. `Compose.py` therefore applies `bench.pdf.correctness` against the LibreOffice reference, as `bench run` does.
+It reads each delivered HTML file with `bench.html_artifacts.check` for the links, and decides each colour and
+decoration check with `bench.html_artifacts.computed_style_pass` from the observations `Capture.mjs` made with
+`bench/html_browser.mjs` in the same browser (`html-browser.json`, bound to the delivered HTML by its digest).
 
 Both renderers were built with `bench build-docxodus` from clean detached worktrees: `main` at
-`9fdec63cc39018ebdf68031496c8162ad34e2d52` and the fix at `38d060f9d9c959f8dea91f7da41d041701d096cc`. That
-fix adds review changes to an earlier fix commit, `71641ebed61a659e6ebe3a268db449e14aa3f0b3`. Measured the same
-way, the earlier commit gave the same result for every check, raster figure, colour region and page-number
-position. The pull request's head, `073b38e0c03c4b22fa2e0afa3e86b5e391c31f3a`, differs from `38d060f9` only in a
-test file, the changelog and documentation. Its library source (`Docxodus/`) is byte-identical, so it was not
-measured again.
+`9fdec63cc39018ebdf68031496c8162ad34e2d52`, before the fix, and `547fc77b2c19c65e53e1a5ff7cfa347fa859d7f1`, the
+merge of [JSv4/Docxodus#1879](https://github.com/JSv4/Docxodus/pull/1879) into Docxodus `main`. This page first
+measured that pull request's commit `38d060f9d9c959f8dea91f7da41d041701d096cc` (and before it
+`71641ebed61a659e6ebe3a268db449e14aa3f0b3`, with the same results), and said that its head `073b38e0` had the same
+library source. The merge also holds `e98dd417`, which changes the converter's simple-field link code (a simple
+HYPERLINK field inside another field's instruction no longer becomes a link), so `547fc77b` was measured instead. In all
+five cases it delivered the same HTML, byte for byte, as `38d060f9`, and the same page rasters, so every link
+check, mandatory PDF check, raster figure, colour region and page-number position above is unchanged. `9fdec63c`
+was captured again with it and also matches its earlier capture. Both builds were captured once more after the
+observer learned to read SVG text's fill (see `docs/ADAPTERS.md`): the delivered HTML, every check result and every
+observed colour and decoration value are the same as in the capture before that change.
+
+`evidence.json` binds the five-case diagnostic manifest `diagnostic-4c809e741d16`, selected with
+`bench.suites.select_cases` from `core-v179` as `bench/fixtures.py` generates it (generator SHA-256
+`28c00ebc7fee22a1bdc01697df5d82d4f04b6353b74ff3918eee5cf4a87d09cc`), and the observer by its source digest.
+`reference-bundle.json` is the LibreOffice bundle registered for that manifest. LibreOffice writes a creation date
+and a document ID into each PDF, so every registration's reference PDFs hash differently; these references' page
+rasters and extracted words are the same as the earlier registration's.
 
 ## Pending
 
-- Word reference registration and full-suite scoring for `core-v177`. No Word capture was made for these cases.
+- Word reference registration and full-suite scoring for `core-v179`. No Word capture was made for these cases.
 - A candidate score under the benchmark's pinned Chromium runtime, from CI or a host that allows its sandbox.
 
 ## Reproduce
@@ -103,7 +144,7 @@ measured again.
 `evidence.json` binds:
 - the manifest, the reference bundle and its environment, and the calibration result;
 - both build identities, and the capture and inspection records;
-- every page measurement, colour region and HTML check;
+- every page measurement, colour region and HTML check, with each style check's browser observation;
 - the hashes of every PDF, delivered HTML file, page raster and screenshot.
 
 `reference-bundle.json` is the LibreOffice bundle. Set `MANIFEST` to a manifest holding only these five cases,
@@ -125,6 +166,7 @@ Before composing, repeat the capture and inspection for `RUN/capture-fix`. Then 
 every page of a case, cropped to the box around all three renderers' ink. Each panel lists:
 - the mandatory check result and the raster score;
 - each label's delivered link;
+- each label's delivered colour and decoration lines;
 - the bounds and coverage of the Hyperlink style's blue;
 - the extracted words.
 

@@ -54,7 +54,8 @@ generator and inspector digests distinguish these source declarations from histo
 
 Mandatory checks cover conversion, artifact digests, page count, physical MediaBox and CropBox coordinates within 0.25 PDF points, rotation, raster dimensions, the full visible token inventory including duplicate counts (visible text excludes the invisible Unicode bidirectional formatting controls U+061C, U+200E, U+200F and U+202A–U+202E, U+2066–U+2069; every other character, including letters, punctuation, soft hyphens and zero-width spaces, still counts unless the explicit decorative-leader policy below applies, and each normalized word keeps its raw extraction as evidence), declared font families, and each case's assertions. Physical box coordinates include UserUnit. Marker matching uses the same visible text and must be unique; ambiguity fails. Region assertion version 2 allows a declared 0.0001-point boundary tolerance for PDF coordinate serialization, about 0.000133 pixels at 96 DPI; version 1 retains exact boundaries. This does not shift or align rasters. Current assertions check named regions/page membership, markers sharing a page, and marker origins relative to the captured reference. The endnote origin uses 0.5-point tolerance and the reference page, so reference providers can use distinct endnote page layouts. An assertion marked `adjudicated: word` records layout measured in Word reference PDFs that LibreOffice does not follow. It binds every candidate and every Word reference. It does not bind a LibreOffice capture, either when deciding a LibreOffice reference's eligibility or when LibreOffice is measured against a LibreOffice track as calibration, so that track stays complete and its calibration stays at 100 while other candidates are held to Word's layout. On such a case, a candidate that follows Word is compared with LibreOffice pages that hold different lines, which caps its raster score there. Future link, reading order, precise baseline, and perceptual color assertions need explicit implementations and tests; they are not implied by this score.
 
-An authored image case may add a version-1 `color-reference-geometry` or `color-geometry` assertion. It declares
+An authored case may add a version-1 `color-reference-geometry` or `color-geometry` assertion. Image, shape and
+border cases use it on pictures and drawn lines; the link cases described after this paragraph use it on text. It declares
 one page and a non-gray RGB ink color on white. An independent 96-DPI Poppler raster scan
 collects that ink's unshifted bounds in points and fractional pixel coverage, including
 antialiasing. The three color channels must agree within 0.015 on the implied white-background
@@ -67,6 +68,17 @@ and 8% coverage tolerance; both are additional mandatory checks, with hard schem
 They do not prove pixel-for-pixel shape identity: unchanged full-page raster scores still
 measure all colors and contour differences. Source and inspector hashes bind this opt-in
 contract; cases without it keep their existing checks.
+
+The five `field-link-*` cases (Docxodus #1870, from `core-v177`) are the first to apply
+`color-reference-geometry` to text: the Hyperlink character style's `0563C1` on a link's letters and
+underline, with the same code and the 1.5pt and 8% tolerances. It requires that colour to cover what it
+covers in the reference, so it fails a renderer that draws contents entries, or a plain run, in that
+blue, and one that drops it from the link that keeps it. It sees that one colour only. A pixel counts
+when it is the declared colour blended over white, its three channels agreeing on the blend amount within
+0.015, so antialiased edges count as partial coverage and a colour within that tolerance counts as the
+declared one. Ink of any other colour, edges included, is outside the region: a link drawn in a
+browser's default `0000EE`, or black text underlined in black, passes the check. The delivered HTML's
+computed `color` and painted `text-decoration-line` checks below cover what it cannot see on those cases.
 
 Version-1 `colored-rule-widths` declarations identify a page, non-gray RGB color,
 positive `widthsPt` set and a tolerance of at most 0.02pt. Poppler's `pdftocairo -svg`
@@ -151,10 +163,23 @@ cannot satisfy the required DejaVu Serif math face; such a reference cannot be s
 
 Version 1 `marker-readable` requires the complete authored paragraph in order and its unique final token to be visible after user-accessible scrolling. Actual range rectangles, clipping ancestors and overflow modes come from a separate offline browser context with scripts disabled; the inspector recomputes pass/fail and verifies the HTML, observer and browser executable hashes. A distinct full `htmlProfile`, when declared, is bound separately from the PDF profile. These checks make no claim that a static PDF prints all scrollable comment text, or that every word has been compared as pixels.
 
-Version 1 `marker-computed-style` adds exact computed `font-size` checks for unique HTML markers.
-Every visible inline fragment of the marker must have the declared pixel size, and the marker must
-have positive, accessible geometry under the same clipping policy as readability assertions. Mixed
-styles cannot pass by reporting only the first fragment. These checks remain separate from PDF scores.
+Version 1 `marker-computed-style` adds exact computed-style checks for unique HTML markers: `font-size`
+(a pixel size), `color` (an opaque `rgb(R, G, B)` value) and `text-decoration-line`. Every visible inline
+fragment of the marker must have the declared value, and the marker must have positive, accessible
+geometry under the same clipping policy as readability assertions. Mixed styles cannot pass by reporting
+only the first fragment. A font size is the computed value of the fragment's element. A colour is the
+colour the text is drawn in: the computed `color` of HTML text, or the `fill` of SVG text, written as the
+sRGB `rgb()` it paints whatever notation the page used. A decoration line is not inherited: a link's
+underline is painted through a child element whose own computed value is `none`. So the observer reports
+the lines painted on the text, the union of the lines of the fragment's element and of each ancestor
+whose decoration reaches it. In HTML that stops at an inline block, a float or an absolutely or fixed
+positioned box. Text in an `<svg>` takes lines only from SVG elements, the `<svg>` included, since no
+HTML decoration reaches into it. An element with `display: contents`, a `blink` line and a fully
+transparent line add nothing; `none` means no line reaches the text. `docs/ADAPTERS.md` gives the rules;
+`tests/test-link-style-browser.mjs` checks each against what Chrome paints. The colour check reads the
+computed colour, not pixels, and the decoration check names lines, not their colour or thickness. A
+colour or line that a `::first-line` rule gives the text, or an underline drawn as a border, is outside them. `font-size` declarations are read
+as before. These checks remain separate from PDF scores.
 
 Version 1 `marker-block-width` compares the content-box width of a unique marker's nearest block with
 that of a unique `reference` marker's block, within a declared `tolerancePx` of at most 2px. The

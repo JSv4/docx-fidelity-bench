@@ -4412,18 +4412,28 @@ def field_link_cases(add, cases):
 
     A table of contents whose entries are HYPERLINK fields, complex or simple, nested in the TOC field's
     result: each entry's text and leader tab are in the Hyperlink character style, then a PAGEREF field
-    gives the heading's page. Word (in Word reference PDFs measured for Docxodus #1870) and LibreOffice
-    draw such an entry black and not underlined, as they draw the control's entries, written as
-    `w:hyperlink w:anchor`; the same link written in the same form outside the table of contents
-    (`WisteriaLantern`) keeps the style's blue and underline. Every entry must also be a link to its
-    heading's bookmark. Each case differs from its control only in the form of its links. Spaces around
-    each leader tab keep the leader's dots apart from the words in PDF text.
+    gives the heading's page. LibreOffice draws such an entry black and not underlined, as it draws the
+    control's entries, written as `w:hyperlink w:anchor`. So did Word in the Word reference PDFs measured
+    for Docxodus #1870 (see JSv4/Docxodus#1879), whose entries were `w:hyperlink` elements and complex
+    fields with a leader tab and a PAGEREF field, and a simple field with neither. The same link written in
+    the same form outside the table of contents (`WisteriaLantern`) keeps the style's blue and underline.
+    Every entry must also be a link to its heading's bookmark. Each case differs from its control only in
+    the form of its links. Spaces around each leader tab keep the leader's dots apart from the words in PDF
+    text.
 
-    In every case the Hyperlink style's blue (0563C1) must cover what it covers in the reference: only
-    `WisteriaPergola`, or only `WisteriaLantern`, each with its underline. The bounds and coverage
-    tolerances are the static-image cases' 1.5pt and 8%."""
+    Each label's delivered HTML must also have the colour and the decoration lines the document gives it:
+    black and none for `WisteriaArbor` and the entries, the style's blue and an underline for
+    `WisteriaPergola` and `WisteriaLantern`. In the PDF, the Hyperlink style's blue (0563C1) must cover
+    what it covers in the reference: only `WisteriaPergola`, or only `WisteriaLantern`, each with its
+    underline. The bounds and coverage tolerances are the static-image cases' 1.5pt and 8%. That check
+    sees only that one colour, so a link drawn in another blue, or underlined in black, passes it; the
+    HTML colour and decoration checks fail both."""
     href = lambda label, target: {'type': 'marker-attribute', 'version': 1, 'marker': label, 'attribute': 'href',
                                   'equals': target}
+    style = lambda label, linked: [{'type': 'marker-computed-style', 'version': 1, 'marker': label, 'property': name,
+                                    'equals': value} for name, value in
+                                   (('color', 'rgb(5, 99, 193)' if linked else 'rgb(0, 0, 0)'),
+                                    ('text-decoration-line', 'underline' if linked else 'none'))]
     blue = lambda: [{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [5, 99, 193],
                      'tolerancePt': 1.5, 'coverageTolerance': 0.08}]
     links = [('WisteriaArbor', 'https://example.com/wisteria-arbor', ''),
@@ -4438,6 +4448,7 @@ def field_link_cases(add, cases):
             ' (Docxodus #1870)', [label for label, _, _ in links], body, styles_xml=WISTERIA_STYLES,
             relations_extra=relations, assertions=blue())
         cases[-1]['htmlAssertions'] = [href(label, target) for label, target, _ in links]
+        cases[-1]['htmlAssertions'] += [d for label, _, props in links for d in style(label, bool(props))]
     entries = [('WisteriaGate', 'Garden gate'), ('WisteriaTerrace', 'Garden terrace'), ('WisteriaCourt', 'Garden court')]
     toc_begin = complex_field(' TOC \\o "1-3" \\h \\z \\u ', '', end=False)
     toc_end = '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
@@ -4467,6 +4478,58 @@ def field_link_cases(add, cases):
         cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
         cases[-1]['htmlAssertions'] = [href(label, f'#_Toc9000{i + 1}') for i, (label, _) in enumerate(entries)]
         cases[-1]['htmlAssertions'].append(href('WisteriaLantern', '#_Toc90001'))
+        cases[-1]['htmlAssertions'] += [d for label, _ in entries for d in style(label, False)] + style('WisteriaLantern', True)
+
+
+def split_direction_mark_cases(add):
+    """Original Tamarisk labels: text a renderer moves to a new parent keeps its invisible direction marks
+    (Docxodus #1862). An HTML renderer may write a left-to-right mark after a line break and right-to-left
+    marks around right-to-left runs; none is a visible word. Three reproducers move such text: a page break
+    splitting a left-to-right paragraph that holds a line break, a page break splitting a right-to-left
+    paragraph of right-to-left runs, and a link holding a line break inside a HYPERLINK field's result. The
+    left-to-right control drops the page break and the field control drops the field. The right-to-left control
+    has a line break in the page break's place, so each label keeps a line of its own and the order of two
+    right-to-left runs on one line, which the reproducer never sets, is not measured.
+
+    The line break that writes the left-to-right mark is pinned too: the word after it must start where the
+    reference starts it, within 0.5pt, so a renderer that loses the break while moving the text (and prints
+    both words on one line) fails although every word is printed.
+
+    The line break comes before the page break because LibreOffice 25.8.7.3 drops a page break that a line
+    break directly follows. The right-to-left runs hold Latin labels: Poppler extracts Hebrew words from a
+    LibreOffice PDF in visual order, so a Hebrew inventory could not be met by the reference."""
+    page_break, line_break = '<w:r><w:br w:type="page"/></w:r>', '<w:r><w:br/></w:r>'
+    full_page = lambda label, page: {'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': page,
+                                     'rect': [0, 0, 612, 792]}
+    after_break = lambda label: [{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.5}]
+    for direction in ('ltr', 'rtl'):
+        if direction == 'ltr':
+            labels = ['TamariskLanding', 'TamariskBeacon', 'TamariskCove']
+            before = run(labels[0]) + line_break + run(labels[1] + ' ')
+            after, props, shape, instead = run(labels[2]), '', 'Tamarisk paragraph with a line break', ''
+        else:
+            labels = ['TamariskQuay', 'TamariskMole']
+            # w:szCs gives the right-to-left runs the 11pt the other labels have; renderers differ on its default.
+            rtl = '<w:szCs w:val="22"/><w:rtl/>'
+            before, after = run(labels[0] + ' ', rtl), run(labels[1], rtl)
+            props, shape = '<w:bidi/>', 'Right-to-left Tamarisk paragraph of right-to-left runs'
+            instead = line_break
+        for control in (False, True):
+            add(f'direction-mark-page-split-{direction}' + ('-control' if control else ''), 'paragraphs',
+                shape + ((' (control: a line break instead of the page break)' if instead else ' (control: no page break)')
+                         if control else ', split by a page break') + ' (Docxodus #1862)',
+                labels, para(props=props, runs=before + (instead if control else page_break) + after),
+                assertions=[full_page(label, 1 if control or label != labels[-1] else 2) for label in labels]
+                + (after_break(labels[1]) if direction == 'ltr' else []))
+    labels = ['TamariskChart', 'TamariskSounding']
+    link = f'<w:hyperlink r:id="rTamariskLink"><w:r><w:t>{labels[0]}</w:t><w:br/><w:t>{labels[1]}</w:t></w:r></w:hyperlink>'
+    for control in (False, True):
+        add('direction-mark-field-link-line-break' + ('-control' if control else ''), 'paragraphs',
+            'Tamarisk link holding a line break' + (' (control: outside any field)' if control
+            else ' inside a HYPERLINK field\'s result') + ' (Docxodus #1862)',
+            labels, para(runs=link if control else complex_field(' HYPERLINK "https://example.com/" ', link)),
+            relations_extra=[('rTamariskLink', 'hyperlink', 'https://example.com/', 'External')],
+            assertions=[full_page(label, 1) for label in labels] + after_break(labels[1]))
 
 
 def unused_grid_column_cases(add):
@@ -7625,7 +7688,8 @@ def generate():
     strict_chart_part_cases(add)
     on_spelled_hidden_mark_cases(add)
     field_link_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v177', 'version': 177, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    split_direction_mark_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v179', 'version': 179, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

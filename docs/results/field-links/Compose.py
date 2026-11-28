@@ -12,8 +12,10 @@ and measures a candidate: `bench.pdf.correctness` for the mandatory checks (the 
 geometry is relative to the reference, so Inspect.py, which checks a PDF against itself, cannot
 decide it), and Poppler at 96 DPI on the CropBox with `bench.metrics.page_metrics` for the raster,
 the worst page for the case. Each delivered HTML file is read with `bench.html_artifacts.check`,
-the inspector `bench run` applies to `marker-attribute` declarations. These are diagnostics of a
-borrowed browser, not registered candidate scores. The sheets show the same unchanged pixels, every
+the inspector `bench run` applies to `marker-attribute` declarations, and each colour and decoration
+declaration is decided by `bench.html_artifacts.computed_style_pass` from the observations Capture.mjs
+made with bench/html_browser.mjs (html-browser.json, bound to the delivered HTML by its digest), as
+`bench run` decides them. These are diagnostics of a borrowed browser, not registered candidate scores. The sheets show the same unchanged pixels, every
 page of a case cropped to the box around all three renderers' ink plus a margin.
 """
 import json
@@ -84,6 +86,25 @@ def ink_box(image):
     return image.convert('RGB').point(lambda v: 255 if v < INK else 0).convert('L').getbbox()
 
 
+def html_checks(declarations, html_path, facts_path, record):
+    """The delivered HTML checks `bench run` makes: link targets from the file, styles from the observer's facts."""
+    for declaration in declarations: html_artifacts.validate_declaration(declaration)
+    checks = html_artifacts.check(html_path.read_text(encoding='utf-8'), declarations)
+    facts = json.loads(facts_path.read_text(encoding='utf-8'))
+    assert digest(facts_path) == record['htmlFactsSha256'] and facts['htmlSha256'] == digest(html_path)
+    assert facts['policy'] == html_artifacts.BROWSER_POLICY
+    indexes = [i for i, d in enumerate(declarations) if d['type'] != 'marker-attribute']
+    assert [o['index'] for o in facts['observations']] == indexes
+    assert all(declarations[i]['type'] == 'marker-computed-style' for i in indexes)
+    for index, observation in zip(indexes, facts['observations']):
+        declaration = declarations[index]
+        checks.append({'name': f'html-style-{index + 1}', 'marker': declaration['marker'],
+                       'property': declaration['property'], 'expected': declaration['equals'],
+                       'observation': observation,
+                       'passed': html_artifacts.computed_style_pass(declaration, observation, index)})
+    return sorted(checks, key=lambda c: int(c['name'].rsplit('-', 1)[1]))
+
+
 def shown(words):
     """Extracted words for the sheet, a leader's dots shortened."""
     return ' | '.join('[leader dots]' if re.fullmatch(r'\.{3,}', w) else w for w in words)
@@ -116,7 +137,7 @@ for case in manifest['cases']:
         candidate_info = bench_pdf.inspect_case_pdf(candidate_pdf, case)
         checks = bench_pdf.correctness(bench_pdf.binding_case(case, 'libreoffice'), reference_info, candidate_info)
         failures = [check['name'] for check in checks if not check['passed']]
-        html = html_artifacts.check(candidate_html.read_text(encoding='utf-8'), case['htmlAssertions'])
+        html = html_checks(case['htmlAssertions'], candidate_html, folder / 'html-browser.json', record)
         pages = rasters(candidate_pdf, run / 'raster' / cid / name)
         measured = raster(reference_pages, pages)
         measured.update(caseScore=0.0 if failures else measured['rasterScore'], close=measured['close'] and not failures)
@@ -161,10 +182,19 @@ for case in manifest['cases']:
                           f'{worst.get("ssim", 0):.4f}, ink F1 {worst.get("inkF1", 0):.4f}, precision '
                           f'{worst.get("precision", 0):.4f}, recall {worst.get("recall", 0):.4f}); '
                           + ('close' if measured['close'] else 'not close'), '#33475b'))
-            links = [f'{c["marker"]} -> {c["actual"] or "no link"}' + ('' if c['passed'] else f' (expected {c["expected"]})')
-                     for c in panel['htmlChecks']]
-            lines.append(('Delivered HTML links: ' + '; '.join(links),
-                          '#21623c' if all(c['passed'] for c in panel['htmlChecks']) else '#8b2a15'))
+            links = [c for c in panel['htmlChecks'] if 'attribute' in c]
+            lines.append(('Delivered HTML links: ' + '; '.join(
+                f'{c["marker"]} -> {c["actual"] or "no link"}' + ('' if c['passed'] else f' (expected {c["expected"]})')
+                for c in links), '#21623c' if all(c['passed'] for c in links) else '#8b2a15'))
+            styles = [c for c in panel['htmlChecks'] if 'property' in c]
+            painted = {}
+            for c in styles:
+                painted.setdefault(c['marker'], []).append(
+                    ' / '.join(c['observation']['computedStyle'][c['property']]) +
+                    ('' if c['passed'] else f' (expected {c["expected"]})'))
+            lines.append(('Delivered HTML colour, decoration: ' + '; '.join(
+                f'{marker} {", ".join(values)}' for marker, values in painted.items()),
+                '#21623c' if all(c['passed'] for c in styles) else '#8b2a15'))
         blue = panel['blueInk']
         bounds = ', '.join(f'{v:.2f}' for v in blue['boundsPt']) if blue['boundsPt'] else 'none'
         lines.append((f'Hyperlink-style blue (0563C1) ink: bounds {bounds} pt, coverage {blue["coverage"]:.1f} px',
