@@ -74,8 +74,8 @@ later amended to `73743aa9`, which differs from `5bdf3f8b` only in `CHANGELOG.md
 
 ## Pending
 
-Word reference registration and full-suite scoring for `core-v176` remain pending; no Word capture was made for
-these cases.
+Word reference registration and full-suite scoring for `core-v178` remain pending; no Word capture was made for
+these cases. The cases were measured when this suite was numbered `core-v176`; renumbering changed no input.
 
 ## Reproduce
 

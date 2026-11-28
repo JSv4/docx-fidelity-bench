@@ -1,0 +1,1511 @@
+{
+  "scope": "Focused unscored public-API diagnostics; no registered candidate score, Word parity or full-suite result",
+  "manifestSha256": "09255640b8861423bdd734c1529c4dbe9f88dd7652365271ce81c099fface100",
+  "referenceBundleSha256": "17603feb112a14806b1ed20fce015beec0c75cff56815097259d409b24f0f4d1",
+  "referenceRenderer": {
+    "name": "libreoffice",
+    "version": "LibreOffice 25.8.7.3 580(Build:3)"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "calibrationResultSha256": "2d4f0c3dc401344704aa4d68276d8f4ed0e24eccf69ac151965b8c0228782617",
+  "metric": {
+    "version": 3,
+    "clippedText": "declared exact-row tokens may be absent or whole up to their authored count",
+    "dpi": 96,
+    "inkThreshold": 24,
+    "inkRadius": 1,
+    "ssimWindow": 8,
+    "ssimC1": 6.5025,
+    "ssimC2": 58.5225,
+    "alignment": "none",
+    "pageScore": "100 * min(ssim, inkF1)",
+    "caseScore": "worst page; zero on mandatory failure",
+    "visibleText": "excludes UAX #9 bidi formatting controls",
+    "canvas": "rasters within 1 pixel per axis share a white union canvas at the CropBox top-left origin; larger differences fail"
+  },
+  "htmlInspectorVersion": 1,
+  "builds": {
+    "main": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-main/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "9fdec63cc39018ebdf68031496c8162ad34e2d52",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "58ef9353572db7ecfc819d67b69a604753225f636c9ecd07a426d94158ff34e4",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "a69922835398430cd15281f5168284ee6b1c129c35f1341cff500a3ae073b297",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "3b1e1352ad11eaa2fdb8abc010ccd4a6bd63050d7f76432b8868813ac4ad682b",
+        "npm-export/dist/fonts/doctor.js": "67f9b4730ac19f63c864a4c52745b4a8b644440bc2b14aaf0245ab2e58f980bd",
+        "npm-export/dist/fonts/document.js": "71cd290ff360442416f4956e2a097cdab5f98abcd973a302fe2f5a62c50b670d",
+        "npm-export/dist/fonts/index.js": "ef3febc49ec719defa8dfafdfcc1b978c186968578d8ecf930fcd4c5da21337c",
+        "npm-export/dist/fonts/local.js": "d9f18d9db548ddd99e51c84b0de12d876804a3dcd5812caf4745e134ecc831e2",
+        "npm-export/dist/fonts/resolver.js": "ab91831b23074d2c0d251ebdea62bf9d2864651f1eec9b9a33e8e7e44dca5729",
+        "npm-export/dist/fonts/sfnt.js": "626c3dce361d156e1f1a6cc6dbd142adae446fb67f461a563df6638cfa547540",
+        "npm-export/dist/host.js": "0339943c76d4939b2b22a7131287215ce7d6d6b3b8f04b41de7b15e6529786f4",
+        "npm-export/dist/index.js": "39364f91d2cb92dd015bf9ab0e39528ca4b1f9cc61c91061be8231c381e71565",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "127571023a1bb2c8caf3d2894215c361d98e1bec922e156da678f2257a465619",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "ed0eeb5083c8b0837fe2a058543a2b9576b35014f58f9947ec1cd544756f2bf2",
+      "schema": 1,
+      "tree": "2e646ecf905f7254cbdf96e01cb4fee1203bbc7d"
+    },
+    "fix": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/.cache/docxodus-1870/bench-work/dx-fix/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "38d060f9d9c959f8dea91f7da41d041701d096cc",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "58ef9353572db7ecfc819d67b69a604753225f636c9ecd07a426d94158ff34e4",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "a69922835398430cd15281f5168284ee6b1c129c35f1341cff500a3ae073b297",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "3b1e1352ad11eaa2fdb8abc010ccd4a6bd63050d7f76432b8868813ac4ad682b",
+        "npm-export/dist/fonts/doctor.js": "67f9b4730ac19f63c864a4c52745b4a8b644440bc2b14aaf0245ab2e58f980bd",
+        "npm-export/dist/fonts/document.js": "71cd290ff360442416f4956e2a097cdab5f98abcd973a302fe2f5a62c50b670d",
+        "npm-export/dist/fonts/index.js": "ef3febc49ec719defa8dfafdfcc1b978c186968578d8ecf930fcd4c5da21337c",
+        "npm-export/dist/fonts/local.js": "d9f18d9db548ddd99e51c84b0de12d876804a3dcd5812caf4745e134ecc831e2",
+        "npm-export/dist/fonts/resolver.js": "ab91831b23074d2c0d251ebdea62bf9d2864651f1eec9b9a33e8e7e44dca5729",
+        "npm-export/dist/fonts/sfnt.js": "626c3dce361d156e1f1a6cc6dbd142adae446fb67f461a563df6638cfa547540",
+        "npm-export/dist/host.js": "0339943c76d4939b2b22a7131287215ce7d6d6b3b8f04b41de7b15e6529786f4",
+        "npm-export/dist/index.js": "39364f91d2cb92dd015bf9ab0e39528ca4b1f9cc61c91061be8231c381e71565",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "6cbbd769af8fddb90e63a649f5892a962c8105efd6c04da862a21ecb182528d8",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "ed0eeb5083c8b0837fe2a058543a2b9576b35014f58f9947ec1cd544756f2bf2",
+      "schema": 1,
+      "tree": "f14a36384f122b12f7a566986ac0cee415894360"
+    }
+  },
+  "captures": {
+    "main": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "9fdec63cc39018ebdf68031496c8162ad34e2d52",
+      "sourceTree": "2e646ecf905f7254cbdf96e01cb4fee1203bbc7d",
+      "buildIdentitySha256": "e89ef20941be4e97993a58460844b15f531a89be1fde3b67ad9fbd3a055be575",
+      "manifestSha256": "09255640b8861423bdd734c1529c4dbe9f88dd7652365271ce81c099fface100",
+      "browserVersion": "158.0.8127.36",
+      "executableSha256": "08d5a3fba3197010b28113da201bd31a49b4439619dbf558f8040e4015c787bb",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "field-link-simple-hyperlink",
+          "inputSha256": "b12d0dfeab329af4bbc38a4c8f9ccebd1fb18dc4a8ed082147b4d5d0e81c80de",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a2c0156b520aafd62825a80390cb48e18843ce0b70dc6b95d27cd2301a533ac5",
+          "renderReportSha256": "2b1c51e56bafcfcfebc1484bcc8e212130a32479716c9a2785717f2b7fbe25be",
+          "htmlSha256": "f75053a696738d82df8de91a608d96dc9da725457400f354a9696ce61f47950a",
+          "htmlFactsSha256": "8dedca8047c5d0273e4e147e0c82bb59841085ea70731f249ff2a7f667b7b7da",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-simple-hyperlink-control",
+          "inputSha256": "60ac3f05aecf9c367a65d5d8bf86113e134a3b4723070b2cac7c97ed44572359",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8257662a7fc42a3340bb6953ed5ff3fbb78c79910276249ed0f0a9deb66ff76e",
+          "renderReportSha256": "eac115f0109165865116589bf98674e2ba882313acfb4ed79adefd3481d318b0",
+          "htmlSha256": "9e0a52a9395734f969dc51d9ebcf6d73cd930f4276e99a3bde552f8f78e62ea8",
+          "htmlFactsSha256": "1c8cd20d4b6fd763c1c96b722a43ec35fb68b93d59c67d81aa8bd0ff5e8f42bc",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-toc-complex-entries",
+          "inputSha256": "f6cd313d498db075a3563ce6359628144e7ffe89c4bbff080317fca0bcaa0eab",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "ce119a0f42cef6d7c5c8564e0b986dfbbffe5d03f2b1277d60c0a31ef97c2067",
+          "renderReportSha256": "0e9924f73f05273257e296d4ecd81ac4ef2852781191855e05fe79253047c6b0",
+          "htmlSha256": "bf78205ad42b263d1a9c7868c2561e6d9fe22e3a48af751e513f4e9bcae16f2e",
+          "htmlFactsSha256": "c5aed3af1e3adcb88a8694d174477a17b37175b0e82ff8017f086f0acb0e9a31",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-toc-simple-entries",
+          "inputSha256": "18da154b459025f8ef7e31641ff020ab2e032e556fcc6fd660f7e797d24197dd",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "42e1d6d6b42ad0fd6e8b80894a18d673e7cfc6d954c4dc7c5b4eada410b9420b",
+          "renderReportSha256": "d96baa1d429558518b09ab99dd961df912a91b227ff02ab0af765c7988a15b2d",
+          "htmlSha256": "783284d417fc468fd2b7f344f96a16a6b86ae34767a197cb72fcdb3e07065ff8",
+          "htmlFactsSha256": "498dc56dc08bf96d2db8427ac2ad36204fcf5cbd9373356647a56f8ba71c917d",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-toc-element-entries-control",
+          "inputSha256": "07be61159220fafee251dd7c8f333e99c92b1d3a278f8816c2d5a966ad6b998b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d787d2a287bf7b2f9a9c0aa91c761ebaaa095125305e6801472827724ab24d6e",
+          "renderReportSha256": "651069a3a16a61df0fcc61d5a62c46c66d82b0a88ffcbd6fcace8419c1acb1d9",
+          "htmlSha256": "6553ead49d6587997709d5659af677d6726842b4d3c00eabf3a5215ab2a030b7",
+          "htmlFactsSha256": "58efaf0cd158a011f2f548b1177f3c0fde82a88e17eccb162c6ac87f21ddbfce",
+          "mandatoryPdfFailures": []
+        }
+      ],
+      "htmlInspectorSha256": "85b55a36b1745ca06cf9102bbb234d37f2a9a4915fd5413d227ad1d7e3bb5e8d",
+      "inspectionManifestSha256": "09255640b8861423bdd734c1529c4dbe9f88dd7652365271ce81c099fface100"
+    },
+    "fix": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "38d060f9d9c959f8dea91f7da41d041701d096cc",
+      "sourceTree": "f14a36384f122b12f7a566986ac0cee415894360",
+      "buildIdentitySha256": "e37ff0e346b2403fbb83198e6fc1df92b2fc4951636db3652217324ea440a8ed",
+      "manifestSha256": "09255640b8861423bdd734c1529c4dbe9f88dd7652365271ce81c099fface100",
+      "browserVersion": "158.0.8127.36",
+      "executableSha256": "08d5a3fba3197010b28113da201bd31a49b4439619dbf558f8040e4015c787bb",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "field-link-simple-hyperlink",
+          "inputSha256": "b12d0dfeab329af4bbc38a4c8f9ccebd1fb18dc4a8ed082147b4d5d0e81c80de",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "19e6aec1dd5dab5eecba1eecd84b5b1576dac9bab975c808705e8239176009b5",
+          "renderReportSha256": "852bf7904780f99a168ceed67081c42f43ba7ed7740292c07b1e7dc3f97c60e2",
+          "htmlSha256": "9210e4ec06fd7edb301583ca97f58f2d011f26497be1c084cf59d0f30e1b9781",
+          "htmlFactsSha256": "d7e0f0fddcdcda1257249c9667f207e52e6f92ed84b3168eaa6cd36e10a06429",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-simple-hyperlink-control",
+          "inputSha256": "60ac3f05aecf9c367a65d5d8bf86113e134a3b4723070b2cac7c97ed44572359",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "36e531fe9f7ebf3e7459df6e0c43203d1ef2b515f901ab831d4cce876d260ab9",
+          "renderReportSha256": "52ea8682d9d1dbf24eb490d73dda56ba30d01ae7739fc874eba24fcb8733a77a",
+          "htmlSha256": "9e0a52a9395734f969dc51d9ebcf6d73cd930f4276e99a3bde552f8f78e62ea8",
+          "htmlFactsSha256": "1c8cd20d4b6fd763c1c96b722a43ec35fb68b93d59c67d81aa8bd0ff5e8f42bc",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-toc-complex-entries",
+          "inputSha256": "f6cd313d498db075a3563ce6359628144e7ffe89c4bbff080317fca0bcaa0eab",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "075f89e91953d168fe92eeb4bb25c6d73076ecadb4dc912e00de038a3036cd7f",
+          "renderReportSha256": "f153eb1c2523021d12b68f0dc757917473ad4266d9a06dcff4dca0a1ba4ebdf9",
+          "htmlSha256": "187a804bf3d85a0fd25d79eaff8ce7e71bbf2f2071a237fe8b328bbd850c8c41",
+          "htmlFactsSha256": "834ad216d75cbcf37bc60210fbb00900f7c5ec73f2ce44909b73222ec069a595",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-toc-simple-entries",
+          "inputSha256": "18da154b459025f8ef7e31641ff020ab2e032e556fcc6fd660f7e797d24197dd",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "0c70f8f6f312b1dc7142fe9c4f495d916fc3a4166416fb6c9af9069bea4b2b8b",
+          "renderReportSha256": "03d1d416a1cdc4c4cba0d8e007c49ccc4895652cb7addd6f5c7342213e29f669",
+          "htmlSha256": "5a130accccf2d10507be9a4d981e5e51fd2a155328ad417c577313d987772f0a",
+          "htmlFactsSha256": "076ee64b6f7002ca2be9d0cd6976e9a8bcb225fd4deccbfaba76e3a48b8936e6",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "field-link-toc-element-entries-control",
+          "inputSha256": "07be61159220fafee251dd7c8f333e99c92b1d3a278f8816c2d5a966ad6b998b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "fbd943ca60af09a365591dbd1508895308da13439652d943fd634e320561c989",
+          "renderReportSha256": "b79c9bcb6c06176d9cd4bb724fe2243be52ebbc0cb91fb7f0515771d34ec98b1",
+          "htmlSha256": "6553ead49d6587997709d5659af677d6726842b4d3c00eabf3a5215ab2a030b7",
+          "htmlFactsSha256": "58efaf0cd158a011f2f548b1177f3c0fde82a88e17eccb162c6ac87f21ddbfce",
+          "mandatoryPdfFailures": []
+        }
+      ],
+      "htmlInspectorSha256": "85b55a36b1745ca06cf9102bbb234d37f2a9a4915fd5413d227ad1d7e3bb5e8d",
+      "inspectionManifestSha256": "09255640b8861423bdd734c1529c4dbe9f88dd7652365271ce81c099fface100"
+    }
+  },
+  "cases": [
+    {
+      "id": "field-link-simple-hyperlink",
+      "inputSha256": "b12d0dfeab329af4bbc38a4c8f9ccebd1fb18dc4a8ed082147b4d5d0e81c80de",
+      "screenshot": "field-link-simple-hyperlink.png",
+      "screenshotSha256": "e39709ae7365f367b1a33a1ad8d29653ec60461d4f3eef60bfe9ec7c6f16e4f6",
+      "cropPx": [
+        72,
+        74,
+        215,
+        165
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "62a01c8c5b2a4affc7d15975076c63e829786b9f3e15bf140e5b0821cbaaf149",
+          "failures": [],
+          "words": [
+            "WisteriaArbor",
+            "WisteriaPergola"
+          ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              72.0,
+              94.5,
+              143.25,
+              105.75
+            ],
+            "coverage": 351.12686793493253
+          },
+          "pageRasterSha256": [
+            "9762ec8f90ffe6726c64efd28ceecbbef9a88826e283d6a655be6057c6ddd943"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9fdec63c",
+          "pdfSha256": "a2c0156b520aafd62825a80390cb48e18843ce0b70dc6b95d27cd2301a533ac5",
+          "failures": [],
+          "words": [
+            "WisteriaArbor",
+            "WisteriaPergola"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.92248613777535,
+                "ssim": 0.9992248613777536,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.92248613777535,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.92248613777535
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              71.25,
+              93.75,
+              142.5,
+              105.0
+            ],
+            "coverage": 342.834676040805
+          },
+          "htmlSha256": "f75053a696738d82df8de91a608d96dc9da725457400f354a9696ce61f47950a",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaArbor",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-arbor",
+              "actual": null,
+              "passed": false
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaPergola",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-pergola",
+              "actual": null,
+              "passed": false
+            }
+          ],
+          "pageRasterSha256": [
+            "cebb1e27d98baef417413a0c560edc3d0ca23a7b5c6ee4fa5a99637304952e64"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 38d060f9",
+          "pdfSha256": "19e6aec1dd5dab5eecba1eecd84b5b1576dac9bab975c808705e8239176009b5",
+          "failures": [],
+          "words": [
+            "WisteriaArbor",
+            "WisteriaPergola"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.92248613777535,
+                "ssim": 0.9992248613777536,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.92248613777535,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.92248613777535
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              71.25,
+              93.75,
+              142.5,
+              105.0
+            ],
+            "coverage": 342.834676040805
+          },
+          "htmlSha256": "9210e4ec06fd7edb301583ca97f58f2d011f26497be1c084cf59d0f30e1b9781",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaArbor",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-arbor",
+              "actual": "https://example.com/wisteria-arbor",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaPergola",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-pergola",
+              "actual": "https://example.com/wisteria-pergola",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "cebb1e27d98baef417413a0c560edc3d0ca23a7b5c6ee4fa5a99637304952e64"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "field-link-simple-hyperlink-control",
+      "inputSha256": "60ac3f05aecf9c367a65d5d8bf86113e134a3b4723070b2cac7c97ed44572359",
+      "screenshot": "field-link-simple-hyperlink-control.png",
+      "screenshotSha256": "7018abba4759e33a67afb5b790c8d53e67ea4a79d26530b4c55f2b4d706bfa03",
+      "cropPx": [
+        72,
+        74,
+        215,
+        165
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "f3f32babd4681669e66233c75a28152851202d879fea17f28ea8de742c1328d2",
+          "failures": [],
+          "words": [
+            "WisteriaArbor",
+            "WisteriaPergola"
+          ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              72.0,
+              94.5,
+              143.25,
+              105.75
+            ],
+            "coverage": 351.12686793493253
+          },
+          "pageRasterSha256": [
+            "9762ec8f90ffe6726c64efd28ceecbbef9a88826e283d6a655be6057c6ddd943"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9fdec63c",
+          "pdfSha256": "8257662a7fc42a3340bb6953ed5ff3fbb78c79910276249ed0f0a9deb66ff76e",
+          "failures": [],
+          "words": [
+            "WisteriaArbor",
+            "WisteriaPergola"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.92248613777535,
+                "ssim": 0.9992248613777536,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.92248613777535,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.92248613777535
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              71.25,
+              93.75,
+              142.5,
+              105.0
+            ],
+            "coverage": 342.834676040805
+          },
+          "htmlSha256": "9e0a52a9395734f969dc51d9ebcf6d73cd930f4276e99a3bde552f8f78e62ea8",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaArbor",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-arbor",
+              "actual": "https://example.com/wisteria-arbor",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaPergola",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-pergola",
+              "actual": "https://example.com/wisteria-pergola",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "cebb1e27d98baef417413a0c560edc3d0ca23a7b5c6ee4fa5a99637304952e64"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 38d060f9",
+          "pdfSha256": "36e531fe9f7ebf3e7459df6e0c43203d1ef2b515f901ab831d4cce876d260ab9",
+          "failures": [],
+          "words": [
+            "WisteriaArbor",
+            "WisteriaPergola"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 99.92248613777535,
+                "ssim": 0.9992248613777536,
+                "inkF1": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "close": true
+              }
+            ],
+            "rasterScore": 99.92248613777535,
+            "worstPage": 1,
+            "close": true,
+            "caseScore": 99.92248613777535
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              71.25,
+              93.75,
+              142.5,
+              105.0
+            ],
+            "coverage": 342.834676040805
+          },
+          "htmlSha256": "9e0a52a9395734f969dc51d9ebcf6d73cd930f4276e99a3bde552f8f78e62ea8",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaArbor",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-arbor",
+              "actual": "https://example.com/wisteria-arbor",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaPergola",
+              "attribute": "href",
+              "expected": "https://example.com/wisteria-pergola",
+              "actual": "https://example.com/wisteria-pergola",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "cebb1e27d98baef417413a0c560edc3d0ca23a7b5c6ee4fa5a99637304952e64"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "field-link-toc-complex-entries",
+      "inputSha256": "f6cd313d498db075a3563ce6359628144e7ffe89c4bbff080317fca0bcaa0eab",
+      "screenshot": "field-link-toc-complex-entries.png",
+      "screenshotSha256": "d0782237e6ad72ec51f0e0a766fd1d57b267f31a7211c806c30c2e0668b67af7",
+      "cropPx": [
+        72,
+        75,
+        743,
+        333
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "f2c4b8fb8dc3b5166dfae2a6eae22f24c1205552b6159f5aa40d4a0b34f33193",
+          "failures": [],
+          "words": [
+            "WisteriaGate",
+            "................................................................................................................................................",
+            "1",
+            "WisteriaTerrace",
+            "............................................................................................................................................",
+            "1",
+            "WisteriaCourt",
+            "...............................................................................................................................................",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              90.0,
+              132.75,
+              162.0,
+              142.5
+            ],
+            "coverage": 338.91705155776117
+          },
+          "pageRasterSha256": [
+            "92645f0d87cc26e4ab921cbf3838aded6a2fc4564b89e38dff1f9c8a1c75137b"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9fdec63c",
+          "pdfSha256": "ce119a0f42cef6d7c5c8564e0b986dfbbffe5d03f2b1277d60c0a31ef97c2067",
+          "failures": [
+            "assertion-color-reference-geometry"
+          ],
+          "words": [
+            "WisteriaGate",
+            "1",
+            "WisteriaTerrace",
+            "1",
+            "WisteriaCourt",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 87.75562506332713,
+                "ssim": 0.9765640946462129,
+                "inkF1": 0.8775562506332713,
+                "precision": 0.9085141903171954,
+                "recall": 0.8486385929308303,
+                "close": false
+              }
+            ],
+            "rasterScore": 87.75562506332713,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 0.0
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              71.25,
+              74.25,
+              523.5,
+              142.5
+            ],
+            "coverage": 3046.0158400882383
+          },
+          "htmlSha256": "bf78205ad42b263d1a9c7868c2561e6d9fe22e3a48af751e513f4e9bcae16f2e",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaGate",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": null,
+              "passed": false
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaTerrace",
+              "attribute": "href",
+              "expected": "#_Toc90002",
+              "actual": null,
+              "passed": false
+            },
+            {
+              "name": "html-attribute-3",
+              "marker": "WisteriaCourt",
+              "attribute": "href",
+              "expected": "#_Toc90003",
+              "actual": null,
+              "passed": false
+            },
+            {
+              "name": "html-attribute-4",
+              "marker": "WisteriaLantern",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "0f1fe1db9f6fc347141df989a43f26cdc60d1dd54bde097c078ec1f87958f245"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 38d060f9",
+          "pdfSha256": "075f89e91953d168fe92eeb4bb25c6d73076ecadb4dc912e00de038a3036cd7f",
+          "failures": [],
+          "words": [
+            "WisteriaGate",
+            "1",
+            "WisteriaTerrace",
+            "1",
+            "WisteriaCourt",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 91.3795361573778,
+                "ssim": 0.9791403406318522,
+                "inkF1": 0.913795361573778,
+                "precision": 0.9897894065092534,
+                "recall": 0.8486385929308303,
+                "close": false
+              }
+            ],
+            "rasterScore": 91.3795361573778,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 91.3795361573778
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              90.0,
+              132.75,
+              162.0,
+              142.5
+            ],
+            "coverage": 339.5371386821064
+          },
+          "htmlSha256": "187a804bf3d85a0fd25d79eaff8ce7e71bbf2f2071a237fe8b328bbd850c8c41",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaGate",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaTerrace",
+              "attribute": "href",
+              "expected": "#_Toc90002",
+              "actual": "#_Toc90002",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-3",
+              "marker": "WisteriaCourt",
+              "attribute": "href",
+              "expected": "#_Toc90003",
+              "actual": "#_Toc90003",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-4",
+              "marker": "WisteriaLantern",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "592bba15bac414620277454c4ec548173fa57dfa0604cc9bf70545e4389b2cd1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "field-link-toc-simple-entries",
+      "inputSha256": "18da154b459025f8ef7e31641ff020ab2e032e556fcc6fd660f7e797d24197dd",
+      "screenshot": "field-link-toc-simple-entries.png",
+      "screenshotSha256": "553b315f708ed40ed2b1777ae5e2936b0548a6493158c996bc8dd9b78a233b25",
+      "cropPx": [
+        72,
+        75,
+        743,
+        333
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "eb24ddc58690f18523a1c47f74497cde8d63c3caecb26d060a810c72fe763b46",
+          "failures": [],
+          "words": [
+            "WisteriaGate",
+            "................................................................................................................................................",
+            "1",
+            "WisteriaTerrace",
+            "............................................................................................................................................",
+            "1",
+            "WisteriaCourt",
+            "...............................................................................................................................................",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              90.0,
+              132.75,
+              162.0,
+              142.5
+            ],
+            "coverage": 338.91705155776117
+          },
+          "pageRasterSha256": [
+            "92645f0d87cc26e4ab921cbf3838aded6a2fc4564b89e38dff1f9c8a1c75137b"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9fdec63c",
+          "pdfSha256": "42e1d6d6b42ad0fd6e8b80894a18d673e7cfc6d954c4dc7c5b4eada410b9420b",
+          "failures": [
+            "assertion-color-reference-geometry"
+          ],
+          "words": [
+            "WisteriaGate",
+            "1",
+            "WisteriaTerrace",
+            "1",
+            "WisteriaCourt",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 87.75562506332713,
+                "ssim": 0.9765640946462129,
+                "inkF1": 0.8775562506332713,
+                "precision": 0.9085141903171954,
+                "recall": 0.8486385929308303,
+                "close": false
+              }
+            ],
+            "rasterScore": 87.75562506332713,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 0.0
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              71.25,
+              74.25,
+              523.5,
+              142.5
+            ],
+            "coverage": 3046.0158400882383
+          },
+          "htmlSha256": "783284d417fc468fd2b7f344f96a16a6b86ae34767a197cb72fcdb3e07065ff8",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaGate",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": null,
+              "passed": false
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaTerrace",
+              "attribute": "href",
+              "expected": "#_Toc90002",
+              "actual": null,
+              "passed": false
+            },
+            {
+              "name": "html-attribute-3",
+              "marker": "WisteriaCourt",
+              "attribute": "href",
+              "expected": "#_Toc90003",
+              "actual": null,
+              "passed": false
+            },
+            {
+              "name": "html-attribute-4",
+              "marker": "WisteriaLantern",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": null,
+              "passed": false
+            }
+          ],
+          "pageRasterSha256": [
+            "0f1fe1db9f6fc347141df989a43f26cdc60d1dd54bde097c078ec1f87958f245"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 38d060f9",
+          "pdfSha256": "0c70f8f6f312b1dc7142fe9c4f495d916fc3a4166416fb6c9af9069bea4b2b8b",
+          "failures": [],
+          "words": [
+            "WisteriaGate",
+            "1",
+            "WisteriaTerrace",
+            "1",
+            "WisteriaCourt",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 91.3795361573778,
+                "ssim": 0.9791403406318522,
+                "inkF1": 0.913795361573778,
+                "precision": 0.9897894065092534,
+                "recall": 0.8486385929308303,
+                "close": false
+              }
+            ],
+            "rasterScore": 91.3795361573778,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 91.3795361573778
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              90.0,
+              132.75,
+              162.0,
+              142.5
+            ],
+            "coverage": 339.5371386821064
+          },
+          "htmlSha256": "5a130accccf2d10507be9a4d981e5e51fd2a155328ad417c577313d987772f0a",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaGate",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaTerrace",
+              "attribute": "href",
+              "expected": "#_Toc90002",
+              "actual": "#_Toc90002",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-3",
+              "marker": "WisteriaCourt",
+              "attribute": "href",
+              "expected": "#_Toc90003",
+              "actual": "#_Toc90003",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-4",
+              "marker": "WisteriaLantern",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "592bba15bac414620277454c4ec548173fa57dfa0604cc9bf70545e4389b2cd1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "field-link-toc-element-entries-control",
+      "inputSha256": "07be61159220fafee251dd7c8f333e99c92b1d3a278f8816c2d5a966ad6b998b",
+      "screenshot": "field-link-toc-element-entries-control.png",
+      "screenshotSha256": "8a9bb4830421049d189be2649efac3a18269cffe80dfa129e7da438affee88f9",
+      "cropPx": [
+        72,
+        75,
+        743,
+        333
+      ],
+      "panels": [
+        {
+          "renderer": "LibreOffice 25.8.7.3 reference",
+          "pdfSha256": "ace75eb75756ab08da45a9662703089f778770b0530463053666ca87bb960ff8",
+          "failures": [],
+          "words": [
+            "WisteriaGate",
+            "................................................................................................................................................",
+            "1",
+            "WisteriaTerrace",
+            "............................................................................................................................................",
+            "1",
+            "WisteriaCourt",
+            "...............................................................................................................................................",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "calibrationScore": 100.0,
+            "close": true
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              90.0,
+              132.75,
+              162.0,
+              142.5
+            ],
+            "coverage": 338.91705155776117
+          },
+          "pageRasterSha256": [
+            "92645f0d87cc26e4ab921cbf3838aded6a2fc4564b89e38dff1f9c8a1c75137b"
+          ]
+        },
+        {
+          "renderer": "Docxodus main 9fdec63c",
+          "pdfSha256": "d787d2a287bf7b2f9a9c0aa91c761ebaaa095125305e6801472827724ab24d6e",
+          "failures": [],
+          "words": [
+            "WisteriaGate",
+            "1",
+            "WisteriaTerrace",
+            "1",
+            "WisteriaCourt",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 92.52228855286639,
+                "ssim": 0.979781191829182,
+                "inkF1": 0.9252228855286638,
+                "precision": 0.999364406779661,
+                "recall": 0.8613225097243362,
+                "close": false
+              }
+            ],
+            "rasterScore": 92.52228855286639,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 92.52228855286639
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              90.0,
+              132.75,
+              162.0,
+              142.5
+            ],
+            "coverage": 339.5371386821064
+          },
+          "htmlSha256": "6553ead49d6587997709d5659af677d6726842b4d3c00eabf3a5215ab2a030b7",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaGate",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaTerrace",
+              "attribute": "href",
+              "expected": "#_Toc90002",
+              "actual": "#_Toc90002",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-3",
+              "marker": "WisteriaCourt",
+              "attribute": "href",
+              "expected": "#_Toc90003",
+              "actual": "#_Toc90003",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-4",
+              "marker": "WisteriaLantern",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "8bbd2b95a21125af48f6c0b6f9c9d490ffa37844a5277bfaa45b62723b0d7ed4"
+          ]
+        },
+        {
+          "renderer": "Docxodus fix 38d060f9",
+          "pdfSha256": "fbd943ca60af09a365591dbd1508895308da13439652d943fd634e320561c989",
+          "failures": [],
+          "words": [
+            "WisteriaGate",
+            "1",
+            "WisteriaTerrace",
+            "1",
+            "WisteriaCourt",
+            "1",
+            "See",
+            "WisteriaLantern",
+            "Garden",
+            "gate",
+            "Garden",
+            "terrace",
+            "Garden",
+            "court"
+          ],
+          "measurement": {
+            "pages": [
+              {
+                "score": 92.52228855286639,
+                "ssim": 0.979781191829182,
+                "inkF1": 0.9252228855286638,
+                "precision": 0.999364406779661,
+                "recall": 0.8613225097243362,
+                "close": false
+              }
+            ],
+            "rasterScore": 92.52228855286639,
+            "worstPage": 1,
+            "close": false,
+            "caseScore": 92.52228855286639
+          },
+          "blueInk": {
+            "page": 1,
+            "rgb": [
+              5,
+              99,
+              193
+            ],
+            "boundsPt": [
+              90.0,
+              132.75,
+              162.0,
+              142.5
+            ],
+            "coverage": 339.5371386821064
+          },
+          "htmlSha256": "6553ead49d6587997709d5659af677d6726842b4d3c00eabf3a5215ab2a030b7",
+          "htmlChecks": [
+            {
+              "name": "html-attribute-1",
+              "marker": "WisteriaGate",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-2",
+              "marker": "WisteriaTerrace",
+              "attribute": "href",
+              "expected": "#_Toc90002",
+              "actual": "#_Toc90002",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-3",
+              "marker": "WisteriaCourt",
+              "attribute": "href",
+              "expected": "#_Toc90003",
+              "actual": "#_Toc90003",
+              "passed": true
+            },
+            {
+              "name": "html-attribute-4",
+              "marker": "WisteriaLantern",
+              "attribute": "href",
+              "expected": "#_Toc90001",
+              "actual": "#_Toc90001",
+              "passed": true
+            }
+          ],
+          "pageRasterSha256": [
+            "8bbd2b95a21125af48f6c0b6f9c9d490ffa37844a5277bfaa45b62723b0d7ed4"
+          ]
+        }
+      ]
+    }
+  ],
+  "tools": {
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631",
+    "docs/results/export-reliability/Inspect.py": "f52f51d657d3d0d06f85c2ab42664e1bd120c82c461849e5eef435545d3f22bc",
+    "docs/results/field-links/Compose.py": "7a88c3963963778e2decab2b2ca8398e6bebc79a9ff5071241fee4687a9d753f"
+  }
+}
